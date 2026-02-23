@@ -65,7 +65,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
   const next = idx < chapters.length - 1 ? chapters[idx + 1] : null;
 
   return (
-    <article className="max-w-2xl mx-auto px-6 py-12 lg:py-16">
+    <article className="max-w-2xl mx-auto xl:ml-72 xl:mr-auto px-6 py-12 lg:py-16 xl:max-w-3xl">
       {/* Chapter header */}
       <div className="mb-10">
         <div className="flex items-center gap-3 mb-4">

@@ -3701,4 +3701,923 @@ operator = Agent(
       </Callout>
     </>
   ),
+
+  "cost-optimization": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        Most people run GPT-4o for everything and wonder why their bill is $200/month. The truth? <strong>90% of your agent's tasks don't need the smartest model.</strong> This chapter shows you how to cut costs 80% without sacrificing quality.
+      </p>
+
+      <Analogy>
+        You don't hire a brain surgeon to take your blood pressure. Different tasks need different expertise levels. Your agent's model selection should work the same way — use the expensive specialist for hard problems, and the fast generalist for everything else.
+      </Analogy>
+
+      <h2>The Model Tier Strategy</h2>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="text-sm font-bold text-green-400 mb-2">🟢 Tier 1: Fast & Cheap ($0.10-0.50/day)</div>
+          <p className="text-xs text-zinc-400 mb-2">Use for: simple replies, formatting, classification, routine tasks</p>
+          <ul className="space-y-1 text-xs text-zinc-500">
+            <li>• <strong>GPT-4o-mini</strong> — $0.15/1M input, $0.60/1M output</li>
+            <li>• <strong>Claude 3.5 Haiku</strong> — $0.25/1M input, $1.25/1M output</li>
+            <li>• <strong>Gemini Flash</strong> — $0.075/1M input, $0.30/1M output</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+          <div className="text-sm font-bold text-blue-400 mb-2">🔵 Tier 2: Smart & Balanced ($1-5/day)</div>
+          <p className="text-xs text-zinc-400 mb-2">Use for: content writing, analysis, code generation, research synthesis</p>
+          <ul className="space-y-1 text-xs text-zinc-500">
+            <li>• <strong>Claude Sonnet</strong> — $3/1M input, $15/1M output</li>
+            <li>• <strong>GPT-4o</strong> — $2.50/1M input, $10/1M output</li>
+            <li>• <strong>Gemini Pro</strong> — $1.25/1M input, $5/1M output</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+          <div className="text-sm font-bold text-purple-400 mb-2">🟣 Tier 3: Expert & Expensive ($5-20/day)</div>
+          <p className="text-xs text-zinc-400 mb-2">Use for: complex reasoning, architecture decisions, strategy, debugging hard problems</p>
+          <ul className="space-y-1 text-xs text-zinc-500">
+            <li>• <strong>Claude Opus</strong> — $15/1M input, $75/1M output</li>
+            <li>• <strong>GPT-4.5</strong> — $75/1M input, $150/1M output</li>
+            <li>• <strong>o1 / o3</strong> — Variable, reasoning-heavy</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Task-to-Model Mapping</h2>
+
+      <Code title="knowledge/config/model-routing.md">{`# Model Routing Rules
+
+## Use CHEAP model (Haiku/Flash/4o-mini):
+- Formatting text (markdown, JSON conversion)
+- Simple classification ("is this urgent?")
+- Acknowledging messages ("got it, working on it")
+- Heartbeat checks (is anything new?)
+- Reading and summarizing short documents
+
+## Use BALANCED model (Sonnet/4o/Gemini Pro):
+- Writing content (tweets, posts, newsletters)
+- Research synthesis (combining multiple sources)
+- Code generation (new features, bug fixes)
+- Data analysis (trends, patterns)
+- Cron job outputs (daily reports, plans)
+
+## Use EXPERT model (Opus/o3) — sparingly:
+- Architecture decisions ("how should I structure this?")
+- Debugging complex issues
+- Strategy and planning
+- Code review for critical systems
+- When Sonnet gets it wrong twice`}</Code>
+
+      <h2>🔌 Platform-Specific Cost Optimization</h2>
+
+      <div className="my-6 space-y-4">
+        <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-5">
+          <div className="text-sm font-bold text-cyan-400 mb-2">🐾 OpenClaw</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• Set default model to Sonnet in config, override to Opus only for complex tasks</li>
+            <li>• Use <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">--model</code> per cron job to pick the right tier</li>
+            <li>• Set <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">contextTokens: 50000</code> instead of 200k — most tasks don't need huge context</li>
+            <li>• Use isolated sessions for cron jobs — they start fresh without dragging history</li>
+            <li>• Run <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">/compact</code> when context exceeds 100k to avoid paying for repeated context</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="text-sm font-bold text-green-400 mb-2">🤖 Claude API</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• Use prompt caching — repeated system prompts cost 90% less after first call</li>
+            <li>• Haiku for preprocessing, Sonnet for main work, Opus only for review</li>
+            <li>• Set <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">max_tokens</code> to limit output length (don't pay for rambling)</li>
+            <li>• Batch API: 50% discount for non-time-sensitive tasks (reports, analysis)</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+          <div className="text-sm font-bold text-blue-400 mb-2">💬 ChatGPT / OpenAI API</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• GPT-4o-mini for 80% of tasks — it's shockingly good for the price</li>
+            <li>• Use structured outputs (JSON mode) to reduce output tokens</li>
+            <li>• Batch API: 50% off for async processing</li>
+            <li>• Avoid GPT-4.5 unless genuinely needed — it's 30x more expensive than 4o</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-orange-500/20 bg-orange-500/5 p-5">
+          <div className="text-sm font-bold text-orange-400 mb-2">🚀 CrewAI / LangChain</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• Assign cheaper models to simple agents (research → Haiku, writing → Sonnet)</li>
+            <li>• Set max_iterations per agent to prevent runaway loops</li>
+            <li>• Cache tool results — don't re-search the same query twice</li>
+            <li>• Use LangSmith/Arize to identify which agents burn the most tokens</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+          <div className="text-sm font-bold text-purple-400 mb-2">⚡ n8n / Make / Zapier</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• Use AI nodes sparingly — each one is an API call</li>
+            <li>• Combine multiple prompts into one node where possible</li>
+            <li>• Cache results in a database instead of re-querying</li>
+            <li>• Set usage alerts — Zapier/Make can spiral costs if workflows run too often</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-5">
+          <div className="text-sm font-bold text-yellow-400 mb-2">💻 Cursor / Windsurf / Cline</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• Use "fast" model for autocomplete, "smart" model only for complex edits</li>
+            <li>• Be specific in prompts — vague prompts = more back-and-forth = more tokens</li>
+            <li>• Use @file references instead of pasting entire files into chat</li>
+            <li>• Cursor Pro ($20/mo) vs API credits — calculate which is cheaper for your usage</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>The Monthly Budget Framework</h2>
+
+      <div className="my-6 rounded-xl border border-zinc-700 bg-zinc-900/40 p-5">
+        <div className="text-sm font-bold text-zinc-200 mb-3">Example: SaaS Operator Running 3 Daily Automations</div>
+        <div className="space-y-2 text-xs text-zinc-400">
+          <div className="flex justify-between"><span>Trading plan (Sonnet, daily)</span><span className="text-zinc-300">~$1.50/mo</span></div>
+          <div className="flex justify-between"><span>Content research (Sonnet, daily)</span><span className="text-zinc-300">~$2.00/mo</span></div>
+          <div className="flex justify-between"><span>Idea validation (Opus, weekly)</span><span className="text-zinc-300">~$3.00/mo</span></div>
+          <div className="flex justify-between"><span>Heartbeats & misc (Haiku, ongoing)</span><span className="text-zinc-300">~$0.50/mo</span></div>
+          <div className="flex justify-between"><span>Interactive chat (Sonnet, ~20 msgs/day)</span><span className="text-zinc-300">~$5.00/mo</span></div>
+          <div className="flex justify-between border-t border-zinc-700 pt-2 mt-2 font-bold"><span className="text-zinc-200">Total</span><span className="text-green-400">~$12/mo</span></div>
+        </div>
+      </div>
+
+      <Callout emoji="💡" title="The 80/20 Rule of AI Costs">
+        <strong>80% of your costs come from 20% of your tasks.</strong> Find those expensive tasks (usually: long conversations with big context, or unnecessarily using Opus/o3 for simple work). Fix those, and your bill drops dramatically. Most operators should be under $15/month.
+      </Callout>
+    </>
+  ),
+
+  "debugging-observability": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        Your agent ran a cron job at 3 AM. Something went wrong. The output was weird. <strong>How do you figure out what happened?</strong> This chapter gives you the debugging and observability toolkit.
+      </p>
+
+      <Analogy>
+        Imagine you hire a night-shift worker. They work while you sleep. In the morning, the work is done — but something's off. Without security cameras (logs), a task checklist (traces), and a supervisor's report (summaries), you'd have no idea what went wrong. Observability is your security camera system for AI agents.
+      </Analogy>
+
+      <h2>The 3 Pillars of Agent Observability</h2>
+
+      <div className="my-6 grid gap-4">
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+          <div className="text-sm font-bold text-blue-400 mb-2">1. 📋 Logs — What Happened</div>
+          <p className="text-xs text-zinc-400">Raw record of every action. Input → thinking → output → tool calls → results. The foundation of debugging.</p>
+        </div>
+        <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+          <div className="text-sm font-bold text-purple-400 mb-2">2. 🔗 Traces — The Full Journey</div>
+          <p className="text-xs text-zinc-400">Connected chain of events: trigger → model call → tool use → response → delivery. Shows cause and effect.</p>
+        </div>
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="text-sm font-bold text-green-400 mb-2">3. 📊 Metrics — The Trends</div>
+          <p className="text-xs text-zinc-400">Token usage over time, error rates, response latency, cost per task. Tells you if things are getting better or worse.</p>
+        </div>
+      </div>
+
+      <h2>Common Agent Failures & How to Debug Them</h2>
+
+      <div className="my-6 space-y-4">
+        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
+          <div className="text-xs font-bold text-red-400 mb-2">🐛 "The output was wrong/hallucinated"</div>
+          <p className="text-xs text-zinc-400"><strong>Debug steps:</strong></p>
+          <ol className="text-xs text-zinc-500 space-y-1 mt-1">
+            <li>1. Check the input prompt — was context missing?</li>
+            <li>2. Check which model was used — cheaper models hallucinate more</li>
+            <li>3. Check if knowledge base files were accessible</li>
+            <li>4. Check context window — was it full/truncated?</li>
+            <li>5. <strong>Fix:</strong> Add missing context to knowledge base, or upgrade model for that task</li>
+          </ol>
+        </div>
+        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
+          <div className="text-xs font-bold text-red-400 mb-2">🐛 "The cron job didn't run"</div>
+          <ol className="text-xs text-zinc-500 space-y-1 mt-1">
+            <li>1. Check cron expression — is the timezone correct?</li>
+            <li>2. Check if the gateway was running at scheduled time</li>
+            <li>3. Check API key validity — expired keys fail silently</li>
+            <li>4. Check rate limits — were you throttled?</li>
+            <li>5. <strong>Fix:</strong> Add a heartbeat check that monitors cron execution</li>
+          </ol>
+        </div>
+        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
+          <div className="text-xs font-bold text-red-400 mb-2">🐛 "The agent went off-script"</div>
+          <ol className="text-xs text-zinc-500 space-y-1 mt-1">
+            <li>1. Check for prompt injection in input data</li>
+            <li>2. Check if system prompt was too vague or contradictory</li>
+            <li>3. Check conversation history — did it drift over many messages?</li>
+            <li>4. Check if it hit a tool error and improvised badly</li>
+            <li>5. <strong>Fix:</strong> Tighten system prompt, add guardrails, use isolated sessions for risky tasks</li>
+          </ol>
+        </div>
+        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
+          <div className="text-xs font-bold text-red-400 mb-2">🐛 "Costs spiked unexpectedly"</div>
+          <ol className="text-xs text-zinc-500 space-y-1 mt-1">
+            <li>1. Check for infinite loops (agent retrying failed tool calls)</li>
+            <li>2. Check context window size — bloated history = expensive</li>
+            <li>3. Check if a cron job ran more often than expected</li>
+            <li>4. Check if model was accidentally set to Opus/o3 for routine tasks</li>
+            <li>5. <strong>Fix:</strong> Set max iterations, compact context, fix model routing</li>
+          </ol>
+        </div>
+      </div>
+
+      <h2>🔌 Observability by Platform</h2>
+
+      <div className="my-6 space-y-4">
+        <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-5">
+          <div className="text-sm font-bold text-cyan-400 mb-2">🐾 OpenClaw</div>
+          <Code title="Built-in Debugging">{`# View session history
+openclaw sessions list --active 60
+
+# Check cron job runs
+openclaw cron runs --job "Trading Plan" --limit 5
+
+# View session logs
+openclaw sessions history --session <key> --include-tools
+
+# Check gateway status
+openclaw status
+
+# Monitor in real-time
+# Add a daily self-diagnostic cron:
+openclaw cron add --name "Daily Health Check" \\
+  --cron "0 22 * * *" --session isolated \\
+  --message "Run a self-diagnostic:
+  1. Check all cron jobs ran today (list runs)
+  2. Check for any errors in recent sessions
+  3. Report: tasks completed, tasks failed, total cost
+  Post summary to Discord."
+  --model "haiku" --announce`}</Code>
+        </div>
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="text-sm font-bold text-green-400 mb-2">🤖 Claude API — Built-in Logging</div>
+          <Code title="Python Logging Setup">{`import anthropic
+import json
+from datetime import datetime
+
+client = anthropic.Anthropic()
+
+def logged_completion(prompt, model="claude-sonnet-4-20250514"):
+    """Wrapper that logs every API call"""
+    start = datetime.now()
+    
+    response = client.messages.create(
+        model=model,
+        max_tokens=1024,
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    log_entry = {
+        "timestamp": start.isoformat(),
+        "model": model,
+        "input_tokens": response.usage.input_tokens,
+        "output_tokens": response.usage.output_tokens,
+        "latency_ms": (datetime.now() - start).total_seconds() * 1000,
+        "prompt_preview": prompt[:100],
+        "stop_reason": response.stop_reason,
+    }
+    
+    with open("logs/agent.jsonl", "a") as f:
+        f.write(json.dumps(log_entry) + "\\n")
+    
+    return response`}</Code>
+        </div>
+        <div className="rounded-xl border border-orange-500/20 bg-orange-500/5 p-5">
+          <div className="text-sm font-bold text-orange-400 mb-2">🚀 CrewAI / LangChain — LangSmith & Arize</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• <strong>LangSmith:</strong> Automatic tracing for LangChain. See every chain step, token count, latency</li>
+            <li>• <strong>Arize Phoenix:</strong> Open-source observability. Local dashboard for traces + evals</li>
+            <li>• <strong>CrewAI verbose=True:</strong> Prints every agent step to console — basic but effective</li>
+            <li>• <strong>OpenTelemetry:</strong> Industry standard. Export traces to any observability platform</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+          <div className="text-sm font-bold text-purple-400 mb-2">⚡ n8n / Make / Zapier</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• <strong>n8n:</strong> Built-in execution history. Click any run to see input/output for every node</li>
+            <li>• <strong>Make:</strong> Scenario history with full data flow visualization</li>
+            <li>• <strong>Zapier:</strong> Task history with per-step data. Set up error notifications</li>
+            <li>• <strong>Pro tip:</strong> Add a "log to spreadsheet" node at the end of every workflow for your own analytics</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-5">
+          <div className="text-sm font-bold text-yellow-400 mb-2">💻 Cursor / Windsurf / Cline</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• <strong>Cursor:</strong> Check Settings → Usage to monitor token consumption</li>
+            <li>• <strong>Git diff:</strong> Review what the agent changed with <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">git diff</code> before committing</li>
+            <li>• <strong>Undo:</strong> Use git to revert bad changes: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">git checkout -- .</code></li>
+            <li>• <strong>Cline:</strong> Shows full conversation log in the sidebar — review reasoning</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>The "Morning After" Checklist</h2>
+
+      <Code title="Daily Review Prompt (5 minutes)">{`Quick daily review checklist:
+
+1. Did all scheduled cron jobs run? ✅/❌
+2. Any error messages in logs? ✅/❌
+3. Token usage within budget? ✅/❌
+4. Output quality acceptable? ✅/❌
+5. Any unexpected behaviors? ✅/❌
+
+If all ✅ → Great, move on.
+If any ❌ → Debug using the failure patterns above.`}</Code>
+
+      <Callout emoji="🔑" title="The #1 Debugging Rule">
+        <strong>Always check the input before blaming the model.</strong> 90% of "the AI is broken" problems are actually "I gave it bad/missing context" problems. Check what went IN before analyzing what came OUT.
+      </Callout>
+    </>
+  ),
+
+  "tool-api-integration": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        An agent without tools is just a chatbot. Tools are what make agents <strong>actually useful</strong> — they can search the web, read files, send messages, deploy code, and interact with any API. This chapter covers how to wire it all up.
+      </p>
+
+      <Analogy>
+        A chef without a kitchen is just someone who knows recipes. The <strong>tools</strong> (oven, knives, pans) are what turn knowledge into meals. Your agent's tools are what turn intelligence into action. More tools = more capable chef. Better tools = better meals.
+      </Analogy>
+
+      <h2>The Tool Landscape</h2>
+
+      <div className="my-6 grid gap-4 sm:grid-cols-2">
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+          <div className="text-sm font-bold text-blue-400 mb-2">🔍 Information Tools</div>
+          <ul className="space-y-1 text-xs text-zinc-400">
+            <li>• Web search (Google, Brave, Perplexity)</li>
+            <li>• Web browsing / scraping</li>
+            <li>• File reading</li>
+            <li>• Database queries</li>
+            <li>• API data fetching</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="text-sm font-bold text-green-400 mb-2">✍️ Action Tools</div>
+          <ul className="space-y-1 text-xs text-zinc-400">
+            <li>• File writing / code generation</li>
+            <li>• Message sending (Discord, Slack, email)</li>
+            <li>• Deployment (Vercel, AWS, Docker)</li>
+            <li>• Git operations</li>
+            <li>• Payment processing</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+          <div className="text-sm font-bold text-purple-400 mb-2">🧠 Cognitive Tools</div>
+          <ul className="space-y-1 text-xs text-zinc-400">
+            <li>• Memory read/write</li>
+            <li>• Sub-agent spawning</li>
+            <li>• Code execution (sandboxed)</li>
+            <li>• Image analysis / generation</li>
+            <li>• TTS / speech synthesis</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5">
+          <div className="text-sm font-bold text-amber-400 mb-2">🔗 Integration Tools</div>
+          <ul className="space-y-1 text-xs text-zinc-400">
+            <li>• Webhooks (incoming/outgoing)</li>
+            <li>• MCP servers (Model Context Protocol)</li>
+            <li>• OAuth connections</li>
+            <li>• Calendar (Google, Outlook)</li>
+            <li>• CRM (HubSpot, Salesforce)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>MCP (Model Context Protocol) — The Future of Tool Integration</h2>
+
+      <p>MCP is an open standard (created by Anthropic) that lets any AI agent connect to any tool server through a universal protocol. Think of it as <strong>USB for AI tools</strong> — plug in any MCP server and your agent can use it immediately.</p>
+
+      <Code title="MCP Server Setup Example">{`# Install an MCP server (e.g., filesystem access)
+npx @anthropic/create-mcp-server filesystem
+
+# Or use community MCP servers:
+npx mcp-server-github    # GitHub operations
+npx mcp-server-slack     # Slack integration  
+npx mcp-server-postgres  # Database access
+npx mcp-server-brave     # Web search
+
+# Configure in your agent's config:
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-server-filesystem", "/path/to/workspace"]
+    },
+    "github": {
+      "command": "npx", 
+      "args": ["mcp-server-github"],
+      "env": { "GITHUB_TOKEN": "ghp_xxxx" }
+    }
+  }
+}`}</Code>
+
+      <h2>🔌 Tool Integration by Platform</h2>
+
+      <div className="my-6 space-y-4">
+        <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-5">
+          <div className="text-sm font-bold text-cyan-400 mb-2">🐾 OpenClaw — Built-in Tool Suite</div>
+          <p className="text-xs text-zinc-400 mb-2">OpenClaw comes with tools pre-wired. You configure which ones are available:</p>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• <strong>exec:</strong> Shell commands, background processes</li>
+            <li>• <strong>web_search / web_fetch:</strong> Search and scrape the web</li>
+            <li>• <strong>browser:</strong> Full browser automation (Playwright-based)</li>
+            <li>• <strong>message:</strong> Send to Discord, Telegram, Slack, WhatsApp, Signal</li>
+            <li>• <strong>cron:</strong> Schedule recurring tasks</li>
+            <li>• <strong>nodes:</strong> Control paired devices (camera, screen, location)</li>
+            <li>• <strong>sessions_spawn:</strong> Create sub-agent sessions</li>
+            <li>• <strong>image / tts:</strong> Image analysis and text-to-speech</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="text-sm font-bold text-green-400 mb-2">🤖 Claude — MCP + Tool Use API</div>
+          <Code title="Claude Tool Use (Python)">{`import anthropic
+
+client = anthropic.Anthropic()
+
+# Define tools the agent can use
+tools = [
+    {
+        "name": "search_web",
+        "description": "Search the web for current information",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "Search query"}
+            },
+            "required": ["query"]
+        }
+    },
+    {
+        "name": "send_email",
+        "description": "Send an email",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "to": {"type": "string"},
+                "subject": {"type": "string"},
+                "body": {"type": "string"}
+            },
+            "required": ["to", "subject", "body"]
+        }
+    }
+]
+
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    tools=tools,
+    messages=[{"role": "user", "content": "Search for AI news today"}]
+)
+
+# Handle tool calls in the response
+for block in response.content:
+    if block.type == "tool_use":
+        # Execute the tool and return results
+        result = execute_tool(block.name, block.input)
+        # Continue conversation with tool result...`}</Code>
+        </div>
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+          <div className="text-sm font-bold text-blue-400 mb-2">💬 ChatGPT — Function Calling</div>
+          <Code title="OpenAI Function Calling">{`import openai
+
+tools = [{
+    "type": "function",
+    "function": {
+        "name": "get_stock_price",
+        "description": "Get current stock price",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "symbol": {"type": "string", "description": "Stock ticker"}
+            },
+            "required": ["symbol"]
+        }
+    }
+}]
+
+response = openai.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "What's AAPL at?"}],
+    tools=tools,
+    tool_choice="auto"
+)
+
+# Check if model wants to call a function
+if response.choices[0].message.tool_calls:
+    for call in response.choices[0].message.tool_calls:
+        result = execute_function(call.function.name, 
+                                  call.function.arguments)
+        # Return result to continue conversation`}</Code>
+        </div>
+        <div className="rounded-xl border border-orange-500/20 bg-orange-500/5 p-5">
+          <div className="text-sm font-bold text-orange-400 mb-2">🚀 CrewAI / LangChain — Custom Tools</div>
+          <Code title="CrewAI Custom Tool">{`from crewai_tools import BaseTool
+
+class PriceLookupTool(BaseTool):
+    name: str = "Price Lookup"
+    description: str = "Look up current price for a product or service"
+    
+    def _run(self, query: str) -> str:
+        # Your implementation here
+        result = search_prices(query)
+        return f"Found: {result}"
+
+# Assign tools to agents
+agent = Agent(
+    role="Research Analyst",
+    tools=[PriceLookupTool(), SearchTool(), WebScrapeTool()],
+    llm="claude-sonnet-4-20250514"
+)`}</Code>
+        </div>
+        <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+          <div className="text-sm font-bold text-purple-400 mb-2">⚡ n8n / Make / Zapier — Visual Wiring</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• <strong>n8n:</strong> 400+ integrations. Drag nodes for Slack, Gmail, Sheets, HTTP, etc. AI agent node connects to OpenAI/Anthropic with tool definitions</li>
+            <li>• <strong>Make:</strong> 1000+ app modules. Use "AI Text Generator" module with custom connections</li>
+            <li>• <strong>Zapier:</strong> 6000+ apps. Use "Code by Zapier" for custom logic, "Webhooks" for API calls</li>
+            <li>• <strong>Best practice:</strong> Use webhooks as the bridge between AI agents and no-code tools</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-5">
+          <div className="text-sm font-bold text-yellow-400 mb-2">💻 Cursor / Windsurf / Cline — MCP Integration</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• <strong>Cursor:</strong> Supports MCP servers natively. Add to settings, agent can use any MCP tool</li>
+            <li>• <strong>Cline:</strong> Full MCP support. Create/install MCP servers directly from Cline</li>
+            <li>• <strong>Windsurf:</strong> MCP support via configuration file</li>
+            <li>• <strong>Use case:</strong> Connect coding agent to GitHub MCP for PR creation, database MCP for schema queries</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Webhook Patterns</h2>
+
+      <p>Webhooks are the universal glue. Any platform can send/receive webhooks, making them the easiest way to connect different systems:</p>
+
+      <Code title="Webhook Integration Pattern">{`# Incoming webhook: External service → Your agent
+# Example: Stripe payment → trigger agent action
+POST https://your-openclaw.com/webhook/stripe
+{
+  "event": "payment.completed",
+  "amount": 29.00,
+  "customer": "john@example.com"
+}
+# Agent receives this as a system event and acts on it
+
+# Outgoing webhook: Your agent → External service  
+# Example: Agent publishes content → notify Slack
+POST https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+{
+  "text": "📝 New content published: [Title]",
+  "channel": "#content-updates"
+}`}</Code>
+
+      <Callout emoji="🔌" title="Start with 3 Tools, Expand from There">
+        Don't try to wire up 20 integrations on day one. Start with: <strong>1) Web search</strong> (information), <strong>2) File system</strong> (memory), <strong>3) One messaging channel</strong> (output). Master those three, then add more as needed.
+      </Callout>
+    </>
+  ),
+
+  "prompt-engineering-agents": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        Prompting an agent is <strong>not</strong> the same as prompting ChatGPT. An agent has persistent memory, tools, scheduled tasks, and operates autonomously. The prompt engineering techniques that work for chat conversations often fail for agents.
+      </p>
+
+      <Analogy>
+        Giving someone directions to your house is different from giving them a GPS. Directions work for one trip. A GPS works for every trip, adapts to traffic, and handles unexpected situations. <strong>Agent prompts are GPS systems, not directions.</strong> They need to handle any situation, not just the one you're thinking of right now.
+      </Analogy>
+
+      <h2>The 5 Principles of Agent Prompting</h2>
+
+      <div className="my-6 space-y-4">
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+          <div className="text-sm font-bold text-blue-400 mb-2">1. State, Don't Ask</div>
+          <p className="text-xs text-zinc-400 mb-2">In chat, you ask questions. For agents, you state rules. The agent should never need to ask "what do you want me to do?" — it should know from the prompt.</p>
+          <div className="grid gap-2 sm:grid-cols-2 mt-3">
+            <div className="rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+              <div className="text-xs font-bold text-red-400 mb-1">❌ Chat-style</div>
+              <p className="text-xs text-zinc-500">"Can you check if there are any urgent emails?"</p>
+            </div>
+            <div className="rounded-lg bg-green-500/5 border border-green-500/20 p-3">
+              <div className="text-xs font-bold text-green-400 mb-1">✅ Agent-style</div>
+              <p className="text-xs text-zinc-500">"Check emails. If subject contains 'urgent' or sender is in VIP list, forward to Discord immediately. Otherwise, batch for daily summary."</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+          <div className="text-sm font-bold text-purple-400 mb-2">2. Define Boundaries, Not Just Tasks</div>
+          <p className="text-xs text-zinc-400 mb-2">An agent running autonomously needs to know what it <em>shouldn't</em> do, not just what it should.</p>
+          <Code title="Boundary-aware prompt">{`Generate today's content plan.
+
+DO:
+- Research trending topics in AI/SaaS
+- Draft 3 tweet options
+- Save drafts to content/drafts.md
+
+DO NOT:
+- Post anything without approval
+- Engage with controversial topics
+- Reply to other accounts
+- Use hashtags (they look spammy)
+
+IF UNSURE:
+- Save to content/needs-review.md with your concern
+- Do not ask me — decide based on these rules`}</Code>
+        </div>
+
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="text-sm font-bold text-green-400 mb-2">3. Give Examples, Not Descriptions</div>
+          <p className="text-xs text-zinc-400 mb-2">Showing beats telling. 2 examples are worth 200 words of explanation.</p>
+          <div className="grid gap-2 sm:grid-cols-2 mt-3">
+            <div className="rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+              <div className="text-xs font-bold text-red-400 mb-1">❌ Describing</div>
+              <p className="text-xs text-zinc-500">"Write in a casual, witty, slightly irreverent tone that feels authentic and human."</p>
+            </div>
+            <div className="rounded-lg bg-green-500/5 border border-green-500/20 p-3">
+              <div className="text-xs font-bold text-green-400 mb-1">✅ Showing</div>
+              <p className="text-xs text-zinc-500">"Match this voice:<br />GOOD: 'Hot take: most AI agents are just chatbots with a cron job.'<br />BAD: 'In this article, we will explore the fascinating world of AI agents.'"</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5">
+          <div className="text-sm font-bold text-amber-400 mb-2">4. Design for Failure</div>
+          <p className="text-xs text-zinc-400 mb-2">Chat prompts assume success. Agent prompts must handle: tool failures, missing data, rate limits, unexpected inputs.</p>
+          <Code title="Failure-aware prompt">{`Search Twitter for $ES_F sentiment.
+
+IF search returns results:
+  → Analyze sentiment and include quotes
+IF search fails or returns no results:
+  → Use yesterday's sentiment from memory
+  → Add note: "⚠️ Live search unavailable, using cached data"
+IF search returns spam/irrelevant results:
+  → Filter to accounts with 5k+ followers
+  → If still no good data, state "Insufficient signal today"`}</Code>
+        </div>
+
+        <div className="rounded-xl border border-pink-500/20 bg-pink-500/5 p-5">
+          <div className="text-sm font-bold text-pink-400 mb-2">5. Enforce Output Format</div>
+          <p className="text-xs text-zinc-400 mb-2">Agents often need to produce output that feeds into other systems. Strict format prevents downstream failures.</p>
+          <Code title="Format enforcement">{`CRITICAL INSTRUCTION: Output MUST follow this exact format.
+Do NOT summarize. Do NOT add commentary outside the template.
+Do NOT skip sections.
+
+# 📅 Daily Report — [Date]
+
+## 📊 Metrics
+- Tasks completed: [number]
+- Tasks failed: [number]
+- Total cost: $[amount]
+
+## ✅ Completed
+- [Task 1]: [one-line result]
+- [Task 2]: [one-line result]
+
+## ❌ Failed
+- [Task]: [reason] → [suggested fix]
+
+## 📋 Tomorrow
+- [Priority 1]
+- [Priority 2]`}</Code>
+        </div>
+      </div>
+
+      <h2>🔌 Platform-Specific Prompting Tips</h2>
+
+      <div className="my-6 space-y-4">
+        <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-5">
+          <div className="text-sm font-bold text-cyan-400 mb-2">🐾 OpenClaw — AGENTS.md is your system prompt</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• Put rules in AGENTS.md — it's loaded every session automatically</li>
+            <li>• Use SOUL.md for personality/voice — keep it separate from rules</li>
+            <li>• Cron job prompts should be self-contained (isolated sessions have no chat history)</li>
+            <li>• Use "CRITICAL INSTRUCTION" prefix for rules the model must never skip</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="text-sm font-bold text-green-400 mb-2">🤖 Claude — System prompt best practices</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• Claude follows system prompts very faithfully — invest time in getting them right</li>
+            <li>• Use XML tags for structure: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">&lt;rules&gt;...&lt;/rules&gt;</code></li>
+            <li>• Claude responds well to "think step by step" for complex reasoning</li>
+            <li>• For tool use: describe tools precisely — Claude will use them more effectively</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+          <div className="text-sm font-bold text-blue-400 mb-2">💬 ChatGPT — Custom GPT instructions</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• GPT-4o benefits from explicit role assignment: "You are a [role] who [does what]"</li>
+            <li>• Use numbered steps for multi-step tasks</li>
+            <li>• ChatGPT can be chatty — add "Be concise. No preamble. No concluding remarks."</li>
+            <li>• Custom GPT instructions have a character limit — prioritize rules over examples</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-5">
+          <div className="text-sm font-bold text-yellow-400 mb-2">💻 Cursor / Windsurf / Cline — .cursorrules</div>
+          <ul className="space-y-1.5 text-xs text-zinc-400">
+            <li>• Keep .cursorrules under 2000 lines — too long and the model ignores parts</li>
+            <li>• Put the most important rules first (models pay more attention to the beginning)</li>
+            <li>• Include code examples of your patterns — the agent will match them</li>
+            <li>• Negative examples ("never do X") are just as important as positive ones</li>
+          </ul>
+        </div>
+      </div>
+
+      <Callout emoji="🎯" title="The Meta-Skill">
+        Prompt engineering for agents is less about clever tricks and more about <strong>thinking like a manager writing an employee handbook.</strong> Be clear, be specific, anticipate problems, give examples, and define boundaries. The better your "handbook," the less you need to intervene.
+      </Callout>
+    </>
+  ),
+
+  "revenue-playbook": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        You've built a capable AI agent. It runs automations, creates content, does research. Now the question: <strong>How do you turn this into money?</strong> This chapter covers 7 proven revenue models, with specific numbers and implementation guides.
+      </p>
+
+      <Analogy>
+        You built a bakery. The ovens work, the recipes are dialed in, the kitchen runs itself. But you're eating all the bread yourself. <strong>Time to open the shop.</strong> The question isn't whether your bread is good — it's which business model fits your bakery best.
+      </Analogy>
+
+      <h2>The 7 Revenue Models</h2>
+
+      <div className="my-6 space-y-4">
+        <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">1️⃣</span>
+            <div>
+              <div className="text-sm font-bold text-green-400">Automated Newsletter / Daily Briefing</div>
+              <div className="text-xs text-zinc-500">Revenue: $500-5,000/mo · Difficulty: Easy · Time to first $: 2-4 weeks</div>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-400 mb-3">Your agent researches, writes, and sends a daily/weekly newsletter. You review for 5 minutes. Subscribers pay $9-29/month.</p>
+          <div className="rounded-lg bg-zinc-900/50 p-3 text-xs text-zinc-400">
+            <strong className="text-zinc-300">Real math:</strong> 100 subscribers × $19/mo = $1,900/mo. Agent costs: ~$5/mo. Your time: 5 min/day reviewing drafts.
+          </div>
+          <div className="mt-3 text-xs text-zinc-500">
+            <strong>Platforms:</strong> Substack, Buttondown, Beehiiv, ConvertKit<br />
+            <strong>Agent stack:</strong> Research cron → Draft cron → You review → Send cron
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">2️⃣</span>
+            <div>
+              <div className="text-sm font-bold text-blue-400">Discord/Telegram Premium Community</div>
+              <div className="text-xs text-zinc-500">Revenue: $1,000-10,000/mo · Difficulty: Medium · Time to first $: 3-6 weeks</div>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-400 mb-3">Agent provides daily analysis, answers questions, and curates content in a paid community. Members pay for the agent's output + community access.</p>
+          <div className="rounded-lg bg-zinc-900/50 p-3 text-xs text-zinc-400">
+            <strong className="text-zinc-300">Real math:</strong> 200 members × $15/mo = $3,000/mo. Free tier gets delayed content. Premium gets real-time + exclusive analysis.
+          </div>
+          <div className="mt-3 text-xs text-zinc-500">
+            <strong>Platforms:</strong> Discord (Whop/Launchpass for payments), Telegram (InviteMember)<br />
+            <strong>Agent stack:</strong> Daily analysis cron → Auto-post to channels → Q&A bot in community
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">3️⃣</span>
+            <div>
+              <div className="text-sm font-bold text-purple-400">Digital Product (Playbook / Course / Templates)</div>
+              <div className="text-xs text-zinc-500">Revenue: $500-20,000/mo · Difficulty: Medium · Time to first $: 4-8 weeks</div>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-400 mb-3">Agent helps you create, maintain, and market a digital product. The product itself can be about AI agents (meta!) or any niche where you have expertise.</p>
+          <div className="rounded-lg bg-zinc-900/50 p-3 text-xs text-zinc-400">
+            <strong className="text-zinc-300">Real math:</strong> This playbook you're reading. One-time payments $9-69. Agent handles content updates, customer support emails, and marketing content.
+          </div>
+          <div className="mt-3 text-xs text-zinc-500">
+            <strong>Platforms:</strong> Gumroad, Lemon Squeezy, Stripe + custom site<br />
+            <strong>Agent stack:</strong> Content research → Draft chapters → Marketing content → Customer email automation
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">4️⃣</span>
+            <div>
+              <div className="text-sm font-bold text-amber-400">AI-as-a-Service (Agent for Hire)</div>
+              <div className="text-xs text-zinc-500">Revenue: $2,000-15,000/mo · Difficulty: Hard · Time to first $: 6-12 weeks</div>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-400 mb-3">Set up and manage AI agents for clients. You're selling your expertise in building what this playbook teaches. Charge monthly retainers.</p>
+          <div className="rounded-lg bg-zinc-900/50 p-3 text-xs text-zinc-400">
+            <strong className="text-zinc-300">Real math:</strong> 5 clients × $1,500/mo retainer = $7,500/mo. Each client takes 2-3 hours/month to maintain after initial setup.
+          </div>
+          <div className="mt-3 text-xs text-zinc-500">
+            <strong>Find clients:</strong> Twitter, Indie Hackers, local businesses, LinkedIn<br />
+            <strong>Deliverables:</strong> Custom agent setup + monthly optimization + support
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">5️⃣</span>
+            <div>
+              <div className="text-sm font-bold text-red-400">Content-Driven Affiliate Revenue</div>
+              <div className="text-xs text-zinc-500">Revenue: $200-3,000/mo · Difficulty: Easy · Time to first $: 2-4 weeks</div>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-400 mb-3">Agent creates content that naturally recommends tools you use (and earn affiliate commissions from). Authentic recommendations, not spam.</p>
+          <div className="rounded-lg bg-zinc-900/50 p-3 text-xs text-zinc-400">
+            <strong className="text-zinc-300">Real math:</strong> AI tool affiliates pay 20-30% recurring. 50 referrals × $20/mo average × 25% commission = $250/mo passive. Scales with content volume.
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-pink-500/20 bg-pink-500/5 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">6️⃣</span>
+            <div>
+              <div className="text-sm font-bold text-pink-400">Automated SaaS (Agent-Powered Product)</div>
+              <div className="text-xs text-zinc-500">Revenue: $1,000-50,000+/mo · Difficulty: Hard · Time to first $: 8-16 weeks</div>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-400 mb-3">Build a SaaS product where your agent does the work. Customers subscribe, agent delivers value, you manage and improve the system.</p>
+          <div className="rounded-lg bg-zinc-900/50 p-3 text-xs text-zinc-400">
+            <strong className="text-zinc-300">Examples:</strong> AI-generated meal plans ($9/mo), automated SEO audits ($29/mo), daily market analysis ($19/mo), personalized workout plans ($14/mo).
+          </div>
+          <div className="mt-3 text-xs text-zinc-500">
+            <strong>Stack:</strong> Landing page → Payment (Stripe) → Webhook triggers agent → Agent delivers to customer<br />
+            <strong>Key insight:</strong> The agent IS the product. No engineering team needed for MVP.
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">7️⃣</span>
+            <div>
+              <div className="text-sm font-bold text-cyan-400">Freelance Acceleration</div>
+              <div className="text-xs text-zinc-500">Revenue: +50-200% existing income · Difficulty: Easy · Time to first $: Immediate</div>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-400 mb-3">Not a new revenue stream — it's multiplying your existing one. Use your agent to do 3-5x more freelance work in the same time.</p>
+          <div className="rounded-lg bg-zinc-900/50 p-3 text-xs text-zinc-400">
+            <strong className="text-zinc-300">Real math:</strong> Freelance writer earning $3K/mo → Agent handles research + first drafts → Take on 3x more clients → $9K/mo. Same hours.
+          </div>
+        </div>
+      </div>
+
+      <h2>The Launch Sequence (For Any Model Above)</h2>
+
+      <div className="my-6 space-y-3">
+        <div className="flex gap-4 items-start">
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs font-bold text-zinc-400">1</div>
+          <div>
+            <div className="text-sm font-semibold text-zinc-200">Week 1: Validate</div>
+            <p className="text-xs text-zinc-500">Run the Idea Validation Engine (Chapter 12). Find 50+ people who want this. Pre-sell if possible.</p>
+          </div>
+        </div>
+        <div className="flex gap-4 items-start">
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs font-bold text-zinc-400">2</div>
+          <div>
+            <div className="text-sm font-semibold text-zinc-200">Week 2: Build MVP</div>
+            <p className="text-xs text-zinc-500">Agent does the work. You build the wrapper (landing page, payment, delivery mechanism). Keep it ugly but functional.</p>
+          </div>
+        </div>
+        <div className="flex gap-4 items-start">
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs font-bold text-zinc-400">3</div>
+          <div>
+            <div className="text-sm font-semibold text-zinc-200">Week 3: Launch to 10 Customers</div>
+            <p className="text-xs text-zinc-500">Find 10 paying customers. Not free users — paying. This validates the price point and forces you to deliver.</p>
+          </div>
+        </div>
+        <div className="flex gap-4 items-start">
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs font-bold text-zinc-400">4</div>
+          <div>
+            <div className="text-sm font-semibold text-zinc-200">Week 4+: Iterate & Scale</div>
+            <p className="text-xs text-zinc-500">Use the Content Pipeline (Chapter 11) to market. Use feedback to improve. Agent handles operations while you handle growth.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>Revenue Stack: Combining Models</h2>
+
+      <p>The best operators don't pick one model — they stack them:</p>
+
+      <div className="my-6 rounded-xl border border-zinc-700 bg-zinc-900/40 p-5">
+        <div className="text-sm font-bold text-zinc-200 mb-3">Example: The AI Trading Analyst Stack</div>
+        <div className="space-y-2 text-xs text-zinc-400">
+          <div className="flex justify-between"><span>📧 Daily Newsletter (Substack)</span><span className="text-green-400">$1,900/mo (100 subs × $19)</span></div>
+          <div className="flex justify-between"><span>💬 Premium Discord Community</span><span className="text-green-400">$3,000/mo (200 members × $15)</span></div>
+          <div className="flex justify-between"><span>🐦 Twitter → Affiliate referrals</span><span className="text-green-400">$400/mo (tool commissions)</span></div>
+          <div className="flex justify-between"><span>📋 Playbook (one-time sales)</span><span className="text-green-400">$800/mo (avg)</span></div>
+          <div className="flex justify-between border-t border-zinc-700 pt-2 mt-2 font-bold"><span className="text-zinc-200">Total Monthly Revenue</span><span className="text-green-400">$6,100/mo</span></div>
+          <div className="flex justify-between"><span className="text-zinc-500">Agent costs (API + hosting)</span><span className="text-red-400">-$25/mo</span></div>
+          <div className="flex justify-between"><span className="text-zinc-500">Your time investment</span><span className="text-zinc-300">~30 min/day</span></div>
+        </div>
+      </div>
+
+      <Callout emoji="💰" title="The Truth About AI Revenue">
+        The money isn't in the AI — it's in the <strong>problem you solve with the AI</strong>. Nobody pays for "an AI agent." They pay for "daily trading plans that make me money" or "content that grows my audience." Focus on the outcome, not the technology. The agent is the engine. The product is the destination.
+      </Callout>
+    </>
+  ),
 };
