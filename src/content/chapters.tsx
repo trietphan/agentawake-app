@@ -1,5 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
+import {
+  Quiz,
+  Checklist,
+  Tip,
+  CostCalculator,
+  BeforeAfter,
+  FlowDiagram,
+  BrainDiagram,
+  TrustSlider,
+  ROICalculator,
+  ArchitectureDiagram,
+  AgentThinking,
+} from "@/components/Interactive";
 
 // ─── Reusable components for content ────────────────────────
 function Callout({ emoji, title, children }: { emoji: string; title: string; children: React.ReactNode }) {
@@ -165,6 +178,20 @@ export const chapterContent: Record<string, React.ReactNode> = {
       <p>
         You're 45 minutes away from that. Let's go.
       </p>
+
+      <ROICalculator />
+
+      <Quiz
+        question="Why do most AI agents feel 'useless' for real work?"
+        options={[
+          { text: "The AI models aren't smart enough", explanation: "Models are incredibly capable — the bottleneck is usually context, not intelligence." },
+          { text: "They forget everything between conversations", correct: true, explanation: "Exactly! Without persistent memory, every conversation starts from zero. That's the #1 problem this playbook solves." },
+          { text: "They're too expensive to run", explanation: "Most agent setups cost under $15/month. Cost isn't the issue — memory is." },
+          { text: "They can't access external tools", explanation: "Most platforms support tools. The real issue is the agent doesn't remember HOW you want those tools used." },
+        ]}
+      />
+
+      <ArchitectureDiagram />
     </>
   ),
 
@@ -336,6 +363,21 @@ memory/
       <p>
         Now let's build each layer. Starting with the foundation: the Knowledge Base.
       </p>
+
+      <BrainDiagram />
+
+      <Quiz
+        question="Which memory layer stores 'always use Tailwind, never use CSS modules'?"
+        options={[
+          { text: "Knowledge Base", explanation: "Close — project standards could go here, but 'always/never' preferences are more personal." },
+          { text: "Daily Notes", explanation: "Daily notes are for what happened today, not permanent preferences." },
+          { text: "Tacit Knowledge", correct: true, explanation: "Correct! Tacit knowledge captures your preferences, biases, and unwritten rules — the 'vibes' layer." },
+        ]}
+      />
+
+      <Tip emoji="💡" title="Pro Tip: Start with just 3 files">
+        Don't over-engineer your memory system on day one. Start with: <strong>1)</strong> A project overview, <strong>2)</strong> Your preferences/rules, <strong>3)</strong> Today's notes. You can add more layers as you discover what your agent keeps forgetting.
+      </Tip>
     </>
   ),
 
@@ -946,6 +988,29 @@ Conversion rate: 2.3% (below 3% target).
       <p>
         You've now built all three layers of your agent's brain. Knowledge base. Daily notes. Tacit knowledge. But a brain that only works when you poke it isn't very useful. Next up: making it work while you sleep.
       </p>
+
+      <BeforeAfter
+        before={{
+          title: "Without Tacit Knowledge",
+          items: [
+            "Agent writes corporate-sounding content",
+            "Uses markdown tables (you hate those)",
+            "Asks 'should I deploy to staging or production?' every time",
+            "Formats code in a style you don't prefer",
+            "Writes 'Dear Sir/Madam' in your emails",
+          ]
+        }}
+        after={{
+          title: "With Tacit Knowledge",
+          items: [
+            "Matches your casual, punchy writing style",
+            "Uses bullet lists with bold headers (your preference)",
+            "Knows: always staging first, production only after review",
+            "Uses your preferred patterns and naming conventions",
+            "Writes in your actual email voice with the right tone",
+          ]
+        }}
+      />
     </>
   ),
 
@@ -1185,6 +1250,21 @@ Conversion rate: 2.3% (below 3% target).
       <p>
         Your agent now works while you sleep. But before we give it real tools and real access, we need to talk about the thing that keeps you safe: security.
       </p>
+
+      <FlowDiagram
+        steps={[
+          { emoji: "⏰", label: "Cron Trigger", detail: "6:30 AM — scheduled task fires" },
+          { emoji: "🧠", label: "Agent Wakes Up", detail: "Reads AGENTS.md + knowledge base" },
+          { emoji: "🔍", label: "Research", detail: "Searches web, checks APIs, reads data" },
+          { emoji: "✍️", label: "Generate Output", detail: "Creates report/content/analysis" },
+          { emoji: "📤", label: "Deliver", detail: "Posts to Discord, saves to file, sends email" },
+          { emoji: "📝", label: "Log Results", detail: "Updates daily notes for continuity" },
+        ]}
+      />
+
+      <Tip emoji="⚡" title="Tip: Stagger your cron jobs">
+        Don't schedule everything at the same time. If you have 3 daily crons, run them at 6:30 AM, 7:00 AM, and 7:30 AM. This prevents API rate limits, spreads the cost, and makes debugging easier when something fails.
+      </Tip>
     </>
   ),
 
@@ -1549,6 +1629,20 @@ Be the assistant you'd actually want to talk to.`}</Code>
       <p>
         That's the Blueprint tier complete. You now have everything you need to run a functional AI agent with persistent memory. The next tier — Pro — gives you battle-tested configs you can copy-paste, plus real case studies of agents making money.
       </p>
+
+      <Checklist
+        title="Day One Setup Checklist"
+        items={[
+          "Create workspace/knowledge/ folder structure",
+          "Write AGENTS.md with core rules and personality",
+          "Create knowledge/tacit.md with your preferences",
+          "Set up memory/YYYY-MM-DD.md for daily notes",
+          "Configure first heartbeat or cron job",
+          "Add security rules (authorized senders, data boundaries)",
+          "Test: send a task and verify it reads context correctly",
+          "Test: wait for cron/heartbeat to fire and check output",
+        ]}
+      />
     </>
   ),
 
@@ -2309,6 +2403,20 @@ Trigger: [What confirms the move]
         <strong>Your daily time investment:</strong> 0 minutes (it's fully automated)<br /><br />
         That's not a side hustle. That's a business with 99.7% margins.
       </Callout>
+
+      <AgentThinking
+        steps={[
+          "Reading market analysis protocol from knowledge base...",
+          "Fetching ES futures data from TradingView...",
+          "Scanning Twitter for $ES_F sentiment (filtering 5k+ follower accounts)...",
+          "Analyzing overnight price action vs. key levels...",
+          "Identifying 3 high-probability trade setups...",
+          "Generating risk/reward calculations...",
+          "Formatting report with mandatory template...",
+          "Posting to Discord #dailymplevels channel...",
+          "✅ Daily market profile delivered at 6:32 AM CT",
+        ]}
+      />
     </>
   ),
 
@@ -2975,6 +3083,14 @@ When evaluating a draft tweet:
         Month 3: it runs operations while you do strategy (you're the CEO).<br /><br />
         <strong>The bottleneck log is the single most important practice in this entire playbook.</strong> Start one today.
       </Callout>
+
+      <Tip emoji="🏆" title="The 'Zero Bottleneck' Challenge">
+        Keep a bottleneck log for one week. Every time your agent asks you something or gets stuck, log it. At the end of the week, eliminate the top 3. Next week, eliminate the next 3. Within a month, your agent will run nearly autonomously. This is the single highest-ROI practice you can do.
+      </Tip>
+
+      <Tip emoji="🔄" title="The 'Preemptive Knowledge Dump'">
+        Instead of waiting for bottlenecks to happen, spend 15 minutes brainstorming: "What questions will my agent ask this week?" Write the answers into your knowledge base before it asks. Front-loading context is 10x cheaper than interruption-driven context.
+      </Tip>
     </>
   ),
 
@@ -3699,6 +3815,17 @@ operator = Agent(
       <Callout emoji="🎯" title="Trust Is Earned, Not Scheduled">
         Don't advance levels on a timer. Your agent graduates when it <strong>demonstrates competence</strong>. Some agents earn Level 4 in 3 weeks because they're on a platform with good guardrails. Others take 3 months because the stakes are higher. <strong>The speed doesn't matter — the track record does.</strong>
       </Callout>
+
+      <TrustSlider />
+
+      <Quiz
+        question="Your agent has been running for 2 weeks with zero errors. Time to give it payment access?"
+        options={[
+          { text: "Yes — 2 weeks is enough to prove trust", explanation: "Not so fast! Payment access is Level 4. Has it passed all Level 2 and 3 graduation criteria first?" },
+          { text: "No — it should earn Levels 2 and 3 first", correct: true, explanation: "Correct! Trust is progressive. It needs to demonstrate competence at staging deploys (Level 2) and production with approval (Level 3) before getting unsupervised payment access." },
+          { text: "It depends on the platform", explanation: "Platform matters for implementation, but the principle is universal: earn each level before advancing." },
+        ]}
+      />
     </>
   ),
 
@@ -3846,6 +3973,12 @@ operator = Agent(
       <Callout emoji="💡" title="The 80/20 Rule of AI Costs">
         <strong>80% of your costs come from 20% of your tasks.</strong> Find those expensive tasks (usually: long conversations with big context, or unnecessarily using Opus/o3 for simple work). Fix those, and your bill drops dramatically. Most operators should be under $15/month.
       </Callout>
+
+      <CostCalculator />
+
+      <Tip emoji="🧪" title="Experiment: Run your agent on Haiku for a day">
+        Switch your agent to the cheapest model for one full day. You'll be surprised how many tasks it handles just fine. Then switch back to Sonnet only for the tasks that actually needed it. Most people discover 60-70% of their tasks work perfectly on cheap models.
+      </Tip>
     </>
   ),
 
@@ -4618,6 +4751,30 @@ Do NOT skip sections.
       <Callout emoji="💰" title="The Truth About AI Revenue">
         The money isn't in the AI — it's in the <strong>problem you solve with the AI</strong>. Nobody pays for "an AI agent." They pay for "daily trading plans that make me money" or "content that grows my audience." Focus on the outcome, not the technology. The agent is the engine. The product is the destination.
       </Callout>
+
+      <Quiz
+        question="What's the fastest path from 'I have an AI agent' to 'I have revenue'?"
+        options={[
+          { text: "Build a complex SaaS product with the agent", explanation: "SaaS takes 8-16 weeks and significant engineering. It's the highest ceiling but slowest path to first dollar." },
+          { text: "Start a premium newsletter or community", correct: true, explanation: "Correct! Newsletter/community is 2-4 weeks to first revenue. Agent does the research and writing, you review for 5 minutes. Low complexity, high margins, recurring revenue." },
+          { text: "Offer AI consulting services", explanation: "Good money but trades time for money. It's a stepping stone, not a scalable endgame." },
+          { text: "Sell the agent itself", explanation: "Nobody buys 'an agent.' They buy outcomes. Package the agent's output as a product, not the agent itself." },
+        ]}
+      />
+
+      <Checklist
+        title="Revenue Launch Checklist"
+        items={[
+          "Pick ONE revenue model from the 7 above",
+          "Validate demand: find 50+ people who want this (Reddit, Twitter, communities)",
+          "Build MVP in 1 week: landing page + payment + agent delivers value",
+          "Get 10 paying customers (not free users — paying)",
+          "Set up agent automation for daily/weekly delivery",
+          "Create content pipeline to attract more customers",
+          "Iterate based on feedback for 30 days",
+          "Consider adding a second revenue model to stack",
+        ]}
+      />
     </>
   ),
 };
