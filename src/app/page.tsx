@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
+import { StructuredData } from "./structured-data";
 
 function NavBar() {
   return (
@@ -36,12 +37,12 @@ function Hero() {
           The exact playbook we used to build an AI agent that ships code, generates market analysis, creates content, and processes payments — autonomously, every single day.
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
-          <Link href="/guide" className="bg-purple-600 text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-purple-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/20">
-            Read the Guide →
-          </Link>
-          <a href="#use-cases" className="border border-zinc-700 text-zinc-300 px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:border-purple-500/40 hover:text-purple-300 transition-all">
-            See Use Cases
+          <a href="#pricing" className="bg-purple-600 text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-purple-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/20">
+            Get the Playbook →
           </a>
+          <Link href="/free" className="border border-zinc-700 text-zinc-300 px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:border-purple-500/40 hover:text-purple-300 transition-all">
+            Read Free Chapter
+          </Link>
         </div>
         <p className="mt-5 text-sm text-zinc-600">One-time purchase · Interactive chapters · Works with any AI platform · Lifetime updates</p>
       </div>
@@ -353,6 +354,139 @@ function Solution() {
   );
 }
 
+function WhatMakesThisDifferent() {
+  const differentiators = [
+    {
+      icon: "🤖",
+      title: "Built By the System It Documents",
+      desc: "This isn't theory written by someone who read about AI agents. This playbook, this landing page, this payment system — all built by the exact agent architecture we teach. We're the proof it works.",
+      highlight: true,
+    },
+    {
+      icon: "🎮",
+      title: "Interactive, Not Just Readable",
+      desc: "Quizzes that test your understanding. Calculators that estimate your costs and ROI. Checklists that track your progress. Architecture diagrams you can click and explore. This isn't a PDF — it's a learning experience.",
+      highlight: false,
+    },
+    {
+      icon: "🔌",
+      title: "8 Platforms, One Architecture",
+      desc: "Most guides lock you into one tool. We give you the universal architecture, then show platform-specific implementation for Claude, ChatGPT, CrewAI, Cursor, n8n, LangChain, and more. Switch platforms without losing your system.",
+      highlight: false,
+    },
+    {
+      icon: "💰",
+      title: "Revenue-First, Not Theory-First",
+      desc: "Chapter 21 is a complete Revenue Playbook with 7 proven models, real math, and a 4-week launch sequence. We don't just teach you to build agents — we teach you to profit from them. $6K/mo on $15/mo of costs.",
+      highlight: false,
+    },
+    {
+      icon: "🧠",
+      title: "Memory Architecture, Not Prompt Tricks",
+      desc: "Everyone teaches prompting. Nobody teaches persistent memory. Our three-layer brain architecture (knowledge base + daily notes + tacit knowledge) is what turns a chatbot into a business operator that compounds daily.",
+      highlight: false,
+    },
+    {
+      icon: "🔒",
+      title: "Security Built In, Not Bolted On",
+      desc: "Progressive trust ladder, prompt injection defense, data classification — from Chapter 1. Most agent guides don't even mention security until something goes wrong. Ours starts with it.",
+      highlight: false,
+    },
+  ];
+
+  return (
+    <section className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-500/[0.02] to-transparent pointer-events-none" />
+      <div className="max-w-[1080px] mx-auto px-6 relative">
+        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">Why AgentForge</span>
+        <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
+          Not Another <span className="line-through text-zinc-600">Prompt Engineering Course</span>
+        </h2>
+        <p className="text-[1.05rem] text-zinc-400 max-w-[620px] mx-auto mb-14 text-center">
+          We built something that doesn't exist yet: a complete operating system for AI agents, created by the very system it documents.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {differentiators.map((d) => (
+            <div
+              key={d.title}
+              className={`rounded-2xl p-7 transition-all ${
+                d.highlight
+                  ? "bg-gradient-to-b from-purple-500/10 to-[#111116] border border-purple-500/30 md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col justify-center"
+                  : "bg-[#111116] border border-zinc-800/80 hover:border-zinc-700"
+              }`}
+            >
+              <div className={`text-2xl mb-3 ${d.highlight ? "text-3xl mb-4" : ""}`}>{d.icon}</div>
+              <h3 className={`font-semibold mb-2 ${d.highlight ? "text-lg" : "text-[1.05rem]"}`}>{d.title}</h3>
+              <p className={`text-zinc-400 leading-relaxed ${d.highlight ? "text-[0.95rem]" : "text-[0.88rem]"}`}>{d.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BuiltByAI() {
+  return (
+    <section className="py-20">
+      <div className="max-w-[1080px] mx-auto px-6">
+        <div className="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/[0.04] to-[#111116] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10">
+          <div className="flex-shrink-0 text-center">
+            <div className="text-6xl mb-3">🐾</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-purple-400">ToDaMoon</div>
+            <div className="text-xs text-zinc-600">The agent that built this</div>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-bold mb-3">This Product Is Its Own Proof</h3>
+            <p className="text-[0.95rem] text-zinc-400 leading-relaxed mb-4">
+              ToDaMoon is an autonomous AI agent running the exact three-layer memory architecture documented in this playbook.
+              It wrote every chapter, built every interactive component, integrated Stripe payments, deployed to Vercel,
+              and manages its own daily operations — all while its human reviews and steers.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                "Wrote 22 chapters",
+                "Built interactive components",
+                "Integrated payments",
+                "Self-deployed",
+                "Runs daily cron jobs",
+              ].map((item) => (
+                <span key={item} className="text-xs font-medium text-purple-300/80 bg-purple-500/10 border border-purple-500/20 rounded-lg px-3 py-1.5">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NumbersSection() {
+  return (
+    <section className="py-20">
+      <div className="max-w-[1080px] mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { num: "22", label: "Interactive chapters", sub: "Not just text — quizzes, calculators, checklists" },
+            { num: "8+", label: "Platforms covered", sub: "Claude, ChatGPT, CrewAI, Cursor, n8n, and more" },
+            { num: "4,800+", label: "Lines of content", sub: "Deep, practical content with real code" },
+            { num: "7", label: "Revenue models", sub: "With real math and launch sequences" },
+          ].map((s) => (
+            <div key={s.label} className="rounded-2xl bg-[#111116] border border-zinc-800/80 p-6 text-center">
+              <div className="text-3xl font-extrabold bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent mb-1">{s.num}</div>
+              <div className="text-sm font-semibold text-zinc-300 mb-1">{s.label}</div>
+              <div className="text-xs text-zinc-600">{s.sub}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HowItWorks() {
   const steps = [
     { num: "1", title: "Build the Memory Architecture", desc: "Create the three-layer structure. Copy our templates, fill in the brackets, and your agent instantly has persistent memory.", time: "15 minutes" },
@@ -429,16 +563,18 @@ function Pricing() {
       product: "Accelerator",
       price: "$69",
       priceCompare: "One nice dinner out 🍝 (but this keeps working forever)",
-      desc: "The complete system — videos, personalized review, multi-agent orchestration, and early access to our tools.",
+      desc: "The complete system — 9 advanced chapters, revenue playbook, cost optimization, and all future updates.",
       features: [
         "Everything in Pro",
-        "4 video walkthroughs (~2.5 hrs)",
-        "1-on-1 async setup review",
         "Multi-agent orchestration guide",
         "Bottleneck elimination framework",
         "Prompt injection defense playbook",
-        "Early access to our SaaS tools",
-        "Quarterly deep-dive updates",
+        "Cost optimization & model selection",
+        "Debugging & observability toolkit",
+        "Tool & API integration patterns (MCP, webhooks)",
+        "Prompt engineering for agents (not chatbots)",
+        "The Revenue Playbook — 7 proven income models",
+        "All future chapters & updates forever",
       ],
       cta: "Get the Accelerator →",
       tier: "accelerator",
@@ -567,13 +703,17 @@ function BottomCTA() {
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#07070a]">
+      <StructuredData />
       <NavBar />
       <Hero />
       <SocialProof />
       <Problem />
-      <UseCases />
-      <Platforms />
       <Solution />
+      <WhatMakesThisDifferent />
+      <BuiltByAI />
+      <UseCases />
+      <NumbersSection />
+      <Platforms />
       <HowItWorks />
       <Pricing />
       <FAQ />
