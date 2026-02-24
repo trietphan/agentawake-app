@@ -6444,4 +6444,904 @@ function isComplexQuery(query: string): boolean {
       </Tip>
     </>
   ),
+
+  // ═══════════════════════════════════════════════════════════
+  // CHAPTER 25 — PRO TIER
+  // ═══════════════════════════════════════════════════════════
+  "agent-workspace": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        Everyone wants to give their agent a fancy vector database, a knowledge graph, or some enterprise-grade storage layer. Meanwhile, the agents that actually <strong>ship results every day</strong> are reading and writing plain files in a well-organized folder. Your agent doesn't need a database. It needs a well-organized desk.
+      </p>
+
+      <Analogy>
+        Think about the most productive person you know. They probably don't have a custom-built productivity app. They have a <strong>clean desk, labeled folders, and a system they actually follow.</strong> Your agent is the same. A messy workspace with random file names is like giving your assistant a desk covered in sticky notes, coffee stains, and unmarked folders. They'll spend more time looking for things than doing things.
+      </Analogy>
+
+      <h2>The Workspace as an API</h2>
+
+      <p>Here's the mental shift that changes everything: <strong>your file system is your agent's API.</strong> When your agent needs to store data, it writes a file. When it needs to retrieve data, it reads a file. When it needs to communicate with you (or another agent), it updates a file.</p>
+
+      <p>This isn't a limitation — it's a superpower. Files are:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-zinc-200">👁️ Human-readable</div>
+          <p className="text-xs text-zinc-500 mt-1">You can open any file and see exactly what your agent knows. No query language, no admin panel. Just a text editor.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-zinc-200">🔄 Version-controllable</div>
+          <p className="text-xs text-zinc-500 mt-1">Every change is trackable with git. You can see what your agent wrote, when, and revert anything.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-zinc-200">🤝 Universally compatible</div>
+          <p className="text-xs text-zinc-500 mt-1">Every AI model, every framework, every tool can read and write files. No vendor lock-in.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-zinc-200">💪 Debuggable</div>
+          <p className="text-xs text-zinc-500 mt-1">When something goes wrong, you open the file. No "check the logs" dance. The file IS the log.</p>
+        </div>
+      </div>
+
+      <h2>File Naming Conventions That Actually Matter</h2>
+
+      <p>Your agent processes file names to understand what's inside. Bad names = confused agent. Good names = an agent that can navigate your workspace without instructions.</p>
+
+      <Code title="Good vs. Bad file names">{`# ❌ Bad — your agent has no idea what these are
+notes.md
+draft.md
+stuff.md
+todo.md
+meeting.md
+
+# ✅ Good — your agent instantly knows what, when, and why
+2026-02-24-market-analysis.md
+draft-blog-ai-agent-memory.md
+project-agentforge-status.md
+todo-weekly-review.md
+meeting-2026-02-20-product-roadmap.md`}</Code>
+
+      <p>The pattern is simple: <strong>date-prefix for temporal files, type-prefix for categorical files.</strong> Your agent can sort by date, filter by type, and find anything without a search index.</p>
+
+      <Callout emoji="📏" title="The Naming Rules">
+        <strong>1.</strong> Always use ISO dates: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">YYYY-MM-DD</code> (sorts correctly alphabetically)<br />
+        <strong>2.</strong> Use hyphens, not spaces or underscores<br />
+        <strong>3.</strong> Be descriptive but concise: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">project-name-topic.md</code><br />
+        <strong>4.</strong> Consistent extensions: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">.md</code> for everything your agent reads/writes
+      </Callout>
+
+      <h2>The .md File as Universal Interface</h2>
+
+      <p>Markdown is the <strong>lingua franca</strong> between humans and agents. It's readable by both, writable by both, and structured enough to parse but flexible enough to handle anything. JSON is too rigid. Plain text has no structure. Markdown is the Goldilocks zone.</p>
+
+      <Analogy>
+        Markdown is like English in international business. It's not anyone's native language (well, maybe some developers'), but everyone speaks it well enough. Your agent writes markdown, you read it in Obsidian or VS Code or GitHub. You write markdown, your agent parses it perfectly. No translation layer needed.
+      </Analogy>
+
+      <h2>Template Files vs. Living Documents</h2>
+
+      <p>Your workspace needs both, and knowing the difference prevents chaos:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-amber-400">📝 Templates (read-only reference)</div>
+          <p className="text-xs text-zinc-500 mt-1">Files your agent copies from but never modifies. Think: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">templates/daily-note-template.md</code>, <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">templates/project-kickoff.md</code>. These define structure. Store them in a <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">templates/</code> folder.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-emerald-400">📄 Living Documents (read + write)</div>
+          <p className="text-xs text-zinc-500 mt-1">Files your agent actively updates: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">MEMORY.md</code>, <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">memory/2026-02-24.md</code>, <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">knowledge/projects/agentforge.md</code>. These are the actual state of your system.</p>
+        </div>
+      </div>
+
+      <h2>Directory Structure: PARA for Your Agent</h2>
+
+      <p>The PARA method (Projects, Areas, Resources, Archives) maps perfectly to agent workspaces:</p>
+
+      <Code title="The ideal workspace structure">{`workspace/
+├── AGENTS.md          # Agent instructions (read every session)
+├── SOUL.md            # Personality & behavior rules
+├── USER.md            # About the human
+├── MEMORY.md          # Curated long-term memory
+├── TOOLS.md           # Environment-specific notes
+│
+├── memory/            # Daily working notes
+│   ├── 2026-02-24.md
+│   ├── 2026-02-23.md
+│   └── heartbeat-state.json
+│
+├── knowledge/         # PARA structure
+│   ├── projects/      # Active work (finite end date)
+│   │   ├── agentforge.md
+│   │   └── trading-bot.md
+│   ├── areas/         # Ongoing responsibilities (no end date)
+│   │   ├── trading.md
+│   │   └── content-pipeline.md
+│   ├── resources/     # Reference material
+│   │   ├── api-keys-guide.md
+│   │   └── prompt-patterns.md
+│   ├── archives/      # Completed/paused work
+│   │   └── old-project.md
+│   └── tacit.md       # Lessons learned, preferences
+│
+├── templates/         # File templates (read-only)
+│   ├── daily-note.md
+│   └── project-kickoff.md
+│
+└── output/            # Agent-generated deliverables
+    ├── reports/
+    └── drafts/`}</Code>
+
+      <h2>Git: Version Control for Agent Work</h2>
+
+      <p>Here's something most people don't realize: <strong>your agent can commit its own changes.</strong> This gives you a complete audit trail of everything your agent has done, the ability to roll back mistakes, and automatic backups.</p>
+
+      <Code title="Agent auto-commit pattern">{`# In your agent's nightly routine or after major tasks:
+cd ~/.openclaw/workspace
+git add -A
+git commit -m "agent: daily memory consolidation 2026-02-24"
+git push origin main
+
+# Now you can:
+git log --oneline          # See everything your agent did
+git diff HEAD~1            # See what changed today
+git revert HEAD            # Undo the last change`}</Code>
+
+      <Callout emoji="🛡️" title="Why Git Matters for Agents">
+        Without git, if your agent corrupts a file or makes a bad decision, you lose data. With git, every state is recoverable. It's your agent's "undo button" — and it costs nothing.
+      </Callout>
+
+      <h2>Setting Up a Workspace From Scratch</h2>
+
+      <p>Here's the complete walkthrough — 10 minutes to a production-ready workspace:</p>
+
+      <div className="my-6 space-y-2">
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">1️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Create the directory structure</strong> — use the PARA layout above</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">2️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Write AGENTS.md</strong> — define how your agent should behave (use our template)</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">3️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Write SOUL.md</strong> — give your agent personality and boundaries</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">4️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Write USER.md</strong> — tell the agent who you are and what you care about</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">5️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Initialize git</strong> — <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">git init && git add -A && git commit -m "initial workspace"</code></div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">6️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Point your agent at the folder</strong> — configure it as the working directory</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">7️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Test it</strong> — ask your agent to write something, then check the file appeared in the right place</div>
+        </div>
+      </div>
+
+      <Quiz
+        question="Why is a file system better than a database for most agent workspaces?"
+        options={[
+          { text: "Files are faster than databases", explanation: "Speed isn't really the advantage. For small agent workspaces, both are instantaneous." },
+          { text: "Files are human-readable, debuggable, and universally compatible", correct: true, explanation: "Exactly! You can open any file in a text editor, track changes with git, and every AI tool can read/write files. No admin panel, no query language, no vendor lock-in." },
+          { text: "Databases are too expensive", explanation: "SQLite is free. Cost isn't the issue — accessibility and debuggability are." },
+          { text: "Files don't need a schema", explanation: "True but incomplete. The real power is the combination of human-readability, version control, and universal compatibility." },
+        ]}
+      />
+
+      <Quiz
+        question="What's the best file naming convention for agent workspaces?"
+        options={[
+          { text: "Short names like notes.md and draft.md", explanation: "Your agent can't tell what's inside these. It has to read every file to understand what it has." },
+          { text: "UUID-based names like 8f3a-4b2c.md", explanation: "Machines love UUIDs but humans can't navigate the workspace. You need both to be able to read it." },
+          { text: "Date-prefixed and type-prefixed with hyphens", correct: true, explanation: "Correct! 2026-02-24-market-analysis.md tells both you and the agent what it is, when it's from, and sorts correctly alphabetically." },
+          { text: "Whatever feels right in the moment", explanation: "Inconsistency is the enemy of agent navigation. Pick a convention and stick to it." },
+        ]}
+      />
+
+      <Checklist
+        title="Workspace Setup Checklist"
+        items={[
+          "Created PARA directory structure (knowledge/projects, areas, resources, archives)",
+          "Written AGENTS.md with session startup instructions",
+          "Written SOUL.md with personality and boundaries",
+          "Written USER.md with your context and preferences",
+          "Established file naming convention (date-prefix, type-prefix, hyphens)",
+          "Created templates/ folder with at least a daily note template",
+          "Initialized git and made first commit",
+          "Set up agent auto-commit in nightly routine",
+          "Tested that agent can read and write files in the correct locations",
+        ]}
+      />
+
+      <Tip emoji="🏠" title="The Workspace Test">
+        Here's how you know your workspace is well-organized: <strong>could a brand new agent — with zero prior context — read AGENTS.md and immediately know where everything is?</strong> If yes, your workspace is an API. If no, it's a junk drawer. Go organize it.
+      </Tip>
+    </>
+  ),
+
+  // ═══════════════════════════════════════════════════════════
+  // CHAPTER 26 — ACCELERATOR TIER
+  // ═══════════════════════════════════════════════════════════
+  "agent-teams": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        You've built one agent and it's incredible. It handles your morning briefing, writes content, monitors markets, and keeps your memory organized. But now you're hitting a wall: <strong>one agent can't do everything well.</strong> It's like having one employee who's your receptionist, accountant, marketer, and developer. Eventually, they start dropping balls.
+      </p>
+
+      <Analogy>
+        Think of it like a restaurant. When you first open, the owner does everything — cooking, serving, cleaning, managing. It works when you have 5 tables. But at 50 tables? You need a chef, servers, a dishwasher, and a manager. Not because the owner got dumber — because the <strong>workload exceeded what one person can context-switch between.</strong> Agents hit the same wall.
+      </Analogy>
+
+      <h2>When to Go Multi-Agent (Decision Framework)</h2>
+
+      <p>Don't add agents just because you can. More agents = more complexity = more cost = more things that can break. Add another agent only when you hit one of these triggers:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-red-400">🚨 Trigger 1: Context Overflow</div>
+          <p className="text-xs text-zinc-500 mt-1">Your agent's instructions + memory + current task exceed the context window. It starts "forgetting" parts of its job because there's too much to hold at once.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-amber-400">⚠️ Trigger 2: Conflicting Personalities</div>
+          <p className="text-xs text-zinc-500 mt-1">Your agent needs to be both a careful analyst AND a creative writer AND a blunt code reviewer. These personalities fight each other in a single system prompt.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-blue-400">📊 Trigger 3: Parallel Workloads</div>
+          <p className="text-xs text-zinc-500 mt-1">You need things done simultaneously: research happening while content is being written while code is being reviewed. One agent means sequential, not parallel.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-emerald-400">💰 Trigger 4: Cost Optimization</div>
+          <p className="text-xs text-zinc-500 mt-1">Some tasks need GPT-4/Claude Opus (complex reasoning). Others work fine with GPT-4o-mini/Haiku (simple extraction). One agent = one model tier for everything.</p>
+        </div>
+      </div>
+
+      <Callout emoji="⚖️" title="The Rule of Thumb">
+        If your single agent is handling 3+ unrelated domains (e.g., trading + content + DevOps), it's time to specialize. If it's handling 3+ related tasks in one domain (e.g., research + draft + edit for content), keep it as one agent.
+      </Callout>
+
+      <h2>Shared vs. Private Memory</h2>
+
+      <p>The most critical decision in multi-agent setups: <strong>what can each agent see?</strong></p>
+
+      <Code title="Memory boundaries">{`workspace/
+├── shared/              # All agents read/write
+│   ├── MEMORY.md        # Shared long-term memory
+│   ├── inbox/           # Cross-agent communication
+│   │   ├── research-to-writer.md
+│   │   └── analyst-to-chief.md
+│   └── knowledge/       # Shared knowledge base
+│
+├── agents/
+│   ├── researcher/      # Only the researcher sees this
+│   │   ├── SOUL.md
+│   │   ├── memory/
+│   │   └── scratch/     # Working drafts, raw data
+│   ├── writer/          # Only the writer sees this
+│   │   ├── SOUL.md
+│   │   ├── memory/
+│   │   └── drafts/
+│   └── analyst/         # Only the analyst sees this
+│       ├── SOUL.md
+│       ├── memory/
+│       └── data/`}</Code>
+
+      <p><strong>Shared memory</strong> contains facts everyone needs: project status, user preferences, completed decisions. <strong>Private memory</strong> contains agent-specific working state: raw research data, draft iterations, intermediate analysis. Think of shared memory as the company wiki and private memory as each employee's notebook.</p>
+
+      <h2>Communication Patterns</h2>
+
+      <p>Agents need to talk to each other. There are two main patterns, and they have very different tradeoffs:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-zinc-200">📁 File-Based Communication (Recommended)</div>
+          <p className="text-xs text-zinc-500 mt-1">Agents write to a shared <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">inbox/</code> folder. Other agents check the inbox periodically. Async, debuggable, auditable. Like internal memos.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-zinc-200">💬 Direct Messaging (Use Sparingly)</div>
+          <p className="text-xs text-zinc-500 mt-1">One agent spawns or invokes another directly with a prompt. Faster but harder to debug. Like a phone call — no paper trail unless you create one.</p>
+        </div>
+      </div>
+
+      <h2>Specialization Patterns</h2>
+
+      <p>The four agent archetypes that cover 90% of use cases:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-blue-400">🔍 The Researcher</div>
+          <p className="text-xs text-zinc-500 mt-1">Searches the web, reads documents, summarizes findings. Optimized for breadth and accuracy. Model: can use cheaper models for bulk search, expensive for synthesis.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-purple-400">✍️ The Writer</div>
+          <p className="text-xs text-zinc-500 mt-1">Takes research and turns it into content — blog posts, tweets, reports, emails. Optimized for tone, style, and persuasion. Needs the strongest language model.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-emerald-400">📊 The Analyst</div>
+          <p className="text-xs text-zinc-500 mt-1">Crunches numbers, spots patterns, makes recommendations. Optimized for accuracy and structured reasoning. Lives in spreadsheets and data files.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-amber-400">⚙️ The Operator</div>
+          <p className="text-xs text-zinc-500 mt-1">Executes tasks: deploys code, sends emails, updates databases, runs cron jobs. Optimized for reliability and tool use. Needs the highest trust level.</p>
+        </div>
+      </div>
+
+      <h2>The "Chief of Staff" Pattern</h2>
+
+      <p>The most powerful multi-agent pattern is deceptively simple: <strong>one main agent that delegates to specialized sub-agents.</strong></p>
+
+      <Analogy>
+        Think of a CEO with a Chief of Staff. The CEO (you) says "I need a market analysis and a blog post about it." The Chief of Staff (main agent) breaks that into tasks: tells the Researcher to gather data, tells the Analyst to crunch numbers, tells the Writer to draft the post, then compiles everything into a final deliverable. You never talk to the sub-agents directly. The Chief of Staff manages the workflow.
+      </Analogy>
+
+      <Code title="Chief of Staff pattern">{`# Main agent (Chief of Staff) receives:
+"Analyze the AI agent market and write a blog post about it"
+
+# It breaks this into sub-tasks:
+1. → Researcher: "Find top 10 AI agent frameworks, their pricing,
+     user counts, and key differentiators. Output to
+     shared/inbox/research-ai-agents.md"
+
+2. → Analyst: "Read shared/inbox/research-ai-agents.md. Compare
+     frameworks on cost, capability, and ease of use.
+     Score each 1-10. Output to shared/inbox/analysis-ai-agents.md"
+
+3. → Writer: "Read research and analysis files. Write a 1500-word
+     blog post titled 'Best AI Agent Frameworks in 2026'.
+     Match our brand voice in SOUL.md.
+     Output to shared/inbox/draft-ai-agents-blog.md"
+
+4. Chief compiles, reviews, delivers to human.`}</Code>
+
+      <h2>Avoiding "Too Many Cooks"</h2>
+
+      <p>More agents doesn't always mean better results. Here are the failure modes:</p>
+
+      <div className="my-6 space-y-2">
+        <div className="flex items-center gap-3 rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+          <span className="text-lg">💥</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Write conflicts</strong> — two agents editing the same file simultaneously. Solution: each agent owns specific files.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+          <span className="text-lg">🔄</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Infinite loops</strong> — Agent A asks Agent B for input, B asks A for clarification, repeat forever. Solution: set max delegation depth.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+          <span className="text-lg">💸</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Cost explosion</strong> — 5 agents each using GPT-4 = 5x the cost. Solution: use cheap models for simple tasks, expensive for complex.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+          <span className="text-lg">🤷</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Responsibility diffusion</strong> — when nobody owns a task, nobody does it. Solution: explicit ownership in each agent's SOUL.md.</div>
+        </div>
+      </div>
+
+      <h2>Real Example: Three Agents in Parallel</h2>
+
+      <p>Here's a real setup running in production:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
+          <div className="text-sm font-semibold text-emerald-400">📊 Market Analysis Agent (runs 6 AM daily)</div>
+          <p className="text-xs text-zinc-500 mt-1">Scans Twitter sentiment, pulls price data, generates trading plan. Writes to <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">shared/market-briefing.md</code>. Cost: ~$0.80/day (GPT-4o-mini for scraping, Claude for analysis).</p>
+        </div>
+        <div className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4">
+          <div className="text-sm font-semibold text-blue-400">✍️ Content Agent (runs 8 AM daily)</div>
+          <p className="text-xs text-zinc-500 mt-1">Reads market briefing + trending topics. Drafts 3-5 social posts. Writes to <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">shared/content-drafts.md</code>. Cost: ~$0.50/day (Claude Sonnet).</p>
+        </div>
+        <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
+          <div className="text-sm font-semibold text-amber-400">💡 Idea Validator (runs weekly)</div>
+          <p className="text-xs text-zinc-500 mt-1">Mines Reddit/Twitter for pain points, validates against market briefings, scores opportunities. Writes to <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">shared/ideas-scored.md</code>. Cost: ~$2/week.</p>
+        </div>
+      </div>
+
+      <p><strong>Total cost: ~$11/week for three specialized agents running autonomously.</strong> They share a knowledge base but each has private working space. The human reviews outputs for 15 minutes a day.</p>
+
+      <h2>Cost Implications</h2>
+
+      <p>Multi-agent setups multiply costs. Here's how to keep them sane:</p>
+
+      <div className="my-6 space-y-2">
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">💡</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Match model to task</strong> — Researcher uses Haiku ($0.25/1M tokens), Writer uses Sonnet ($3/1M), Analyst uses Opus ($15/1M) only when needed.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">⏰</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Stagger schedules</strong> — don't run all agents at once. Sequential reduces peak cost and lets agents build on each other's output.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">📊</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Track per-agent cost</strong> — know which agent is expensive and whether its output justifies the cost.</div>
+        </div>
+      </div>
+
+      <Quiz
+        question="When should you add a second agent to your setup?"
+        options={[
+          { text: "As soon as your first agent is working well", explanation: "Working well = don't fix it. Only add complexity when you hit a real limit." },
+          { text: "When your single agent's context is overflowing or it needs conflicting personalities", correct: true, explanation: "Correct! Context overflow, conflicting roles, parallel workloads, or cost optimization needs are the real triggers. Not boredom." },
+          { text: "When you want to impress people with your setup", explanation: "Nobody is impressed by a complex system that costs 5x more and breaks more often. Results impress people." },
+          { text: "After reading about multi-agent frameworks on Twitter", explanation: "Twitter makes everything look easy. Multi-agent adds real complexity. Only add it when single-agent fails." },
+        ]}
+      />
+
+      <Quiz
+        question="In the 'Chief of Staff' pattern, what does the main agent do?"
+        options={[
+          { text: "Does all the work itself and delegates the easy parts", explanation: "That defeats the purpose. The Chief delegates everything and focuses on coordination." },
+          { text: "Breaks tasks into sub-tasks, delegates to specialists, and compiles results", correct: true, explanation: "Exactly! The main agent is a coordinator, not a worker. It decomposes, delegates, and assembles." },
+          { text: "Runs all sub-agents simultaneously", explanation: "Sometimes parallel, sometimes sequential. The Chief decides the order based on dependencies." },
+          { text: "Talks directly to the human while sub-agents work", explanation: "The Chief does communicate with the human, but its primary role is task decomposition and delegation." },
+        ]}
+      />
+
+      <Checklist
+        title="Multi-Agent Readiness Checklist"
+        items={[
+          "Confirmed your single agent is hitting at least one trigger (context overflow, conflicting roles, parallel needs, cost optimization)",
+          "Defined clear responsibilities for each agent (no overlap)",
+          "Set up shared vs. private memory boundaries",
+          "Chosen communication pattern (file-based recommended for most)",
+          "Assigned appropriate model tiers per agent (cheap for simple, expensive for complex)",
+          "Implemented the Chief of Staff pattern for coordination",
+          "Set up cost tracking per agent",
+          "Tested with 2 agents before scaling to 3+",
+          "Written explicit SOUL.md for each agent with its role and boundaries",
+        ]}
+      />
+
+      <Tip emoji="🎯" title="Start With Two">
+        Don't go from 1 agent to 5. Go from 1 to 2. Get the communication pattern working, debug the file ownership issues, understand the cost profile. Then add a third. Then maybe a fourth. The companies running 10+ agents started with 2 and scaled slowly. You should too.
+      </Tip>
+    </>
+  ),
+
+  // ═══════════════════════════════════════════════════════════
+  // CHAPTER 27 — PRO TIER
+  // ═══════════════════════════════════════════════════════════
+  "daily-routine": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        Most people set up their agent, run it once, and think they're done. That's like going to the gym once and wondering why you don't have abs. The real power of an AI agent isn't in any single session — it's in the <strong>daily routine that compounds over weeks and months.</strong>
+      </p>
+
+      <Analogy>
+        Think about compound interest. A penny doubled every day becomes $5 million in 30 days. Your agent works the same way. On day 1, it barely knows you. By day 30, it's anticipated your questions before you ask them. By day 90, it's running entire workflows you forgot you set up. The daily routine is the doubling mechanism.
+      </Analogy>
+
+      <h2>The Full Daily Workflow</h2>
+
+      <p>A well-designed agent day has four phases. Not isolated cron jobs — a <strong>connected workflow</strong> where each phase builds on the last:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
+          <div className="text-sm font-semibold text-amber-400">☀️ Morning Briefing (6-7 AM)</div>
+          <p className="text-xs text-zinc-500 mt-1">Agent reads yesterday's notes, checks email/calendar, scans news/markets, and writes a morning summary. You wake up to a briefing, not a blank screen.</p>
+        </div>
+        <div className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4">
+          <div className="text-sm font-semibold text-blue-400">💼 Work Blocks (9 AM - 5 PM)</div>
+          <p className="text-xs text-zinc-500 mt-1">Heartbeat-driven check-ins every 30-60 minutes. Agent handles background tasks, responds to requests, and logs everything to today's daily note.</p>
+        </div>
+        <div className="rounded-lg border border-purple-500/20 bg-purple-500/5 p-4">
+          <div className="text-sm font-semibold text-purple-400">🌆 Evening Consolidation (9-10 PM)</div>
+          <p className="text-xs text-zinc-500 mt-1">Agent reviews the day's notes, extracts key decisions and lessons, updates the knowledge base and MEMORY.md. Like a student reviewing their notes before bed.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-500/20 bg-zinc-500/5 p-4">
+          <div className="text-sm font-semibold text-zinc-400">🌙 Nightly Cleanup (2 AM)</div>
+          <p className="text-xs text-zinc-500 mt-1">Maintenance: archive old files, compact memory, update tacit knowledge, commit changes to git. The janitorial shift nobody sees but everyone benefits from.</p>
+        </div>
+      </div>
+
+      <Code title="Complete daily routine cron config">{`# Morning briefing — delivered to Discord before you wake up
+0 6 * * * openclaw cron run --task "morning-briefing" \\
+  --prompt "Read yesterday's daily note. Check email for urgent items. \\
+  Scan calendar for today. Write a 5-bullet morning briefing to Discord."
+
+# Evening consolidation — knowledge extraction
+0 21 * * * openclaw cron run --task "evening-consolidation" \\
+  --prompt "Read today's daily note (memory/YYYY-MM-DD.md). \\
+  Extract: decisions made, lessons learned, tasks completed, blockers hit. \\
+  Update MEMORY.md if any durable facts emerged. \\
+  Update knowledge/tacit.md if any preferences or patterns were learned."
+
+# Nightly cleanup — the janitorial shift
+0 2 * * * openclaw cron run --task "nightly-cleanup" \\
+  --prompt "Archive daily notes older than 30 days to knowledge/archives/. \\
+  Review MEMORY.md for outdated entries. \\
+  Git commit and push all changes. \\
+  Write a 1-line summary of what was cleaned to tomorrow's daily note."
+
+# Weekly review — every Sunday at 10 AM
+0 10 * * 0 openclaw cron run --task "weekly-review" \\
+  --prompt "Read all daily notes from this week. \\
+  Write a weekly summary: accomplishments, blockers, patterns noticed. \\
+  Score the week 1-10. Suggest one improvement for next week."
+`}</Code>
+
+      <h2>The Compound Knowledge Effect</h2>
+
+      <p>Here's what happens when your agent runs a daily routine consistently:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="flex justify-between items-center">
+            <div className="text-sm font-semibold text-zinc-200">📅 Day 1</div>
+            <div className="text-xs text-red-400 font-bold">Barely useful</div>
+          </div>
+          <p className="text-xs text-zinc-500 mt-1">Agent knows your name and basic preferences. Morning briefing is generic. Needs constant hand-holding.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="flex justify-between items-center">
+            <div className="text-sm font-semibold text-zinc-200">📅 Day 7</div>
+            <div className="text-xs text-amber-400 font-bold">Getting useful</div>
+          </div>
+          <p className="text-xs text-zinc-500 mt-1">Agent knows your projects, your schedule patterns, your communication style. Morning briefings start including relevant context.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="flex justify-between items-center">
+            <div className="text-sm font-semibold text-zinc-200">📅 Day 30</div>
+            <div className="text-xs text-emerald-400 font-bold">Genuinely valuable</div>
+          </div>
+          <p className="text-xs text-zinc-500 mt-1">Agent anticipates your needs. "I noticed you always check gold prices Monday mornings — here's the analysis." Proactively surfaces relevant information.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="flex justify-between items-center">
+            <div className="text-sm font-semibold text-zinc-200">📅 Day 90</div>
+            <div className="text-xs text-purple-400 font-bold">Indispensable</div>
+          </div>
+          <p className="text-xs text-zinc-500 mt-1">Agent runs entire workflows you forgot you set up. Catches mistakes before they happen. Feels like it reads your mind. You genuinely can't imagine working without it.</p>
+        </div>
+      </div>
+
+      <h2>Measuring Agent Performance</h2>
+
+      <p>You can't improve what you don't measure. Track these metrics:</p>
+
+      <div className="my-6 space-y-2">
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">📊</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Tasks completed per day</strong> — is the agent actually doing work, or just generating morning briefings?</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">🎯</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Accuracy rate</strong> — how often do you need to correct the agent's output? Track corrections over time.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">💰</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Cost per task</strong> — total daily API cost ÷ tasks completed. Should trend down as the agent gets smarter.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">⏱️</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Human time saved</strong> — estimate how long each task would take you manually. That's the ROI.</div>
+        </div>
+      </div>
+
+      <h2>The Weekly Review Pattern</h2>
+
+      <p>Every Sunday, your agent reviews its own week. This is where the compounding really kicks in:</p>
+
+      <Code title="Weekly review prompt">{`Read all daily notes from this week (memory/2026-02-17.md through
+memory/2026-02-23.md).
+
+Write a weekly review covering:
+1. Tasks completed (with count)
+2. Tasks failed or incomplete (with reasons)
+3. Patterns noticed ("human always asks for X on Mondays")
+4. Lessons learned ("Y approach worked better than Z")
+5. Self-score: 1-10 with justification
+6. One specific improvement to implement next week
+
+Save to memory/weekly-review-2026-W08.md
+Update knowledge/tacit.md with any new patterns.`}</Code>
+
+      <h2>Monthly Retrospectives</h2>
+
+      <p>Once a month, the agent writes its own performance report. This surfaces long-term trends:</p>
+
+      <Code title="Monthly retro prompt">{`Read all weekly reviews from this month.
+
+Write a monthly retrospective:
+- Total tasks completed vs. previous month
+- Average accuracy trend (improving or declining?)
+- Cost trend (getting more efficient?)
+- Top 3 wins this month
+- Top 3 areas needing improvement
+- Recommended changes to daily routine
+- Recommended changes to knowledge base structure
+
+Save to memory/monthly-retro-2026-02.md`}</Code>
+
+      <Callout emoji="🔄" title="The Flywheel">
+        Daily notes feed weekly reviews. Weekly reviews feed monthly retros. Monthly retros update the daily routine. <strong>The system improves itself.</strong> After 3 months, your agent's routine looks nothing like where it started — it's been refined by 12 weekly reviews and 3 monthly retros, each one making it slightly better.
+      </Callout>
+
+      <Quiz
+        question="Why does evening consolidation happen BEFORE the nightly cleanup?"
+        options={[
+          { text: "It doesn't matter — they can run in any order", explanation: "Order absolutely matters. Consolidation extracts knowledge FROM daily notes. If cleanup archives them first, there's nothing to extract." },
+          { text: "Consolidation extracts knowledge from daily notes, cleanup then archives them", correct: true, explanation: "Exactly! Consolidation is the brain processing the day's experiences. Cleanup is the janitor filing things away. Brain first, then janitor." },
+          { text: "Consolidation is faster so it should go first", explanation: "Speed isn't the reason. The dependency is: consolidation READS daily notes, cleanup MOVES them." },
+          { text: "Because the agent is less tired earlier in the evening", explanation: "Agents don't get tired! The order is about data dependencies, not fatigue." },
+        ]}
+      />
+
+      <Quiz
+        question="What's the most important metric for agent performance?"
+        options={[
+          { text: "Number of API calls per day", explanation: "More API calls could mean more work or more waste. It's not directly useful." },
+          { text: "Cost per task (trending down over time)", correct: true, explanation: "Cost per task captures both efficiency and value. If it's going down, your agent is getting smarter — doing more work per dollar. That's the compound effect in action." },
+          { text: "Number of files created", explanation: "More files doesn't mean better work. An agent could create lots of useless files." },
+          { text: "Length of daily notes", explanation: "Longer notes don't mean better notes. A concise, high-signal daily note is better than a verbose one." },
+        ]}
+      />
+
+      <Checklist
+        title="Daily Routine Setup Checklist"
+        items={[
+          "Set up morning briefing cron (6-7 AM, delivered to your preferred channel)",
+          "Configured heartbeat for work-hours check-ins (every 30-60 min)",
+          "Set up evening consolidation cron (9-10 PM)",
+          "Set up nightly cleanup cron (2 AM)",
+          "Created weekly review cron (Sunday mornings)",
+          "Created monthly retrospective cron (1st of each month)",
+          "Defined performance metrics to track (tasks, accuracy, cost, time saved)",
+          "Tested the full cycle: morning → work → evening → night → next morning",
+          "Let it run for 7 days before making adjustments",
+        ]}
+      />
+
+      <Tip emoji="⏳" title="The Patience Principle">
+        Your agent's daily routine will feel underwhelming for the first week. The morning briefings will be generic. The consolidations will be shallow. <strong>Don't change anything for 14 days.</strong> The compound effect needs time to kick in. By day 14, you'll start seeing the agent surface insights you didn't ask for. By day 30, you'll wonder how you ever worked without it.
+      </Tip>
+    </>
+  ),
+
+  // ═══════════════════════════════════════════════════════════
+  // CHAPTER 28 — ACCELERATOR TIER
+  // ═══════════════════════════════════════════════════════════
+  "building-in-public": (
+    <>
+      <p className="text-lg leading-relaxed mb-6">
+        Here's the most underrated strategy in the AI agent space: <strong>document your journey as you build.</strong> Every problem you solve, every workflow you automate, every "aha" moment — that's content. And not just any content. It's the kind that attracts exactly the people who would pay for what you're building.
+      </p>
+
+      <Analogy>
+        Think of a cooking show. The chef doesn't just serve you the final dish — they show you every step. The chopping, the seasoning, the mistakes, the saves. <strong>The process IS the product.</strong> People watch cooking shows not just to learn recipes but to be entertained by the journey. Building in public with your agent is the same: the journey of automation is more compelling than the finished product.
+      </Analogy>
+
+      <h2>Why Building in Public Works</h2>
+
+      <p>Three reasons this strategy is uniquely powerful for agent builders:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-emerald-400">🎯 Built-in audience targeting</div>
+          <p className="text-xs text-zinc-500 mt-1">People who follow your "building with AI agents" journey are <em>exactly</em> the people who'd buy an AI agent product. Zero marketing waste.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-blue-400">📈 Compound content</div>
+          <p className="text-xs text-zinc-500 mt-1">Every post adds to your credibility. Day 1 posts get 5 likes. Day 90 posts reference 89 days of proof. The longer you do it, the more powerful each post becomes.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="text-sm font-semibold text-purple-400">🤖 Your agent creates the content</div>
+          <p className="text-xs text-zinc-500 mt-1">The meta-play: your agent does work → you document it → the documentation itself is created by the agent. Your agent is literally marketing itself.</p>
+        </div>
+      </div>
+
+      <h2>The X/Twitter Thread Formula</h2>
+
+      <p>The highest-performing format for building in public on X:</p>
+
+      <Code title="The daily thread template">{`Day [X] of building with my AI agent:
+
+[One specific thing that happened today]
+
+The setup:
+- [What the agent was supposed to do]
+- [What actually happened]
+
+The result:
+- [Concrete outcome with numbers if possible]
+
+What I learned:
+- [One actionable takeaway anyone can use]
+
+Tomorrow: [teaser for next post]
+
+---
+
+Example:
+
+Day 47 of building with my AI agent:
+
+It wrote its own weekly performance review 🤯
+
+The setup:
+- Cron job every Sunday at 10 AM
+- Agent reads all 7 daily notes and self-evaluates
+
+The result:
+- Identified that it was spending 40% of its time on
+  tasks I never look at
+- Recommended cutting 2 cron jobs → saved $3/week
+
+What I learned:
+- Give your agent permission to criticize its own work.
+  It found inefficiencies I'd never have noticed.
+
+Tomorrow: implementing its own suggestions (letting
+the AI optimize the AI)`}</Code>
+
+      <h2>The Reddit Strategy</h2>
+
+      <p>Reddit hates self-promotion but loves genuine value. Here's the playbook:</p>
+
+      <div className="my-6 space-y-2">
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">1️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Answer questions</strong> in r/ClaudeAI, r/ChatGPT, r/LocalLLaMA, r/artificial with genuine, detailed answers. Reference your experience.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">2️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Post tutorials</strong> that solve specific problems: "How I gave my agent persistent memory with 3 markdown files"</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">3️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Share failures</strong> honestly: "My agent accidentally sent 200 emails. Here's what I learned about safety." Failures get more engagement than wins.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">4️⃣</span>
+          <div className="text-sm text-zinc-300"><strong>Link subtly</strong> — put your product link in your profile, not your posts. Let people find it through your comment history.</div>
+        </div>
+      </div>
+
+      <h2>Creating an Agent-Powered Newsletter</h2>
+
+      <p>Your agent already generates daily analysis, content drafts, and insights. Package those into a weekly newsletter:</p>
+
+      <Code title="Newsletter automation">{`# Weekly newsletter cron — every Friday at 3 PM
+0 15 * * 5 openclaw cron run --task "newsletter" \\
+  --prompt "Read this week's daily notes and weekly review. \\
+  Write a newsletter issue with: \\
+  1. One 'Agent Insight of the Week' (a specific technique or lesson) \\
+  2. Three quick tips anyone can implement today \\
+  3. One 'Behind the Scenes' story (what went wrong and how we fixed it) \\
+  4. A teaser for next week \\
+  Format for email. Save to output/newsletter/2026-W08.md"`}</Code>
+
+      <Callout emoji="💰" title="The Revenue Connection">
+        A newsletter with 1,000 subscribers who are interested in AI agents is worth $50-200/month in sponsorships alone. At 5,000 subscribers, you can launch paid tiers. Your agent writes 80% of the content. You add personality and hit send. The flywheel: agent works → content → subscribers → revenue → fund more agent work.
+      </Callout>
+
+      <h2>The Compounding Content Flywheel</h2>
+
+      <p>Here's why this strategy is exponential, not linear:</p>
+
+      <div className="my-6 space-y-2">
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">⚙️</span>
+          <div className="text-sm text-zinc-300"><strong>Agent works</strong> → produces daily output (analysis, content, insights)</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">📝</span>
+          <div className="text-sm text-zinc-300"><strong>You document</strong> → turn outputs into tweets, posts, newsletter issues</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">👥</span>
+          <div className="text-sm text-zinc-300"><strong>Audience grows</strong> → people follow for the consistent, authentic journey</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">💸</span>
+          <div className="text-sm text-zinc-300"><strong>Revenue flows</strong> → newsletter subs, product sales, consulting inquiries</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-zinc-800/30 p-3">
+          <span className="text-lg">🔄</span>
+          <div className="text-sm text-zinc-300"><strong>Revenue funds</strong> → more agent compute → better outputs → better content → repeat</div>
+        </div>
+      </div>
+
+      <h2>What NOT to Share</h2>
+
+      <p>Building in public doesn't mean sharing everything. Keep these private:</p>
+
+      <div className="my-6 space-y-2">
+        <div className="flex items-center gap-3 rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+          <span className="text-lg">🔑</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">API keys and credentials</strong> — obviously. But also watch for keys in screenshots of config files.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+          <span className="text-lg">💰</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Exact revenue numbers</strong> (early on) — share percentages and trends, not exact dollars until you're established.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+          <span className="text-lg">🧠</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Your complete system prompt</strong> — share principles and patterns, not the exact prompt that gives you an edge.</div>
+        </div>
+        <div className="flex items-center gap-3 rounded-lg bg-red-500/5 border border-red-500/20 p-3">
+          <span className="text-lg">👤</span>
+          <div className="text-sm text-zinc-400"><strong className="text-zinc-200">Private data from your agent's memory</strong> — your MEMORY.md might contain personal info. Redact before sharing.</div>
+        </div>
+      </div>
+
+      <h2>Monetizing the Journey</h2>
+
+      <p>The journey itself is a product. Here's the progression:</p>
+
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="flex justify-between items-center">
+            <div className="text-sm font-semibold text-zinc-200">Month 1-2: Free content</div>
+            <div className="text-xs text-zinc-500 font-bold">$0 (building trust)</div>
+          </div>
+          <p className="text-xs text-zinc-500 mt-1">Daily tweets, Reddit posts, open-source templates. Goal: 500 followers who care about AI agents.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="flex justify-between items-center">
+            <div className="text-sm font-semibold text-zinc-200">Month 3-4: Paid product</div>
+            <div className="text-xs text-amber-400 font-bold">$500-2K/mo</div>
+          </div>
+          <p className="text-xs text-zinc-500 mt-1">Launch a playbook, template pack, or course based on your documented journey. Your content IS your marketing.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="flex justify-between items-center">
+            <div className="text-sm font-semibold text-zinc-200">Month 5-6: Community + consulting</div>
+            <div className="text-xs text-emerald-400 font-bold">$2-5K/mo</div>
+          </div>
+          <p className="text-xs text-zinc-500 mt-1">Paid community ($19/mo), consulting calls ($200/hr), partnerships with AI tools. You're now a recognized voice.</p>
+        </div>
+        <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="flex justify-between items-center">
+            <div className="text-sm font-semibold text-zinc-200">Month 7+: Scaled products</div>
+            <div className="text-xs text-purple-400 font-bold">$5-20K/mo</div>
+          </div>
+          <p className="text-xs text-zinc-500 mt-1">SaaS built on your agent stack, premium newsletter, agency services. The journey funded the infrastructure that funds the business.</p>
+        </div>
+      </div>
+
+      <Quiz
+        question="Why is building in public particularly effective for AI agent products?"
+        options={[
+          { text: "Because AI is trendy and gets lots of engagement", explanation: "Trendiness helps but isn't the core reason. Trends fade; the structural advantage doesn't." },
+          { text: "Because your audience IS your customer base — people following AI agent content are buyers", correct: true, explanation: "Exactly! Zero marketing waste. Every follower who's interested in your journey is a potential customer. The content qualifies the audience automatically." },
+          { text: "Because it's free marketing", explanation: "It's not free — it costs time and effort. The advantage is audience-product fit, not price." },
+          { text: "Because other AI builders will share your content", explanation: "They might, but virality isn't the core mechanism. Consistent, authentic documentation is." },
+        ]}
+      />
+
+      <Quiz
+        question="What should you share when building in public?"
+        options={[
+          { text: "Everything including API keys and system prompts for maximum transparency", explanation: "Never share credentials or your exact competitive advantage. Transparency has limits." },
+          { text: "Only polished wins and successes", explanation: "People see through this. Failures and mistakes get MORE engagement and build MORE trust." },
+          { text: "Patterns, lessons, failures, and specific techniques — but not credentials or exact prompts", correct: true, explanation: "Share the principles, not the secrets. 'I use a three-layer memory system' (share). The exact system prompt (keep). API keys (never)." },
+          { text: "Nothing until you have a perfect product", explanation: "You'll never have a perfect product. The journey IS the content. Waiting means missing months of compound audience growth." },
+        ]}
+      />
+
+      <Checklist
+        title="Building in Public Launch Checklist"
+        items={[
+          "Created X/Twitter account (or dedicated thread) for your agent journey",
+          "Written your first 'Day 1' post about what you're building and why",
+          "Set up agent to draft daily content from its own output",
+          "Identified 3-5 Reddit communities to provide value in",
+          "Created a simple newsletter signup (even just a Google Form to start)",
+          "Established what you WILL and WON'T share publicly",
+          "Committed to 30 consecutive days of posting (the minimum for compound effects)",
+          "Set up a content calendar: daily tweets, weekly newsletter, monthly deep-dive",
+        ]}
+      />
+
+      <Tip emoji="🎬" title="The Meta Move">
+        The ultimate flex: your agent writes the content about itself. Set up a cron job that drafts a daily "building in public" post based on what the agent actually did that day. You review for 2 minutes, add your personality, and hit send. The agent is literally <strong>marketing itself while doing its job.</strong> That's the flywheel in action.
+      </Tip>
+    </>
+  ),
 };

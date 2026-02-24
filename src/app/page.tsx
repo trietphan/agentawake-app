@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
 import { StructuredData } from "./structured-data";
+import EmailCaptureComponent from "@/components/EmailCapture";
 
 function NavBar() {
   return (
@@ -11,6 +12,7 @@ function NavBar() {
           <a href="#use-cases" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Use Cases</a>
           <a href="#platforms" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Platforms</a>
           <a href="#pricing" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Pricing</a>
+          <Link href="/blog" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Blog</Link>
           <a href="#faq" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">FAQ</a>
           <a href="#pricing" className="bg-purple-600 text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold hover:bg-purple-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/20">Get the Playbook</a>
         </div>
@@ -537,6 +539,10 @@ function HowItWorks() {
   );
 }
 
+function EmailCapture() {
+  return <EmailCaptureComponent />;
+}
+
 function Pricing() {
   const tiers = [
     {
@@ -731,6 +737,7 @@ export default function Home() {
       <Testimonials />
       <Platforms />
       <HowItWorks />
+      <EmailCapture />
       <Pricing />
       <FAQ />
       <BottomCTA />

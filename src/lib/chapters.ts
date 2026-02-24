@@ -238,6 +238,50 @@ export const chapters: Chapter[] = [
     requiredTier: "accelerator",
     readTime: "14 min",
   },
+
+  // PRO TIER (continued)
+  {
+    slug: "agent-workspace",
+    number: 24,
+    title: "The Agent Workspace — Your Files Are Your API",
+    subtitle: "Your agent doesn't need a fancy database — it needs a well-organized desk",
+    emoji: "📁",
+    requiredTier: "pro",
+    readTime: "10 min",
+  },
+
+  // ACCELERATOR TIER (continued)
+  {
+    slug: "agent-teams",
+    number: 25,
+    title: "From Solo Agent to Agent Team",
+    subtitle: "When one brilliant employee isn't enough, build a department",
+    emoji: "👥",
+    requiredTier: "accelerator",
+    readTime: "12 min",
+  },
+
+  // PRO TIER (continued)
+  {
+    slug: "daily-routine",
+    number: 26,
+    title: "The Agent's Daily Routine — Automation That Compounds",
+    subtitle: "Your agent should have a better morning routine than you do",
+    emoji: "🔄",
+    requiredTier: "pro",
+    readTime: "11 min",
+  },
+
+  // ACCELERATOR TIER (continued)
+  {
+    slug: "building-in-public",
+    number: 27,
+    title: "Building in Public with Your Agent",
+    subtitle: "The meta-play: your agent helps market the system that teaches how to build it",
+    emoji: "📢",
+    requiredTier: "accelerator",
+    readTime: "9 min",
+  },
 ];
 
 export function getChapter(slug: string): Chapter | undefined {
