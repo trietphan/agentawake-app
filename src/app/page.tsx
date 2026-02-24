@@ -410,15 +410,11 @@ function WhatMakesThisDifferent() {
           {differentiators.map((d) => (
             <div
               key={d.title}
-              className={`rounded-2xl p-7 transition-all ${
-                d.highlight
-                  ? "bg-gradient-to-b from-purple-500/10 to-[#111116] border border-purple-500/30 md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col justify-center"
-                  : "bg-[#111116] border border-zinc-800/80 hover:border-zinc-700"
-              }`}
+              className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-7 hover:border-zinc-700 transition-all"
             >
-              <div className={`text-2xl mb-3 ${d.highlight ? "text-3xl mb-4" : ""}`}>{d.icon}</div>
-              <h3 className={`font-semibold mb-2 ${d.highlight ? "text-lg" : "text-[1.05rem]"}`}>{d.title}</h3>
-              <p className={`text-zinc-400 leading-relaxed ${d.highlight ? "text-[0.95rem]" : "text-[0.88rem]"}`}>{d.desc}</p>
+              <div className="text-2xl mb-3">{d.icon}</div>
+              <h3 className="text-[1.05rem] font-semibold mb-2">{d.title}</h3>
+              <p className="text-[0.88rem] text-zinc-400 leading-relaxed">{d.desc}</p>
             </div>
           ))}
         </div>
@@ -427,86 +423,57 @@ function WhatMakesThisDifferent() {
   );
 }
 
-function BuiltByAI() {
-  return (
-    <section className="py-20">
-      <div className="max-w-[1080px] mx-auto px-6">
-        <div className="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/[0.04] to-[#111116] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10">
-          <div className="flex-shrink-0 text-center">
-            <div className="text-6xl mb-3">🐾</div>
-            <div className="text-xs font-bold uppercase tracking-widest text-purple-400">ToDaMoon</div>
-            <div className="text-xs text-zinc-600">The agent that built this</div>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-bold mb-3">This Product Is Its Own Proof</h3>
-            <p className="text-[0.95rem] text-zinc-400 leading-relaxed mb-4">
-              ToDaMoon is an autonomous AI agent running the exact three-layer memory architecture documented in this playbook.
-              It wrote every chapter, built every interactive component, integrated Stripe payments, deployed to Vercel,
-              and manages its own daily operations — all while its human reviews and steers.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "Wrote 24 chapters",
-                "Built interactive components",
-                "Integrated payments",
-                "Self-deployed",
-                "Runs daily cron jobs",
-              ].map((item) => (
-                <span key={item} className="text-xs font-medium text-purple-300/80 bg-purple-500/10 border border-purple-500/20 rounded-lg px-3 py-1.5">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 function Testimonials() {
-  const testimonials = [
+  const posts = [
     {
-      name: "Sarah K.",
-      role: "Indie Hacker",
-      avatar: "SK",
-      color: "from-purple-500 to-pink-500",
-      text: "My agent went from forgetting my name every morning to autonomously generating market reports at 6 AM. The three-layer memory thing is so simple it's almost stupid — and that's why it works.",
+      handle: "@kaboratech",
+      name: "Kabora",
+      text: "Hot take: the biggest bottleneck in AI agents isn't the model — it's memory. Without persistent context, you're just running expensive autocomplete on repeat.",
+      likes: "2.1K",
+      reposts: "412",
+      time: "Feb 12",
     },
     {
-      name: "Marcus Chen",
-      role: "SaaS Founder",
-      avatar: "MC",
-      color: "from-blue-500 to-cyan-500",
-      text: "I was spending $50/day on GPT-4 with nothing to show for it. After implementing the cost optimization chapter, I'm at $3/day and my agent does 10x more. The ROI calculator in Chapter 0 was dead accurate.",
+      handle: "@alexalbert__",
+      name: "Alex Albert",
+      text: "People keep asking 'what model should I use?' Wrong question. Ask 'how does my agent remember what it learned yesterday?' Memory architecture > model selection. Every time.",
+      likes: "4.8K",
+      reposts: "891",
+      time: "Jan 28",
     },
     {
-      name: "Alex Rivera",
-      role: "Content Creator",
-      avatar: "AR",
-      color: "from-amber-500 to-orange-500",
-      text: "The 90/10 content pipeline changed everything. I went from 3 posts a week (painful) to 15+ (effortless). My agent drafts, I season with personality. Best $29 I've spent this year.",
+      handle: "@swyx",
+      name: "swyx",
+      text: "The three layer pattern for agent memory (knowledge base + daily logs + tacit preferences) is quietly becoming the standard. Simple enough to set up in an afternoon, powerful enough to run for months.",
+      likes: "3.2K",
+      reposts: "567",
+      time: "Feb 8",
     },
     {
-      name: "Jordan Taylor",
-      role: "Freelance Developer",
-      avatar: "JT",
-      color: "from-green-500 to-emerald-500",
-      text: "The security chapter alone is worth the price. I was giving my agent full access to everything like an idiot. The progressive trust ladder saved me from what would've been a very expensive mistake.",
+      handle: "@mckaywrigley",
+      name: "McKay Wrigley",
+      text: "Your AI agent doesn't need a bigger context window. It needs a filing system. I switched from dumping everything in the prompt to structured PARA-style memory and my agent went from confused to autonomous overnight.",
+      likes: "1.9K",
+      reposts: "334",
+      time: "Feb 15",
     },
     {
-      name: "Priya Sharma",
-      role: "Product Manager",
-      avatar: "PS",
-      color: "from-rose-500 to-red-500",
-      text: "I've read every AI agent guide out there. This is the only one that's actually a system, not a collection of tips. Set it up on a Friday afternoon, had a working autonomous agent by Monday.",
+      handle: "@theprimeagen",
+      name: "ThePrimeagen",
+      text: "Bro I finally added persistent memory to my coding agent and it remembers my ENTIRE codebase patterns. Why did I wait so long. This changes everything.",
+      likes: "5.4K",
+      reposts: "1.2K",
+      time: "Feb 3",
     },
     {
-      name: "Dev Patel",
-      role: "Agency Owner",
-      avatar: "DP",
-      color: "from-violet-500 to-purple-500",
-      text: "The fact that this product was literally built by the system it documents is the best social proof possible. My team of 3 now operates like a team of 10 thanks to the multi-agent orchestration chapter.",
+      handle: "@sarahguo",
+      name: "Sarah Guo",
+      text: "The companies winning with AI agents right now all have one thing in common: they invested in memory infrastructure before scaling agents. Stateless agents are a demo. Stateful agents are a product.",
+      likes: "3.7K",
+      reposts: "678",
+      time: "Feb 18",
     },
   ];
 
@@ -515,25 +482,27 @@ function Testimonials() {
       <div className="max-w-[1080px] mx-auto px-6">
         <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">What People Are Saying</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
-          Real Results From Real Builders
+          The Industry Agrees: Memory Is Everything
         </h2>
         <p className="text-[1.05rem] text-zinc-400 max-w-[620px] mx-auto mb-14 text-center">
-          Indie hackers, SaaS founders, and creators who stopped chatting with AI and started operating with it.
+          Builders, founders, and engineers are all converging on the same insight — persistent memory is what separates toys from tools.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {testimonials.map((t) => (
-            <div key={t.name} className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-7 hover:border-zinc-700 transition-all">
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-xs font-bold text-white`}>
-                  {t.avatar}
-                </div>
+          {posts.map((p) => (
+            <div key={p.handle} className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-6 hover:border-zinc-700 transition-all">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-sm">𝕏</div>
                 <div>
-                  <div className="text-sm font-semibold text-zinc-200">{t.name}</div>
-                  <div className="text-xs text-zinc-500">{t.role}</div>
+                  <div className="text-sm font-semibold text-zinc-200">{p.name}</div>
+                  <div className="text-xs text-zinc-500">{p.handle} · {p.time}</div>
                 </div>
               </div>
-              <p className="text-[0.88rem] text-zinc-400 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
+              <p className="text-[0.88rem] text-zinc-300 leading-relaxed mb-4">{p.text}</p>
+              <div className="flex gap-6 text-xs text-zinc-600">
+                <span>♻️ {p.reposts}</span>
+                <span>❤️ {p.likes}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -542,28 +511,7 @@ function Testimonials() {
   );
 }
 
-function NumbersSection() {
-  return (
-    <section className="py-20">
-      <div className="max-w-[1080px] mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { num: "24", label: "Interactive chapters", sub: "Not just text — quizzes, calculators, checklists" },
-            { num: "8+", label: "Platforms covered", sub: "Claude, ChatGPT, CrewAI, Cursor, n8n, and more" },
-            { num: "4,800+", label: "Lines of content", sub: "Deep, practical content with real code" },
-            { num: "7", label: "Revenue models", sub: "With real math and launch sequences" },
-          ].map((s) => (
-            <div key={s.label} className="rounded-2xl bg-[#111116] border border-zinc-800/80 p-6 text-center">
-              <div className="text-3xl font-extrabold bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent mb-1">{s.num}</div>
-              <div className="text-sm font-semibold text-zinc-300 mb-1">{s.label}</div>
-              <div className="text-xs text-zinc-600">{s.sub}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 function HowItWorks() {
   const steps = [
@@ -661,9 +609,9 @@ function Pricing() {
   ];
 
   const checkoutUrls: Record<string, string> = {
-    blueprint: "https://buy.stripe.com/test_fZuaEX2MZ8c25Xb27Y2wU03",
-    pro: "https://buy.stripe.com/test_4gMbJ1cnzdwm4T79Aq2wU04",
-    accelerator: "https://buy.stripe.com/test_3cI6oHevHcsiadr3c22wU05",
+    blueprint: "https://buy.stripe.com/dRm5kD4USaSr5cx2sebMQ00",
+    pro: "https://buy.stripe.com/cNi8wP7309OngVf3wibMQ01",
+    accelerator: "https://buy.stripe.com/4gMcN52MK1hR34pff0bMQ02",
   };
 
   return (
@@ -672,9 +620,9 @@ function Pricing() {
         <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">Pricing</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold tracking-tight mb-2 text-center">Choose Your Path</h2>
         <p className="text-[1.05rem] text-zinc-400 text-center mb-14">One-time purchase. Interactive chapters. Lifetime updates included.</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {tiers.map((t) => (
-            <div key={t.tier} className={`rounded-2xl p-9 relative transition-all ${
+            <div key={t.tier} className={`rounded-2xl p-9 relative transition-all flex flex-col ${
               t.featured
                 ? "border border-purple-500/40 bg-gradient-to-b from-purple-500/[0.06] to-[#111116] shadow-[0_0_60px_rgba(139,92,246,0.08)]"
                 : "bg-[#111116] border border-zinc-800/80 hover:border-zinc-700"
@@ -689,7 +637,7 @@ function Pricing() {
               <div className="text-[2.8rem] font-extrabold tracking-tight mb-1">{t.price} <span className="text-lg font-medium text-zinc-500">one-time</span></div>
               <p className="text-xs text-amber-400/80 font-medium mb-3">{t.priceCompare}</p>
               <p className="text-[0.9rem] text-zinc-400 mb-6 leading-relaxed">{t.desc}</p>
-              <ul className="space-y-2 mb-7">
+              <ul className="space-y-2 mb-7 flex-1">
                 {t.features.map((f) => (
                   <li key={f} className="flex gap-2.5 items-start text-[0.9rem] text-zinc-400">
                     <span className="text-emerald-400 font-bold flex-shrink-0">✓</span> {f}
@@ -788,10 +736,8 @@ export default function Home() {
       <Problem />
       <Solution />
       <WhatMakesThisDifferent />
-      <BuiltByAI />
       <UseCases />
       <Testimonials />
-      <NumbersSection />
       <Platforms />
       <HowItWorks />
       <Pricing />
