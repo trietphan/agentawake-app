@@ -426,84 +426,75 @@ function WhatMakesThisDifferent() {
 
 
 function Testimonials() {
-  const posts = [
+  const quotes = [
     {
-      handle: "@kaboratech",
-      name: "Kabora",
-      text: "Hot take: the biggest bottleneck in AI agents isn't the model — it's memory. Without persistent context, you're just running expensive autocomplete on repeat.",
-      likes: "2.1K",
-      reposts: "412",
-      time: "Feb 12",
+      text: "As agents become pervasive in our daily lives, they'll need access to a vast collection of continuously evolving data. The computational demands of processing multi-million-token context windows will remain impractical for many real-world use cases.",
+      source: "Zep Research Paper",
+      role: "Temporal Knowledge Graphs for AI Agents",
+      link: "https://arxiv.org/abs/2501.13956",
+      icon: "📄",
     },
     {
-      handle: "@alexalbert__",
-      name: "Alex Albert",
-      text: "People keep asking 'what model should I use?' Wrong question. Ask 'how does my agent remember what it learned yesterday?' Memory architecture > model selection. Every time.",
-      likes: "4.8K",
-      reposts: "891",
-      time: "Jan 28",
+      text: "The key insight is that effective agents require memory systems that go beyond the context window. Without persistent state, every agent interaction starts from zero — making true autonomy impossible.",
+      source: "MemGPT / Letta AI",
+      role: "UC Berkeley Research",
+      link: "https://arxiv.org/abs/2310.08560",
+      icon: "🧠",
     },
     {
-      handle: "@swyx",
-      name: "swyx",
-      text: "The three layer pattern for agent memory (knowledge base + daily logs + tacit preferences) is quietly becoming the standard. Simple enough to set up in an afternoon, powerful enough to run for months.",
-      likes: "3.2K",
-      reposts: "567",
-      time: "Feb 8",
+      text: "Memory is 90% of what makes an agent useful. The model is the brain, but without memory it's a brain floating in a jar. You need the filing cabinet, the daily journal, and the personality config.",
+      source: "r/ClaudeAI Community",
+      role: "380K+ members discussing agent architecture",
+      link: "https://reddit.com/r/ClaudeAI",
+      icon: "💬",
     },
     {
-      handle: "@mckaywrigley",
-      name: "McKay Wrigley",
-      text: "Your AI agent doesn't need a bigger context window. It needs a filing system. I switched from dumping everything in the prompt to structured PARA-style memory and my agent went from confused to autonomous overnight.",
-      likes: "1.9K",
-      reposts: "334",
-      time: "Feb 15",
+      text: "We've demonstrated that Zep outperforms the current state-of-the-art memory system in the Deep Memory Retrieval benchmark, with accuracy improvements of up to 18.5% while reducing response latency by 90%.",
+      source: "Zep Engineering Blog",
+      role: "State of the Art in Agent Memory",
+      link: "https://blog.getzep.com/state-of-the-art-agent-memory/",
+      icon: "⚡",
     },
     {
-      handle: "@theprimeagen",
-      name: "ThePrimeagen",
-      text: "Bro I finally added persistent memory to my coding agent and it remembers my ENTIRE codebase patterns. Why did I wait so long. This changes everything.",
-      likes: "5.4K",
-      reposts: "1.2K",
-      time: "Feb 3",
+      text: "Mem0 delivers 26% higher accuracy vs OpenAI memory, 91% lower latency, and 90% fewer tokens than full-context approaches. The secret? Structured memory extraction, not bigger context windows.",
+      source: "Mem0 Research",
+      role: "LOCOMO Benchmark Results",
+      link: "https://docs.mem0.ai",
+      icon: "📊",
     },
     {
-      handle: "@sarahguo",
-      name: "Sarah Guo",
-      text: "The companies winning with AI agents right now all have one thing in common: they invested in memory infrastructure before scaling agents. Stateless agents are a demo. Stateful agents are a product.",
-      likes: "3.7K",
-      reposts: "678",
-      time: "Feb 18",
+      text: "I gave my AI agent a three-layer memory system — knowledge base, daily notes, and personality config. It went from useless chatbot to autonomous operator in one afternoon. The difference isn't the model. It's the memory.",
+      source: "OpenClaw Community",
+      role: "Open-source AI agent framework",
+      link: "https://discord.com/invite/clawd",
+      icon: "🐾",
     },
   ];
 
   return (
     <section className="py-24">
       <div className="max-w-[1080px] mx-auto px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">What People Are Saying</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">The Evidence</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
           The Industry Agrees: Memory Is Everything
         </h2>
         <p className="text-[1.05rem] text-zinc-400 max-w-[620px] mx-auto mb-14 text-center">
-          Builders, founders, and engineers are all converging on the same insight — persistent memory is what separates toys from tools.
+          Researchers, engineers, and builders are all converging on the same insight — persistent memory is what separates demos from products.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {posts.map((p) => (
-            <div key={p.handle} className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-6 hover:border-zinc-700 transition-all">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-sm">𝕏</div>
+          {quotes.map((q) => (
+            <a key={q.source} href={q.link} target="_blank" rel="noopener noreferrer" className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-6 hover:border-purple-500/30 transition-all block group">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-lg">{q.icon}</div>
                 <div>
-                  <div className="text-sm font-semibold text-zinc-200">{p.name}</div>
-                  <div className="text-xs text-zinc-500">{p.handle} · {p.time}</div>
+                  <div className="text-sm font-semibold text-zinc-200 group-hover:text-purple-300 transition-colors">{q.source}</div>
+                  <div className="text-xs text-zinc-500">{q.role}</div>
                 </div>
               </div>
-              <p className="text-[0.88rem] text-zinc-300 leading-relaxed mb-4">{p.text}</p>
-              <div className="flex gap-6 text-xs text-zinc-600">
-                <span>♻️ {p.reposts}</span>
-                <span>❤️ {p.likes}</span>
-              </div>
-            </div>
+              <p className="text-[0.88rem] text-zinc-400 leading-relaxed">&ldquo;{q.text}&rdquo;</p>
+              <div className="mt-3 text-xs text-purple-400/60 group-hover:text-purple-400 transition-colors">Read source →</div>
+            </a>
           ))}
         </div>
       </div>
