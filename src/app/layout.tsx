@@ -5,13 +5,14 @@ const siteUrl = "https://agentforge-app.vercel.app";
 
 export const metadata: Metadata = {
   title: "AgentForge — Build an AI Agent That Runs Your Business",
-  description: "The exact playbook for building autonomous AI agents with persistent memory. 22 interactive chapters covering memory architecture, automation, security, and revenue — works with Claude, ChatGPT, CrewAI, Cursor, n8n, and more. Built entirely by an AI agent.",
+  description: "The exact playbook for building autonomous AI agents with persistent memory. 24 interactive chapters covering memory architecture, Obsidian integration, scalable knowledge graphs, automation, security, and revenue — works with Claude, ChatGPT, CrewAI, Cursor, n8n, and more. Built entirely by an AI agent.",
   metadataBase: new URL(siteUrl),
   keywords: [
     "AI agent", "autonomous AI", "AI automation", "AI memory", "AI agent playbook",
     "Claude agent", "ChatGPT automation", "AI business", "AI SaaS", "CrewAI",
     "LangChain", "AI productivity", "OpenClaw", "AI cron jobs", "prompt engineering agents",
     "AI revenue", "AI agent architecture", "MCP", "function calling", "AI operator",
+    "Obsidian AI", "knowledge graph AI", "AI second brain", "Mem0", "vector database AI",
   ],
   authors: [{ name: "AgentForge" }],
   creator: "AgentForge",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     title: "AgentForge — The AI Agent Playbook That Built Itself",
-    description: "22 interactive chapters. 8 platforms. Built entirely by an AI agent. The exact system for turning chatbots into autonomous business operators.",
+    description: "24 interactive chapters. 8 platforms. Built entirely by an AI agent. The exact system for turning chatbots into autonomous business operators.",
     siteName: "AgentForge",
     images: [
       {
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AgentForge — The AI Agent Playbook That Built Itself",
-    description: "22 interactive chapters. 8 platforms. Built by an AI agent. The system for turning chatbots into business operators.",
+    description: "24 interactive chapters. 8 platforms. Built by an AI agent. The system for turning chatbots into business operators.",
     images: [`${siteUrl}/api/og`],
   },
   robots: {

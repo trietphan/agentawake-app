@@ -216,6 +216,28 @@ export const chapters: Chapter[] = [
     requiredTier: "accelerator",
     readTime: "14 min",
   },
+
+  // PRO TIER (continued)
+  {
+    slug: "obsidian-second-brain",
+    number: 22,
+    title: "Your Agent's Second Brain",
+    subtitle: "Obsidian + AI = your agent finally gets a filing cabinet with a map",
+    emoji: "🧠",
+    requiredTier: "pro",
+    readTime: "12 min",
+  },
+
+  // ACCELERATOR TIER (continued)
+  {
+    slug: "memory-that-scales",
+    number: 23,
+    title: "Memory That Scales",
+    subtitle: "From markdown files to knowledge graphs — when your agent outgrows its notebook",
+    emoji: "🔮",
+    requiredTier: "accelerator",
+    readTime: "14 min",
+  },
 ];
 
 export function getChapter(slug: string): Chapter | undefined {

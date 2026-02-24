@@ -1,5 +1,22 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+```bash
+# Required
+NEXT_PUBLIC_URL=https://agentforge-app.vercel.app
+JWT_SECRET=your-jwt-secret
+STRIPE_SECRET_KEY=sk_live_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
+
+# Email (Resend)
+RESEND_API_KEY=re_xxx          # Get from https://resend.com/api-keys
+EMAIL_FROM="AgentForge <hello@agentforge.ai>"  # Must be verified in Resend
+
+# Optional
+ALLOW_DEV_LINKS=true           # Enable /api/magic-link GET in production
+```
+
 ## Getting Started
 
 First, run the development server:

@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createToken, UserTier } from "@/lib/auth";
+import { resend, EMAIL_FROM } from "@/lib/resend";
+import MagicLinkEmail from "@/emails/magic-link";
+import WelcomeEmail from "@/emails/welcome";
+import PurchaseConfirmation from "@/emails/purchase-confirmation";
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -16,6 +20,13 @@ const priceTierMap: Record<string, UserTier> = {
   price_1T3k3rGqBVW20cKOemBKXHa3: "blueprint",
   price_1T3k3rGqBVW20cKODfKJTN1F: "pro",
   price_1T3k3sGqBVW20cKOaqN8mbyY: "accelerator",
+};
+
+const tierNames: Record<UserTier, string> = {
+  free: "Free Preview",
+  blueprint: "Blueprint",
+  pro: "Pro",
+  accelerator: "Accelerator",
 };
 
 export async function POST(req: NextRequest) {
@@ -39,6 +50,7 @@ export async function POST(req: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const email = session.customer_details?.email;
+    const name = session.customer_details?.name || "";
 
     if (!email) {
       console.error("No email in checkout session");
@@ -63,11 +75,54 @@ export async function POST(req: NextRequest) {
     });
 
     const magicLink = `${process.env.NEXT_PUBLIC_URL}/api/auth?token=${token}`;
+    const amount = ((session.amount_total || 0) / 100).toFixed(2);
 
-    // TODO: Send email with magic link
-    // For now, log it (in production, integrate SendGrid/Resend)
     console.log(`\n🎉 New purchase! Email: ${email}, Tier: ${tier}`);
     console.log(`🔗 Magic link: ${magicLink}\n`);
+
+    // Send emails via Resend if configured
+    if (resend) {
+      try {
+        // 1. Purchase confirmation
+        await resend.emails.send({
+          from: EMAIL_FROM,
+          to: email,
+          subject: "Your AgentForge receipt",
+          react: PurchaseConfirmation({
+            name,
+            tierName: tierNames[tier],
+            amount,
+            date: new Date().toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            }),
+          }),
+        });
+
+        // 2. Magic link email
+        await resend.emails.send({
+          from: EMAIL_FROM,
+          to: email,
+          subject: `Your AgentForge ${tierNames[tier]} access link`,
+          react: MagicLinkEmail({ magicLink, tierName: tierNames[tier] }),
+        });
+
+        // 3. Welcome email
+        const accessLink = `${process.env.NEXT_PUBLIC_URL}/dashboard`;
+        await resend.emails.send({
+          from: EMAIL_FROM,
+          to: email,
+          subject: "Welcome to AgentForge — let's build your first agent",
+          react: WelcomeEmail({ name, tierName: tierNames[tier], accessLink }),
+        });
+
+        console.log(`📧 All emails sent to ${email}`);
+      } catch (emailError) {
+        console.error("Failed to send emails:", emailError);
+        // Don't fail the webhook — purchase is still valid
+      }
+    }
   }
 
   return NextResponse.json({ received: true });

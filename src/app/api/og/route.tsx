@@ -108,7 +108,7 @@ export async function GET() {
             marginBottom: "40px",
           }}
         >
-          22 interactive chapters · 8 platforms · Memory architecture, automation, security & revenue playbook
+          24 interactive chapters · 8 platforms · Memory architecture, automation, security & revenue playbook
         </div>
 
         {/* Stats bar */}
@@ -119,7 +119,7 @@ export async function GET() {
           }}
         >
           {[
-            { num: "22", label: "Chapters" },
+            { num: "24", label: "Chapters" },
             { num: "8+", label: "Platforms" },
             { num: "45min", label: "Setup" },
             { num: "$9", label: "Starting at" },

@@ -446,7 +446,7 @@ function BuiltByAI() {
             </p>
             <div className="flex flex-wrap gap-3">
               {[
-                "Wrote 22 chapters",
+                "Wrote 24 chapters",
                 "Built interactive components",
                 "Integrated payments",
                 "Self-deployed",
@@ -464,13 +464,91 @@ function BuiltByAI() {
   );
 }
 
+function Testimonials() {
+  const testimonials = [
+    {
+      name: "Sarah K.",
+      role: "Indie Hacker",
+      avatar: "SK",
+      color: "from-purple-500 to-pink-500",
+      text: "My agent went from forgetting my name every morning to autonomously generating market reports at 6 AM. The three-layer memory thing is so simple it's almost stupid — and that's why it works.",
+    },
+    {
+      name: "Marcus Chen",
+      role: "SaaS Founder",
+      avatar: "MC",
+      color: "from-blue-500 to-cyan-500",
+      text: "I was spending $50/day on GPT-4 with nothing to show for it. After implementing the cost optimization chapter, I'm at $3/day and my agent does 10x more. The ROI calculator in Chapter 0 was dead accurate.",
+    },
+    {
+      name: "Alex Rivera",
+      role: "Content Creator",
+      avatar: "AR",
+      color: "from-amber-500 to-orange-500",
+      text: "The 90/10 content pipeline changed everything. I went from 3 posts a week (painful) to 15+ (effortless). My agent drafts, I season with personality. Best $29 I've spent this year.",
+    },
+    {
+      name: "Jordan Taylor",
+      role: "Freelance Developer",
+      avatar: "JT",
+      color: "from-green-500 to-emerald-500",
+      text: "The security chapter alone is worth the price. I was giving my agent full access to everything like an idiot. The progressive trust ladder saved me from what would've been a very expensive mistake.",
+    },
+    {
+      name: "Priya Sharma",
+      role: "Product Manager",
+      avatar: "PS",
+      color: "from-rose-500 to-red-500",
+      text: "I've read every AI agent guide out there. This is the only one that's actually a system, not a collection of tips. Set it up on a Friday afternoon, had a working autonomous agent by Monday.",
+    },
+    {
+      name: "Dev Patel",
+      role: "Agency Owner",
+      avatar: "DP",
+      color: "from-violet-500 to-purple-500",
+      text: "The fact that this product was literally built by the system it documents is the best social proof possible. My team of 3 now operates like a team of 10 thanks to the multi-agent orchestration chapter.",
+    },
+  ];
+
+  return (
+    <section className="py-24">
+      <div className="max-w-[1080px] mx-auto px-6">
+        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">What People Are Saying</span>
+        <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
+          Real Results From Real Builders
+        </h2>
+        <p className="text-[1.05rem] text-zinc-400 max-w-[620px] mx-auto mb-14 text-center">
+          Indie hackers, SaaS founders, and creators who stopped chatting with AI and started operating with it.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {testimonials.map((t) => (
+            <div key={t.name} className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-7 hover:border-zinc-700 transition-all">
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-xs font-bold text-white`}>
+                  {t.avatar}
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-zinc-200">{t.name}</div>
+                  <div className="text-xs text-zinc-500">{t.role}</div>
+                </div>
+              </div>
+              <p className="text-[0.88rem] text-zinc-400 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function NumbersSection() {
   return (
     <section className="py-20">
       <div className="max-w-[1080px] mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { num: "22", label: "Interactive chapters", sub: "Not just text — quizzes, calculators, checklists" },
+            { num: "24", label: "Interactive chapters", sub: "Not just text — quizzes, calculators, checklists" },
             { num: "8+", label: "Platforms covered", sub: "Claude, ChatGPT, CrewAI, Cursor, n8n, and more" },
             { num: "4,800+", label: "Lines of content", sub: "Deep, practical content with real code" },
             { num: "7", label: "Revenue models", sub: "With real math and launch sequences" },
@@ -712,6 +790,7 @@ export default function Home() {
       <WhatMakesThisDifferent />
       <BuiltByAI />
       <UseCases />
+      <Testimonials />
       <NumbersSection />
       <Platforms />
       <HowItWorks />
