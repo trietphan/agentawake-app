@@ -472,7 +472,7 @@ function Testimonials() {
   ];
 
   return (
-    <section className="py-24">
+    <section className="py-24 bg-gradient-to-b from-purple-500/[0.03] to-transparent">
       <div className="max-w-[1080px] mx-auto px-6">
         <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">The Evidence</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
