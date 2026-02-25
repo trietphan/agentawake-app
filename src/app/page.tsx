@@ -5,16 +5,26 @@ import EmailCaptureComponent from "@/components/EmailCapture";
 
 function NavBar() {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#07070a]/85 backdrop-blur-xl border-b border-zinc-800/60">
-      <div className="max-w-[1080px] mx-auto px-6 h-[60px] flex items-center justify-between">
-        <span className="text-[1.15rem] font-extrabold bg-gradient-to-br from-purple-500 to-purple-300 bg-clip-text text-transparent">⚡ AgentAwake</span>
-        <div className="flex items-center gap-7">
+    <nav className="fixed top-0 w-full z-50 bg-[#07070a]/80 backdrop-blur-xl border-b border-zinc-800/60">
+      <div className="max-w-[1080px] mx-auto px-4 sm:px-6 h-[62px] flex items-center justify-between gap-3">
+        <Link href="/" className="flex items-center gap-2.5 min-w-0">
+          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-fuchsia-500 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-fuchsia-500/25 animate-float">
+            <span className="text-[15px]">⚡</span>
+          </span>
+          <span className="text-[1.05rem] sm:text-[1.15rem] font-extrabold bg-gradient-to-r from-fuchsia-300 via-purple-200 to-cyan-300 bg-clip-text text-transparent truncate">AgentAwake</span>
+        </Link>
+
+        <div className="flex items-center gap-2 sm:gap-7">
           <a href="#use-cases" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Use Cases</a>
           <a href="#platforms" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Platforms</a>
           <a href="#pricing" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Pricing</a>
           <Link href="/blog" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Blog</Link>
           <a href="#faq" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">FAQ</a>
-          <a href="#pricing" className="bg-purple-600 text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold hover:bg-purple-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/20">Get the Playbook</a>
+
+          <Link href="/blog" className="sm:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-zinc-700/80 text-zinc-200 hover:text-white hover:border-purple-400/60 transition-colors" aria-label="Open Blog">
+            📝
+          </Link>
+          <a href="#pricing" className="bg-gradient-to-r from-fuchsia-600 to-purple-500 text-white px-3.5 sm:px-5 py-2.5 rounded-[10px] text-xs sm:text-sm font-semibold hover:from-fuchsia-500 hover:to-purple-400 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/25 whitespace-nowrap">Get the Playbook</a>
         </div>
       </div>
     </nav>
@@ -24,15 +34,17 @@ function NavBar() {
 function Hero() {
   return (
     <section className="pt-40 pb-24 text-center relative overflow-hidden">
-      <div className="absolute -top-[300px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-[radial-gradient(ellipse,rgba(139,92,246,0.08),transparent_70%)] pointer-events-none" />
+      <div className="absolute -top-[300px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-[radial-gradient(ellipse,rgba(217,70,239,0.12),transparent_70%)] pointer-events-none" />
+      <div className="absolute top-[15%] left-[8%] w-40 h-40 rounded-full bg-cyan-400/15 blur-3xl pointer-events-none animate-blob" />
+      <div className="absolute top-[30%] right-[8%] w-44 h-44 rounded-full bg-fuchsia-500/15 blur-3xl pointer-events-none animate-blob-delay" />
       <div className="max-w-[1080px] mx-auto px-6 relative">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm font-semibold text-purple-300 bg-gradient-to-br from-purple-500/10 to-purple-500/5 border border-purple-500/20 mb-7">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm font-semibold text-fuchsia-200 bg-gradient-to-r from-fuchsia-500/15 via-purple-500/15 to-cyan-500/15 border border-fuchsia-400/30 mb-7 animate-gradient-shift">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           Built by an autonomous AI agent — the system documented inside
         </div>
         <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] mb-6 max-w-[780px] mx-auto">
           Your AI Agent Should Be{" "}
-          <span className="bg-gradient-to-r from-purple-500 via-purple-300 to-pink-300 bg-clip-text text-transparent">Running Your Business</span>{" "}
+          <span className="bg-gradient-to-r from-fuchsia-400 via-purple-300 to-cyan-300 bg-clip-text text-transparent animate-gradient-shift">Running Your Business</span>{" "}
           While You Sleep
         </h1>
         <p className="text-lg text-zinc-400 max-w-[560px] mx-auto mb-11 leading-relaxed">
@@ -87,7 +99,7 @@ function Problem() {
         <p className="text-[1.05rem] text-zinc-400 max-w-[620px] mb-12">You installed ChatGPT, Claude, or an agent framework. It felt magical for an hour. Then reality hit — every session starts from scratch.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {cards.map((c) => (
-            <div key={c.title} className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-7 hover:border-zinc-700 transition-all">
+            <div key={c.title} className="bg-[#111116]/95 border border-zinc-800/80 rounded-2xl p-7 hover:border-fuchsia-400/40 hover:-translate-y-1 transition-all duration-300">
               <div className={`w-11 h-11 rounded-[10px] flex items-center justify-center text-xl mb-4 ${c.color}`}>{c.icon}</div>
               <h3 className="text-[1.05rem] font-semibold mb-2">{c.title}</h3>
               <p className="text-zinc-400 text-[0.92rem] leading-relaxed">{c.desc}</p>
@@ -621,8 +633,8 @@ function Pricing() {
           {tiers.map((t) => (
             <div key={t.tier} className={`rounded-2xl p-9 relative transition-all flex flex-col ${
               t.featured
-                ? "border border-purple-500/40 bg-gradient-to-b from-purple-500/[0.06] to-[#111116] shadow-[0_0_60px_rgba(139,92,246,0.08)]"
-                : "bg-[#111116] border border-zinc-800/80 hover:border-zinc-700"
+                ? "border border-fuchsia-400/45 bg-gradient-to-b from-fuchsia-500/[0.08] via-purple-500/[0.05] to-[#111116] shadow-[0_0_70px_rgba(217,70,239,0.14)]"
+                : "bg-[#111116]/95 border border-zinc-800/80 hover:border-cyan-400/35 hover:-translate-y-1"
             }`}>
               {t.featured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[0.72rem] font-bold uppercase tracking-wide px-4 py-1 rounded-full">
