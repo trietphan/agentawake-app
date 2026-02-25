@@ -91,6 +91,24 @@ html {
   transform: translateY(0) scale(1);
 }
 
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: revealUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+    transition: none;
+  }
+  .reveal-visible {
+    animation: revealUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+  @keyframes revealUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-blob,
   .animate-blob-delay,

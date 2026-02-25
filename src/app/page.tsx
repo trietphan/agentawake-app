@@ -1,11 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
 import { StructuredData } from "./structured-data";
-import EmailCaptureComponent from "@/components/EmailCapture";
+import dynamic from "next/dynamic";
 import Reveal from "@/components/Reveal";
-import MobileStickyCTA from "@/components/MobileStickyCTA";
-import GlowCard from "@/components/GlowCard";
 import RotatingText from "@/components/RotatingText";
+import GlowCard from "@/components/GlowCard";
+
+const EmailCaptureComponent = dynamic(() => import("@/components/EmailCapture"), { loading: () => <div className="h-12" /> });
+const MobileStickyCTA = dynamic(() => import("@/components/MobileStickyCTA"), { loading: () => <div /> });
 
 function NavBar() {
   return (

@@ -7,6 +7,9 @@ export default function Reveal({ children, className = "" }: { children: React.R
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // Skip JS animation if browser supports CSS animation-timeline
+    if (CSS.supports?.("animation-timeline: view()")) return;
+
     const el = ref.current;
     if (!el) return;
 
