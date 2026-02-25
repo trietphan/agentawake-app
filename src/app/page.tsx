@@ -4,6 +4,8 @@ import { StructuredData } from "./structured-data";
 import EmailCaptureComponent from "@/components/EmailCapture";
 import Reveal from "@/components/Reveal";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
+import GlowCard from "@/components/GlowCard";
+import RotatingText from "@/components/RotatingText";
 
 function NavBar() {
   return (
@@ -50,7 +52,7 @@ function Hero() {
           While You Sleep
         </h1>
         <p className="text-lg text-zinc-400 max-w-[560px] mx-auto mb-11 leading-relaxed">
-          The exact playbook we used to build an AI agent that ships code, generates market analysis, creates content, and processes payments — autonomously, every single day.
+          The exact playbook to make your AI agent <RotatingText /> — shipping code, generating analysis, creating content, and processing payments autonomously.
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
           <a href="#pricing" className="bg-purple-600 text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-purple-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/20">
@@ -75,13 +77,21 @@ function SocialProof() {
   ];
   return (
     <section className="py-14 border-y border-zinc-800/60">
-      <div className="max-w-[1080px] mx-auto px-6 flex justify-center flex-wrap gap-16">
+      <div className="max-w-[1080px] mx-auto px-6">
+        <div className="flex justify-center mb-6">
+          <span className="inline-flex items-center gap-2 text-xs font-medium text-zinc-400 bg-zinc-800/60 px-3 py-1.5 rounded-full border border-zinc-700/50">
+            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+            Updated daily · Building in public
+          </span>
+        </div>
+        <div className="flex justify-center flex-wrap gap-16">
         {stats.map((s) => (
           <div key={s.lbl} className="text-center">
             <div className="text-[2.2rem] font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent">{s.num}</div>
             <div className="text-sm text-zinc-500 font-medium mt-0.5">{s.lbl}</div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );
@@ -426,36 +436,42 @@ function WhatMakesThisDifferent() {
       title: "Built By the System It Documents",
       desc: "This isn't theory written by someone who read about AI agents. This playbook, this landing page, this payment system — all built by the exact agent architecture we teach. We're the proof it works.",
       highlight: true,
+      accent: "border-t-fuchsia-500",
     },
     {
       icon: "🎮",
       title: "Interactive, Not Just Readable",
       desc: "Quizzes that test your understanding. Calculators that estimate your costs and ROI. Checklists that track your progress. Architecture diagrams you can click and explore. This isn't a PDF — it's a learning experience.",
       highlight: false,
+      accent: "border-t-cyan-400",
     },
     {
       icon: "🔌",
       title: "8 Platforms, One Architecture",
       desc: "Most guides lock you into one tool. We give you the universal architecture, then show platform-specific implementation for Claude, ChatGPT, CrewAI, Cursor, n8n, LangChain, and more. Switch platforms without losing your system.",
       highlight: false,
+      accent: "border-t-violet-500",
     },
     {
       icon: "💰",
       title: "Revenue-First, Not Theory-First",
       desc: "Chapter 21 is a complete Revenue Playbook with 7 proven models, real math, and a 4-week launch sequence. We don't just teach you to build agents — we teach you to profit from them. $6K/mo on $15/mo of costs.",
       highlight: false,
+      accent: "border-t-emerald-400",
     },
     {
       icon: "🧠",
       title: "Memory Architecture, Not Prompt Tricks",
       desc: "Everyone teaches prompting. Nobody teaches persistent memory. Our three-layer brain architecture (knowledge base + daily notes + tacit knowledge) is what turns a chatbot into a business operator that compounds daily.",
       highlight: false,
+      accent: "border-t-amber-400",
     },
     {
       icon: "🔒",
       title: "Security Built In, Not Bolted On",
       desc: "Progressive trust ladder, prompt injection defense, data classification — from Chapter 1. Most agent guides don't even mention security until something goes wrong. Ours starts with it.",
       highlight: false,
+      accent: "border-t-rose-500",
     },
   ];
 
@@ -475,7 +491,7 @@ function WhatMakesThisDifferent() {
           {differentiators.map((d) => (
             <div
               key={d.title}
-              className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-7 hover:border-zinc-700 transition-all"
+              className={`bg-[#111116] border border-zinc-800/80 border-t-2 ${d.accent} rounded-2xl p-7 hover:border-zinc-700 transition-all`}
             >
               <div className="text-2xl mb-3">{d.icon}</div>
               <h3 className="text-[1.05rem] font-semibold mb-2">{d.title}</h3>
@@ -682,7 +698,8 @@ function Pricing() {
         <p className="text-[1.05rem] text-zinc-400 text-center mb-14">One-time purchase. Interactive chapters. Lifetime updates included.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {tiers.map((t) => (
-            <div key={t.tier} className={`rounded-2xl p-9 relative transition-all flex flex-col ${
+            <GlowCard key={t.tier} className="rounded-2xl">
+            <div className={`rounded-2xl p-9 relative transition-all flex flex-col h-full ${
               t.featured
                 ? "border border-fuchsia-400/45 bg-gradient-to-b from-fuchsia-500/[0.08] via-purple-500/[0.05] to-[#111116] shadow-[0_0_70px_rgba(217,70,239,0.14)]"
                 : "bg-[#111116]/95 border border-zinc-800/80 hover:border-cyan-400/35 hover:-translate-y-1"
@@ -716,7 +733,18 @@ function Pricing() {
               </a>
               <p className="text-center text-xs text-zinc-600 mt-2.5">30-day money-back guarantee</p>
             </div>
+            </GlowCard>
           ))}
+        </div>
+
+        <div className="flex justify-center items-center gap-4 sm:gap-6 mt-10 text-xs text-zinc-500 flex-wrap">
+          <span>🔒 Secure checkout</span>
+          <span className="hidden sm:inline text-zinc-700">|</span>
+          <span>↩️ 30-day money back</span>
+          <span className="hidden sm:inline text-zinc-700">|</span>
+          <span>⚡ Instant access</span>
+          <span className="hidden sm:inline text-zinc-700">|</span>
+          <span>🚫 No subscription</span>
         </div>
       </div>
     </section>

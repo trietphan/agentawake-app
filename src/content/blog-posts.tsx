@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { AmnesiaQuiz, CostCalculator, SpotTheAgent } from "../components/BlogGames";
+import TweetableQuote from "../components/TweetableQuote";
 
 export interface BlogPost {
   slug: string;
@@ -49,6 +50,8 @@ export const blogPosts: BlogPost[] = [
           gave them anywhere to store memories. It's like hiring a genius and
           then deleting their brain every night.
         </p>
+
+        <TweetableQuote quote="The AI is brilliant. It can write a recursive algorithm while explaining quantum physics in the voice of a pirate. But ask it what you talked about yesterday and it stares at you like a golden retriever who just heard a new word." />
 
         <AmnesiaQuiz />
 
@@ -114,6 +117,8 @@ export const blogPosts: BlogPost[] = [
           and promotes the good stuff to the knowledge base. That's it. You're
           done. Go make coffee or something.
         </p>
+
+        <TweetableQuote quote="The solution to AI amnesia is embarrassingly simple: three plain text files. Markdown. On your machine. No PhD. No infrastructure. No existential crisis." />
 
         <h2>The Compound Effect Is Where Things Get Weird</h2>
 
@@ -187,6 +192,8 @@ export const blogPosts: BlogPost[] = [
           It's the whole damn game.
         </p>
 
+        <TweetableQuote quote="Most people give their agent a single MEMORY.md file and dump their entire existence into it like it's a diary, a to-do list, and a therapy journal all at once." />
+
         <h2>PARA in 30 Seconds (The Marie Kondo of Agent Brains)</h2>
 
         <p>
@@ -239,6 +246,8 @@ export const blogPosts: BlogPost[] = [
 └── tacit.md            # The unGoogleable wisdom`}</code></pre>
 
         <SpotTheAgent />
+
+        <TweetableQuote quote="Good organization isn't a nice-to-have for AI agents. They either find the right file or they hallucinate something plausible but completely made up. It's the whole damn game." />
 
         <h2>Why This Demolishes the "One Giant File" Approach</h2>
 
@@ -387,6 +396,8 @@ Automated S&P 500 and Gold trading system.
 
         <AmnesiaQuiz />
 
+        <TweetableQuote quote="Every session with ChatGPT, you re-introduce yourself like you're at some dystopian speed-dating event. Twenty minutes gone. Again." />
+
         <h2>It's Not the AI's Fault (But It's Still Annoying)</h2>
 
         <p>
@@ -466,6 +477,8 @@ Automated S&P 500 and Gold trading system.
           <em> knows</em> you. Not in a creepy way. In a "finally, someone who
           remembers I hate YAML" way.
         </p>
+
+        <TweetableQuote quote="Your AI isn't dumb — it's architecturally amnesiac. The thinking works. The remembering doesn't exist. That's not stupidity. That's architecture." />
 
         <h2>What Mornings Look Like After</h2>
 

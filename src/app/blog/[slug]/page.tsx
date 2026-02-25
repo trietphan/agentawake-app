@@ -11,9 +11,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) return { title: "Not Found" };
+  const url = `https://agentawake.com/blog/${post.slug}`;
   return {
     title: `${post.title} — AgentAwake Blog`,
     description: post.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url,
+      siteName: "AgentAwake",
+      images: [{ url: `https://agentawake.com/api/og?title=${encodeURIComponent(post.title)}`, width: 1200, height: 630 }],
+      publishedTime: post.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [`https://agentawake.com/api/og?title=${encodeURIComponent(post.title)}`],
+    },
   };
 }
 
@@ -26,8 +43,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const shareText = `${post.title} — if your AI agent keeps forgetting everything, this helps.`;
   const xShare = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(postUrl)}`;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    url: postUrl,
+    author: { "@type": "Organization", name: "AgentAwake" },
+    publisher: { "@type": "Organization", name: "AgentAwake", url: "https://agentawake.com" },
+    image: `https://agentawake.com/api/og?title=${encodeURIComponent(post.title)}`,
+  };
+
   return (
     <div className="min-h-screen bg-[#07070a]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <nav className="fixed top-0 w-full z-50 bg-[#07070a]/85 backdrop-blur-xl border-b border-zinc-800/60">
         <div className="max-w-[1080px] mx-auto px-4 sm:px-6 h-[60px] flex items-center justify-between">
           <Link href="/" className="text-[1.05rem] sm:text-[1.15rem] font-extrabold bg-gradient-to-r from-fuchsia-400 via-purple-300 to-cyan-300 bg-clip-text text-transparent">⚡ AgentAwake</Link>
