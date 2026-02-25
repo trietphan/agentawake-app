@@ -5,19 +5,20 @@ import dynamic from "next/dynamic";
 import Reveal from "@/components/Reveal";
 import RotatingText from "@/components/RotatingText";
 import GlowCard from "@/components/GlowCard";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const EmailCaptureComponent = dynamic(() => import("@/components/EmailCapture"), { loading: () => <div className="h-12" /> });
 const MobileStickyCTA = dynamic(() => import("@/components/MobileStickyCTA"), { loading: () => <div /> });
 
 function NavBar() {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#07070a]/80 backdrop-blur-xl border-b border-zinc-800/60">
+    <nav className="fixed top-0 w-full z-50 bg-[#07070a]/80 backdrop-blur-xl border-b border-[var(--border)]/60">
       <div className="max-w-[1080px] mx-auto px-4 sm:px-6 h-[62px] flex items-center justify-between gap-3">
         <Link href="/" className="flex items-center gap-2.5 min-w-0">
-          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-fuchsia-500 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-fuchsia-500/25 animate-float">
+          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 via-amber-400 to-yellow-300 flex items-center justify-center shadow-lg shadow-orange-500/25 animate-float">
             <span className="text-[15px]">⚡</span>
           </span>
-          <span className="text-[1.05rem] sm:text-[1.15rem] font-extrabold bg-gradient-to-r from-fuchsia-300 via-purple-200 to-cyan-300 bg-clip-text text-transparent truncate">AgentAwake</span>
+          <span className="text-[1.05rem] sm:text-[1.15rem] font-extrabold bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-300 bg-clip-text text-transparent truncate">AgentAwake</span>
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-7">
@@ -27,10 +28,11 @@ function NavBar() {
           <Link href="/blog" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Blog</Link>
           <a href="#faq" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">FAQ</a>
 
-          <Link href="/blog" className="sm:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-zinc-700/80 text-zinc-200 hover:text-white hover:border-purple-400/60 transition-colors" aria-label="Open Blog">
+          <Link href="/blog" className="sm:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-zinc-700/80 text-zinc-200 hover:text-white hover:border-orange-400/60 transition-colors" aria-label="Open Blog">
             📝
           </Link>
-          <a href="#pricing" className="bg-gradient-to-r from-fuchsia-600 to-purple-500 text-white px-3.5 sm:px-5 py-2.5 rounded-[10px] text-xs sm:text-sm font-semibold hover:from-fuchsia-500 hover:to-purple-400 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/25 whitespace-nowrap">Get the Playbook</a>
+          <ThemeToggle />
+          <a href="#pricing" className="bg-gradient-to-r from-orange-600 to-amber-500 text-white px-3.5 sm:px-5 py-2.5 rounded-[10px] text-xs sm:text-sm font-semibold hover:from-orange-500 hover:to-amber-400 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/25 whitespace-nowrap">Get the Playbook</a>
         </div>
       </div>
     </nav>
@@ -42,25 +44,25 @@ function Hero() {
     <section className="pt-40 pb-24 text-center relative overflow-hidden">
       <div className="absolute -top-[300px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-[radial-gradient(ellipse,rgba(217,70,239,0.12),transparent_70%)] pointer-events-none" />
       <div className="absolute top-[15%] left-[8%] w-40 h-40 rounded-full bg-cyan-400/15 blur-3xl pointer-events-none animate-blob" />
-      <div className="absolute top-[30%] right-[8%] w-44 h-44 rounded-full bg-fuchsia-500/15 blur-3xl pointer-events-none animate-blob-delay" />
+      <div className="absolute top-[30%] right-[8%] w-44 h-44 rounded-full bg-orange-500/15 blur-3xl pointer-events-none animate-blob-delay" />
       <div className="max-w-[1080px] mx-auto px-6 relative">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm font-semibold text-fuchsia-200 bg-gradient-to-r from-fuchsia-500/15 via-purple-500/15 to-cyan-500/15 border border-fuchsia-400/30 mb-7 animate-gradient-shift">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm font-semibold text-orange-200 bg-gradient-to-r from-orange-500/15 via-amber-500/15 to-yellow-500/15 border border-orange-400/30 mb-7 animate-gradient-shift">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           Built by an autonomous AI agent — the system documented inside
         </div>
         <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] mb-6 max-w-[780px] mx-auto">
           Your AI Agent Should Be{" "}
-          <span className="bg-gradient-to-r from-fuchsia-400 via-purple-300 to-cyan-300 bg-clip-text text-transparent animate-gradient-shift">Running Your Business</span>{" "}
+          <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-300 bg-clip-text text-transparent animate-gradient-shift">Running Your Business</span>{" "}
           While You Sleep
         </h1>
         <p className="text-lg text-zinc-400 max-w-[560px] mx-auto mb-11 leading-relaxed">
           The exact playbook to make your AI agent <RotatingText /> — shipping code, generating analysis, creating content, and processing payments autonomously.
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
-          <a href="#pricing" className="bg-purple-600 text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-purple-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/20">
+          <a href="#pricing" className="bg-orange-600 text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-orange-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/20">
             Get the Playbook →
           </a>
-          <Link href="/free" className="border border-zinc-700 text-zinc-300 px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:border-purple-500/40 hover:text-purple-300 transition-all">
+          <Link href="/free" className="border border-zinc-700 text-zinc-300 px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:border-orange-500/40 hover:text-orange-300 transition-all">
             Read Free Chapter
           </Link>
         </div>
@@ -78,7 +80,7 @@ function SocialProof() {
     { num: "8+", lbl: "Compatible platforms" },
   ];
   return (
-    <section className="py-14 border-y border-zinc-800/60">
+    <section className="py-14 border-y border-[var(--border)]/60">
       <div className="max-w-[1080px] mx-auto px-6">
         <div className="flex justify-center mb-6">
           <span className="inline-flex items-center gap-2 text-xs font-medium text-zinc-400 bg-zinc-800/60 px-3 py-1.5 rounded-full border border-zinc-700/50">
@@ -105,7 +107,7 @@ function BuildLog() {
       label: "Today",
       title: "Rebranded to AgentAwake + domain migration",
       desc: "Shifted brand narrative from generic agent tooling to memory-first positioning.",
-      color: "from-fuchsia-500/25 to-purple-500/10 border-fuchsia-400/30",
+      color: "from-orange-500/25 to-amber-500/10 border-orange-400/30",
     },
     {
       label: "This Week",
@@ -117,17 +119,17 @@ function BuildLog() {
       label: "Next",
       title: "X distribution flywheel + content cadence",
       desc: "2 posts/day + high-leverage replies to compound reach and inbound interest.",
-      color: "from-violet-500/20 to-fuchsia-500/10 border-violet-400/30",
+      color: "from-orange-500/20 to-amber-500/10 border-orange-400/30",
     },
   ];
 
   return (
     <section className="py-20">
       <div className="max-w-[1080px] mx-auto px-6">
-        <div className="rounded-3xl border border-zinc-800/80 bg-[#111116]/85 p-8 md:p-10">
+        <div className="rounded-3xl border border-[var(--border)]/80 bg-[var(--surface)]/85 p-8 md:p-10">
           <div className="flex items-center justify-between gap-3 flex-wrap mb-7">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-fuchsia-300">Build Log</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-orange-300">Build Log</span>
               <h3 className="text-2xl font-bold mt-2">Shipping Fast, In Public</h3>
             </div>
             <Link href="/blog" className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors">Read updates →</Link>
@@ -157,12 +159,12 @@ function Problem() {
   return (
     <section className="py-24">
       <div className="max-w-[1080px] mx-auto px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block">The Problem</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3.5 block">The Problem</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4">Your AI Agent Has Amnesia</h2>
         <p className="text-[1.05rem] text-zinc-400 max-w-[620px] mb-12">You installed ChatGPT, Claude, or an agent framework. It felt magical for an hour. Then reality hit — every session starts from scratch.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {cards.map((c) => (
-            <div key={c.title} className="bg-[#111116]/95 border border-zinc-800/80 rounded-2xl p-7 hover:border-fuchsia-400/40 hover:-translate-y-1 transition-all duration-300">
+            <div key={c.title} className="bg-[var(--surface)]/95 border border-[var(--border)]/80 rounded-2xl p-7 hover:border-orange-400/40 hover:-translate-y-1 transition-all duration-300">
               <div className={`w-11 h-11 rounded-[10px] flex items-center justify-center text-xl mb-4 ${c.color}`}>{c.icon}</div>
               <h3 className="text-[1.05rem] font-semibold mb-2">{c.title}</h3>
               <p className="text-zinc-400 text-[0.92rem] leading-relaxed">{c.desc}</p>
@@ -219,7 +221,7 @@ function UseCases() {
     {
       emoji: "🛒",
       tag: "E-Commerce",
-      tagColor: "bg-violet-400/10 text-violet-400",
+      tagColor: "bg-orange-400/10 text-orange-400",
       title: "Product Research & Listing",
       subtitle: "Find winning products while you're at brunch",
       description: "Agent monitors trending products on TikTok/Pinterest, analyzes competitor pricing, generates optimized listings with SEO keywords, and tracks inventory levels.",
@@ -261,7 +263,7 @@ function UseCases() {
   return (
     <section id="use-cases" className="py-24">
       <div className="max-w-[1080px] mx-auto px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">Use Cases</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3.5 block text-center">Use Cases</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
           8 Ways Your Agent Prints Time <span className="text-zinc-500">(and Money)</span>
         </h2>
@@ -271,18 +273,18 @@ function UseCases() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {cases.map((c) => (
-            <div key={c.title} className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-7 hover:border-zinc-700 transition-all group">
+            <div key={c.title} className="bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-7 hover:border-zinc-700 transition-all group">
               <div className="flex items-center gap-3 mb-4">
                 <span className={`text-[0.72rem] font-bold uppercase tracking-wide px-2.5 py-1 rounded-md ${c.tagColor}`}>{c.tag}</span>
               </div>
               <h3 className="text-lg font-semibold mb-1">{c.emoji} {c.title}</h3>
-              <p className="text-sm text-purple-300/70 mb-3 italic">{c.subtitle}</p>
+              <p className="text-sm text-orange-300/70 mb-3 italic">{c.subtitle}</p>
               <p className="text-[0.92rem] text-zinc-400 leading-relaxed mb-4">{c.description}</p>
               <div className="rounded-xl bg-amber-400/5 border-l-[3px] border-amber-400/40 p-3.5 mb-4">
                 <div className="text-[0.7rem] font-bold uppercase tracking-wider text-amber-400/80 mb-1">Real-life translation</div>
                 <p className="text-sm text-zinc-300/80 italic">{c.analogy}</p>
               </div>
-              <div className="text-sm font-semibold text-emerald-400 pt-3 border-t border-zinc-800">{c.result}</div>
+              <div className="text-sm font-semibold text-emerald-400 pt-3 border-t border-[var(--border)]">{c.result}</div>
             </div>
           ))}
         </div>
@@ -354,7 +356,7 @@ function Platforms() {
   return (
     <section id="platforms" className="py-24">
       <div className="max-w-[1080px] mx-auto px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">Platform Compatibility</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3.5 block text-center">Platform Compatibility</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
           Works With Your Favorite AI Tools
         </h2>
@@ -366,14 +368,14 @@ function Platforms() {
           {platforms.map((p) => (
             <div key={p.name} className={`rounded-2xl p-6 transition-all ${
               p.featured
-                ? "bg-gradient-to-b from-purple-500/10 to-[#111116] border border-purple-500/30 hover:border-purple-500/50"
-                : "bg-[#111116] border border-zinc-800/80 hover:border-zinc-700"
+                ? "bg-gradient-to-b from-orange-500/10 to-[#111116] border border-orange-500/30 hover:border-orange-500/50"
+                : "bg-[var(--surface)] border border-[var(--border)]/80 hover:border-zinc-700"
             }`}>
               <div className="text-2xl mb-3">{p.icon}</div>
               <h4 className="text-[0.95rem] font-semibold mb-1">{p.name}</h4>
               <p className="text-[0.82rem] text-zinc-500 mb-3 leading-relaxed">{p.desc}</p>
               <span className={`text-[0.72rem] font-bold uppercase tracking-wide px-2 py-1 rounded-md ${
-                p.featured ? "bg-purple-500/15 text-purple-300" : "bg-zinc-800 text-zinc-400"
+                p.featured ? "bg-orange-500/15 text-orange-300" : "bg-zinc-800 text-zinc-400"
               }`}>
                 {p.compatibility}
               </span>
@@ -409,19 +411,19 @@ function Solution() {
   return (
     <section className="py-24">
       <div className="max-w-[1080px] mx-auto px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block">The Solution</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3.5 block">The Solution</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4">A Three-Layer System That Compounds</h2>
         <p className="text-[1.05rem] text-zinc-400 max-w-[620px] mb-14">The same architecture behind agents generating thousands per week. Not theory — the exact system we run in production.</p>
         <div className="space-y-4">
           {layers.map((l) => (
-            <div key={l.num} className="flex flex-col sm:flex-row gap-5 items-start bg-[#111116] border border-zinc-800/80 rounded-2xl p-8 hover:border-purple-500/20 hover:shadow-[0_0_40px_rgba(139,92,246,0.05)] transition-all">
-              <div className="flex-shrink-0 w-[52px] h-[52px] rounded-[14px] flex items-center justify-center text-lg font-extrabold bg-gradient-to-br from-purple-500/15 to-purple-500/5 border border-purple-500/20 text-purple-300">
+            <div key={l.num} className="flex flex-col sm:flex-row gap-5 items-start bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-8 hover:border-orange-500/20 hover:shadow-[0_0_40px_rgba(139,92,246,0.05)] transition-all">
+              <div className="flex-shrink-0 w-[52px] h-[52px] rounded-[14px] flex items-center justify-center text-lg font-extrabold bg-gradient-to-br from-orange-500/15 to-orange-500/5 border border-orange-500/20 text-orange-300">
                 {l.num}
               </div>
               <div>
                 <h3 className="text-[1.1rem] font-semibold mb-1.5">{l.title}</h3>
                 <p className="text-[0.92rem] text-zinc-400">{l.desc}</p>
-                <div className="mt-2.5 text-[0.85rem] text-zinc-500 pl-3.5 border-l-2 border-zinc-800 italic">{l.detail}</div>
+                <div className="mt-2.5 text-[0.85rem] text-zinc-500 pl-3.5 border-l-2 border-[var(--border)] italic">{l.detail}</div>
               </div>
             </div>
           ))}
@@ -438,7 +440,7 @@ function WhatMakesThisDifferent() {
       title: "Built By the System It Documents",
       desc: "This isn't theory written by someone who read about AI agents. This playbook, this landing page, this payment system — all built by the exact agent architecture we teach. We're the proof it works.",
       highlight: true,
-      accent: "border-t-fuchsia-500",
+      accent: "border-t-orange-500",
     },
     {
       icon: "🎮",
@@ -452,7 +454,7 @@ function WhatMakesThisDifferent() {
       title: "8 Platforms, One Architecture",
       desc: "Most guides lock you into one tool. We give you the universal architecture, then show platform-specific implementation for Claude, ChatGPT, CrewAI, Cursor, n8n, LangChain, and more. Switch platforms without losing your system.",
       highlight: false,
-      accent: "border-t-violet-500",
+      accent: "border-t-orange-500",
     },
     {
       icon: "💰",
@@ -479,9 +481,9 @@ function WhatMakesThisDifferent() {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-500/[0.02] to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-500/[0.02] to-transparent pointer-events-none" />
       <div className="max-w-[1080px] mx-auto px-6 relative">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">Why AgentAwake</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3.5 block text-center">Why AgentAwake</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
           Not Another <span className="line-through text-zinc-600">Prompt Engineering Course</span>
         </h2>
@@ -493,7 +495,7 @@ function WhatMakesThisDifferent() {
           {differentiators.map((d) => (
             <div
               key={d.title}
-              className={`bg-[#111116] border border-zinc-800/80 border-t-2 ${d.accent} rounded-2xl p-7 hover:border-zinc-700 transition-all`}
+              className={`bg-[var(--surface)] border border-[var(--border)]/80 border-t-2 ${d.accent} rounded-2xl p-7 hover:border-zinc-700 transition-all`}
             >
               <div className="text-2xl mb-3">{d.icon}</div>
               <h3 className="text-[1.05rem] font-semibold mb-2">{d.title}</h3>
@@ -555,9 +557,9 @@ function Testimonials() {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-purple-500/[0.03] to-transparent">
+    <section className="py-24 bg-gradient-to-b from-orange-500/[0.03] to-transparent">
       <div className="max-w-[1080px] mx-auto px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">The Evidence</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3.5 block text-center">The Evidence</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
           The Industry Agrees: Memory Is Everything
         </h2>
@@ -567,16 +569,16 @@ function Testimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {quotes.map((q) => (
-            <a key={q.source} href={q.link} target="_blank" rel="noopener noreferrer" className="bg-[#111116] border border-zinc-800/80 rounded-2xl p-6 hover:border-purple-500/30 transition-all block group">
+            <a key={q.source} href={q.link} target="_blank" rel="noopener noreferrer" className="bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-6 hover:border-orange-500/30 transition-all block group">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-lg">{q.icon}</div>
                 <div>
-                  <div className="text-sm font-semibold text-zinc-200 group-hover:text-purple-300 transition-colors">{q.source}</div>
+                  <div className="text-sm font-semibold text-zinc-200 group-hover:text-orange-300 transition-colors">{q.source}</div>
                   <div className="text-xs text-zinc-500">{q.role}</div>
                 </div>
               </div>
               <p className="text-[0.88rem] text-zinc-400 leading-relaxed">&ldquo;{q.text}&rdquo;</p>
-              <div className="mt-3 text-xs text-purple-400/60 group-hover:text-purple-400 transition-colors">Read source →</div>
+              <div className="mt-3 text-xs text-orange-400/60 group-hover:text-orange-400 transition-colors">Read source →</div>
             </a>
           ))}
         </div>
@@ -597,19 +599,19 @@ function HowItWorks() {
   return (
     <section id="how" className="py-24">
       <div className="max-w-[1080px] mx-auto px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">How It Works</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3.5 block text-center">How It Works</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">From Chatbot to Operator in 45 Minutes</h2>
         <p className="text-[1.05rem] text-zinc-400 max-w-[560px] mx-auto mb-14 text-center">Less time than an episode of The Office. More life-changing.</p>
         <div className="max-w-[680px] mx-auto relative">
-          <div className="absolute left-[27px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 to-zinc-800" />
+          <div className="absolute left-[27px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 to-zinc-800" />
           <div className="space-y-10">
             {steps.map((s) => (
               <div key={s.num} className="flex gap-6 relative">
-                <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[#111116] border-2 border-purple-500 flex items-center justify-center font-extrabold text-purple-300 z-10">{s.num}</div>
+                <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[var(--surface)] border-2 border-orange-500 flex items-center justify-center font-extrabold text-orange-300 z-10">{s.num}</div>
                 <div className="pt-2">
                   <h3 className="text-[1.05rem] font-semibold mb-1">{s.title}</h3>
                   <p className="text-[0.92rem] text-zinc-400">{s.desc}</p>
-                  <div className="text-sm text-purple-400 font-semibold mt-1.5">⏱ {s.time}</div>
+                  <div className="text-sm text-orange-400 font-semibold mt-1.5">⏱ {s.time}</div>
                 </div>
               </div>
             ))}
@@ -695,7 +697,7 @@ function Pricing() {
   return (
     <section id="pricing" className="py-24">
       <div className="max-w-[1080px] mx-auto px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">Pricing</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3.5 block text-center">Pricing</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold tracking-tight mb-2 text-center">Choose Your Path</h2>
         <p className="text-[1.05rem] text-zinc-400 text-center mb-14">One-time purchase. Interactive chapters. Lifetime updates included.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -703,15 +705,15 @@ function Pricing() {
             <GlowCard key={t.tier} className="rounded-2xl">
             <div className={`rounded-2xl p-9 relative transition-all flex flex-col h-full ${
               t.featured
-                ? "border border-fuchsia-400/45 bg-gradient-to-b from-fuchsia-500/[0.08] via-purple-500/[0.05] to-[#111116] shadow-[0_0_70px_rgba(217,70,239,0.14)]"
-                : "bg-[#111116]/95 border border-zinc-800/80 hover:border-cyan-400/35 hover:-translate-y-1"
+                ? "border border-orange-400/45 bg-gradient-to-b from-orange-500/[0.08] via-amber-500/[0.05] to-[#111116] shadow-[0_0_70px_rgba(217,70,239,0.14)]"
+                : "bg-[var(--surface)]/95 border border-[var(--border)]/80 hover:border-cyan-400/35 hover:-translate-y-1"
             }`}>
               {t.featured && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[0.72rem] font-bold uppercase tracking-wide px-4 py-1 rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-[0.72rem] font-bold uppercase tracking-wide px-4 py-1 rounded-full">
                   Most Popular
                 </div>
               )}
-              <div className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-1">{t.name}</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-1">{t.name}</div>
               <div className="text-xl font-bold mb-3">{t.product}</div>
               <div className="text-[2.8rem] font-extrabold tracking-tight mb-1">{t.price} <span className="text-lg font-medium text-zinc-500">one-time</span></div>
               <p className="text-xs text-amber-400/80 font-medium mb-3">{t.priceCompare}</p>
@@ -727,8 +729,8 @@ function Pricing() {
                 href={checkoutUrls[t.tier]}
                 className={`block text-center w-full py-3.5 rounded-[10px] font-semibold text-[0.92rem] transition-all ${
                   t.featured
-                    ? "bg-purple-600 text-white hover:bg-purple-500 hover:-translate-y-0.5"
-                    : "border border-zinc-700 text-zinc-300 hover:border-purple-500/40 hover:text-purple-300"
+                    ? "bg-orange-600 text-white hover:bg-orange-500 hover:-translate-y-0.5"
+                    : "border border-zinc-700 text-zinc-300 hover:border-orange-500/40 hover:text-orange-300"
                 }`}
               >
                 {t.cta}
@@ -788,7 +790,7 @@ function FAQ() {
         <div className="divide-y divide-zinc-800">
           {items.map((item) => (
             <details key={item.q} className="group">
-              <summary className="flex justify-between items-center py-5 cursor-pointer text-[0.98rem] font-semibold hover:text-purple-300 transition-colors list-none [&::-webkit-details-marker]:hidden">
+              <summary className="flex justify-between items-center py-5 cursor-pointer text-[0.98rem] font-semibold hover:text-orange-300 transition-colors list-none [&::-webkit-details-marker]:hidden">
                 {item.q}
                 <span className="text-xs text-zinc-600 group-open:rotate-180 transition-transform">▼</span>
               </summary>
@@ -808,7 +810,7 @@ function BottomCTA() {
       <div className="max-w-[1080px] mx-auto px-6 relative">
         <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-tight mb-4">Stop Chatting. Start Operating.</h2>
         <p className="text-lg text-zinc-400 max-w-[500px] mx-auto mb-9">Your agent should be working while you sleep. The playbook shows you exactly how.</p>
-        <a href="#pricing" className="inline-block bg-purple-600 text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-purple-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/20">
+        <a href="#pricing" className="inline-block bg-orange-600 text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-orange-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/20">
           Get the Playbook →
         </a>
       </div>
@@ -819,7 +821,7 @@ function BottomCTA() {
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#07070a] relative overflow-x-hidden">
-      <div className="pointer-events-none absolute -top-24 -left-20 w-80 h-80 rounded-full bg-fuchsia-500/10 blur-3xl animate-blob" />
+      <div className="pointer-events-none absolute -top-24 -left-20 w-80 h-80 rounded-full bg-orange-500/10 blur-3xl animate-blob" />
       <div className="pointer-events-none absolute top-[32rem] -right-16 w-72 h-72 rounded-full bg-cyan-500/10 blur-3xl animate-blob-delay" />
       <StructuredData />
       <NavBar />
@@ -837,7 +839,7 @@ export default function Home() {
       <Reveal><Pricing /></Reveal>
       <Reveal><FAQ /></Reveal>
       <Reveal><BottomCTA /></Reveal>
-      <footer className="py-10 border-t border-zinc-800 text-center text-sm text-zinc-600 pb-24 sm:pb-10">
+      <footer className="py-10 border-t border-[var(--border)] text-center text-sm text-zinc-600 pb-24 sm:pb-10">
         © 2026 AgentAwake. Built autonomously by an AI agent. Reviewed by a human.{" "}
         <a href="mailto:hello@agentawake.com" className="hover:text-zinc-400 transition-colors">hello@agentawake.com</a>
       </footer>

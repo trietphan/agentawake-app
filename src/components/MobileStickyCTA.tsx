@@ -9,7 +9,7 @@ export default function MobileStickyCTA() {
         <Link href="/free" className="flex-1 text-center py-3 rounded-xl border border-zinc-600 text-zinc-200 text-sm font-semibold">
           Free Chapter
         </Link>
-        <a href="#pricing" className="flex-1 text-center py-3 rounded-xl bg-gradient-to-r from-fuchsia-600 to-purple-500 text-white text-sm font-semibold shadow-lg shadow-fuchsia-500/20">
+        <a href="#pricing" className="flex-1 text-center py-3 rounded-xl bg-gradient-to-r from-orange-600 to-amber-500 text-white text-sm font-semibold shadow-lg shadow-orange-500/20">
           Get Playbook
         </a>
       </div>

@@ -28,15 +28,15 @@ export default function EmailCapture() {
 
   return (
     <section className="py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-fuchsia-500/[0.08] via-cyan-500/[0.05] to-transparent pointer-events-none" />
-      <div className="absolute -top-24 -left-16 w-72 h-72 rounded-full bg-fuchsia-500/20 blur-3xl animate-blob" />
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-500/[0.08] via-amber-500/[0.05] to-transparent pointer-events-none" />
+      <div className="absolute -top-24 -left-16 w-72 h-72 rounded-full bg-orange-500/20 blur-3xl animate-blob" />
       <div className="absolute -bottom-28 -right-10 w-80 h-80 rounded-full bg-cyan-500/20 blur-3xl animate-blob-delay" />
 
       <div className="max-w-[980px] mx-auto px-6 relative">
         <div className="rounded-3xl border border-zinc-700/60 bg-[#0f0f14]/85 backdrop-blur-xl p-8 md:p-12 shadow-[0_0_80px_rgba(139,92,246,0.12)]">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-fuchsia-300 mb-4 px-3 py-1.5 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 animate-fadeIn">
+              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-orange-300 mb-4 px-3 py-1.5 rounded-full border border-orange-400/30 bg-orange-500/10 animate-fadeIn">
                 Free Starter Kit
               </span>
               <h2 className="text-[clamp(2rem,4vw,2.8rem)] font-extrabold leading-tight tracking-tight mb-4">
@@ -66,11 +66,11 @@ export default function EmailCapture() {
                     name="email"
                     required
                     placeholder="your@email.com"
-                    className="w-full px-5 py-4 rounded-xl bg-[#15151d] border border-zinc-700 text-white placeholder:text-zinc-500 focus:outline-none focus:border-fuchsia-400/60 text-sm"
+                    className="w-full px-5 py-4 rounded-xl bg-[var(--surface)] border border-zinc-700 text-white placeholder:text-zinc-500 focus:outline-none focus:border-orange-400/60 text-sm"
                   />
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-fuchsia-600 to-purple-500 text-white px-7 py-4 rounded-xl text-sm font-semibold hover:from-fuchsia-500 hover:to-purple-400 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-fuchsia-500/25"
+                    className="w-full bg-gradient-to-r from-orange-600 to-amber-500 text-white px-7 py-4 rounded-xl text-sm font-semibold hover:from-orange-500 hover:to-amber-400 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/25"
                   >
                     Get Free Templates →
                   </button>

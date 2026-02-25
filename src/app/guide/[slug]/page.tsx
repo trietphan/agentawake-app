@@ -27,19 +27,19 @@ function LockedOverlay({ requiredTier }: { requiredTier: UserTier }) {
       </div>
       {/* Unlock CTA */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="rounded-2xl border border-purple-500/30 bg-[#0c0c10]/95 backdrop-blur-sm p-8 text-center max-w-md mx-4">
+        <div className="rounded-2xl border border-orange-500/30 bg-[var(--surface)]/95 backdrop-blur-sm p-8 text-center max-w-md mx-4">
           <div className="text-3xl mb-3">🔒</div>
           <h3 className="text-lg font-bold mb-2">
             Unlock with {requiredTier.charAt(0).toUpperCase() + requiredTier.slice(1)}
           </h3>
           <p className="text-sm text-zinc-400 mb-5">
-            This chapter requires the <strong className="text-purple-400">{requiredTier}</strong> tier
+            This chapter requires the <strong className="text-orange-400">{requiredTier}</strong> tier
             ({tierPrices[requiredTier] || ""}).
             Get instant access to this chapter and everything below it.
           </p>
           <Link
             href="/#pricing"
-            className="inline-block rounded-xl bg-purple-600 px-6 py-3 text-sm font-bold text-white hover:bg-purple-500 transition-colors"
+            className="inline-block rounded-xl bg-orange-600 px-6 py-3 text-sm font-bold text-white hover:bg-orange-500 transition-colors"
           >
             Upgrade to {requiredTier.charAt(0).toUpperCase() + requiredTier.slice(1)} →
           </Link>
@@ -71,7 +71,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
         <div className="flex items-center gap-3 mb-4">
           <span className="text-3xl">{chapter.emoji}</span>
           <div>
-            <div className="text-[0.65rem] font-bold uppercase tracking-widest text-purple-400">
+            <div className="text-[0.65rem] font-bold uppercase tracking-widest text-orange-400">
               Chapter {chapter.number} · {chapter.readTime} read
             </div>
           </div>
@@ -94,7 +94,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* Navigation */}
-      <div className="mt-16 flex items-center justify-between border-t border-zinc-800 pt-8">
+      <div className="mt-16 flex items-center justify-between border-t border-[var(--border)] pt-8">
         {prev ? (
           <Link href={`/guide/${prev.slug}`} className="group flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-300 transition-colors">
             <span>←</span>

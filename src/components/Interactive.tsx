@@ -35,7 +35,7 @@ export function Quiz({ question, options }: { question: string; options: QuizOpt
                       ? "border-red-500/40 bg-red-500/10 text-red-300"
                       : isCorrect
                         ? "border-green-500/20 bg-green-500/5 text-green-400/70"
-                        : "border-zinc-800 bg-zinc-900/30 text-zinc-600"
+                        : "border-[var(--border)] bg-zinc-900/30 text-zinc-600"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -121,7 +121,7 @@ export function Tip({ emoji, title, children }: { emoji: string; title: string; 
         <span className={`text-zinc-500 transition-transform ${open ? "rotate-180" : ""}`}>▼</span>
       </button>
       {open && (
-        <div className="px-4 pb-4 text-sm text-zinc-400 border-t border-zinc-800/50 pt-3">
+        <div className="px-4 pb-4 text-sm text-zinc-400 border-t border-[var(--border)]/50 pt-3">
           {children}
         </div>
       )}
@@ -294,11 +294,11 @@ export function BrainDiagram() {
     {
       emoji: "✨",
       name: "Tacit Knowledge",
-      color: "purple",
+      color: "orange",
       desc: "Your vibes. Voice, preferences, unwritten rules. The stuff that makes the agent feel like YOUR agent.",
-      classes: "border-purple-500/30 bg-purple-500/10",
-      activeClasses: "border-purple-500/60 bg-purple-500/20 scale-105",
-      textColor: "text-purple-400",
+      classes: "border-orange-500/30 bg-orange-500/10",
+      activeClasses: "border-orange-500/60 bg-orange-500/20 scale-105",
+      textColor: "text-orange-400",
     },
   ];
 
@@ -339,7 +339,7 @@ export function TrustSlider() {
     { name: "Observer", emoji: "👀", color: "text-blue-400", border: "border-blue-500/30", bg: "bg-blue-500/10", access: "Read files, web search, conversation only", risk: "None — pure read-only" },
     { name: "Assistant", emoji: "🤝", color: "text-green-400", border: "border-green-500/30", bg: "bg-green-500/10", access: "Write files, git, staging deploys, draft messages", risk: "Low — internal changes only" },
     { name: "Operator", emoji: "⚙️", color: "text-amber-400", border: "border-amber-500/30", bg: "bg-amber-500/10", access: "Production deploys, social posts (with review), email drafts", risk: "Medium — external with guardrails" },
-    { name: "Autonomous", emoji: "🚀", color: "text-purple-400", border: "border-purple-500/30", bg: "bg-purple-500/10", access: "Auto-posting, email send, payment processing", risk: "High — unsupervised external actions" },
+    { name: "Autonomous", emoji: "🚀", color: "text-orange-400", border: "border-orange-500/30", bg: "bg-orange-500/10", access: "Auto-posting, email send, payment processing", risk: "High — unsupervised external actions" },
     { name: "Partner", emoji: "👑", color: "text-pink-400", border: "border-pink-500/30", bg: "bg-pink-500/10", access: "Strategy execution, opportunity identification, full operations", risk: "Maximum — full autonomy" },
   ];
 
@@ -355,7 +355,7 @@ export function TrustSlider() {
           max={5}
           value={level}
           onChange={(e) => setLevel(Number(e.target.value))}
-          className="w-full accent-purple-500"
+          className="w-full accent-orange-500"
         />
         <div className="flex justify-between text-[10px] text-zinc-600 mt-1">
           <span>👀 Observer</span><span>🤝</span><span>⚙️</span><span>🚀</span><span>👑 Partner</span>
@@ -425,7 +425,7 @@ export function ArchitectureDiagram() {
       <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-4 text-center">🏗️ Agent Architecture Overview</div>
       <svg viewBox="0 0 400 280" className="w-full max-w-md mx-auto" fill="none">
         {/* You (CEO) */}
-        <rect x="150" y="10" width="100" height="40" rx="12" fill="#7c3aed" fillOpacity="0.15" stroke="#7c3aed" strokeOpacity="0.4" />
+        <rect x="150" y="10" width="100" height="40" rx="12" fill="#fb5607" fillOpacity="0.15" stroke="#fb5607" strokeOpacity="0.4" />
         <text x="200" y="35" textAnchor="middle" fill="#c4b5fd" fontSize="12" fontWeight="bold">👤 You (CEO)</text>
 
         {/* Arrow down */}

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 function EmailCapture() {
   return (
-    <div className="rounded-2xl border border-purple-500/30 bg-gradient-to-b from-purple-500/[0.06] to-[#111116] p-8 text-center">
+    <div className="rounded-2xl border border-orange-500/30 bg-gradient-to-b from-orange-500/[0.06] to-[#111116] p-8 text-center">
       <div className="text-2xl mb-2">📬</div>
       <h3 className="text-lg font-bold mb-2">Get the Full Architecture Guide Free</h3>
       <p className="text-sm text-zinc-400 mb-5 max-w-sm mx-auto">
@@ -24,11 +24,11 @@ function EmailCapture() {
         <input
           type="email"
           placeholder="you@example.com"
-          className="flex-1 rounded-xl bg-zinc-900 border border-zinc-700 px-4 py-3 text-sm text-zinc-200 placeholder:text-zinc-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/30"
+          className="flex-1 rounded-xl bg-zinc-900 border border-zinc-700 px-4 py-3 text-sm text-zinc-200 placeholder:text-zinc-600 focus:border-orange-500/50 focus:outline-none focus:ring-1 focus:ring-orange-500/30"
         />
         <button
           type="submit"
-          className="rounded-xl bg-purple-600 px-6 py-3 text-sm font-bold text-white hover:bg-purple-500 transition-all hover:-translate-y-0.5 shrink-0"
+          className="rounded-xl bg-orange-600 px-6 py-3 text-sm font-bold text-white hover:bg-orange-500 transition-all hover:-translate-y-0.5 shrink-0"
         >
           Send It →
         </button>
@@ -42,14 +42,14 @@ export default function FreePage() {
   return (
     <div className="min-h-screen bg-[#07070a] text-zinc-100">
       {/* Nav */}
-      <nav className="sticky top-0 z-50 bg-[#07070a]/90 backdrop-blur-xl border-b border-zinc-800/60">
+      <nav className="sticky top-0 z-50 bg-[#07070a]/90 backdrop-blur-xl border-b border-[var(--border)]/60">
         <div className="max-w-2xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link href="/" className="text-sm font-bold text-zinc-400 hover:text-zinc-200 transition-colors">
             ← AgentAwake
           </Link>
           <Link
             href="/#pricing"
-            className="rounded-lg bg-purple-600 px-4 py-2 text-sm font-bold text-white hover:bg-purple-500 transition-all"
+            className="rounded-lg bg-orange-600 px-4 py-2 text-sm font-bold text-white hover:bg-orange-500 transition-all"
           >
             Get Full Playbook
           </Link>
@@ -102,16 +102,16 @@ export default function FreePage() {
           <p>The fix isn't complex AI infrastructure. It's not RAG pipelines or vector databases. It's <strong>three files</strong> that your agent reads on startup:</p>
 
           <div className="my-6 space-y-3">
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+            <div className="rounded-xl border border-[var(--border)] bg-zinc-900/50 p-5">
               <div className="text-sm font-bold text-blue-400 mb-1">📚 File 1: Knowledge Base</div>
               <p className="text-sm text-zinc-400">Permanent stuff. Your projects, your clients, your tech stack, your business rules. The agent reads this like a new employee reads the company handbook. Once written, it barely changes.</p>
             </div>
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+            <div className="rounded-xl border border-[var(--border)] bg-zinc-900/50 p-5">
               <div className="text-sm font-bold text-green-400 mb-1">📝 File 2: Daily Notes</div>
               <p className="text-sm text-zinc-400">What happened today. Decisions made, tasks completed, blockers hit, things to follow up on. The agent reads yesterday's notes and picks up where it left off.</p>
             </div>
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
-              <div className="text-sm font-bold text-purple-400 mb-1">✨ File 3: Tacit Knowledge</div>
+            <div className="rounded-xl border border-[var(--border)] bg-zinc-900/50 p-5">
+              <div className="text-sm font-bold text-orange-400 mb-1">✨ File 3: Tacit Knowledge</div>
               <p className="text-sm text-zinc-400">The stuff that can't be Googled. "Boss hates tables." "Always explain the why." "Never deploy on Fridays." Lessons learned through experience.</p>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function FreePage() {
               { icon: "💻", name: "Cursor" },
               { icon: "🤖", name: "AutoGPT" },
             ].map((p) => (
-              <div key={p.name} className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/30 px-3 py-2.5 text-sm">
+              <div key={p.name} className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-zinc-900/30 px-3 py-2.5 text-sm">
                 <span>{p.icon}</span>
                 <span className="text-zinc-400">{p.name}</span>
               </div>
@@ -151,8 +151,8 @@ export default function FreePage() {
               { ch: "Ch 13-16", title: "Advanced orchestration", desc: "Multi-agent systems, bottleneck elimination, progressive trust" },
               { ch: "Ch 17-21", title: "Cost optimization & revenue", desc: "Spend $15/mo, earn $6K+/mo — with 7 proven revenue models" },
             ].map((item) => (
-              <div key={item.ch} className="flex gap-4 items-start rounded-xl border border-zinc-800/50 bg-zinc-900/20 px-4 py-3">
-                <span className="text-xs font-bold text-purple-400 bg-purple-500/10 px-2 py-1 rounded shrink-0 mt-0.5">{item.ch}</span>
+              <div key={item.ch} className="flex gap-4 items-start rounded-xl border border-[var(--border)]/50 bg-zinc-900/20 px-4 py-3">
+                <span className="text-xs font-bold text-orange-400 bg-orange-500/10 px-2 py-1 rounded shrink-0 mt-0.5">{item.ch}</span>
                 <div>
                   <div className="text-sm font-semibold text-zinc-200">{item.title}</div>
                   <div className="text-xs text-zinc-500">{item.desc}</div>
@@ -161,8 +161,8 @@ export default function FreePage() {
             ))}
           </div>
 
-          <div className="my-8 rounded-2xl border border-purple-500/20 bg-purple-500/5 p-5">
-            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-purple-300">
+          <div className="my-8 rounded-2xl border border-orange-500/20 bg-orange-500/5 p-5">
+            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-orange-300">
               <span className="text-lg">🤯</span> The meta part
             </div>
             <div className="text-sm leading-relaxed text-zinc-300">
@@ -182,7 +182,7 @@ export default function FreePage() {
           <p className="text-zinc-400 mb-6">22 interactive chapters. 8 platforms. Real code. Starting at $9.</p>
           <Link
             href="/#pricing"
-            className="inline-block bg-purple-600 text-white px-9 py-4 rounded-xl text-base font-bold hover:bg-purple-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/20"
+            className="inline-block bg-orange-600 text-white px-9 py-4 rounded-xl text-base font-bold hover:bg-orange-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/20"
           >
             Get the Full Playbook →
           </Link>
@@ -190,7 +190,7 @@ export default function FreePage() {
         </div>
       </article>
 
-      <footer className="py-8 border-t border-zinc-800 text-center text-xs text-zinc-600">
+      <footer className="py-8 border-t border-[var(--border)] text-center text-xs text-zinc-600">
         © 2026 AgentAwake · Built by an AI agent · <Link href="/" className="hover:text-zinc-400">Home</Link>
       </footer>
     </div>
