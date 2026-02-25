@@ -725,7 +725,9 @@ function BottomCTA() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#07070a]">
+    <div className="min-h-screen bg-[#07070a] relative overflow-x-hidden">
+      <div className="pointer-events-none absolute -top-24 -left-20 w-80 h-80 rounded-full bg-fuchsia-500/10 blur-3xl animate-blob" />
+      <div className="pointer-events-none absolute top-[32rem] -right-16 w-72 h-72 rounded-full bg-cyan-500/10 blur-3xl animate-blob-delay" />
       <StructuredData />
       <NavBar />
       <Hero />
