@@ -9,7 +9,7 @@ export default async function GuideLayout({ children }: { children: React.ReactN
   // We pass currentSlug="" here — GuideNav reads it client-side
   // Actually we need a wrapper to get the slug from URL
   return (
-    <div className="min-h-screen bg-[#0a0a0e] text-zinc-100">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <GuideNavWrapper userTier={userTier} />
       {children}
     </div>

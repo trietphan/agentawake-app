@@ -21,10 +21,10 @@ interface GuideNavProps {
 
 const tierLevel: Record<string, number> = { free: 0, blueprint: 1, pro: 2, accelerator: 3 };
 const tierColors: Record<string, string> = {
-  free: "text-zinc-400",
-  blueprint: "text-orange-400",
+  free: "text-[var(--text-secondary)]",
+  blueprint: "text-[var(--accent-light)]",
   pro: "text-blue-400",
-  accelerator: "text-amber-400",
+  accelerator: "text-[var(--accent-light)]",
 };
 
 export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavProps) {
@@ -44,10 +44,10 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
             onClick={() => setOpen(false)}
             className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${
               active
-                ? "bg-orange-500/15 text-orange-300 font-medium"
+                ? "bg-[var(--accent)]/15 text-[var(--accent-light)] font-medium"
                 : locked
-                  ? "text-zinc-600 hover:text-zinc-500"
-                  : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50"
+                  ? "text-[var(--text-tertiary)] hover:text-[var(--text-tertiary)]"
+                  : "text-[var(--text-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)]/50"
             }`}
           >
             <span className="text-lg shrink-0">{locked ? "🔒" : ch.emoji}</span>
@@ -55,7 +55,7 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
               <div className={`truncate ${active ? "" : ""}`}>
                 {ch.number}. {ch.title}
               </div>
-              <div className={`text-xs mt-0.5 ${tierColors[ch.requiredTier] || "text-zinc-500"}`}>
+              <div className={`text-xs mt-0.5 ${tierColors[ch.requiredTier] || "text-[var(--text-tertiary)]"}`}>
                 {ch.readTime} · {ch.requiredTier}
               </div>
             </div>
@@ -68,9 +68,9 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
   return (
     <>
       {/* Sticky top bar */}
-      <div className="sticky top-0 z-50 border-b border-[var(--border)]/80 bg-[#0a0a0e]/95 backdrop-blur-md">
+      <div className="sticky top-0 z-50 border-b border-[var(--border)]/80 bg-[var(--background)]/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="text-sm font-bold text-zinc-400 hover:text-zinc-200 transition-colors">
+          <Link href="/" className="text-sm font-bold text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">
             ← AgentAwake
           </Link>
           <div className="flex items-center gap-2">
@@ -78,7 +78,7 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
           {/* Hamburger: only on smaller screens */}
           <button
             onClick={() => setOpen(true)}
-            className="flex xl:hidden items-center gap-2 rounded-lg bg-zinc-800/60 px-3 py-1.5 text-sm text-zinc-300 hover:bg-zinc-700/60 transition-colors"
+            className="flex xl:hidden items-center gap-2 rounded-lg bg-[var(--surface-hover)]/60 px-3 py-1.5 text-sm text-[var(--foreground)]/80 hover:bg-zinc-700/60 transition-colors"
           >
             <span className="text-base">☰</span>
             <span className="hidden sm:inline">Chapters</span>
@@ -88,15 +88,15 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
       </div>
 
       {/* Desktop persistent sidebar (xl+) */}
-      <aside className="hidden xl:block fixed top-[53px] left-0 w-72 h-[calc(100vh-53px)] border-r border-[var(--border)]/60 bg-[#0a0a0e] overflow-y-auto z-40">
+      <aside className="hidden xl:block fixed top-[53px] left-0 w-72 h-[calc(100vh-53px)] border-r border-[var(--border)]/60 bg-[var(--background)] overflow-y-auto z-40">
         <div className="px-4 pt-5 pb-2">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-600">📖 Chapters</h2>
+          <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--text-tertiary)]">📖 Chapters</h2>
         </div>
         {navContent}
         <div className="p-4 border-t border-[var(--border)]">
           <Link
             href="/#pricing"
-            className="block w-full text-center rounded-xl bg-orange-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-orange-500 transition-colors"
+            className="block w-full text-center rounded-xl bg-[var(--accent-muted)] px-4 py-2.5 text-sm font-bold text-white hover:bg-[var(--accent)] transition-colors"
           >
             Unlock All Chapters →
           </Link>
@@ -112,10 +112,10 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
           {/* Drawer */}
           <div className="relative ml-auto w-full max-w-sm bg-[var(--surface)] border-l border-[var(--border)] overflow-y-auto animate-slide-in">
             <div className="sticky top-0 flex items-center justify-between border-b border-[var(--border)] bg-[var(--surface)] px-5 py-4">
-              <h2 className="text-base font-bold text-zinc-100">📖 Chapters</h2>
+              <h2 className="text-base font-bold text-[var(--foreground)]">📖 Chapters</h2>
               <button
                 onClick={() => setOpen(false)}
-                className="rounded-lg p-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                className="rounded-lg p-1.5 text-[var(--text-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)] transition-colors"
               >
                 ✕
               </button>
@@ -127,7 +127,7 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
               <Link
                 href="/#pricing"
                 onClick={() => setOpen(false)}
-                className="block w-full text-center rounded-xl bg-orange-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-orange-500 transition-colors"
+                className="block w-full text-center rounded-xl bg-[var(--accent-muted)] px-4 py-2.5 text-sm font-bold text-white hover:bg-[var(--accent)] transition-colors"
               >
                 Unlock All Chapters →
               </Link>

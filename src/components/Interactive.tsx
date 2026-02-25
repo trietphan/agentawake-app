@@ -15,7 +15,7 @@ export function Quiz({ question, options }: { question: string; options: QuizOpt
   return (
     <div className="my-6 rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-5">
       <div className="mb-1 text-xs font-bold uppercase tracking-wider text-indigo-400">🧠 Quick Check</div>
-      <div className="text-sm font-semibold text-zinc-200 mb-4">{question}</div>
+      <div className="text-sm font-semibold text-[var(--foreground)] mb-4">{question}</div>
       <div className="space-y-2">
         {options.map((opt, i) => {
           const isSelected = selected === i;
@@ -28,14 +28,14 @@ export function Quiz({ question, options }: { question: string; options: QuizOpt
               disabled={selected !== null}
               className={`w-full text-left rounded-xl px-4 py-3 text-sm transition-all border ${
                 !showResult
-                  ? "border-zinc-700 bg-zinc-900/50 text-zinc-300 hover:border-indigo-500/40 hover:bg-indigo-500/10 cursor-pointer"
+                  ? "border-[var(--border)] bg-[var(--surface-hover)]/50 text-[var(--foreground)]/80 hover:border-indigo-500/40 hover:bg-indigo-500/10 cursor-pointer"
                   : isSelected && isCorrect
                     ? "border-green-500/40 bg-green-500/10 text-green-300"
                     : isSelected && !isCorrect
                       ? "border-red-500/40 bg-red-500/10 text-red-300"
                       : isCorrect
                         ? "border-green-500/20 bg-green-500/5 text-green-400/70"
-                        : "border-[var(--border)] bg-zinc-900/30 text-zinc-600"
+                        : "border-[var(--border)] bg-[var(--surface-hover)]/30 text-[var(--text-tertiary)]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -71,10 +71,10 @@ export function Checklist({ title, items }: { title: string; items: string[] }) 
     <div className="my-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
       <div className="flex items-center justify-between mb-3">
         <div className="text-sm font-bold text-emerald-400">✅ {title}</div>
-        <div className="text-xs text-zinc-500">{progress}/{items.length} complete</div>
+        <div className="text-xs text-[var(--text-tertiary)]">{progress}/{items.length} complete</div>
       </div>
       {/* Progress bar */}
-      <div className="h-1.5 rounded-full bg-zinc-800 mb-4 overflow-hidden">
+      <div className="h-1.5 rounded-full bg-[var(--surface-hover)] mb-4 overflow-hidden">
         <div
           className="h-full rounded-full bg-emerald-500 transition-all duration-500"
           style={{ width: `${(progress / items.length) * 100}%` }}
@@ -92,7 +92,7 @@ export function Checklist({ title, items }: { title: string; items: string[] }) 
             className={`w-full flex items-start gap-3 rounded-xl px-3 py-2.5 text-sm text-left transition-all ${
               checked[i]
                 ? "bg-emerald-500/10 text-emerald-300 line-through opacity-70"
-                : "bg-zinc-900/30 text-zinc-300 hover:bg-zinc-800/50"
+                : "bg-[var(--surface-hover)]/30 text-[var(--foreground)]/80 hover:bg-[var(--surface-hover)]/50"
             }`}
           >
             <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded border border-current flex items-center justify-center text-xs">
@@ -111,17 +111,17 @@ export function Tip({ emoji, title, children }: { emoji: string; title: string; 
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="my-4 rounded-xl border border-zinc-700/50 bg-zinc-900/30 overflow-hidden">
+    <div className="my-4 rounded-xl border border-[var(--border)]/50 bg-[var(--surface-hover)]/30 overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-3 px-4 py-3 text-sm text-left hover:bg-zinc-800/30 transition-colors"
+        className="w-full flex items-center gap-3 px-4 py-3 text-sm text-left hover:bg-[var(--surface-hover)]/30 transition-colors"
       >
         <span className="text-lg">{emoji}</span>
-        <span className="font-medium text-zinc-200 flex-1">{title}</span>
-        <span className={`text-zinc-500 transition-transform ${open ? "rotate-180" : ""}`}>▼</span>
+        <span className="font-medium text-[var(--foreground)] flex-1">{title}</span>
+        <span className={`text-[var(--text-tertiary)] transition-transform ${open ? "rotate-180" : ""}`}>▼</span>
       </button>
       {open && (
-        <div className="px-4 pb-4 text-sm text-zinc-400 border-t border-[var(--border)]/50 pt-3">
+        <div className="px-4 pb-4 text-sm text-[var(--text-secondary)] border-t border-[var(--border)]/50 pt-3">
           {children}
         </div>
       )}
@@ -146,26 +146,26 @@ export function CostCalculator() {
   const monthlyCost = dailyCost * 30;
 
   return (
-    <div className="my-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
-      <div className="mb-1 text-xs font-bold uppercase tracking-wider text-amber-400">💸 Cost Calculator</div>
-      <div className="text-sm text-zinc-400 mb-4">Estimate your monthly AI agent costs</div>
+    <div className="my-6 rounded-2xl border border-[var(--accent-light)]/15 bg-[var(--accent-light)]/4 p-5">
+      <div className="mb-1 text-xs font-bold uppercase tracking-wider text-[var(--accent-light)]">💸 Cost Calculator</div>
+      <div className="text-sm text-[var(--text-secondary)] mb-4">Estimate your monthly AI agent costs</div>
 
       <div className="space-y-4">
         <div>
-          <label className="text-xs text-zinc-500 block mb-1.5">Tasks per day: <strong className="text-zinc-300">{tasks}</strong></label>
+          <label className="text-xs text-[var(--text-tertiary)] block mb-1.5">Tasks per day: <strong className="text-[var(--foreground)]/80">{tasks}</strong></label>
           <input
             type="range"
             min={1}
             max={50}
             value={tasks}
             onChange={(e) => setTasks(Number(e.target.value))}
-            className="w-full accent-amber-500"
+            className="w-full accent-[var(--accent)]"
           />
-          <div className="flex justify-between text-[10px] text-zinc-600"><span>1</span><span>50</span></div>
+          <div className="flex justify-between text-[10px] text-[var(--text-tertiary)]"><span>1</span><span>50</span></div>
         </div>
 
         <div>
-          <label className="text-xs text-zinc-500 block mb-1.5">Tokens per task: <strong className="text-zinc-300">{tokensPerTask.toLocaleString()}</strong></label>
+          <label className="text-xs text-[var(--text-tertiary)] block mb-1.5">Tokens per task: <strong className="text-[var(--foreground)]/80">{tokensPerTask.toLocaleString()}</strong></label>
           <input
             type="range"
             min={500}
@@ -173,13 +173,13 @@ export function CostCalculator() {
             step={500}
             value={tokensPerTask}
             onChange={(e) => setTokensPerTask(Number(e.target.value))}
-            className="w-full accent-amber-500"
+            className="w-full accent-[var(--accent)]"
           />
-          <div className="flex justify-between text-[10px] text-zinc-600"><span>500</span><span>10,000</span></div>
+          <div className="flex justify-between text-[10px] text-[var(--text-tertiary)]"><span>500</span><span>10,000</span></div>
         </div>
 
         <div>
-          <label className="text-xs text-zinc-500 block mb-1.5">Model tier</label>
+          <label className="text-xs text-[var(--text-tertiary)] block mb-1.5">Model tier</label>
           <div className="grid grid-cols-3 gap-2">
             {(["cheap", "balanced", "expert"] as const).map((tier) => (
               <button
@@ -187,25 +187,25 @@ export function CostCalculator() {
                 onClick={() => setModel(tier)}
                 className={`rounded-lg px-3 py-2 text-xs font-medium transition-all border ${
                   model === tier
-                    ? "border-amber-500/40 bg-amber-500/15 text-amber-300"
-                    : "border-zinc-700 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600"
+                    ? "border-[var(--accent-light)]/30 bg-[var(--accent-light)]/10 text-[var(--accent-light)]"
+                    : "border-[var(--border)] bg-[var(--surface-hover)]/50 text-[var(--text-secondary)] hover:border-[var(--border-hover)]"
                 }`}
               >
                 {tier === "cheap" ? "💚 Cheap" : tier === "balanced" ? "💙 Balanced" : "💜 Expert"}
               </button>
             ))}
           </div>
-          <div className="text-[10px] text-zinc-600 mt-1">{rate.name}</div>
+          <div className="text-[10px] text-[var(--text-tertiary)] mt-1">{rate.name}</div>
         </div>
 
-        <div className="rounded-xl bg-zinc-900/60 border border-zinc-700/50 p-4 mt-2">
+        <div className="rounded-xl bg-[var(--surface)]/60 border border-[var(--border)]/50 p-4 mt-2">
           <div className="flex justify-between text-sm mb-1">
-            <span className="text-zinc-400">Daily cost</span>
-            <span className="font-bold text-zinc-200">${dailyCost.toFixed(3)}</span>
+            <span className="text-[var(--text-secondary)]">Daily cost</span>
+            <span className="font-bold text-[var(--foreground)]">${dailyCost.toFixed(3)}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-zinc-400">Monthly cost</span>
-            <span className="font-bold text-lg text-amber-400">${monthlyCost.toFixed(2)}</span>
+            <span className="text-[var(--text-secondary)]">Monthly cost</span>
+            <span className="font-bold text-lg text-[var(--accent-light)]">${monthlyCost.toFixed(2)}</span>
           </div>
         </div>
       </div>
@@ -221,7 +221,7 @@ export function BeforeAfter({ before, after }: { before: { title: string; items:
         <div className="text-xs font-bold text-red-400 mb-3">❌ {before.title}</div>
         <ul className="space-y-2">
           {before.items.map((item, i) => (
-            <li key={i} className="flex gap-2 text-xs text-zinc-400">
+            <li key={i} className="flex gap-2 text-xs text-[var(--text-secondary)]">
               <span className="text-red-500/60 shrink-0">✗</span>
               <span>{item}</span>
             </li>
@@ -232,7 +232,7 @@ export function BeforeAfter({ before, after }: { before: { title: string; items:
         <div className="text-xs font-bold text-green-400 mb-3">✅ {after.title}</div>
         <ul className="space-y-2">
           {after.items.map((item, i) => (
-            <li key={i} className="flex gap-2 text-xs text-zinc-400">
+            <li key={i} className="flex gap-2 text-xs text-[var(--text-secondary)]">
               <span className="text-green-500/60 shrink-0">✓</span>
               <span>{item}</span>
             </li>
@@ -250,16 +250,16 @@ export function FlowDiagram({ steps }: { steps: { emoji: string; label: string; 
       {steps.map((step, i) => (
         <React.Fragment key={i}>
           <div className="relative w-full max-w-xs">
-            <div className="rounded-xl border border-zinc-700/50 bg-zinc-900/50 p-4 text-center">
+            <div className="rounded-xl border border-[var(--border)]/50 bg-[var(--surface-hover)]/50 p-4 text-center">
               <div className="text-2xl mb-1">{step.emoji}</div>
-              <div className="text-sm font-semibold text-zinc-200">{step.label}</div>
-              {step.detail && <div className="text-xs text-zinc-500 mt-1">{step.detail}</div>}
+              <div className="text-sm font-semibold text-[var(--foreground)]">{step.label}</div>
+              {step.detail && <div className="text-xs text-[var(--text-tertiary)] mt-1">{step.detail}</div>}
             </div>
           </div>
           {i < steps.length - 1 && (
             <div className="flex flex-col items-center py-1">
               <div className="w-px h-4 bg-zinc-700" />
-              <div className="text-zinc-600 text-xs">▼</div>
+              <div className="text-[var(--text-tertiary)] text-xs">▼</div>
             </div>
           )}
         </React.Fragment>
@@ -296,15 +296,15 @@ export function BrainDiagram() {
       name: "Tacit Knowledge",
       color: "orange",
       desc: "Your vibes. Voice, preferences, unwritten rules. The stuff that makes the agent feel like YOUR agent.",
-      classes: "border-orange-500/30 bg-orange-500/10",
-      activeClasses: "border-orange-500/60 bg-orange-500/20 scale-105",
-      textColor: "text-orange-400",
+      classes: "border-[var(--accent)]/20 bg-[var(--accent)]/10",
+      activeClasses: "border-[var(--accent)]/60 bg-[var(--accent)]/20 scale-105",
+      textColor: "text-[var(--accent-light)]",
     },
   ];
 
   return (
-    <div className="my-6 rounded-2xl border border-zinc-700/30 bg-zinc-900/20 p-6">
-      <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-4 text-center">🧠 The Three-Layer Brain — Click to explore</div>
+    <div className="my-6 rounded-2xl border border-[var(--border)]/30 bg-[var(--surface-hover)]/20 p-6">
+      <div className="text-xs font-bold uppercase tracking-wider text-[var(--text-tertiary)] mb-4 text-center">🧠 The Three-Layer Brain — Click to explore</div>
       <div className="space-y-3">
         {layers.map((layer, i) => (
           <button
@@ -319,7 +319,7 @@ export function BrainDiagram() {
               <div className="flex-1">
                 <div className={`text-sm font-bold ${layer.textColor}`}>{layer.name}</div>
                 {active === i && (
-                  <div className="text-xs text-zinc-300 mt-1 animate-fadeIn">{layer.desc}</div>
+                  <div className="text-xs text-[var(--foreground)]/80 mt-1 animate-fadeIn">{layer.desc}</div>
                 )}
               </div>
               <span className={`text-xs ${layer.textColor} transition-transform ${active === i ? "rotate-180" : ""}`}>▼</span>
@@ -338,16 +338,16 @@ export function TrustSlider() {
   const levels = [
     { name: "Observer", emoji: "👀", color: "text-blue-400", border: "border-blue-500/30", bg: "bg-blue-500/10", access: "Read files, web search, conversation only", risk: "None — pure read-only" },
     { name: "Assistant", emoji: "🤝", color: "text-green-400", border: "border-green-500/30", bg: "bg-green-500/10", access: "Write files, git, staging deploys, draft messages", risk: "Low — internal changes only" },
-    { name: "Operator", emoji: "⚙️", color: "text-amber-400", border: "border-amber-500/30", bg: "bg-amber-500/10", access: "Production deploys, social posts (with review), email drafts", risk: "Medium — external with guardrails" },
-    { name: "Autonomous", emoji: "🚀", color: "text-orange-400", border: "border-orange-500/30", bg: "bg-orange-500/10", access: "Auto-posting, email send, payment processing", risk: "High — unsupervised external actions" },
+    { name: "Operator", emoji: "⚙️", color: "text-[var(--accent-light)]", border: "border-[var(--accent-light)]/20", bg: "bg-[var(--accent-light)]/8", access: "Production deploys, social posts (with review), email drafts", risk: "Medium — external with guardrails" },
+    { name: "Autonomous", emoji: "🚀", color: "text-[var(--accent-light)]", border: "border-[var(--accent)]/20", bg: "bg-[var(--accent)]/10", access: "Auto-posting, email send, payment processing", risk: "High — unsupervised external actions" },
     { name: "Partner", emoji: "👑", color: "text-pink-400", border: "border-pink-500/30", bg: "bg-pink-500/10", access: "Strategy execution, opportunity identification, full operations", risk: "Maximum — full autonomy" },
   ];
 
   const l = levels[level - 1];
 
   return (
-    <div className="my-6 rounded-2xl border border-zinc-700/30 bg-zinc-900/20 p-6">
-      <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-4 text-center">🪜 Trust Level Explorer — Slide to preview</div>
+    <div className="my-6 rounded-2xl border border-[var(--border)]/30 bg-[var(--surface-hover)]/20 p-6">
+      <div className="text-xs font-bold uppercase tracking-wider text-[var(--text-tertiary)] mb-4 text-center">🪜 Trust Level Explorer — Slide to preview</div>
       <div className="mb-4">
         <input
           type="range"
@@ -355,9 +355,9 @@ export function TrustSlider() {
           max={5}
           value={level}
           onChange={(e) => setLevel(Number(e.target.value))}
-          className="w-full accent-orange-500"
+          className="w-full accent-[var(--accent)]"
         />
-        <div className="flex justify-between text-[10px] text-zinc-600 mt-1">
+        <div className="flex justify-between text-[10px] text-[var(--text-tertiary)] mt-1">
           <span>👀 Observer</span><span>🤝</span><span>⚙️</span><span>🚀</span><span>👑 Partner</span>
         </div>
       </div>
@@ -368,9 +368,9 @@ export function TrustSlider() {
             <div className={`text-lg font-bold ${l.color}`}>Level {level}: {l.name}</div>
           </div>
         </div>
-        <div className="space-y-2 text-xs text-zinc-400">
-          <div><strong className="text-zinc-300">Access:</strong> {l.access}</div>
-          <div><strong className="text-zinc-300">Risk level:</strong> {l.risk}</div>
+        <div className="space-y-2 text-xs text-[var(--text-secondary)]">
+          <div><strong className="text-[var(--foreground)]/80">Access:</strong> {l.access}</div>
+          <div><strong className="text-[var(--foreground)]/80">Risk level:</strong> {l.risk}</div>
         </div>
       </div>
     </div>
@@ -391,27 +391,27 @@ export function ROICalculator() {
   return (
     <div className="my-6 rounded-2xl border border-green-500/20 bg-green-500/5 p-5">
       <div className="mb-1 text-xs font-bold uppercase tracking-wider text-green-400">📈 ROI Calculator</div>
-      <div className="text-sm text-zinc-400 mb-4">See what an AI agent saves you</div>
+      <div className="text-sm text-[var(--text-secondary)] mb-4">See what an AI agent saves you</div>
 
       <div className="space-y-4">
         <div>
-          <label className="text-xs text-zinc-500 block mb-1.5">Hours/week on repetitive tasks: <strong className="text-zinc-300">{hours}h</strong></label>
+          <label className="text-xs text-[var(--text-tertiary)] block mb-1.5">Hours/week on repetitive tasks: <strong className="text-[var(--foreground)]/80">{hours}h</strong></label>
           <input type="range" min={1} max={40} value={hours} onChange={(e) => setHours(Number(e.target.value))} className="w-full accent-green-500" />
         </div>
         <div>
-          <label className="text-xs text-zinc-500 block mb-1.5">Your hourly value: <strong className="text-zinc-300">${rate}/h</strong></label>
+          <label className="text-xs text-[var(--text-tertiary)] block mb-1.5">Your hourly value: <strong className="text-[var(--foreground)]/80">${rate}/h</strong></label>
           <input type="range" min={15} max={200} step={5} value={rate} onChange={(e) => setRate(Number(e.target.value))} className="w-full accent-green-500" />
         </div>
         <div>
-          <label className="text-xs text-zinc-500 block mb-1.5">% automatable with agent: <strong className="text-zinc-300">{automation}%</strong></label>
+          <label className="text-xs text-[var(--text-tertiary)] block mb-1.5">% automatable with agent: <strong className="text-[var(--foreground)]/80">{automation}%</strong></label>
           <input type="range" min={10} max={90} step={5} value={automation} onChange={(e) => setAutomation(Number(e.target.value))} className="w-full accent-green-500" />
         </div>
 
-        <div className="rounded-xl bg-zinc-900/60 border border-zinc-700/50 p-4 space-y-2">
-          <div className="flex justify-between text-sm"><span className="text-zinc-400">Hours saved/week</span><span className="font-bold text-zinc-200">{timeSaved.toFixed(1)}h</span></div>
-          <div className="flex justify-between text-sm"><span className="text-zinc-400">Value saved/month</span><span className="font-bold text-zinc-200">${moneySaved.toFixed(0)}</span></div>
-          <div className="flex justify-between text-sm"><span className="text-zinc-400">Agent cost/month</span><span className="text-red-400">-${agentCost}</span></div>
-          <div className="flex justify-between text-sm border-t border-zinc-700 pt-2"><span className="text-zinc-400">ROI</span><span className="font-bold text-lg text-green-400">{roi.toFixed(0)}%</span></div>
+        <div className="rounded-xl bg-[var(--surface)]/60 border border-[var(--border)]/50 p-4 space-y-2">
+          <div className="flex justify-between text-sm"><span className="text-[var(--text-secondary)]">Hours saved/week</span><span className="font-bold text-[var(--foreground)]">{timeSaved.toFixed(1)}h</span></div>
+          <div className="flex justify-between text-sm"><span className="text-[var(--text-secondary)]">Value saved/month</span><span className="font-bold text-[var(--foreground)]">${moneySaved.toFixed(0)}</span></div>
+          <div className="flex justify-between text-sm"><span className="text-[var(--text-secondary)]">Agent cost/month</span><span className="text-red-400">-${agentCost}</span></div>
+          <div className="flex justify-between text-sm border-t border-[var(--border)] pt-2"><span className="text-[var(--text-secondary)]">ROI</span><span className="font-bold text-lg text-green-400">{roi.toFixed(0)}%</span></div>
         </div>
       </div>
     </div>
@@ -421,8 +421,8 @@ export function ROICalculator() {
 // ─── Architecture Diagram (SVG) ─────────────────────────────
 export function ArchitectureDiagram() {
   return (
-    <div className="my-6 rounded-2xl border border-zinc-700/30 bg-zinc-900/20 p-6">
-      <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-4 text-center">🏗️ Agent Architecture Overview</div>
+    <div className="my-6 rounded-2xl border border-[var(--border)]/30 bg-[var(--surface-hover)]/20 p-6">
+      <div className="text-xs font-bold uppercase tracking-wider text-[var(--text-tertiary)] mb-4 text-center">🏗️ Agent Architecture Overview</div>
       <svg viewBox="0 0 400 280" className="w-full max-w-md mx-auto" fill="none">
         {/* You (CEO) */}
         <rect x="150" y="10" width="100" height="40" rx="12" fill="#fb5607" fillOpacity="0.15" stroke="#fb5607" strokeOpacity="0.4" />
@@ -489,25 +489,25 @@ export function AgentThinking({ steps }: { steps: string[] }) {
   }, [visibleSteps, steps.length]);
 
   return (
-    <div className="my-6 rounded-xl border border-zinc-700/50 bg-[#0d1117] p-4 font-mono text-xs">
-      <div className="flex items-center gap-2 text-zinc-500 mb-3">
+    <div className="my-6 rounded-xl border border-[var(--border)]/50 bg-[#0d1117] p-4 font-mono text-xs">
+      <div className="flex items-center gap-2 text-[var(--text-tertiary)] mb-3">
         <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse" />
         Agent thinking...
       </div>
       <div className="space-y-1.5">
         {steps.slice(0, visibleSteps).map((step, i) => (
           <div key={i} className="text-emerald-400/80 animate-fadeIn">
-            <span className="text-zinc-600 mr-2">{i + 1}.</span> {step}
+            <span className="text-[var(--text-tertiary)] mr-2">{i + 1}.</span> {step}
           </div>
         ))}
         {visibleSteps < steps.length && (
-          <div className="text-zinc-600 animate-pulse">▊</div>
+          <div className="text-[var(--text-tertiary)] animate-pulse">▊</div>
         )}
       </div>
       {visibleSteps >= steps.length && (
         <button
           onClick={() => setVisibleSteps(0)}
-          className="mt-3 text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
+          className="mt-3 text-xs text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
         >
           ↻ Replay
         </button>

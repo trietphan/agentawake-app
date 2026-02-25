@@ -14,42 +14,42 @@ export const metadata: Metadata = {
 
 function EmailCapture() {
   return (
-    <div className="rounded-2xl border border-orange-500/30 bg-gradient-to-b from-orange-500/[0.06] to-[#111116] p-8 text-center">
+    <div className="rounded-2xl border border-[var(--accent)]/20 bg-gradient-to-b from-[var(--accent)]/[0.04] to-[var(--surface)] p-8 text-center">
       <div className="text-2xl mb-2">📬</div>
       <h3 className="text-lg font-bold mb-2">Get the Full Architecture Guide Free</h3>
-      <p className="text-sm text-zinc-400 mb-5 max-w-sm mx-auto">
+      <p className="text-sm text-[var(--text-secondary)] mb-5 max-w-sm mx-auto">
         Join 0→1 builders getting the memory architecture cheat sheet + weekly agent techniques. No spam, unsubscribe anytime.
       </p>
       <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
         <input
           type="email"
           placeholder="you@example.com"
-          className="flex-1 rounded-xl bg-zinc-900 border border-zinc-700 px-4 py-3 text-sm text-zinc-200 placeholder:text-zinc-600 focus:border-orange-500/50 focus:outline-none focus:ring-1 focus:ring-orange-500/30"
+          className="flex-1 rounded-xl bg-[var(--surface)] border border-[var(--border)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--accent)]/50 focus:outline-none focus:ring-1 focus:ring-[var(--accent)]/30"
         />
         <button
           type="submit"
-          className="rounded-xl bg-orange-600 px-6 py-3 text-sm font-bold text-white hover:bg-orange-500 transition-all hover:-translate-y-0.5 shrink-0"
+          className="rounded-xl bg-[var(--accent-muted)] px-6 py-3 text-sm font-bold text-white hover:bg-[var(--accent)] transition-all hover:-translate-y-0.5 shrink-0"
         >
           Send It →
         </button>
       </form>
-      <p className="text-[10px] text-zinc-600 mt-3">No credit card required · Works with any AI platform</p>
+      <p className="text-[10px] text-[var(--text-tertiary)] mt-3">No credit card required · Works with any AI platform</p>
     </div>
   );
 }
 
 export default function FreePage() {
   return (
-    <div className="min-h-screen bg-[#07070a] text-zinc-100">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* Nav */}
-      <nav className="sticky top-0 z-50 bg-[#07070a]/90 backdrop-blur-xl border-b border-[var(--border)]/60">
+      <nav className="sticky top-0 z-50 bg-[var(--background)]/90 backdrop-blur-xl border-b border-[var(--border)]/60">
         <div className="max-w-2xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="text-sm font-bold text-zinc-400 hover:text-zinc-200 transition-colors">
+          <Link href="/" className="text-sm font-bold text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">
             ← AgentAwake
           </Link>
           <Link
             href="/#pricing"
-            className="rounded-lg bg-orange-600 px-4 py-2 text-sm font-bold text-white hover:bg-orange-500 transition-all"
+            className="rounded-lg bg-[var(--accent-muted)] px-4 py-2 text-sm font-bold text-white hover:bg-[var(--accent)] transition-all"
           >
             Get Full Playbook
           </Link>
@@ -63,12 +63,12 @@ export default function FreePage() {
             ✨ FREE CHAPTER — No signup required
           </div>
           <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight mb-4">
-            Why Your AI Agent Has Amnesia <span className="text-zinc-500">(And the 3-File Fix)</span>
+            Why Your AI Agent Has Amnesia <span className="text-[var(--text-tertiary)]">(And the 3-File Fix)</span>
           </h1>
-          <p className="text-lg text-zinc-400 leading-relaxed">
+          <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
             You gave ChatGPT or Claude a complex task. It was brilliant. You came back the next day — and it had no idea who you were. Here's exactly why, and how to fix it in 45 minutes.
           </p>
-          <div className="flex items-center gap-4 mt-4 text-xs text-zinc-600">
+          <div className="flex items-center gap-4 mt-4 text-xs text-[var(--text-tertiary)]">
             <span>📖 4 min read</span>
             <span>·</span>
             <span>🔓 100% Free</span>
@@ -78,7 +78,7 @@ export default function FreePage() {
         </div>
 
         {/* Content */}
-        <div className="prose-custom space-y-5 text-[0.95rem] leading-relaxed text-zinc-300 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-zinc-100 [&_h2]:mt-10 [&_h2]:mb-4 [&_strong]:text-zinc-100">
+        <div className="prose-custom space-y-5 text-[0.95rem] leading-relaxed text-[var(--foreground)]/80 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[var(--foreground)] [&_h2]:mt-10 [&_h2]:mb-4 [&_strong]:text-[var(--foreground)]">
 
           <p>Let's be honest. You downloaded ChatGPT, Claude, or some shiny AI agent tool. You had a <strong>magical</strong> first conversation. It felt like the future. Then you came back the next day and it said:</p>
 
@@ -90,9 +90,9 @@ export default function FreePage() {
 
           <p>Gone. All of it. Every conversation starts from absolute zero.</p>
 
-          <div className="my-6 rounded-2xl border-l-4 border-amber-400/60 bg-amber-400/5 p-5">
-            <div className="mb-1 text-xs font-bold uppercase tracking-wider text-amber-400">🍕 Real-life analogy</div>
-            <div className="text-[0.95rem] leading-relaxed text-zinc-200 italic">
+          <div className="my-6 rounded-2xl border-l-4 border-[var(--accent-light)]/40 bg-[var(--accent-light)]/4 p-5">
+            <div className="mb-1 text-xs font-bold uppercase tracking-wider text-[var(--accent-light)]">🍕 Real-life analogy</div>
+            <div className="text-[0.95rem] leading-relaxed text-[var(--foreground)] italic">
               Imagine hiring the smartest person you've ever met. They solve three months of problems in one afternoon. Then they get blackout drunk at dinner and forget everything. Every. Single. Night. That's your AI agent without a memory system.
             </div>
           </div>
@@ -102,17 +102,17 @@ export default function FreePage() {
           <p>The fix isn't complex AI infrastructure. It's not RAG pipelines or vector databases. It's <strong>three files</strong> that your agent reads on startup:</p>
 
           <div className="my-6 space-y-3">
-            <div className="rounded-xl border border-[var(--border)] bg-zinc-900/50 p-5">
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-hover)]/50 p-5">
               <div className="text-sm font-bold text-blue-400 mb-1">📚 File 1: Knowledge Base</div>
-              <p className="text-sm text-zinc-400">Permanent stuff. Your projects, your clients, your tech stack, your business rules. The agent reads this like a new employee reads the company handbook. Once written, it barely changes.</p>
+              <p className="text-sm text-[var(--text-secondary)]">Permanent stuff. Your projects, your clients, your tech stack, your business rules. The agent reads this like a new employee reads the company handbook. Once written, it barely changes.</p>
             </div>
-            <div className="rounded-xl border border-[var(--border)] bg-zinc-900/50 p-5">
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-hover)]/50 p-5">
               <div className="text-sm font-bold text-green-400 mb-1">📝 File 2: Daily Notes</div>
-              <p className="text-sm text-zinc-400">What happened today. Decisions made, tasks completed, blockers hit, things to follow up on. The agent reads yesterday's notes and picks up where it left off.</p>
+              <p className="text-sm text-[var(--text-secondary)]">What happened today. Decisions made, tasks completed, blockers hit, things to follow up on. The agent reads yesterday's notes and picks up where it left off.</p>
             </div>
-            <div className="rounded-xl border border-[var(--border)] bg-zinc-900/50 p-5">
-              <div className="text-sm font-bold text-orange-400 mb-1">✨ File 3: Tacit Knowledge</div>
-              <p className="text-sm text-zinc-400">The stuff that can't be Googled. "Boss hates tables." "Always explain the why." "Never deploy on Fridays." Lessons learned through experience.</p>
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-hover)]/50 p-5">
+              <div className="text-sm font-bold text-[var(--accent-light)] mb-1">✨ File 3: Tacit Knowledge</div>
+              <p className="text-sm text-[var(--text-secondary)]">The stuff that can't be Googled. "Boss hates tables." "Always explain the why." "Never deploy on Fridays." Lessons learned through experience.</p>
             </div>
           </div>
 
@@ -133,9 +133,9 @@ export default function FreePage() {
               { icon: "💻", name: "Cursor" },
               { icon: "🤖", name: "AutoGPT" },
             ].map((p) => (
-              <div key={p.name} className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-zinc-900/30 px-3 py-2.5 text-sm">
+              <div key={p.name} className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-hover)]/30 px-3 py-2.5 text-sm">
                 <span>{p.icon}</span>
-                <span className="text-zinc-400">{p.name}</span>
+                <span className="text-[var(--text-secondary)]">{p.name}</span>
               </div>
             ))}
           </div>
@@ -151,21 +151,21 @@ export default function FreePage() {
               { ch: "Ch 13-16", title: "Advanced orchestration", desc: "Multi-agent systems, bottleneck elimination, progressive trust" },
               { ch: "Ch 17-21", title: "Cost optimization & revenue", desc: "Spend $15/mo, earn $6K+/mo — with 7 proven revenue models" },
             ].map((item) => (
-              <div key={item.ch} className="flex gap-4 items-start rounded-xl border border-[var(--border)]/50 bg-zinc-900/20 px-4 py-3">
-                <span className="text-xs font-bold text-orange-400 bg-orange-500/10 px-2 py-1 rounded shrink-0 mt-0.5">{item.ch}</span>
+              <div key={item.ch} className="flex gap-4 items-start rounded-xl border border-[var(--border)]/50 bg-[var(--surface-hover)]/20 px-4 py-3">
+                <span className="text-xs font-bold text-[var(--accent-light)] bg-[var(--accent)]/10 px-2 py-1 rounded shrink-0 mt-0.5">{item.ch}</span>
                 <div>
-                  <div className="text-sm font-semibold text-zinc-200">{item.title}</div>
-                  <div className="text-xs text-zinc-500">{item.desc}</div>
+                  <div className="text-sm font-semibold text-[var(--foreground)]">{item.title}</div>
+                  <div className="text-xs text-[var(--text-tertiary)]">{item.desc}</div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="my-8 rounded-2xl border border-orange-500/20 bg-orange-500/5 p-5">
-            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-orange-300">
+          <div className="my-8 rounded-2xl border border-[var(--accent)]/15 bg-[var(--accent)]/5 p-5">
+            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-[var(--accent-light)]">
               <span className="text-lg">🤯</span> The meta part
             </div>
-            <div className="text-sm leading-relaxed text-zinc-300">
+            <div className="text-sm leading-relaxed text-[var(--foreground)]/80">
               This entire product — the landing page, the interactive chapters, the payment system — was <strong>built by the exact agent system documented in this playbook</strong>. We're selling the map we used to navigate the territory.
             </div>
           </div>
@@ -179,19 +179,19 @@ export default function FreePage() {
         {/* CTA */}
         <div className="text-center mt-12 pb-8">
           <h2 className="text-2xl font-bold mb-3">Ready to Fix the Amnesia?</h2>
-          <p className="text-zinc-400 mb-6">22 interactive chapters. 8 platforms. Real code. Starting at $9.</p>
+          <p className="text-[var(--text-secondary)] mb-6">22 interactive chapters. 8 platforms. Real code. Starting at $9.</p>
           <Link
             href="/#pricing"
-            className="inline-block bg-orange-600 text-white px-9 py-4 rounded-xl text-base font-bold hover:bg-orange-500 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/20"
+            className="inline-block bg-[var(--accent-muted)] text-white px-9 py-4 rounded-xl text-base font-bold hover:bg-[var(--accent)] transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--accent)]/10"
           >
             Get the Full Playbook →
           </Link>
-          <p className="text-xs text-zinc-600 mt-3">One-time purchase · 30-day money-back guarantee</p>
+          <p className="text-xs text-[var(--text-tertiary)] mt-3">One-time purchase · 30-day money-back guarantee</p>
         </div>
       </article>
 
-      <footer className="py-8 border-t border-[var(--border)] text-center text-xs text-zinc-600">
-        © 2026 AgentAwake · Built by an AI agent · <Link href="/" className="hover:text-zinc-400">Home</Link>
+      <footer className="py-8 border-t border-[var(--border)] text-center text-xs text-[var(--text-tertiary)]">
+        © 2026 AgentAwake · Built by an AI agent · <Link href="/" className="hover:text-[var(--text-secondary)]">Home</Link>
       </footer>
     </div>
   );

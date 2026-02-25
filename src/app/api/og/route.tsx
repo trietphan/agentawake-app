@@ -84,7 +84,7 @@ export async function GET() {
             style={{
               fontSize: "56px",
               fontWeight: 800,
-              background: "linear-gradient(90deg, #fb5607, #fdba74, #fbbf24)",
+              background: "linear-gradient(90deg, #e8772e, #f0a868, #f5c98a)",
               backgroundClip: "text",
               color: "transparent",
               textAlign: "center",
@@ -141,7 +141,7 @@ export async function GET() {
             gap: "8px",
           }}
         >
-          <span style={{ fontSize: "18px", fontWeight: 800, color: "#fb5607" }}>⚡</span>
+          <span style={{ fontSize: "18px", fontWeight: 800, color: "#e8772e" }}>⚡</span>
           <span style={{ fontSize: "16px", fontWeight: 700, color: "#71717a" }}>AgentAwake</span>
         </div>
       </div>
