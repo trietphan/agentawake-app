@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import { MemoryQuiz, CostCalculator, SpotTheAgent, MemoryTimeline } from "./blog-components";
+import { AmnesiaQuiz, CostCalculator, SpotTheAgent } from "../components/BlogGames";
 
 export interface BlogPost {
   slug: string;
@@ -16,123 +16,258 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-to-give-your-ai-agent-persistent-memory",
     title: "How to Give Your AI Agent Persistent Memory",
-    description: "Your AI agent forgets everything between sessions. Here's how to fix that with a simple three-file memory architecture that takes 15 minutes to set up.",
+    description:
+      "Your AI agent forgets everything between sessions. Here's how to fix that with a simple three-file memory architecture that takes 15 minutes to set up.",
     date: "2026-02-24",
     readTime: "8 min",
     tags: ["AI agent memory", "persistent memory", "agent architecture"],
     content: (
       <>
-        <p>Imagine hiring the smartest person you've ever met. They crush every task. They're insightful, fast, tireless. There's just one catch: <strong>they get blackout drunk every single night and wake up remembering absolutely nothing.</strong></p>
+        <p>
+          You know that movie <em>50 First Dates</em> where Drew Barrymore wakes
+          up every morning with zero memory of the day before, and Adam Sandler
+          has to win her over again from scratch? <strong>That's you and
+          your AI agent, except nobody's laughing and there's no Hawaiian
+          soundtrack.</strong>
+        </p>
 
-        <p>That's your AI agent right now.</p>
+        <p>
+          Every single session, you sit down and re-introduce yourself like
+          you're at some kind of dystopian speed-dating event. "Hi, I'm working
+          on a React dashboard, we decided on Postgres last week, my deploy day
+          is Tuesday, and for the love of god please stop suggesting MongoDB."
+          Twenty minutes gone. Again.
+        </p>
 
-        <p>Every morning, you sit down with this brilliant amnesiac and spend the first twenty minutes explaining who you are, what your project is, what you decided yesterday, and why you chose React over Vue for the third damn time. It nods along, does great work... and tomorrow you'll do it all over again.</p>
+        <p>
+          Here's what kills me: the AI is <strong>brilliant</strong>. It can
+          write a recursive algorithm while explaining quantum physics in the
+          voice of a pirate. But ask it what you talked about yesterday and it
+          stares at you like a golden retriever who just heard a new word.
+          That's not a model problem. GPT-4, Claude, Gemini — they can all
+          think. <strong>None of them can remember</strong>, because nobody
+          gave them anywhere to store memories. It's like hiring a genius and
+          then deleting their brain every night.
+        </p>
 
-        <p>This isn't a model limitation. GPT-4, Claude, Gemini — they're all smart enough to remember. The problem is that <strong>nobody gave them a place to store memories.</strong> It's like expecting someone to have a great memory while deleting their hippocampus every night. The thinking part works fine. The remembering part doesn't exist.</p>
+        <AmnesiaQuiz />
 
-        <MemoryQuiz />
+        <h2>Three Files. That's the Whole Fix.</h2>
 
-        <h2>The Fix Is Embarrassingly Simple</h2>
+        <p>
+          I'm almost embarrassed to tell you this, because after weeks of
+          reading about vector databases, RAG pipelines, and LangChain graphs
+          that look like someone sneezed on a whiteboard, the actual solution
+          is... <strong>three plain text files.</strong> Markdown. On your
+          machine. That your agent reads when it wakes up and writes to
+          throughout the day. No PhD. No infrastructure. No existential crisis.
+        </p>
 
-        <p>Here's the part that will either relieve you or annoy you: the solution is <strong>three files.</strong> That's it. Three plain text files that your agent reads when it wakes up and writes to throughout the day. No vector databases. No LangChain spaghetti. No PhD required.</p>
-
-        <p><strong>File one is the Knowledge Base</strong> — your agent's long-term brain. Organized using the PARA method (Projects, Areas, Resources, Archives), it's where everything lives: what projects you're working on, your ongoing responsibilities, reference material, and completed work. When your agent needs context about your trading bot, it reads one file. When it needs to know about your SaaS, it reads another. Surgical precision instead of dumping everything into one bloated document.</p>
+        <p>
+          <strong>File one: the Knowledge Base.</strong> Think of it as your
+          agent's long-term memory organized using the PARA method — Projects,
+          Areas, Resources, Archives. Your trading bot lives in one file. Your
+          SaaS lives in another. When your agent needs context, it reads exactly
+          the file it needs instead of inhaling your entire life story like some
+          kind of digital stalker. Surgical precision. Minimal tokens. Maximum
+          context.
+        </p>
 
         <pre><code>{`knowledge/
 ├── projects/        # Active work with deadlines
 │   ├── my-saas.md
-│   └── content-calendar.md
+│   └── trading-bot.md
 ├── areas/           # Ongoing responsibilities
-│   └── trading.md
+│   └── content.md
 ├── resources/       # Reference material
 │   └── api-docs.md
-└── archives/        # Completed work
+└── archives/        # Done and dusted
     └── old-project.md`}</code></pre>
 
-        <p><strong>File two is the Daily Notes</strong> — short-term memory. Every day gets its own markdown file where your agent logs decisions, completed tasks, blockers, and what's coming tomorrow. When your agent wakes up, it reads yesterday's note and immediately knows what's going on. No "how can I help you today?" — it already knows.</p>
+        <p>
+          <strong>File two: Daily Notes.</strong> Every day gets a markdown file
+          where your agent logs what happened — decisions, tasks completed,
+          blockers, plans for tomorrow. When it wakes up the next morning, it
+          reads yesterday's note and <em>already knows what's going on.</em> No
+          more "How can I help you today?" It knows how it can help you today,
+          because it wrote itself a damn to-do list last night.
+        </p>
 
-        <pre><code>{`# memory/2026-02-24.md
-## Decisions Made
-- Chose React for the dashboard
-- Set Pro tier pricing at $29/mo
-
-## Tomorrow
-- Debug the Stripe webhook
-- Review blog drafts`}</code></pre>
-
-        <p><strong>File three is Tacit Knowledge</strong> — the stuff that can't be Googled. Your preferences, your quirks, lessons learned the hard way. "Never deploy on Fridays." "Triet hates markdown tables." "The trading bot works better with 15-min candles." This file grows over time, and after a month, your agent knows you better than most coworkers.</p>
+        <p>
+          <strong>File three: Tacit Knowledge.</strong> This is the good stuff
+          — the things that can't be Googled. "Triet hates markdown tables."
+          "Never deploy on Fridays, the last time was a bloodbath." "The
+          15-minute candles work better than 5-minute, we tested this
+          extensively and the matter is settled." After a month of accumulating
+          these little nuggets, your agent knows you better than most of your
+          coworkers. Honestly, better than some of your friends.
+        </p>
 
         <CostCalculator />
 
-        <h2>Setting It Up Takes 15 Minutes. I Timed It.</h2>
+        <h2>Fifteen Minutes to Set Up. I Literally Timed It.</h2>
 
-        <p>Create the folder structure. Write an AGENTS.md file that tells your agent to read these files at startup and write to them throughout the day. Add a simple cron job for nightly consolidation — where your agent reviews the day's notes and updates the knowledge base with anything worth keeping long-term.</p>
+        <p>
+          Create the folder structure. Write an AGENTS.md that tells your agent
+          "read these files at startup, write to them throughout the day." Add a
+          cron job for nightly consolidation so your agent reviews the day's notes
+          and promotes the good stuff to the knowledge base. That's it. You're
+          done. Go make coffee or something.
+        </p>
 
-        <p>That's genuinely it. Fifteen minutes of setup, and your agent goes from goldfish-brained chatbot to an assistant that compounds intelligence over time.</p>
+        <h2>The Compound Effect Is Where Things Get Weird</h2>
 
-        <h2>The Compound Effect Is the Real Magic</h2>
+        <p>
+          Day one, your agent barely knows you. It's reading sparse files and
+          asking reasonable questions. Fine. By <strong>day seven</strong>, it
+          knows your stack, your projects, and your deployment schedule. By
+          <strong> day thirty</strong>, it's writing you morning briefings and
+          catching blockers before you notice them. By <strong>day ninety</strong>,
+          it's running entire workflows autonomously because it has three months
+          of compounding context about how you think, what you prefer, and what
+          tends to blow up.
+        </p>
 
-        <p>Day one, your agent barely knows you. It's reading sparse files and asking reasonable questions. By day seven, it knows your active projects, your stack, and your deployment schedule. <strong>By day thirty, it's writing you morning briefings and catching blockers before you notice them.</strong> By day ninety, it's running entire workflows autonomously because it has three months of accumulated context about how you work, what you prefer, and what tends to go wrong.</p>
+        <p>
+          Every day of context makes the next day's work better. It's not linear
+          — it's compound interest, but for intelligence. And once you've felt
+          the difference, going back to a memoryless agent feels like switching
+          from a smartphone to two tin cans and a string.
+        </p>
 
-        <p>Every day of context makes the next day's work better. It's not linear improvement — it's compounding. And once you've felt the difference, going back to an amnesiac agent feels like switching from a smartphone to a rotary phone.</p>
+        <p>
+          If you want the full recipe — copy-paste templates, cron configs,
+          security model, and real case studies of agents running in production —
+          the <a href="/#pricing">AgentForge Playbook</a> has everything. Forty-five
+          minutes to set up. A lifetime of your AI actually knowing who the hell
+          you are.
+        </p>
 
-        <p>If you want the full recipe — copy-paste templates, cron configs, security model, and three real case studies of agents running in production — the <a href="/#pricing">AgentForge Playbook</a> has everything. Forty-five minutes to set up. Lifetime of compounding intelligence.</p>
-
-        <p><strong><a href="/#pricing">Get the playbook →</a></strong></p>
+        <p>
+          <strong><a href="/#pricing">Get the playbook →</a></strong>
+        </p>
       </>
     ),
   },
   {
     slug: "para-method-for-ai-agents",
     title: "The PARA Method for AI Agents: A Complete Guide",
-    description: "The PARA method (Projects, Areas, Resources, Archives) isn't just for humans. Here's how to use it to organize your AI agent's knowledge base for maximum effectiveness.",
+    description:
+      "The PARA method (Projects, Areas, Resources, Archives) isn't just for humans. Here's how to use it to organize your AI agent's knowledge base for maximum effectiveness.",
     date: "2026-02-22",
     readTime: "9 min",
     tags: ["PARA method", "AI agent", "knowledge management"],
     content: (
       <>
-        <p>You know that one kitchen drawer? The one where you shove batteries, takeout menus, a screwdriver, three dead pens, and that warranty card for a toaster you no longer own? <strong>That's what your AI agent's memory looks like right now.</strong></p>
+        <p>
+          Everyone has that one kitchen drawer. You know the one — batteries,
+          takeout menus, a screwdriver that doesn't fit anything, three dead
+          pens, and a warranty card for a toaster you threw away in 2019.
+          <strong> That drawer is what your AI agent's memory looks like
+          right now.</strong>
+        </p>
 
-        <p>Most people set up an agent with a single MEMORY.md file and dump everything in there. Project notes, personal preferences, API keys, random thoughts from 3 AM — all in one glorious, unsearchable blob. Then they wonder why their agent can't find anything and burns through tokens like a Hummer burns through gas.</p>
+        <p>
+          Most people give their agent a single MEMORY.md file and proceed to
+          dump their entire professional and personal existence into it like it's
+          a diary, a to-do list, and a therapy journal all at once. Project
+          notes next to pizza preferences next to API keys next to a 3 AM
+          thought about whether hotdogs are sandwiches. Then they wonder why the
+          agent can't find anything and burns through tokens like a Hummer
+          going uphill.
+        </p>
 
-        <p>Tiago Forte's PARA method was designed for human knowledge management, but here's the twist: <strong>it works even better for AI agents.</strong> Humans can "kind of remember where they put something." Agents can't. They either find the right file or they don't. Which means good organization isn't nice-to-have — it's the whole game.</p>
+        <p>
+          Here's the plot twist: Tiago Forte's PARA method — originally
+          designed for humans who hoard too many Notion pages — <strong>works
+          even better for AI agents.</strong> Humans have this fuzzy ability to
+          "kinda remember where they put something." Agents don't. They either
+          find the right file or they hallucinate something that sounds plausible
+          but is completely made up. Good organization isn't a nice-to-have.
+          It's the whole damn game.
+        </p>
 
-        <h2>PARA in 30 Seconds (Or: Marie Kondo-ing Your Agent's Brain)</h2>
+        <h2>PARA in 30 Seconds (The Marie Kondo of Agent Brains)</h2>
 
-        <p>PARA stands for four buckets that cover literally everything your agent needs to know. Think of it like organizing a video game inventory. You wouldn't dump health potions, quest items, armor, and that weird rock you picked up in the tutorial all into one bag. You'd sort them.</p>
+        <p>
+          PARA splits everything into four buckets, and together they cover
+          literally every type of information your agent will ever need. Think
+          of it like organizing a video game inventory — you wouldn't dump
+          health potions, quest items, armor, and that weird rock from the
+          tutorial into the same bag. (Okay, <em>I</em> would. But I'm not
+          the role model here.)
+        </p>
 
-        <p><strong>Projects</strong> are your active quests — things with a deadline and a finish line. "Launch the new website" or "Write the Q1 analysis." When a project is done, it moves to Archives. Clean, simple, done.</p>
+        <p>
+          <strong>Projects</strong> are your active quests. Things with a
+          deadline and a finish line. "Launch the new website" or "Ship the Q1
+          analysis." When they're done, they move to Archives. Clean exit.
+          No lingering.
+        </p>
 
-        <p><strong>Areas</strong> are your ongoing stats — things you maintain indefinitely with no completion date. Trading strategy. Client relationships. Content creation. These are the plates you're always spinning.</p>
+        <p>
+          <strong>Areas</strong> are the plates you're always spinning — things
+          you maintain indefinitely with no end date. Trading strategy. Client
+          relationships. Content pipeline. The stuff that never really "finishes"
+          but always needs attention, like laundry or dental hygiene.
+        </p>
 
-        <p><strong>Resources</strong> are your reference scrolls — stuff you might need but aren't actively working on. API documentation, style guides, industry research. Store once, reference forever.</p>
+        <p>
+          <strong>Resources</strong> are your reference library. API docs, style
+          guides, templates, that one Stack Overflow answer you keep going back
+          to. Store once, reference forever, never organize again.
+        </p>
 
-        <p><strong>Archives</strong> are your completed quest log. Done or paused items from the other three categories. Your agent won't read these unless specifically asked, which keeps the active directories fast and lean.</p>
+        <p>
+          <strong>Archives</strong> are the completed quest log. Done, paused,
+          or "we don't talk about that project anymore" items. Your agent won't
+          touch these unless explicitly asked, which keeps the active directories
+          fast and lean.
+        </p>
 
         <pre><code>{`knowledge/
 ├── projects/           # Active quests
 │   ├── agentforge.md
 │   └── trading-bot.md
-├── areas/              # Ongoing stats
+├── areas/              # Ongoing plates
 │   ├── trading.md
 │   └── content.md
-├── resources/          # Reference scrolls
+├── resources/          # Reference library
 │   └── api-docs.md
-├── archives/           # Completed quest log
+├── archives/           # Completed / paused
 │   └── old-project.md
-└── tacit.md            # Cross-cutting wisdom`}</code></pre>
-
-        <h2>Why This Beats the "One Giant File" Approach</h2>
-
-        <p>When your agent needs to work on the trading bot, it reads <code>knowledge/projects/trading-bot.md</code>. Not the entire knowledge base. Not every note you've ever written. Just the one file it needs, with exactly the context that matters.</p>
-
-        <p>This is faster (less to read), cheaper (fewer tokens), and more accurate (relevant context only). It's the difference between asking a librarian for a specific book versus dumping the entire library on their desk and saying "somewhere in here."</p>
+└── tacit.md            # The unGoogleable wisdom`}</code></pre>
 
         <SpotTheAgent />
 
+        <h2>Why This Demolishes the "One Giant File" Approach</h2>
+
+        <p>
+          When your agent needs to work on the trading bot, it reads
+          <code> knowledge/projects/trading-bot.md</code>. Not the entire
+          knowledge base. Not every shower thought you've ever had. <strong>Just
+          the relevant file with exactly the context that matters.</strong>
+        </p>
+
+        <p>
+          This is faster (less to read), cheaper (fewer tokens), and way more
+          accurate (no "the agent confused my pizza order with my deployment
+          config" incidents). It's the difference between asking a librarian for
+          a specific book and dumping the entire Library of Congress on their
+          desk while screaming "it's in here somewhere!"
+        </p>
+
         <h2>What Goes in Each File</h2>
 
-        <p><strong>Project files</strong> follow a dead-simple template: status, objective, current state, key decisions, and next actions. When your agent reads one of these, it immediately knows everything about the project — where it stands, what's been decided, and what to do next. Zero context-setting conversation required.</p>
+        <p>
+          <strong>Project files</strong> follow a dead-simple template: status,
+          objective, current state, key decisions, and next actions. When your
+          agent opens one, it immediately knows where the project stands, what's
+          been decided (and <em>why</em>), and what to do next. Zero warm-up
+          conversation required. It's like handing someone a perfect briefing
+          instead of making them sit through a two-hour meeting that could've
+          been an email.
+        </p>
 
         <pre><code>{`# Project: Trading Bot
 ## Status: Active
@@ -140,20 +275,35 @@ export const blogPosts: BlogPost[] = [
 Automated S&P 500 and Gold trading system.
 
 ## Key Decisions
-- 15-min candles (not 5-min — tested, better results)
-- Conservative 1:2 risk/reward targets
+- 15-min candles (tested, better than 5-min, case closed)
+- Conservative 1:2 risk/reward ratio
 
 ## Next Actions
 - Backtest February strategy
 - Add Gold correlation alerts`}</code></pre>
 
-        <p><strong>Area files</strong> capture your ongoing approach and accumulated patterns. Your trading area file knows you don't trade on FOMC days and that Monday mornings are volatile. Your content area file knows your writing style and posting schedule. These are living documents that get richer over time.</p>
+        <p>
+          <strong>Area files</strong> capture your ongoing approach and
+          patterns. Your trading area knows you don't trade on FOMC days and
+          that Monday mornings are volatile. Your content area knows your writing
+          style, posting schedule, and that you think listicles are a crime
+          against journalism. These files grow richer over time, and that
+          richness translates directly into better agent output.
+        </p>
 
-        <p><strong>Resource files</strong> are the boring-but-essential reference material. API docs, templates, config guides. The stuff you'll be glad exists the one time you need it at 2 AM.</p>
+        <p>
+          <strong>Resource files</strong> are the boring-but-essential reference
+          material — API docs, config guides, templates. The stuff you'll be
+          extremely glad exists at 2 AM when everything is on fire and you can't
+          remember the Stripe webhook format.
+        </p>
 
-        <h2>The Navigation Rule That Makes It All Work</h2>
+        <h2>Five Lines That Change Everything</h2>
 
-        <p>Drop this into your AGENTS.md and your agent will navigate like a pro:</p>
+        <p>
+          Drop this into your AGENTS.md and your agent goes from "ctrl+F
+          through chaos" to "walk directly to the right shelf":
+        </p>
 
         <pre><code>{`## Knowledge Base Navigation
 - Starting a project task? Read knowledge/projects/<project>.md first
@@ -162,86 +312,218 @@ Automated S&P 500 and Gold trading system.
 - Never read archives unless specifically asked
 - After completing work, update the relevant file`}</code></pre>
 
-        <p>That's five lines. Five lines that turn your agent from "ctrl+F through chaos" into "walk directly to the right shelf." Your agent isn't searching anymore — it's <strong>navigating.</strong> And navigation is always faster than search.</p>
+        <p>
+          Five lines. That's the difference between searching and
+          <strong> navigating.</strong> And navigation is always, always faster
+          than search. Your agent doesn't rummage through drawers anymore. It
+          walks directly to the filing cabinet, pulls the right folder, and gets
+          to work.
+        </p>
 
-        <h2>Migrating from Chaos (Your Agent Can Do It Itself)</h2>
+        <h2>Already Have a Mess? Let the AI Clean It Up.</h2>
 
-        <p>If you've already got a bloated MEMORY.md full of everything ever, don't panic. Create the PARA folder structure, then literally tell your agent: "Read through MEMORY.md, categorize each entry as Project, Area, Resource, or Archive, and move them into the right files." It'll do the migration in about two minutes. Let the AI organize its own brain — it's weirdly good at it.</p>
+        <p>
+          If you've already got a bloated MEMORY.md with six months of
+          everything-bagel context, don't panic. Create the PARA folder
+          structure, then tell your agent: "Read through MEMORY.md, categorize
+          each entry as Project, Area, Resource, or Archive, and move them into
+          the right files." It'll do the migration in about two minutes. There's
+          something poetically satisfying about letting the AI organize its own
+          brain. It's weirdly good at it.
+        </p>
 
-        <p>PARA is one layer of the three-layer memory architecture in the <a href="/#pricing">AgentForge Playbook</a>. The playbook includes copy-paste templates for every file, cron job configs for automated maintenance, and real case studies showing PARA running in production with agents that have been accumulating context for months.</p>
+        <p>
+          PARA is one layer of the three-layer memory architecture in the{" "}
+          <a href="/#pricing">AgentForge Playbook</a>. The playbook includes
+          copy-paste templates for every file type, cron configs for automated
+          nightly consolidation, and real case studies from agents that have been
+          accumulating structured context for months. It's the difference
+          between a junk drawer and a filing system — and your agent will thank
+          you. (Not literally. Yet.)
+        </p>
 
-        <p><strong><a href="/#pricing">Get the playbook →</a></strong></p>
+        <p>
+          <strong><a href="/#pricing">Get the playbook →</a></strong>
+        </p>
       </>
     ),
   },
   {
     slug: "why-your-chatgpt-agent-keeps-forgetting-everything",
     title: "Why Your ChatGPT Agent Keeps Forgetting Everything",
-    description: "Frustrated that ChatGPT forgets your conversations? It's not the AI's fault — it's a missing architecture. Here's the real reason and how to fix it permanently.",
+    description:
+      "Frustrated that ChatGPT forgets your conversations? It's not the AI's fault — it's a missing architecture. Here's the real reason and how to fix it permanently.",
     date: "2026-02-20",
     readTime: "7 min",
     tags: ["ChatGPT", "AI memory", "agent forgetting"],
     content: (
       <>
-        <p>Let me paint you a picture.</p>
+        <p>Let me paint you a picture that will feel uncomfortably familiar.</p>
 
-        <p>It's Tuesday night. You've just spent 45 minutes having the most productive conversation of your life with ChatGPT. You've mapped out your entire product roadmap, made three critical architecture decisions, and figured out a pricing strategy that actually makes sense. You close the laptop feeling like a genius.</p>
+        <p>
+          It's Tuesday night. You just spent 45 minutes having the most
+          productive conversation of your life with ChatGPT. You mapped out
+          your entire product roadmap, made three critical architecture
+          decisions, and landed on a pricing strategy that actually makes sense.
+          You close the laptop feeling like a tech visionary. You sleep the
+          sleep of the righteous.
+        </p>
 
         <p>Wednesday morning. You open ChatGPT.</p>
 
-        <p><em>"Hi! How can I help you today? 😊"</em></p>
+        <p>
+          <em>"Hi! How can I help you today? 😊"</em>
+        </p>
 
-        <p><strong>It remembers nothing.</strong> Not your name, not your project, not the pricing strategy you spent an hour on. It's sitting there with that infuriating smiley face like you're two strangers meeting at a bus stop.</p>
+        <p>
+          <strong>Gone. All of it.</strong> Not your name, not your project, not
+          the pricing strategy you workshopped for an hour. It's sitting there
+          with that infuriating smiley face like you're two strangers who just
+          made eye contact on the subway. You know that feeling when you walk
+          into a room and forget why you went in there? Imagine that, but the
+          room is your entire professional relationship and the person in it has
+          no idea who you are.
+        </p>
 
-        <p>This is the AI equivalent of hiring a brilliant consultant who gets blackout drunk every single night. Every morning they show up to work bright-eyed, completely competent, and with absolutely zero memory of anything that happened before today. You'd fire that person. But for some reason, we just... accept this from our AI agents.</p>
+        <AmnesiaQuiz />
 
-        <MemoryTimeline />
+        <h2>It's Not the AI's Fault (But It's Still Annoying)</h2>
 
-        <h2>Here's Why It Happens (And Why It's Not the AI's Fault)</h2>
+        <p>
+          Blaming ChatGPT for forgetting is like blaming a fish for not riding a
+          bicycle. <strong>LLMs literally don't have a mechanism for storing
+          memories between sessions.</strong> Everything happens inside a
+          "context window" — the text visible in a single conversation. When
+          that conversation ends, the context doesn't get saved somewhere hidden.
+          It doesn't get compressed. It just... ceases to exist. Like a
+          Buddhist sand mandala, except way less intentional and way more
+          infuriating.
+        </p>
 
-        <p>Blaming ChatGPT for forgetting is like blaming a fish for not climbing trees. <strong>LLMs literally don't have a mechanism for storing memories between sessions.</strong> They process everything in a "context window" — the text visible in a single conversation — and when that conversation ends, poof. Gone. Not stored somewhere you can't see. Not compressed. Just... gone.</p>
+        <p>
+          Your brain has a thinking system (prefrontal cortex) and a remembering
+          system (hippocampus). If someone Eternal Sunshine'd your hippocampus
+          every night, you'd wake up just as confused as ChatGPT. The thinking
+          works. The remembering doesn't exist. <strong>That's not stupidity.
+          That's architecture.</strong>
+        </p>
 
-        <p>Your brain has two systems: one for thinking (prefrontal cortex) and one for remembering (hippocampus). If someone Eternal-Sunshine'd your hippocampus every night, you'd wake up just as confused as ChatGPT. Your thinking would be fine. Your memory would be nonexistent. That's exactly what's happening to your AI.</p>
+        <h2>"But Wait, ChatGPT Has a Memory Feature Now!"</h2>
 
-        <h2>"But ChatGPT Has a Memory Feature Now!"</h2>
+        <p>
+          I hear you. And look, OpenAI tried. But ChatGPT's built-in memory is
+          like sticking Post-it notes on a tornado — technically you're writing
+          things down, but good luck finding them later.
+        </p>
 
-        <p>I can hear you. "They added memory! Problem solved!" Yeah, and I added a Post-it note to my fridge. That doesn't make me organized.</p>
+        <p>
+          It's a <strong>black box.</strong> You can't see what it chose to
+          remember. You can't organize it. You can't prioritize. It picks up
+          random trivia ("user likes Python") while completely missing critical
+          context ("user's entire business strategy"). There's no structure, no
+          hierarchy, no way to distinguish between "billion-dollar product
+          decision" and "mentioned burritos once."
+        </p>
 
-        <p>ChatGPT's built-in memory is a <strong>black box.</strong> You can't see what it chose to remember. You can't organize it. You can't tell it what matters. It picks up random facts ("user likes Python") and misses critical ones ("user's entire product strategy"). There's no structure, no hierarchy, no distinction between "crucial business decision" and "offhand comment about pizza preferences."</p>
-
-        <p>Worse, it's locked to ChatGPT. Switch to Claude? Start over from zero. It's like storing your entire address book in a phone that can't export contacts. And eventually it fills up and silently drops old memories. Hope that pricing strategy wasn't in there.</p>
+        <p>
+          And the kicker? It's locked to ChatGPT. Switch to Claude? Start from
+          scratch. Want to use Cursor for coding? Zero context. It's like
+          storing your entire contact list on a phone that can't export. When
+          the memory inevitably fills up, it silently drops old entries. Hope
+          that pricing strategy wasn't one of them.
+        </p>
 
         <CostCalculator />
 
-        <h2>The Fix: Give Your AI a Damn Filing Cabinet</h2>
+        <h2>The Fix: Three Text Files and a Cron Job</h2>
 
-        <p>The solution isn't some bleeding-edge research project. It's embarrassingly straightforward: <strong>three text files that live on your machine.</strong></p>
+        <p>
+          The solution isn't some bleeding-edge research paper or a startup
+          charging $200/month for "AI memory infrastructure." It's
+          embarrassingly simple: <strong>three text files that live on your
+          machine, owned by you, readable by any AI.</strong>
+        </p>
 
-        <p>A <strong>Knowledge Base</strong> organized with the PARA method — Projects, Areas, Resources, Archives. Everything your agent needs to know about your world, structured so it can find anything in seconds. When it needs to work on your SaaS, it reads the SaaS file. When it needs your trading strategy, it reads the trading file. Surgical, fast, cheap.</p>
+        <p>
+          A <strong>Knowledge Base</strong> organized with PARA — Projects,
+          Areas, Resources, Archives. Everything your agent needs about your
+          world, structured so it can find anything in seconds. Need the trading
+          bot context? One file. Need the SaaS status? Different file. Your
+          agent reads what it needs and ignores the rest. Surgical, fast, cheap.
+        </p>
 
-        <p><strong>Daily Notes</strong> that log what happened each day: decisions made, tasks completed, blockers hit, plans for tomorrow. Your agent reads yesterday's note every morning and immediately knows what's going on. The "how can I help you today?" problem vanishes on day one.</p>
+        <p>
+          <strong>Daily Notes</strong> that log what happened each day. Decisions
+          made, tasks done, blockers hit, plans for tomorrow. Your agent reads
+          yesterday's note every morning and hits the ground running. The "how
+          can I help you today?" nightmare vanishes immediately. Day one.
+        </p>
 
-        <p>And a <strong>Tacit Knowledge</strong> file for all the stuff that can't be Googled — your preferences, patterns, and hard-won lessons. "Never deploy on Fridays." "The 15-min candles work better than 5-min." "Boss really hates markdown tables." After a month, this file makes your agent feel like it actually <em>knows</em> you.</p>
+        <p>
+          And a <strong>Tacit Knowledge</strong> file for the unGoogleable stuff.
+          Your preferences, your patterns, your hard-won "never again" lessons.
+          After a month, this file makes your agent feel like it genuinely
+          <em> knows</em> you. Not in a creepy way. In a "finally, someone who
+          remembers I hate YAML" way.
+        </p>
 
-        <h2>What Your Mornings Look Like After</h2>
+        <h2>What Mornings Look Like After</h2>
 
-        <p>Here's a real morning with the memory architecture running. At 6 AM, a cron job fires. Your agent reads yesterday's daily notes and this morning's calendar. By 6:05, it's written you a briefing: "You've got a client call at 10. Yesterday's Stripe webhook bug is still open — want me to take another crack at it? Also, Gold is down 2% pre-market." That briefing hits your Discord before you've had coffee.</p>
+        <p>
+          6 AM. A cron job fires. Your agent reads yesterday's notes, checks the
+          calendar, scans for anything urgent. By 6:05, your Discord has a
+          briefing: "Client call at 10. The Stripe webhook bug from Thursday
+          is still open — want me to take another crack? Gold's down 2%
+          pre-market." That arrived before your coffee. You didn't explain a
+          single thing.
+        </p>
 
-        <p>Throughout the day, every decision, task, and lesson gets logged. At night, the agent reviews everything, updates the knowledge base, and extracts patterns into tacit knowledge. By morning, it's smarter than it was yesterday. <strong>Every single day, it gets better.</strong></p>
+        <p>
+          Throughout the day, every decision and lesson gets logged. At night,
+          the agent reviews everything, updates the knowledge base, and extracts
+          patterns. By morning, it's smarter than yesterday. <strong>Every day,
+          compounding.</strong> Day 30, it's catching blockers before you see
+          them. Day 90, it's running whole workflows solo because it has three
+          months of understanding how you think.
+        </p>
 
-        <h2>This Works With Everything, Not Just ChatGPT</h2>
+        <h2>This Works Everywhere, Not Just ChatGPT</h2>
 
-        <p>Because the memory lives in files (not inside ChatGPT's proprietary brain), you can point any AI at it. Use ChatGPT with custom instructions. Use Claude Projects. Use Cursor or Windsurf for coding. Use LangChain or CrewAI for automation. <strong>Switch platforms without losing a single memory.</strong> Your knowledge base goes wherever you go.</p>
+        <p>
+          Because the memory lives in files — not inside ChatGPT's proprietary
+          black box — you can point <strong>any</strong> AI at it. ChatGPT with
+          custom instructions. Claude Projects. Cursor for coding. CrewAI for
+          automation. Switch platforms without losing a single memory. Your
+          knowledge base goes wherever you go, like a brain in a briefcase.
+          (Okay, that metaphor got dark. But you get it.)
+        </p>
 
-        <p>That's the difference between renting memory from OpenAI and owning it yourself.</p>
+        <p>
+          That's the difference between renting memory from OpenAI and owning
+          it yourself. One makes you a customer. The other makes you
+          independent.
+        </p>
 
         <h2>Stop Re-Explaining. Start Operating.</h2>
 
-        <p>Your AI isn't stupid — it's architecturally amnesiac. The fix takes 45 minutes and three text files. After that, your agent compounds intelligence every day instead of starting from zero.</p>
+        <p>
+          Your AI isn't dumb — it's architecturally amnesiac. The fix takes 45
+          minutes and zero dependencies. After that, your agent compounds
+          intelligence every single day instead of starting from zero like it's
+          got some kind of Groundhog Day curse.
+        </p>
 
-        <p>The <a href="/#pricing">AgentForge Playbook</a> has the complete architecture: copy-paste templates, cron configs for automated consolidation, a security model for giving your agent real access safely, and three case studies from agents running in production. Forty-five minutes of setup. Months of compounding returns.</p>
+        <p>
+          The <a href="/#pricing">AgentForge Playbook</a> has the complete
+          architecture — templates, cron configs, security model, and three
+          case studies from agents running in production. Forty-five minutes of
+          setup. Months of compounding returns. And you'll never hear "How can
+          I help you today?" again.
+        </p>
 
-        <p><strong><a href="/#pricing">Get the playbook →</a></strong></p>
+        <p>
+          <strong><a href="/#pricing">Get the playbook →</a></strong>
+        </p>
       </>
     ),
   },
