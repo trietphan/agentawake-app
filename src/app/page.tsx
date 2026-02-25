@@ -80,7 +80,7 @@ function SocialProof() {
     { num: "90%", lbl: "Less manual work" },
     { num: "24/7", lbl: "Autonomous operation" },
     { num: "45 min", lbl: "Setup time" },
-    { num: "8+", lbl: "Compatible platforms" },
+    { num: "8", lbl: "Full implementation guides" },
   ];
   return (
     <section className="py-14 border-y border-[var(--border)]/60">
@@ -308,49 +308,49 @@ function Platforms() {
     {
       name: "Claude (Anthropic)",
       desc: "Use Projects + custom instructions to build the memory system. Works great for solo operators.",
-      compatibility: "Architecture guide",
+      compatibility: "Full implementation guide",
       icon: "🟣",
       featured: false,
     },
     {
       name: "ChatGPT + GPTs",
       desc: "Custom GPTs with knowledge files as your pantry. Pair with Zapier for cron-like automation.",
-      compatibility: "Architecture guide",
+      compatibility: "Full implementation guide",
       icon: "🟢",
       featured: false,
     },
     {
       name: "CrewAI",
       desc: "Multi-agent framework. Use the orchestration chapter for crew setup and task delegation patterns.",
-      compatibility: "Architecture + orchestration",
+      compatibility: "Full implementation guide",
       icon: "🚀",
       featured: false,
     },
     {
       name: "AutoGPT / AgentGPT",
       desc: "OG autonomous agents. The memory architecture fixes their biggest weakness — context loss between runs.",
-      compatibility: "Architecture guide",
+      compatibility: "Full implementation guide",
       icon: "🤖",
       featured: false,
     },
     {
       name: "LangChain / LangGraph",
       desc: "Developer-focused agent chains. Apply the PARA memory and security model to your custom agent pipelines.",
-      compatibility: "Architecture guide",
+      compatibility: "Full implementation guide",
       icon: "🔗",
       featured: false,
     },
     {
       name: "n8n / Make / Zapier",
       desc: "No-code automation platforms. Use the cron recipes and heartbeat patterns as workflow templates.",
-      compatibility: "Automation patterns",
+      compatibility: "Full implementation guide",
       icon: "⚙️",
       featured: false,
     },
     {
       name: "Cursor / Windsurf / Cline",
       desc: "AI coding agents. Apply the knowledge base and tacit knowledge layers to make your coding assistant remember your codebase patterns.",
-      compatibility: "Memory architecture",
+      compatibility: "Full implementation guide",
       icon: "💻",
       featured: false,
     },
@@ -364,7 +364,7 @@ function Platforms() {
           Works With Your Favorite AI Tools
         </h2>
         <p className="text-[1.05rem] text-[var(--text-secondary)] max-w-[620px] mx-auto mb-14 text-center">
-          The memory architecture and automation patterns are universal. OpenClaw gets the full copy-paste treatment. Everything else gets the blueprint you can adapt in minutes.
+          All eight supported platforms now include dedicated, end-to-end implementation chapters with real configs, code snippets, and deployment patterns.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

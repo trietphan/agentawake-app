@@ -27,6 +27,14 @@ import ChAgentWorkspace from "./agent-workspace";
 import ChAgentTeams from "./agent-teams";
 import ChDailyRoutine from "./daily-routine";
 import ChBuildingInPublic from "./building-in-public";
+import ChClaudeImplementation from "./claude-implementation";
+import ChChatgptImplementation from "./chatgpt-implementation";
+import ChCrewaiImplementation from "./crewai-implementation";
+import ChLangchainImplementation from "./langchain-implementation";
+import ChAutogptImplementation from "./autogpt-implementation";
+import ChN8nImplementation from "./n8n-implementation";
+import ChCursorImplementation from "./cursor-implementation";
+import ChOpenclawImplementation from "./openclaw-implementation";
 
 export const chapterComponents: Record<string, React.ComponentType> = {
   "why-your-agent-has-amnesia": ChWhyYourAgentHasAmnesia,
@@ -57,4 +65,12 @@ export const chapterComponents: Record<string, React.ComponentType> = {
   "agent-teams": ChAgentTeams,
   "daily-routine": ChDailyRoutine,
   "building-in-public": ChBuildingInPublic,
+  "claude-implementation": ChClaudeImplementation,
+  "chatgpt-implementation": ChChatgptImplementation,
+  "crewai-implementation": ChCrewaiImplementation,
+  "langchain-implementation": ChLangchainImplementation,
+  "autogpt-implementation": ChAutogptImplementation,
+  "n8n-implementation": ChN8nImplementation,
+  "cursor-implementation": ChCursorImplementation,
+  "openclaw-implementation": ChOpenclawImplementation,
 };
