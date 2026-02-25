@@ -12,10 +12,10 @@ export default function WelcomeEmail({ name, tierName, accessLink }: WelcomeEmai
   return (
     <Html>
       <Head />
-      <Preview>Welcome to AgentForge — let&apos;s build your first agent</Preview>
+      <Preview>Welcome to AgentAwake — let&apos;s build your first agent</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={h1}>Welcome to AgentForge 🚀</Heading>
+          <Heading style={h1}>Welcome to AgentAwake 🚀</Heading>
           <Text style={text}>
             Hey {name || 'there'},
           </Text>
@@ -39,7 +39,7 @@ export default function WelcomeEmail({ name, tierName, accessLink }: WelcomeEmai
             If you get stuck, reply to this email. I read every one.
           </Text>
           <Text style={text}>
-            — The AgentForge Team
+            — The AgentAwake Team
           </Text>
         </Container>
       </Body>

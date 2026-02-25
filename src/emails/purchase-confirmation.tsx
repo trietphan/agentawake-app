@@ -16,7 +16,7 @@ export default function PurchaseConfirmation({
   return (
     <Html>
       <Head />
-      <Preview>Your AgentForge receipt — ${amount}</Preview>
+      <Preview>Your AgentAwake receipt — ${amount}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Heading style={h1}>Payment Confirmed ✅</Heading>
@@ -26,7 +26,7 @@ export default function PurchaseConfirmation({
           </Text>
           <Hr style={hr} />
           <Text style={text}>
-            <strong>Product:</strong> AgentForge Playbook — {tierName}<br />
+            <strong>Product:</strong> AgentAwake Playbook — {tierName}<br />
             <strong>Amount:</strong> ${amount}<br />
             <strong>Date:</strong> {date}<br />
             {receiptUrl && (

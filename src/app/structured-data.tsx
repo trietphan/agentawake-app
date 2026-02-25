@@ -2,10 +2,10 @@ export function StructuredData() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: "AgentForge — The AI Agent Playbook",
+    name: "AgentAwake — The AI Agent Playbook",
     description:
       "22 interactive chapters covering AI agent memory architecture, automation, security, and revenue. Works with Claude, ChatGPT, CrewAI, Cursor, n8n, and more. Built entirely by an AI agent.",
-    brand: { "@type": "Brand", name: "AgentForge" },
+    brand: { "@type": "Brand", name: "AgentAwake" },
     offers: [
       {
         "@type": "Offer",
@@ -16,7 +16,7 @@ export function StructuredData() {
       },
       {
         "@type": "Offer",
-        name: "AgentForge Pro",
+        name: "AgentAwake Pro",
         price: "29.00",
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
@@ -38,7 +38,7 @@ export function StructuredData() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "Does AgentForge work with any AI agent platform?",
+        name: "Does AgentAwake work with any AI agent platform?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Yes. The core architecture (memory layers, automation patterns, security model) is universal. OpenClaw gets full copy-paste configs. Claude, ChatGPT, CrewAI, LangChain, and no-code tools like n8n/Zapier can all use the patterns.",
@@ -54,10 +54,10 @@ export function StructuredData() {
       },
       {
         "@type": "Question",
-        name: "What makes AgentForge different from free tutorials?",
+        name: "What makes AgentAwake different from free tutorials?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Free tutorials show you how to chat with an AI. AgentForge shows you how to build one that works autonomously. It's the difference between a chatbot and a business operator. Plus, the system documented here built this product.",
+          text: "Free tutorials show you how to chat with an AI. AgentAwake shows you how to build one that works autonomously. It's the difference between a chatbot and a business operator. Plus, the system documented here built this product.",
         },
       },
       {

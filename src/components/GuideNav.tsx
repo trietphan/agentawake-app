@@ -70,7 +70,7 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
       <div className="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#0a0a0e]/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="text-sm font-bold text-zinc-400 hover:text-zinc-200 transition-colors">
-            ← AgentForge
+            ← AgentAwake
           </Link>
           {/* Hamburger: only on smaller screens */}
           <button

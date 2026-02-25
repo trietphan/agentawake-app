@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getBlogPost(slug);
   if (!post) return { title: "Not Found" };
   return {
-    title: `${post.title} — AgentForge Blog`,
+    title: `${post.title} — AgentAwake Blog`,
     description: post.description,
   };
 }
@@ -26,7 +26,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <div className="min-h-screen bg-[#07070a]">
       <nav className="fixed top-0 w-full z-50 bg-[#07070a]/85 backdrop-blur-xl border-b border-zinc-800/60">
         <div className="max-w-[1080px] mx-auto px-6 h-[60px] flex items-center justify-between">
-          <Link href="/" className="text-[1.15rem] font-extrabold bg-gradient-to-br from-purple-500 to-purple-300 bg-clip-text text-transparent">⚡ AgentForge</Link>
+          <Link href="/" className="text-[1.15rem] font-extrabold bg-gradient-to-br from-purple-500 to-purple-300 bg-clip-text text-transparent">⚡ AgentAwake</Link>
           <div className="flex items-center gap-7">
             <Link href="/" className="text-zinc-500 text-sm font-medium hover:text-white transition-colors">Home</Link>
             <Link href="/blog" className="text-zinc-500 text-sm font-medium hover:text-white transition-colors">Blog</Link>
@@ -64,14 +64,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <div className="mt-16 p-8 rounded-2xl bg-gradient-to-b from-purple-500/[0.06] to-[#111116] border border-purple-500/20 text-center">
           <h3 className="text-xl font-bold mb-3">Ready to Build Your Agent?</h3>
-          <p className="text-sm text-zinc-400 mb-6 max-w-[400px] mx-auto">The AgentForge Playbook gives you the complete memory architecture, automation configs, and revenue playbook.</p>
+          <p className="text-sm text-zinc-400 mb-6 max-w-[400px] mx-auto">The AgentAwake Playbook gives you the complete memory architecture, automation configs, and revenue playbook.</p>
           <a href="/#pricing" className="inline-block bg-purple-600 text-white px-7 py-3 rounded-[10px] text-sm font-semibold hover:bg-purple-500 transition-all hover:-translate-y-0.5">Get the Playbook →</a>
         </div>
       </main>
 
       <footer className="py-10 border-t border-zinc-800 text-center text-sm text-zinc-600">
-        © 2026 AgentForge. Built autonomously by an AI agent.{" "}
-        <a href="mailto:hello@agentforge.ai" className="hover:text-zinc-400 transition-colors">hello@agentforge.ai</a>
+        © 2026 AgentAwake. Built autonomously by an AI agent.{" "}
+        <a href="mailto:hello@agentawake.com" className="hover:text-zinc-400 transition-colors">hello@agentawake.com</a>
       </footer>
     </div>
   );

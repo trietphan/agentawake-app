@@ -142,7 +142,7 @@ export async function GET() {
           }}
         >
           <span style={{ fontSize: "18px", fontWeight: 800, color: "#a855f7" }}>⚡</span>
-          <span style={{ fontSize: "16px", fontWeight: 700, color: "#71717a" }}>AgentForge</span>
+          <span style={{ fontSize: "16px", fontWeight: 700, color: "#71717a" }}>AgentAwake</span>
         </div>
       </div>
     ),

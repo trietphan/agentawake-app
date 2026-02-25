@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
         await resend.emails.send({
           from: EMAIL_FROM,
           to: email,
-          subject: "Your AgentForge receipt",
+          subject: "Your AgentAwake receipt",
           react: PurchaseConfirmation({
             name,
             tierName: tierNames[tier],
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
         await resend.emails.send({
           from: EMAIL_FROM,
           to: email,
-          subject: `Your AgentForge ${tierNames[tier]} access link`,
+          subject: `Your AgentAwake ${tierNames[tier]} access link`,
           react: MagicLinkEmail({ magicLink, tierName: tierNames[tier] }),
         });
 
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
         await resend.emails.send({
           from: EMAIL_FROM,
           to: email,
-          subject: "Welcome to AgentForge — let's build your first agent",
+          subject: "Welcome to AgentAwake — let's build your first agent",
           react: WelcomeEmail({ name, tierName: tierNames[tier], accessLink }),
         });
 

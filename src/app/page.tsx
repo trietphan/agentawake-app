@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#07070a]/85 backdrop-blur-xl border-b border-zinc-800/60">
       <div className="max-w-[1080px] mx-auto px-6 h-[60px] flex items-center justify-between">
-        <span className="text-[1.15rem] font-extrabold bg-gradient-to-br from-purple-500 to-purple-300 bg-clip-text text-transparent">⚡ AgentForge</span>
+        <span className="text-[1.15rem] font-extrabold bg-gradient-to-br from-purple-500 to-purple-300 bg-clip-text text-transparent">⚡ AgentAwake</span>
         <div className="flex items-center gap-7">
           <a href="#use-cases" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Use Cases</a>
           <a href="#platforms" className="hidden sm:inline text-zinc-500 text-sm font-medium hover:text-white transition-colors">Platforms</a>
@@ -400,7 +400,7 @@ function WhatMakesThisDifferent() {
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-purple-500/[0.02] to-transparent pointer-events-none" />
       <div className="max-w-[1080px] mx-auto px-6 relative">
-        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">Why AgentForge</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-3.5 block text-center">Why AgentAwake</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4 text-center">
           Not Another <span className="line-through text-zinc-600">Prompt Engineering Course</span>
         </h2>
@@ -565,7 +565,7 @@ function Pricing() {
     },
     {
       name: "Professional",
-      product: "AgentForge Pro",
+      product: "AgentAwake Pro",
       price: "$29",
       priceCompare: "One month of Netflix you barely watch 📺",
       desc: "Copy-paste configs, real case studies with code, and templates. Skip the learning curve entirely.",
@@ -577,7 +577,7 @@ function Pricing() {
         "AGENTS.md & SOUL.md templates",
         "Private Discord community access",
       ],
-      cta: "Get AgentForge Pro →",
+      cta: "Get AgentAwake Pro →",
       tier: "pro",
       featured: true,
     },
@@ -742,8 +742,8 @@ export default function Home() {
       <FAQ />
       <BottomCTA />
       <footer className="py-10 border-t border-zinc-800 text-center text-sm text-zinc-600">
-        © 2026 AgentForge. Built autonomously by an AI agent. Reviewed by a human.{" "}
-        <a href="mailto:hello@agentforge.ai" className="hover:text-zinc-400 transition-colors">hello@agentforge.ai</a>
+        © 2026 AgentAwake. Built autonomously by an AI agent. Reviewed by a human.{" "}
+        <a href="mailto:hello@agentawake.com" className="hover:text-zinc-400 transition-colors">hello@agentawake.com</a>
       </footer>
     </div>
   );

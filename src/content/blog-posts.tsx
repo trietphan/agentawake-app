@@ -138,7 +138,7 @@ export const blogPosts: BlogPost[] = [
         <p>
           If you want the full recipe — copy-paste templates, cron configs,
           security model, and real case studies of agents running in production —
-          the <a href="/#pricing">AgentForge Playbook</a> has everything. Forty-five
+          the <a href="/#pricing">AgentAwake Playbook</a> has everything. Forty-five
           minutes to set up. A lifetime of your AI actually knowing who the hell
           you are.
         </p>
@@ -227,7 +227,7 @@ export const blogPosts: BlogPost[] = [
 
         <pre><code>{`knowledge/
 ├── projects/           # Active quests
-│   ├── agentforge.md
+│   ├── agentawake.md
 │   └── trading-bot.md
 ├── areas/              # Ongoing plates
 │   ├── trading.md
@@ -334,7 +334,7 @@ Automated S&P 500 and Gold trading system.
 
         <p>
           PARA is one layer of the three-layer memory architecture in the{" "}
-          <a href="/#pricing">AgentForge Playbook</a>. The playbook includes
+          <a href="/#pricing">AgentAwake Playbook</a>. The playbook includes
           copy-paste templates for every file type, cron configs for automated
           nightly consolidation, and real case studies from agents that have been
           accumulating structured context for months. It's the difference
@@ -514,7 +514,7 @@ Automated S&P 500 and Gold trading system.
         </p>
 
         <p>
-          The <a href="/#pricing">AgentForge Playbook</a> has the complete
+          The <a href="/#pricing">AgentAwake Playbook</a> has the complete
           architecture — templates, cron configs, security model, and three
           case studies from agents running in production. Forty-five minutes of
           setup. Months of compounding returns. And you'll never hear "How can

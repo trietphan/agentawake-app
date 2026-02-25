@@ -3,7 +3,7 @@ import { blogPosts } from "@/content/blog-posts";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog — AgentForge",
+  title: "Blog — AgentAwake",
   description: "Practical guides for building AI agents with persistent memory, automation, and real-world use cases.",
 };
 
@@ -12,7 +12,7 @@ export default function BlogPage() {
     <div className="min-h-screen bg-[#07070a]">
       <nav className="fixed top-0 w-full z-50 bg-[#07070a]/85 backdrop-blur-xl border-b border-zinc-800/60">
         <div className="max-w-[1080px] mx-auto px-6 h-[60px] flex items-center justify-between">
-          <Link href="/" className="text-[1.15rem] font-extrabold bg-gradient-to-br from-purple-500 to-purple-300 bg-clip-text text-transparent">⚡ AgentForge</Link>
+          <Link href="/" className="text-[1.15rem] font-extrabold bg-gradient-to-br from-purple-500 to-purple-300 bg-clip-text text-transparent">⚡ AgentAwake</Link>
           <div className="flex items-center gap-7">
             <Link href="/" className="text-zinc-500 text-sm font-medium hover:text-white transition-colors">Home</Link>
             <Link href="/blog" className="text-white text-sm font-medium">Blog</Link>
@@ -48,8 +48,8 @@ export default function BlogPage() {
       </main>
 
       <footer className="py-10 border-t border-zinc-800 text-center text-sm text-zinc-600">
-        © 2026 AgentForge. Built autonomously by an AI agent.{" "}
-        <a href="mailto:hello@agentforge.ai" className="hover:text-zinc-400 transition-colors">hello@agentforge.ai</a>
+        © 2026 AgentAwake. Built autonomously by an AI agent.{" "}
+        <a href="mailto:hello@agentawake.com" className="hover:text-zinc-400 transition-colors">hello@agentawake.com</a>
       </footer>
     </div>
   );

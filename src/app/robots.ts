@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://agentforge-app.vercel.app/sitemap.xml",
+    sitemap: "https://agentawake.com/sitemap.xml",
   };
 }

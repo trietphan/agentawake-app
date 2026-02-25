@@ -761,7 +761,7 @@ Conversion rate: 2.3% (below 3% target).
 ## What's Cooking 🍳
 - **SaaS Landing Page** → Live! Stripe checkout working
 - **Content Calendar** → 3 posts scheduled, 2 need review
-- **AgentForge Playbook** → Writing chapters 8-12
+- **AgentAwake Playbook** → Writing chapters 8-12
 
 ## Running in the Background 🔄
 - Market analysis cron → fires 6 AM daily ✅
@@ -782,7 +782,7 @@ Conversion rate: 2.3% (below 3% target).
 - Twitter API rate limited us — had to add retry logic
 
 ## Stuck On 🚧
-- Need a custom domain (agentforge.ai?)
+- Need a custom domain (agentawake.ai?)
 - Twitter API rate limit — might need premium tier
 - Can't decide between Clerk and Supabase Auth
 
@@ -2196,7 +2196,7 @@ openclaw cron add \\
       <p>Want to do all 7 steps from the checklist in one command? Here you go:</p>
 
       <Code title="terminal — one-shot setup">{`#!/bin/bash
-# AgentForge Day One Setup Script
+# AgentAwake Day One Setup Script
 
 echo "🧠 Creating knowledge base structure..."
 mkdir -p knowledge/{projects,areas,resources,archives}
@@ -5998,8 +5998,8 @@ Do NOT skip sections.
 When referencing other files in the workspace, use Obsidian-style wiki-links:
 - Instead of: see memory/2024-01-15.md
 - Use: see [[2024-01-15]]
-- Instead of: check knowledge/projects/agentforge.md
-- Use: check [[agentforge]]`}</Code>
+- Instead of: check knowledge/projects/agentawake.md
+- Use: check [[agentawake]]`}</Code>
 
       <h2>The Five Essential Plugins</h2>
 
@@ -6497,7 +6497,7 @@ meeting.md
 # ✅ Good — your agent instantly knows what, when, and why
 2026-02-24-market-analysis.md
 draft-blog-ai-agent-memory.md
-project-agentforge-status.md
+project-agentawake-status.md
 todo-weekly-review.md
 meeting-2026-02-20-product-roadmap.md`}</Code>
 
@@ -6529,7 +6529,7 @@ meeting-2026-02-20-product-roadmap.md`}</Code>
         </div>
         <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
           <div className="text-sm font-semibold text-emerald-400">📄 Living Documents (read + write)</div>
-          <p className="text-xs text-zinc-500 mt-1">Files your agent actively updates: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">MEMORY.md</code>, <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">memory/2026-02-24.md</code>, <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">knowledge/projects/agentforge.md</code>. These are the actual state of your system.</p>
+          <p className="text-xs text-zinc-500 mt-1">Files your agent actively updates: <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">MEMORY.md</code>, <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">memory/2026-02-24.md</code>, <code className="text-xs bg-zinc-800 px-1 py-0.5 rounded">knowledge/projects/agentawake.md</code>. These are the actual state of your system.</p>
         </div>
       </div>
 
@@ -6551,7 +6551,7 @@ meeting-2026-02-20-product-roadmap.md`}</Code>
 │
 ├── knowledge/         # PARA structure
 │   ├── projects/      # Active work (finite end date)
-│   │   ├── agentforge.md
+│   │   ├── agentawake.md
 │   │   └── trading-bot.md
 │   ├── areas/         # Ongoing responsibilities (no end date)
 │   │   ├── trading.md

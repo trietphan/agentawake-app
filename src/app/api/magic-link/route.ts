@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
       const { error } = await resend.emails.send({
         from: EMAIL_FROM,
         to: email,
-        subject: `Your AgentForge ${tierNames[userTier]} access link`,
+        subject: `Your AgentAwake ${tierNames[userTier]} access link`,
         react: MagicLinkEmail({ magicLink, tierName: tierNames[userTier] }),
       });
 
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Not available in production" }, { status: 403 });
   }
 
-  const email = req.nextUrl.searchParams.get("email") || "test@agentforge.ai";
+  const email = req.nextUrl.searchParams.get("email") || "test@agentawake.ai";
   const tier = (req.nextUrl.searchParams.get("tier") || "blueprint") as UserTier;
 
   const token = await createToken({

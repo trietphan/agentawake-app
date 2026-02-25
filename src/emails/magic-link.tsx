@@ -19,10 +19,10 @@ export default function MagicLinkEmail({ magicLink, tierName }: MagicLinkEmailPr
   return (
     <Html>
       <Head />
-      <Preview>Your access link to AgentForge {tierName}</Preview>
+      <Preview>Your access link to AgentAwake {tierName}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={h1}>Your AgentForge Access Link 🔑</Heading>
+          <Heading style={h1}>Your AgentAwake Access Link 🔑</Heading>
           <Text style={text}>
             Click the button below to access your <strong>{tierName}</strong> content.
             This link is unique to you — don&apos;t share it.

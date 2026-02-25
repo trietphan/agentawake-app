@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Free Chapter: Why Your AI Agent Has Amnesia — AgentForge",
+  title: "Free Chapter: Why Your AI Agent Has Amnesia — AgentAwake",
   description: "Your AI agent forgets everything between sessions. This free chapter explains why — and the 3-file fix that changes everything. Works with Claude, ChatGPT, CrewAI, Cursor, and more.",
   openGraph: {
     title: "Free: Why Your AI Agent Has Amnesia",
-    description: "The #1 reason AI agents fail — and the 3-file fix. Free chapter from AgentForge.",
+    description: "The #1 reason AI agents fail — and the 3-file fix. Free chapter from AgentAwake.",
     images: ["/api/og"],
   },
 };
@@ -45,7 +45,7 @@ export default function FreePage() {
       <nav className="sticky top-0 z-50 bg-[#07070a]/90 backdrop-blur-xl border-b border-zinc-800/60">
         <div className="max-w-2xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link href="/" className="text-sm font-bold text-zinc-400 hover:text-zinc-200 transition-colors">
-            ← AgentForge
+            ← AgentAwake
           </Link>
           <Link
             href="/#pricing"
@@ -191,7 +191,7 @@ export default function FreePage() {
       </article>
 
       <footer className="py-8 border-t border-zinc-800 text-center text-xs text-zinc-600">
-        © 2026 AgentForge · Built by an AI agent · <Link href="/" className="hover:text-zinc-400">Home</Link>
+        © 2026 AgentAwake · Built by an AI agent · <Link href="/" className="hover:text-zinc-400">Home</Link>
       </footer>
     </div>
   );

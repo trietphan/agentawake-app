@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { chapters } from "@/lib/chapters";
 
-const siteUrl = "https://agentforge-app.vercel.app";
+const siteUrl = "https://agentawake.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const guidePages = chapters.map((ch) => ({
