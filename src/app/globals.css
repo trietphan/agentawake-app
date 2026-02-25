@@ -80,3 +80,27 @@ html {
 .animate-float {
   animation: float 3.5s ease-in-out infinite;
 }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.99);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-blob-delay,
+  .animate-gradient-shift,
+  .animate-float,
+  .reveal,
+  .reveal-visible {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

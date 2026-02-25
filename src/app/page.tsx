@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { StructuredData } from "./structured-data";
 import EmailCaptureComponent from "@/components/EmailCapture";
+import Reveal from "@/components/Reveal";
+import MobileStickyCTA from "@/components/MobileStickyCTA";
 
 function NavBar() {
   return (
@@ -80,6 +82,55 @@ function SocialProof() {
             <div className="text-sm text-zinc-500 font-medium mt-0.5">{s.lbl}</div>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function BuildLog() {
+  const items = [
+    {
+      label: "Today",
+      title: "Rebranded to AgentAwake + domain migration",
+      desc: "Shifted brand narrative from generic agent tooling to memory-first positioning.",
+      color: "from-fuchsia-500/25 to-purple-500/10 border-fuchsia-400/30",
+    },
+    {
+      label: "This Week",
+      title: "Shipped new chapters + interactive blog games",
+      desc: "Added practical depth and playful interactivity to boost retention and shares.",
+      color: "from-cyan-500/20 to-blue-500/10 border-cyan-400/30",
+    },
+    {
+      label: "Next",
+      title: "X distribution flywheel + content cadence",
+      desc: "2 posts/day + high-leverage replies to compound reach and inbound interest.",
+      color: "from-violet-500/20 to-fuchsia-500/10 border-violet-400/30",
+    },
+  ];
+
+  return (
+    <section className="py-20">
+      <div className="max-w-[1080px] mx-auto px-6">
+        <div className="rounded-3xl border border-zinc-800/80 bg-[#111116]/85 p-8 md:p-10">
+          <div className="flex items-center justify-between gap-3 flex-wrap mb-7">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-fuchsia-300">Build Log</span>
+              <h3 className="text-2xl font-bold mt-2">Shipping Fast, In Public</h3>
+            </div>
+            <Link href="/blog" className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors">Read updates →</Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {items.map((item) => (
+              <div key={item.title} className={`rounded-2xl border p-5 bg-gradient-to-b ${item.color}`}>
+                <div className="text-[11px] uppercase tracking-widest text-zinc-300 mb-2">{item.label}</div>
+                <h4 className="font-semibold mb-2 leading-snug">{item.title}</h4>
+                <p className="text-sm text-zinc-300/85 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -743,22 +794,24 @@ export default function Home() {
       <StructuredData />
       <NavBar />
       <Hero />
-      <SocialProof />
-      <Problem />
-      <Solution />
-      <WhatMakesThisDifferent />
+      <Reveal><SocialProof /></Reveal>
+      <Reveal><BuildLog /></Reveal>
+      <Reveal><Problem /></Reveal>
+      <Reveal><Solution /></Reveal>
+      <Reveal><WhatMakesThisDifferent /></Reveal>
       <UseCases />
-      <Testimonials />
-      <Platforms />
-      <HowItWorks />
-      <EmailCapture />
-      <Pricing />
-      <FAQ />
-      <BottomCTA />
-      <footer className="py-10 border-t border-zinc-800 text-center text-sm text-zinc-600">
+      <Reveal><Testimonials /></Reveal>
+      <Reveal><Platforms /></Reveal>
+      <Reveal><HowItWorks /></Reveal>
+      <Reveal><EmailCapture /></Reveal>
+      <Reveal><Pricing /></Reveal>
+      <Reveal><FAQ /></Reveal>
+      <Reveal><BottomCTA /></Reveal>
+      <footer className="py-10 border-t border-zinc-800 text-center text-sm text-zinc-600 pb-24 sm:pb-10">
         © 2026 AgentAwake. Built autonomously by an AI agent. Reviewed by a human.{" "}
         <a href="mailto:hello@agentawake.com" className="hover:text-zinc-400 transition-colors">hello@agentawake.com</a>
       </footer>
+      <MobileStickyCTA />
     </div>
   );
 }
