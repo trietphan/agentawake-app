@@ -24,7 +24,7 @@ export function MemoryQuiz() {
         : "Okay, show-off. Your agent actually retains context. You're either already using a memory system or you're lying. Either way, nice.";
 
   return (
-    <div style={{ background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.25)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
+    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
       <p style={{ fontWeight: 700, fontSize: "1.15em", marginBottom: 16 }}>🧠 Quiz: How Amnesiac Is Your AI?</p>
       {questions.map((q, i) => (
         <div key={i} style={{ marginBottom: 14 }}>
@@ -48,7 +48,7 @@ export function MemoryQuiz() {
         </div>
       ))}
       {allAnswered && !showResult && (
-        <button onClick={() => setShowResult(true)} style={{ marginTop: 8, padding: "10px 24px", borderRadius: 8, background: "#8b5cf6", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer" }}>
+        <button onClick={() => setShowResult(true)} style={{ marginTop: 8, padding: "10px 24px", borderRadius: 8, background: "#e8772e", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer" }}>
           Show My Score
         </button>
       )}
@@ -133,12 +133,12 @@ export function MemoryTimeline() {
     { day: "Day 1", title: "Stranger Danger", desc: "Your agent knows literally nothing. You spend 20 minutes explaining your project, your stack, your name. It responds with \"I'd be happy to help! 😊\" and you die a little inside.", color: "#ef4444" },
     { day: "Day 7", title: "Acquaintance", desc: "A week of accumulated notes. Your agent knows your active projects, your preferred stack, and that you deploy on Tuesdays. It still asks some questions, but relevant ones.", color: "#eab308" },
     { day: "Day 30", title: "Reliable Coworker", desc: "Your agent has a month of context. It references past decisions, anticipates blockers, and writes morning briefings tailored to your schedule. You've stopped re-explaining things entirely.", color: "#22c55e" },
-    { day: "Day 90", title: "Mind Reader", desc: "Three months of compounding memory. Your agent runs workflows autonomously, flags issues before you notice them, and knows your patterns better than most humans you work with.", color: "#8b5cf6" },
+    { day: "Day 90", title: "Mind Reader", desc: "Three months of compounding memory. Your agent runs workflows autonomously, flags issues before you notice them, and knows your patterns better than most humans you work with.", color: "#e8772e" },
   ];
   const [active, setActive] = useState(0);
 
   return (
-    <div style={{ background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.25)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
+    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
       <p style={{ fontWeight: 700, fontSize: "1.15em", marginBottom: 16 }}>📈 The Memory Timeline: From Goldfish to Mind Reader</p>
       <div style={{ display: "flex", gap: 0, marginBottom: 20, position: "relative" }}>
         {stages.map((s, i) => (

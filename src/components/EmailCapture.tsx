@@ -33,7 +33,7 @@ export default function EmailCapture() {
       <div className="absolute -bottom-28 -right-10 w-80 h-80 rounded-full bg-cyan-500/20 blur-3xl animate-blob-delay" />
 
       <div className="max-w-[980px] mx-auto px-6 relative">
-        <div className="rounded-3xl border border-[var(--border)]/60 bg-[#0f0f14]/85 backdrop-blur-xl p-8 md:p-12 shadow-[0_0_80px_rgba(139,92,246,0.12)]">
+        <div className="rounded-3xl border border-[var(--border)]/60 bg-[var(--surface)]/90 backdrop-blur-xl p-8 md:p-12 shadow-[0_0_80px_rgba(232,119,46,0.08)]">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
               <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-4 px-3 py-1.5 rounded-full border border-[var(--accent-light)]/20 bg-[var(--accent)]/10 animate-fadeIn">

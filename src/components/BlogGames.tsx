@@ -28,7 +28,7 @@ export function AmnesiaQuiz() {
         : "Either you've already built a memory system or you're in denial. Either way, respect. Share your secrets in the comments (just kidding, there are no comments).";
 
   return (
-    <div style={{ background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.25)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
+    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
       <p style={{ fontWeight: 700, fontSize: "1.15em", marginBottom: 16 }}>🧠 The AI Amnesia Quiz: How Bad Is It?</p>
       {questions.map((q, i) => (
         <div key={i} style={{ marginBottom: 14 }}>
@@ -71,7 +71,7 @@ export function AmnesiaQuiz() {
             marginTop: 8,
             padding: "10px 24px",
             borderRadius: 8,
-            background: "#8b5cf6",
+            background: "#e8772e",
             color: "#fff",
             fontWeight: 700,
             border: "none",

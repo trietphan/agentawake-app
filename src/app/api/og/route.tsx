@@ -28,7 +28,7 @@ export async function GET() {
             transform: "translateX(-50%)",
             width: "800px",
             height: "600px",
-            background: "radial-gradient(ellipse, rgba(139,92,246,0.15), transparent 70%)",
+            background: "radial-gradient(ellipse, rgba(232,119,46,0.12), transparent 70%)",
           }}
         />
 
@@ -40,8 +40,8 @@ export async function GET() {
             gap: "8px",
             padding: "8px 20px",
             borderRadius: "50px",
-            border: "1px solid rgba(139,92,246,0.3)",
-            background: "rgba(139,92,246,0.08)",
+            border: "1px solid rgba(232,119,46,0.2)",
+            background: "rgba(232,119,46,0.06)",
             marginBottom: "30px",
           }}
         >

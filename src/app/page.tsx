@@ -45,8 +45,8 @@ function NavBar() {
 function Hero() {
   return (
     <section className="pt-40 pb-24 text-center relative overflow-hidden">
-      <div className="absolute -top-[300px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-[radial-gradient(ellipse,rgba(217,70,239,0.12),transparent_70%)] pointer-events-none" />
-      <div className="absolute top-[15%] left-[8%] w-40 h-40 rounded-full bg-cyan-400/15 blur-3xl pointer-events-none animate-blob" />
+      <div className="absolute -top-[300px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-[radial-gradient(ellipse,rgba(232,119,46,0.1),transparent_70%)] pointer-events-none" />
+      <div className="absolute top-[15%] left-[8%] w-40 h-40 rounded-full bg-[var(--accent)]/10 blur-3xl pointer-events-none animate-blob" />
       <div className="absolute top-[30%] right-[8%] w-44 h-44 rounded-full bg-[var(--accent)]/15 blur-3xl pointer-events-none animate-blob-delay" />
       <div className="max-w-[1080px] mx-auto px-6 relative">
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm font-semibold text-[var(--accent-light)] bg-gradient-to-r from-[var(--accent)]/10 via-[var(--accent-light)]/8 to-[var(--accent-light)]/5 border border-[var(--accent-light)]/20 mb-7 animate-gradient-shift">
@@ -419,7 +419,7 @@ function Solution() {
         <p className="text-[1.05rem] text-[var(--text-secondary)] max-w-[620px] mb-14">The same architecture behind agents generating thousands per week. Not theory — the exact system we run in production.</p>
         <div className="space-y-4">
           {layers.map((l) => (
-            <div key={l.num} className="flex flex-col sm:flex-row gap-5 items-start bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-8 hover:border-[var(--accent)]/15 hover:shadow-[0_0_40px_rgba(139,92,246,0.05)] transition-all">
+            <div key={l.num} className="flex flex-col sm:flex-row gap-5 items-start bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-8 hover:border-[var(--accent)]/15 hover:shadow-[0_0_40px_rgba(232,119,46,0.04)] transition-all">
               <div className="flex-shrink-0 w-[52px] h-[52px] rounded-[14px] flex items-center justify-center text-lg font-extrabold bg-gradient-to-br from-[var(--accent)]/15 to-[var(--accent)]/5 border border-[var(--accent)]/15 text-[var(--accent-light)]">
                 {l.num}
               </div>
@@ -708,7 +708,7 @@ function Pricing() {
             <GlowCard key={t.tier} className="rounded-2xl">
             <div className={`rounded-2xl p-9 relative transition-all flex flex-col h-full ${
               t.featured
-                ? "border border-[var(--accent-light)]/35 bg-gradient-to-b from-[var(--accent)]/[0.06] via-[var(--accent-light)]/[0.04] to-[var(--surface)] shadow-[0_0_70px_rgba(217,70,239,0.14)]"
+                ? "border border-[var(--accent-light)]/35 bg-gradient-to-b from-[var(--accent)]/[0.06] via-[var(--accent-light)]/[0.04] to-[var(--surface)] shadow-[0_0_70px_rgba(232,119,46,0.1)]"
                 : "bg-[var(--surface)]/95 border border-[var(--border)]/80 hover:border-cyan-400/35 hover:-translate-y-1"
             }`}>
               {t.featured && (
@@ -809,7 +809,7 @@ function FAQ() {
 function BottomCTA() {
   return (
     <section className="py-24 text-center relative overflow-hidden">
-      <div className="absolute bottom-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(139,92,246,0.1),transparent_70%)] pointer-events-none" />
+      <div className="absolute bottom-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(232,119,46,0.08),transparent_70%)] pointer-events-none" />
       <div className="max-w-[1080px] mx-auto px-6 relative">
         <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-tight mb-4">Stop Chatting. Start Operating.</h2>
         <p className="text-lg text-[var(--text-secondary)] max-w-[500px] mx-auto mb-9">Your agent should be working while you sleep. The playbook shows you exactly how.</p>
