@@ -23,9 +23,9 @@ export const blogPosts: BlogPost[] = [
     tags: ["Claude persistent memory", "Claude memory system", "give Claude long-term memory", "Claude Code", "MCP"],
     content: (
       <>
-        <div className="rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 p-5">
-          <h3 className="mt-0 mb-2">TL;DR</h3>
-          <ol className="m-0 list-decimal pl-5 space-y-1">
+        <div className="rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 p-5 sm:p-6 my-2">
+          <h3 className="text-xl sm:text-2xl font-bold mt-0 mb-3 text-[var(--foreground)]">TL;DR</h3>
+          <ol className="list-decimal pl-5 space-y-3 mb-0 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
             <li>Claude forgets between sessions because chat context is temporary.</li>
             <li>Use 3 memory layers: PARA knowledge, daily notes, tacit rules.</li>
             <li>Implement via Claude Projects, Claude Code CLI, or MCP.</li>
@@ -33,27 +33,32 @@ export const blogPosts: BlogPost[] = [
           </ol>
         </div>
 
-        <p className="mt-16">
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6 mt-16">
           Claude 3.7 is excellent at reasoning and coding, but each fresh session starts cold.
           If you keep re-explaining context, the issue is architecture—not intelligence.
         </p>
 
         <div className="rounded-xl border-l-4 border-cyan-400 bg-cyan-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-cyan-300 mb-2">🔵 Info</p>
-          <p className="text-sm text-[var(--foreground)]/80">Context window != memory. Context is temporary scratch space. Memory must live in durable files or services Claude can re-open later.</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Context window != memory. Context is temporary scratch space. Memory must live in durable files or services Claude can re-open later.</p>
         </div>
 
         <TweetableQuote quote="Persistent memory is not a bigger prompt. It's a stable architecture Claude can read and update every day." />
 
-        <hr className="border-[var(--border)] my-12" />
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
 
-        <h2 className="mt-16">🧠 The 3-Layer Memory Architecture</h2>
-        <p>
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">01</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">🧠 The 3-Layer Memory Architecture</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           Think of memory like an operating system: long-term docs, daily state, and behavioral defaults.
           Each layer has one job, which keeps retrieval fast and updates clean.
         </p>
 
-        <pre><code>{`Memory System (Claude)
+        <div className="relative my-6">
+          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">text</span>
+          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`Memory System (Claude)
 
 ┌───────────────────────────────────────┐
 │ Layer 1: Knowledge Base (PARA)       │
@@ -69,13 +74,16 @@ export const blogPosts: BlogPost[] = [
 │ Layer 3: Tacit Knowledge              │
 │ preferences, style, guardrails        │
 └───────────────────────────────────────┘`}</code></pre>
+        </div>
 
-        <h3 className="mt-12"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-amber-400/20 text-amber-300 mr-2">Method 1</span>PARA Knowledge Base</h3>
-        <p>
+        <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-amber-400/20 text-amber-300 mr-2">Method 1</span>PARA Knowledge Base</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           PARA keeps context discoverable and scoped. Claude should read one relevant file, not your whole history.
         </p>
 
-        <pre><code>{`knowledge/
+        <div className="relative my-6">
+          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">tree</span>
+          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`knowledge/
 ├── projects/
 │   ├── agentawake-site.md
 │   └── sales-automation.md
@@ -86,18 +94,21 @@ export const blogPosts: BlogPost[] = [
 │   └── api-references.md
 └── archives/
     └── old-launches.md`}</code></pre>
+        </div>
 
         <div className="rounded-xl border-l-4 border-emerald-400 bg-emerald-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-emerald-300 mb-2">✅ Quick Win</p>
-          <p className="text-sm text-[var(--foreground)]/80">Start with one active project file only. Over-structuring on day one slows adoption.</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Start with one active project file only. Over-structuring on day one slows adoption.</p>
         </div>
 
-        <h3 className="mt-12"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-blue-400/20 text-blue-300 mr-2">Method 2</span>Daily Notes</h3>
-        <p>
+        <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-blue-400/20 text-blue-300 mr-2">Method 2</span>Daily Notes</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           Daily notes provide session continuity: what changed, what broke, and what happens next.
         </p>
 
-        <pre><code>{`# 2026-02-25
+        <div className="relative my-6">
+          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">markdown</span>
+          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`# 2026-02-25
 ## Wins
 - Finished pricing page refactor
 
@@ -111,47 +122,79 @@ export const blogPosts: BlogPost[] = [
 ## Next actions
 - Add idempotency key
 - Re-run integration tests`}</code></pre>
+        </div>
 
         <div className="rounded-xl border-l-4 border-amber-400 bg-amber-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-amber-300 mb-2">💡 Pro Tip</p>
-          <p className="text-sm text-[var(--foreground)]/80">Add one startup rule to your project: “Before answering, read yesterday’s note and the active project file.” This removes most reset friction immediately.</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Add one startup rule to your project: “Before answering, read yesterday’s note and the active project file.” This removes most reset friction immediately.</p>
         </div>
 
-        <h3 className="mt-12"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-rose-400/20 text-rose-300 mr-2">Method 3</span>Tacit Knowledge</h3>
-        <p>
+        <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-rose-400/20 text-rose-300 mr-2">Method 3</span>Tacit Knowledge</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           Tacit knowledge stores your style and constraints so outputs stay consistent over time.
         </p>
 
-        <pre><code>{`# tacit.md
+        <div className="relative my-6">
+          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">markdown</span>
+          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`# tacit.md
 - Default to TypeScript and strict mode.
 - Keep answers concise unless asked for detail.
 - Never use markdown tables in Discord.
 - Ask before destructive commands.
 - Prefer practical examples over theory.`}</code></pre>
+        </div>
 
         <div className="rounded-xl border-l-4 border-rose-400 bg-rose-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-rose-300 mb-2">⚠️ Warning</p>
-          <p className="text-sm text-[var(--foreground)]/80">Don’t mix ephemeral chatter into tacit rules. Keep tacit files durable and high-signal, or Claude will pick up noise as policy.</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Don’t mix ephemeral chatter into tacit rules. Keep tacit files durable and high-signal, or Claude will pick up noise as policy.</p>
         </div>
 
-        <hr className="border-[var(--border)] my-12" />
+        <div className="rounded-xl bg-[var(--surface)] border border-[var(--border)] p-5 my-8">
+          <p className="text-sm font-semibold text-[var(--accent-light)] mb-2">🔑 Key Takeaway</p>
+          <p className="text-[0.95rem] text-[var(--foreground)]/80 m-0">Separate memory into layers with clear jobs, and retrieval becomes fast, cheap, and consistent.</p>
+        </div>
 
-        <h2 className="mt-16">🛠️ Implementation Paths (Pick One)</h2>
-        <ol>
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">02</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">🛠️ Implementation Paths (Pick One)</h2>
+        </div>
+        <ol className="list-decimal pl-5 space-y-3 mb-6 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
           <li><strong>Claude Projects:</strong> fastest setup, mostly manual updates.</li>
           <li><strong>Claude Code CLI:</strong> direct file workflows for developers.</li>
           <li><strong>MCP server:</strong> best for scale and cross-project memory.</li>
         </ol>
 
-        <h3 className="mt-12">A) Claude Projects</h3>
-        <pre><code>{`Project Instructions:
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
+          <div className="rounded-xl border border-blue-400/20 bg-blue-400/5 p-4">
+            <p className="text-sm font-bold text-blue-300 mb-1">🌐 Claude Projects</p>
+            <p className="text-xs text-[var(--text-secondary)] mb-0">Best for: non-technical users. Setup: 5 min.</p>
+          </div>
+          <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-4">
+            <p className="text-sm font-bold text-emerald-300 mb-1">💻 Claude Code CLI</p>
+            <p className="text-xs text-[var(--text-secondary)] mb-0">Best for: developers. Setup: 15 min.</p>
+          </div>
+          <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4">
+            <p className="text-sm font-bold text-amber-300 mb-1">🔌 MCP Server</p>
+            <p className="text-xs text-[var(--text-secondary)] mb-0">Best for: power users. Setup: 30 min.</p>
+          </div>
+        </div>
+
+        <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]">A) Claude Projects</h3>
+        <div className="relative my-6">
+          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">text</span>
+          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`Project Instructions:
 1. Read knowledge/projects/<active-project>.md before coding.
 2. Read daily-notes/YYYY-MM-DD.md before planning.
 3. Update both files after major decisions.
 4. Keep answers aligned with tacit.md.`}</code></pre>
+        </div>
 
-        <h3 className="mt-12">B) Claude Code CLI</h3>
-        <pre><code>{`# 1) bootstrap folders
+        <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]">B) Claude Code CLI</h3>
+        <div className="relative my-6">
+          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">bash</span>
+          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`# 1) bootstrap folders
 mkdir -p knowledge/{projects,areas,resources,archives} daily-notes
 
 # 2) ask Claude to operate with memory files
@@ -159,9 +202,12 @@ claude "Read knowledge/projects/agentawake-site.md and daily-notes/$(date +%F).m
 
 # 3) append a quick memory note manually when needed
 echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`}</code></pre>
+        </div>
 
-        <h3 className="mt-12">C) MCP Memory Server</h3>
-        <pre><code>{`{
+        <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]">C) MCP Memory Server</h3>
+        <div className="relative my-6">
+          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">json</span>
+          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`{
   "mcpServers": {
     "memory": {
       "command": "npx",
@@ -169,29 +215,49 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
     }
   }
 }`}</code></pre>
+        </div>
 
         <div className="rounded-xl border-l-4 border-cyan-400 bg-cyan-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-cyan-300 mb-2">🔵 Info</p>
-          <p className="text-sm text-[var(--foreground)]/80">MCP is ideal once you want shared memory across multiple agent workflows, not just one project repo.</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">MCP is ideal once you want shared memory across multiple agent workflows, not just one project repo.</p>
         </div>
 
-        <hr className="border-[var(--border)] my-12" />
+        <div className="rounded-xl bg-[var(--surface)] border border-[var(--border)] p-5 my-8">
+          <p className="text-sm font-semibold text-[var(--accent-light)] mb-2">🔑 Key Takeaway</p>
+          <p className="text-[0.95rem] text-[var(--foreground)]/80 m-0">Pick one implementation path and execute it today—consistency matters more than perfection.</p>
+        </div>
 
-        <h2 className="mt-16">🌙 Automate Nightly Consolidation</h2>
-        <p>
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">03</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">🌙 Automate Nightly Consolidation</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           Run one nightly job to summarize daily notes, promote durable insights into PARA files, and prune low-value noise.
         </p>
 
-        <pre><code>{`# run at 2:00 AM daily
+        <div className="relative my-6">
+          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">cron</span>
+          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`# run at 2:00 AM daily
 0 2 * * * cd /my/project && claude "Review today's daily note, update relevant knowledge/* files, and append 3 durable lessons to tacit.md if applicable."`}</code></pre>
+        </div>
 
         <AmnesiaQuiz />
         <CostCalculator />
 
-        <hr className="border-[var(--border)] my-12" />
+        <div className="rounded-xl bg-[var(--surface)] border border-[var(--border)] p-5 my-8">
+          <p className="text-sm font-semibold text-[var(--accent-light)] mb-2">🔑 Key Takeaway</p>
+          <p className="text-[0.95rem] text-[var(--foreground)]/80 m-0">A tiny nightly routine compounds memory quality so your assistant gets sharper every morning.</p>
+        </div>
 
-        <h2 className="mt-16">✅ Final Checklist</h2>
-        <ol>
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">04</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">✅ Final Checklist</h2>
+        </div>
+        <ol className="list-decimal pl-5 space-y-3 mb-6 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
           <li>Create PARA folders and seed one active project file.</li>
           <li>Start daily notes with wins, decisions, blockers, next actions.</li>
           <li>Write tacit rules for style and guardrails.</li>
@@ -199,15 +265,15 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
           <li>Automate nightly consolidation.</li>
         </ol>
 
-        <p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           With this in place, Claude stops acting like a brilliant stranger and starts operating with continuity.
         </p>
 
-        <p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           If you want full templates and production-ready configs, grab the <a href="/#pricing">AgentAwake Playbook</a>.
         </p>
 
-        <p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)] mb-0">
           <strong><a href="/#pricing">Get the complete playbook →</a></strong>
         </p>
       </>

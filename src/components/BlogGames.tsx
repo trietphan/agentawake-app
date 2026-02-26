@@ -28,7 +28,7 @@ export function AmnesiaQuiz() {
         : "Either you've already built a memory system or you're in denial. Either way, respect. Share your secrets in the comments (just kidding, there are no comments).";
 
   return (
-    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
+    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "30px 24px 34px", margin: "32px 0" }}>
       <p style={{ fontWeight: 700, fontSize: "1.15em", marginBottom: 16 }}>🧠 The AI Amnesia Quiz: How Bad Is It?</p>
       {questions.map((q, i) => (
         <div key={i} style={{ marginBottom: 14 }}>
@@ -44,10 +44,13 @@ export function AmnesiaQuiz() {
                   setShowResult(false);
                 }}
                 style={{
-                  padding: "6px 18px",
-                  borderRadius: 6,
+                  minHeight: 44,
+                  minWidth: 80,
+                  padding: "12px 20px",
+                  borderRadius: 10,
                   cursor: "pointer",
                   fontWeight: 600,
+                  fontSize: "1rem",
                   background:
                     answers[i] === val
                       ? val
@@ -105,7 +108,7 @@ export function CostCalculator() {
         background: "rgba(234,179,8,0.08)",
         border: "1px solid rgba(234,179,8,0.25)",
         borderRadius: 12,
-        padding: "24px 28px",
+        padding: "30px 24px 34px",
         margin: "32px 0",
       }}
     >
@@ -124,7 +127,7 @@ export function CostCalculator() {
             max={30}
             value={mins}
             onChange={(e) => setMins(+e.target.value)}
-            style={{ verticalAlign: "middle", marginLeft: 8 }}
+            className="ml-2 align-middle h-3 w-full max-w-[220px] appearance-none rounded-full bg-white/15 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[var(--accent)] [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-white/30"
           />{" "}
           <strong>{mins} min</strong>
         </label>
@@ -136,7 +139,7 @@ export function CostCalculator() {
             max={10}
             value={sessions}
             onChange={(e) => setSessions(+e.target.value)}
-            style={{ verticalAlign: "middle", marginLeft: 8 }}
+            className="ml-2 align-middle h-3 w-full max-w-[220px] appearance-none rounded-full bg-white/15 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[var(--accent)] [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-white/30"
           />{" "}
           <strong>{sessions}</strong>
         </label>
@@ -149,9 +152,10 @@ export function CostCalculator() {
             value={rate}
             onChange={(e) => setRate(+e.target.value)}
             style={{
-              width: 80,
-              padding: "4px 8px",
-              borderRadius: 6,
+              minWidth: 80,
+              padding: "12px",
+              fontSize: "1rem",
+              borderRadius: 10,
               border: "1px solid rgba(255,255,255,0.2)",
               background: "rgba(255,255,255,0.08)",
               color: "inherit",
@@ -169,13 +173,13 @@ export function CostCalculator() {
           textAlign: "center",
         }}
       >
-        <p style={{ fontSize: "0.9em", opacity: 0.7 }}>
+        <p style={{ fontSize: "1rem", opacity: 0.75 }}>
           Every month, you light on fire approximately...
         </p>
         <p style={{ fontSize: "2.2em", fontWeight: 800, color: "#eab308" }}>
           ${Math.round(monthly).toLocaleString()}
         </p>
-        <p style={{ fontSize: "0.9em", opacity: 0.7 }}>
+        <p style={{ fontSize: "1rem", opacity: 0.75 }}>
           ...babysitting an AI that refuses to take notes.{" "}
           {monthly > 500
             ? "That's a car payment. For context you already gave it."

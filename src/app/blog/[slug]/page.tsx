@@ -81,7 +81,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </nav>
 
       <ReadingProgress />
-      <main className="pt-32 pb-24 max-w-[680px] mx-auto px-5 sm:px-6 overflow-x-hidden">
+      <main className="pt-32 pb-32 sm:pb-24 max-w-[680px] mx-auto px-5 sm:px-6 overflow-x-hidden">
         <Link href="/blog" className="text-sm text-[var(--accent-light)] hover:text-[var(--accent-light)] transition-colors mb-8 inline-block">← Back to Blog</Link>
 
         <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 p-5 sm:p-7 relative overflow-hidden">
@@ -113,22 +113,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </a>
           </div>
 
-          <div className="prose prose-invert prose-zinc max-w-none overflow-x-hidden [counter-reset:section]
-            prose-headings:font-bold prose-headings:tracking-tight
-            prose-h2:text-xl prose-h2:mt-14 prose-h2:mb-6 prose-h2:flex prose-h2:items-center prose-h2:gap-3
-            prose-h3:text-lg prose-h3:mt-12 prose-h3:mb-5
-            prose-p:text-[0.95rem] sm:prose-p:text-[0.98rem] prose-p:leading-[1.85] prose-p:text-[var(--foreground)]/80 prose-p:mb-7
-            prose-li:text-[0.93rem] sm:prose-li:text-[0.95rem] prose-li:text-[var(--foreground)]/80 prose-li:leading-7 prose-li:mb-2
-            prose-a:text-[var(--accent-light)] prose-a:no-underline hover:prose-a:text-[var(--accent-light)]
-            prose-strong:text-[var(--foreground)]
-            prose-code:text-emerald-300/90 prose-code:text-[0.8rem] prose-code:bg-[var(--surface-hover)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:break-words
-            prose-pre:bg-[#0d1117] prose-pre:border prose-pre:border-[var(--border)] prose-pre:rounded-xl prose-pre:px-4 prose-pre:py-4 prose-pre:overflow-x-auto prose-pre:max-w-full prose-pre:text-[0.8rem] sm:prose-pre:text-[0.85rem]
-            prose-blockquote:border-[var(--accent)]/40 prose-blockquote:pl-5 prose-blockquote:my-8 prose-blockquote:text-[var(--text-secondary)]
-            prose-hr:border-[var(--border)] prose-hr:my-12
-            prose-img:rounded-xl prose-img:max-w-full
-            [&_h2]:before:content-[counter(section,decimal-leading-zero)] [&_h2]:before:counter-increment-[section] [&_h2]:before:inline-flex [&_h2]:before:items-center [&_h2]:before:justify-center [&_h2]:before:w-8 [&_h2]:before:h-8 [&_h2]:before:text-xs [&_h2]:before:font-extrabold [&_h2]:before:rounded-full [&_h2]:before:bg-gradient-to-br [&_h2]:before:from-amber-400/30 [&_h2]:before:to-rose-400/30 [&_h2]:before:text-amber-200
-            [&_pre]:overflow-x-auto [&_pre]:max-w-full [&_pre]:whitespace-pre [&_pre_code]:whitespace-pre
-          ">
+          <div className="max-w-full overflow-x-hidden space-y-0">
             {post.content}
           </div>
 

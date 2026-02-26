@@ -24,7 +24,7 @@ export function MemoryQuiz() {
         : "Okay, show-off. Your agent actually retains context. You're either already using a memory system or you're lying. Either way, nice.";
 
   return (
-    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
+    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "30px 24px 34px", margin: "32px 0" }}>
       <p style={{ fontWeight: 700, fontSize: "1.15em", marginBottom: 16 }}>🧠 Quiz: How Amnesiac Is Your AI?</p>
       {questions.map((q, i) => (
         <div key={i} style={{ marginBottom: 14 }}>
@@ -35,7 +35,7 @@ export function MemoryQuiz() {
                 key={String(val)}
                 onClick={() => { const next = [...answers]; next[i] = val; setAnswers(next); setShowResult(false); }}
                 style={{
-                  padding: "6px 18px", borderRadius: 6, cursor: "pointer", fontWeight: 600,
+                  minHeight: 44, minWidth: 80, padding: "12px 20px", borderRadius: 10, cursor: "pointer", fontWeight: 600, fontSize: "1rem",
                   background: answers[i] === val ? (val ? "#22c55e" : "#ef4444") : "rgba(255,255,255,0.08)",
                   color: answers[i] === val ? "#fff" : "inherit",
                   border: "1px solid rgba(255,255,255,0.15)",
@@ -69,17 +69,17 @@ export function CostCalculator() {
   const monthly = ((mins * sessions * rate) / 60) * 22;
 
   return (
-    <div style={{ background: "rgba(234,179,8,0.08)", border: "1px solid rgba(234,179,8,0.25)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
+    <div style={{ background: "rgba(234,179,8,0.08)", border: "1px solid rgba(234,179,8,0.25)", borderRadius: 12, padding: "30px 24px 34px", margin: "32px 0" }}>
       <p style={{ fontWeight: 700, fontSize: "1.15em", marginBottom: 16 }}>💸 How Much Does AI Amnesia Cost You?</p>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-        <label>Minutes re-explaining per session: <input type="range" min={1} max={30} value={mins} onChange={(e) => setMins(+e.target.value)} style={{ verticalAlign: "middle", marginLeft: 8 }} /> <strong>{mins} min</strong></label>
-        <label>Sessions per day: <input type="range" min={1} max={10} value={sessions} onChange={(e) => setSessions(+e.target.value)} style={{ verticalAlign: "middle", marginLeft: 8 }} /> <strong>{sessions}</strong></label>
-        <label>Your hourly rate ($): <input type="number" min={10} max={1000} value={rate} onChange={(e) => setRate(+e.target.value)} style={{ width: 80, padding: "4px 8px", borderRadius: 6, border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.08)", color: "inherit", marginLeft: 8 }} /></label>
+        <label>Minutes re-explaining per session: <input type="range" min={1} max={30} value={mins} onChange={(e) => setMins(+e.target.value)} className="ml-2 align-middle h-3 w-full max-w-[220px] appearance-none rounded-full bg-white/15 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[var(--accent)] [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-white/30" /> <strong>{mins} min</strong></label>
+        <label>Sessions per day: <input type="range" min={1} max={10} value={sessions} onChange={(e) => setSessions(+e.target.value)} className="ml-2 align-middle h-3 w-full max-w-[220px] appearance-none rounded-full bg-white/15 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[var(--accent)] [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-white/30" /> <strong>{sessions}</strong></label>
+        <label>Your hourly rate ($): <input type="number" min={10} max={1000} value={rate} onChange={(e) => setRate(+e.target.value)} style={{ minWidth: 80, padding: "12px", fontSize: "1rem", borderRadius: 10, border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.08)", color: "inherit", marginLeft: 8 }} /></label>
       </div>
       <div style={{ marginTop: 20, padding: 16, background: "rgba(0,0,0,0.2)", borderRadius: 8, textAlign: "center" }}>
-        <p style={{ fontSize: "0.9em", opacity: 0.7 }}>You&apos;re burning roughly...</p>
+        <p style={{ fontSize: "1rem", opacity: 0.75 }}>You&apos;re burning roughly...</p>
         <p style={{ fontSize: "2em", fontWeight: 800, color: "#eab308" }}>${Math.round(monthly)}/month</p>
-        <p style={{ fontSize: "0.9em", opacity: 0.7 }}>...explaining the same damn things to an AI that can&apos;t be bothered to remember.</p>
+        <p style={{ fontSize: "1rem", opacity: 0.75 }}>...explaining the same damn things to an AI that can&apos;t be bothered to remember.</p>
       </div>
     </div>
   );
@@ -100,7 +100,7 @@ export function SpotTheAgent() {
   const [guess, setGuess] = useState<number | null>(null);
 
   return (
-    <div style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.25)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
+    <div style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.25)", borderRadius: 12, padding: "30px 24px 34px", margin: "32px 0" }}>
       <p style={{ fontWeight: 700, fontSize: "1.15em", marginBottom: 4 }}>🕵️ Spot the Agent: Which One Has Memory?</p>
       <p style={{ opacity: 0.7, marginBottom: 16 }}>Two agents. Same question. One remembers you. One doesn&apos;t. Can you tell?</p>
       {paragraphs.map((p, i) => (
@@ -138,7 +138,7 @@ export function MemoryTimeline() {
   const [active, setActive] = useState(0);
 
   return (
-    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "24px 28px", margin: "32px 0" }}>
+    <div style={{ background: "rgba(232,119,46,0.06)", border: "1px solid rgba(232,119,46,0.18)", borderRadius: 12, padding: "30px 24px 34px", margin: "32px 0" }}>
       <p style={{ fontWeight: 700, fontSize: "1.15em", marginBottom: 16 }}>📈 The Memory Timeline: From Goldfish to Mind Reader</p>
       <div style={{ display: "flex", gap: 0, marginBottom: 20, position: "relative" }}>
         {stages.map((s, i) => (
