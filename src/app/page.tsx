@@ -120,12 +120,12 @@ function SocialProof() {
             Updated daily · Building in public
           </span>
         </div>
-        <div className="flex justify-center flex-wrap gap-16">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 max-w-3xl mx-auto">
         {stats.map((s, index) => (
           <ScrollReveal key={s.lbl} delay={(index % 3) * 100}>
-            <div className="text-center">
-              <div className="text-[2.2rem] font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent">{s.num}</div>
-              <div className="text-sm text-[var(--text-tertiary)] font-medium mt-0.5">{s.lbl}</div>
+            <div className="text-center min-w-0">
+              <div className="text-[1.8rem] sm:text-[2.2rem] font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent leading-none">{s.num}</div>
+              <div className="text-xs sm:text-sm text-[var(--text-tertiary)] font-medium mt-1 break-words">{s.lbl}</div>
             </div>
           </ScrollReveal>
         ))}
@@ -748,14 +748,14 @@ function Pricing() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {tiers.map((t, index) => (
             <ScrollReveal key={t.tier} delay={index * 100}>
-              <GlowCard className="rounded-2xl">
-                <div className={`rounded-2xl p-9 relative transition-all flex flex-col h-full ${
+              <GlowCard className="rounded-2xl overflow-visible">
+                <div className={`rounded-2xl p-7 sm:p-9 relative transition-all flex flex-col h-full overflow-visible ${
                   t.featured
-                    ? "border border-[var(--accent-light)]/35 bg-gradient-to-b from-[var(--accent)]/[0.06] via-[var(--accent-light)]/[0.04] to-[var(--surface)] shadow-[0_0_70px_rgba(232,119,46,0.1)]"
+                    ? "mt-4 sm:mt-0 border border-[var(--accent-light)]/35 bg-gradient-to-b from-[var(--accent)]/[0.06] via-[var(--accent-light)]/[0.04] to-[var(--surface)] shadow-[0_0_70px_rgba(232,119,46,0.1)]"
                     : "bg-[var(--surface)]/95 border border-[var(--border)]/80 hover:border-cyan-400/35 hover:-translate-y-1"
                 }`}>
                   {t.featured && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--accent-muted)] text-white text-[0.72rem] font-bold uppercase tracking-wide px-4 py-1 rounded-full">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 bg-[var(--accent-muted)] text-white text-[0.72rem] font-bold uppercase tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
                       Most Popular
                     </div>
                   )}

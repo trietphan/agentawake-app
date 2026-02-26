@@ -26,32 +26,31 @@ export const blogPosts: BlogPost[] = [
         <div className="rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 p-5">
           <h3 className="mt-0 mb-2">TL;DR</h3>
           <ol className="m-0 list-decimal pl-5 space-y-1">
-            <li>Claude forgets between sessions because chat context is temporary, not persistent memory.</li>
-            <li>Use a 3-layer architecture: Knowledge Base (PARA), Daily Notes, and Tacit Knowledge.</li>
-            <li>Implement with Claude Projects, Claude Code CLI, or MCP servers.</li>
-            <li>Add nightly automation so memory gets better while you sleep.</li>
+            <li>Claude forgets between sessions because chat context is temporary.</li>
+            <li>Use 3 memory layers: PARA knowledge, daily notes, tacit rules.</li>
+            <li>Implement via Claude Projects, Claude Code CLI, or MCP.</li>
+            <li>Add nightly consolidation so memory quality compounds.</li>
           </ol>
         </div>
 
         <p className="mt-16">
-          Claude 3.7 is insanely good at reasoning, coding, and synthesis. But once the session ends, so does its working memory.
-          That means every new chat starts with expensive re-explaining.
-          You are not fighting model quality—you are fighting architecture.
+          Claude 3.7 is excellent at reasoning and coding, but each fresh session starts cold.
+          If you keep re-explaining context, the issue is architecture—not intelligence.
         </p>
 
-        <p>
-          The fix is not "paste more files into context." Big prompts feel smart, but they are noisy and fragile.
-          Persistent memory means Claude can reliably find, update, and reuse structured context across days.
-        </p>
+        <div className="rounded-xl border-l-4 border-cyan-400 bg-cyan-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-cyan-300 mb-2">🔵 Info</p>
+          <p className="text-sm text-[var(--foreground)]/80">Context window != memory. Context is temporary scratch space. Memory must live in durable files or services Claude can re-open later.</p>
+        </div>
 
         <TweetableQuote quote="Persistent memory is not a bigger prompt. It's a stable architecture Claude can read and update every day." />
 
         <hr className="border-[var(--border)] my-12" />
 
-        <h2 className="mt-16">The 3-Layer Memory Architecture</h2>
+        <h2 className="mt-16">🧠 The 3-Layer Memory Architecture</h2>
         <p>
-          Think of this like a kitchen system, not a junk drawer.
-          One layer stores stable ingredients, one tracks what happened today, and one encodes your style and non-negotiables.
+          Think of memory like an operating system: long-term docs, daily state, and behavioral defaults.
+          Each layer has one job, which keeps retrieval fast and updates clean.
         </p>
 
         <pre><code>{`Memory System (Claude)
@@ -71,10 +70,9 @@ export const blogPosts: BlogPost[] = [
 │ preferences, style, guardrails        │
 └───────────────────────────────────────┘`}</code></pre>
 
-        <h3 className="mt-12">Layer 1 — Knowledge Base (PARA)</h3>
+        <h3 className="mt-12"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-amber-400/20 text-amber-300 mr-2">Method 1</span>PARA Knowledge Base</h3>
         <p>
-          PARA keeps files discoverable.
-          Claude should read the minimum relevant file, not your entire history.
+          PARA keeps context discoverable and scoped. Claude should read one relevant file, not your whole history.
         </p>
 
         <pre><code>{`knowledge/
@@ -89,10 +87,14 @@ export const blogPosts: BlogPost[] = [
 └── archives/
     └── old-launches.md`}</code></pre>
 
-        <h3 className="mt-12">Layer 2 — Daily Notes</h3>
+        <div className="rounded-xl border-l-4 border-emerald-400 bg-emerald-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-emerald-300 mb-2">✅ Quick Win</p>
+          <p className="text-sm text-[var(--foreground)]/80">Start with one active project file only. Over-structuring on day one slows adoption.</p>
+        </div>
+
+        <h3 className="mt-12"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-blue-400/20 text-blue-300 mr-2">Method 2</span>Daily Notes</h3>
         <p>
-          Daily notes are Claude's short-term continuity.
-          At startup, Claude reads yesterday's note and resumes instantly.
+          Daily notes provide session continuity: what changed, what broke, and what happens next.
         </p>
 
         <pre><code>{`# 2026-02-25
@@ -110,14 +112,14 @@ export const blogPosts: BlogPost[] = [
 - Add idempotency key
 - Re-run integration tests`}</code></pre>
 
-        <div className="mt-12 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5">
-          <p className="m-0"><strong>Quick Win:</strong> Add one startup rule to your Claude Project: “Before answering, read the relevant PARA file + yesterday’s daily note.” This single line eliminates most reset pain immediately.</p>
+        <div className="rounded-xl border-l-4 border-amber-400 bg-amber-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-amber-300 mb-2">💡 Pro Tip</p>
+          <p className="text-sm text-[var(--foreground)]/80">Add one startup rule to your project: “Before answering, read yesterday’s note and the active project file.” This removes most reset friction immediately.</p>
         </div>
 
-        <h3 className="mt-12">Layer 3 — Tacit Knowledge</h3>
+        <h3 className="mt-12"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-rose-400/20 text-rose-300 mr-2">Method 3</span>Tacit Knowledge</h3>
         <p>
-          This is your private operating style.
-          Capture things like writing tone, code conventions, and “never do this” constraints.
+          Tacit knowledge stores your style and constraints so outputs stay consistent over time.
         </p>
 
         <pre><code>{`# tacit.md
@@ -127,13 +129,18 @@ export const blogPosts: BlogPost[] = [
 - Ask before destructive commands.
 - Prefer practical examples over theory.`}</code></pre>
 
+        <div className="rounded-xl border-l-4 border-rose-400 bg-rose-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-rose-300 mb-2">⚠️ Warning</p>
+          <p className="text-sm text-[var(--foreground)]/80">Don’t mix ephemeral chatter into tacit rules. Keep tacit files durable and high-signal, or Claude will pick up noise as policy.</p>
+        </div>
+
         <hr className="border-[var(--border)] my-12" />
 
-        <h2 className="mt-16">Implementation Paths (Pick One)</h2>
+        <h2 className="mt-16">🛠️ Implementation Paths (Pick One)</h2>
         <ol>
-          <li><strong>Claude Projects:</strong> fastest setup in web UI, manual updates.</li>
-          <li><strong>Claude Code CLI:</strong> direct file read/write, ideal for developers.</li>
-          <li><strong>MCP memory server:</strong> best long-term flexibility and automation.</li>
+          <li><strong>Claude Projects:</strong> fastest setup, mostly manual updates.</li>
+          <li><strong>Claude Code CLI:</strong> direct file workflows for developers.</li>
+          <li><strong>MCP server:</strong> best for scale and cross-project memory.</li>
         </ol>
 
         <h3 className="mt-12">A) Claude Projects</h3>
@@ -163,17 +170,16 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
   }
 }`}</code></pre>
 
-        <p>
-          MCP lets Claude query and persist memory through a stable interface.
-          It is excellent once you need cross-project recall and less manual file handling.
-        </p>
+        <div className="rounded-xl border-l-4 border-cyan-400 bg-cyan-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-cyan-300 mb-2">🔵 Info</p>
+          <p className="text-sm text-[var(--foreground)]/80">MCP is ideal once you want shared memory across multiple agent workflows, not just one project repo.</p>
+        </div>
 
         <hr className="border-[var(--border)] my-12" />
 
-        <h2 className="mt-16">Automate Nightly Consolidation</h2>
+        <h2 className="mt-16">🌙 Automate Nightly Consolidation</h2>
         <p>
-          Your memory system compounds when it is maintained automatically.
-          Run one nightly job: summarize the day, promote durable insights to knowledge files, and trim noise.
+          Run one nightly job to summarize daily notes, promote durable insights into PARA files, and prune low-value noise.
         </p>
 
         <pre><code>{`# run at 2:00 AM daily
@@ -184,24 +190,21 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
 
         <hr className="border-[var(--border)] my-12" />
 
-        <h2 className="mt-16">Final Checklist</h2>
+        <h2 className="mt-16">✅ Final Checklist</h2>
         <ol>
           <li>Create PARA folders and seed one active project file.</li>
-          <li>Start daily notes with wins, decisions, blockers, and next actions.</li>
-          <li>Write tacit rules so Claude matches your preferences.</li>
-          <li>Add startup and shutdown routines.</li>
+          <li>Start daily notes with wins, decisions, blockers, next actions.</li>
+          <li>Write tacit rules for style and guardrails.</li>
+          <li>Add startup/shutdown routines.</li>
           <li>Automate nightly consolidation.</li>
         </ol>
 
         <p>
-          Once this is in place, Claude stops feeling like a brilliant stranger you re-brief every morning.
-          It starts behaving like an operator with continuity.
-          That shift is where real leverage appears.
+          With this in place, Claude stops acting like a brilliant stranger and starts operating with continuity.
         </p>
 
         <p>
-          If you want full templates, prompts, and production-ready configs, grab the <a href="/#pricing">AgentAwake Playbook</a>.
-          Setup is quick, and the payoff compounds daily.
+          If you want full templates and production-ready configs, grab the <a href="/#pricing">AgentAwake Playbook</a>.
         </p>
 
         <p>

@@ -48,7 +48,7 @@ export default function ChaptersPage() {
             return (
               <ScrollReveal key={tier} direction="fade">
                 <section>
-                <div className="flex items-center justify-between mb-5">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-5">
                   <h2 className="text-xl font-bold">
                     {meta.label} Tier <span className="text-[var(--text-tertiary)] text-base font-medium">({meta.price})</span>
                   </h2>
@@ -62,15 +62,15 @@ export default function ChaptersPage() {
                     const isFree = ch.requiredTier === "free";
                     const isNewPlatform = ch.number >= 28 && ch.number <= 35;
                     const card = (
-                      <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]/60 p-5 hover:border-[var(--accent)]/30 transition-all">
-                        <div className="flex items-start justify-between gap-3">
-                          <div>
+                      <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]/60 p-5 hover:border-[var(--accent)]/30 transition-all overflow-hidden">
+                        <div className="flex flex-col sm:flex-row items-start justify-between gap-3">
+                          <div className="min-w-0">
                             <div className="text-xs text-[var(--text-tertiary)] mb-1">Chapter {ch.number}</div>
-                            <h3 className="text-lg font-semibold leading-snug">{ch.emoji} {ch.title}</h3>
+                            <h3 className="text-lg font-semibold leading-snug break-words">{ch.emoji} {ch.title}</h3>
                           </div>
-                          <div className="flex items-center gap-2 shrink-0">
-                            {isNewPlatform && <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-[var(--accent)] text-white">NEW</span>}
-                            <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${meta.border} ${meta.bg} ${meta.accent}`}>
+                          <div className="flex flex-wrap items-center gap-2 shrink-0 max-w-full">
+                            {isNewPlatform && <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-[var(--accent)] text-white whitespace-nowrap">NEW</span>}
+                            <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border whitespace-nowrap ${meta.border} ${meta.bg} ${meta.accent}`}>
                               {meta.label} {tier !== "free" ? meta.price : ""}
                             </span>
                           </div>

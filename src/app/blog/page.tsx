@@ -31,11 +31,11 @@ export default function BlogPage() {
         </div>
       </nav>
 
-      <main className="pt-32 pb-24 max-w-[780px] mx-auto px-6">
+      <main className="pt-32 pb-24 max-w-[780px] mx-auto px-5 sm:px-6 overflow-x-hidden">
         <h1 className="text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-tight mb-4">Blog</h1>
         <p className="text-lg text-[var(--text-secondary)] mb-14">Practical guides for building AI agents that actually work.</p>
 
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 gap-8">
           {blogPosts.map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
               <article className="bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-7 hover:border-[var(--accent)]/20 transition-all">
@@ -46,7 +46,7 @@ export default function BlogPage() {
                 </div>
                 <h2 className="text-xl font-semibold mb-2 group-hover:text-[var(--accent-light)] transition-colors">{post.title}</h2>
                 <p className="text-[0.92rem] text-[var(--text-secondary)] leading-relaxed">{post.description}</p>
-                <div className="flex gap-2 mt-4">
+                <div className="flex flex-wrap gap-2 mt-4">
                   {post.tags.map((tag) => (
                     <span key={tag} className="text-[0.7rem] font-medium uppercase tracking-wide px-2 py-1 rounded-md bg-[var(--surface-hover)] text-[var(--text-secondary)]">{tag}</span>
                   ))}
