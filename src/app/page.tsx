@@ -862,11 +862,11 @@ function Pricing() {
         <span className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-3.5 block text-center">Pricing</span>
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold tracking-tight mb-2 text-center">Choose Your Path</h2>
         <p className="text-[1.05rem] text-[var(--text-secondary)] text-center mb-14">One-time purchase. Interactive chapters. Lifetime updates included.</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
           {tiers.map((t, index) => (
-            <ScrollReveal key={t.tier} delay={index * 100}>
-              <GlowCard className="rounded-2xl overflow-visible">
-                <div className={`rounded-2xl p-7 sm:p-9 relative transition-all flex flex-col h-full overflow-visible ${
+            <ScrollReveal key={t.tier} delay={index * 100} className="flex flex-col h-full">
+              <GlowCard className="rounded-2xl overflow-visible flex-1 flex flex-col">
+                <div className={`rounded-2xl p-7 sm:p-9 relative transition-all flex flex-col flex-1 overflow-visible ${
                   t.featured
                     ? "mt-4 sm:mt-0 border border-[var(--accent-light)]/35 bg-gradient-to-b from-[var(--accent)]/[0.06] via-[var(--accent-light)]/[0.04] to-[var(--surface)] shadow-[0_0_70px_rgba(232,119,46,0.1)]"
                     : "bg-[var(--surface)]/95 border border-[var(--border)]/80 hover:border-cyan-400/35 hover:-translate-y-1"

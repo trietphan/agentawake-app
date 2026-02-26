@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     purchasedAt: new Date().toISOString(),
   });
 
-  const res = NextResponse.redirect(new URL("/guide/three-layer-memory", req.url));
+  const res = NextResponse.redirect(new URL("/guide/why-your-agent-has-amnesia", req.url));
   res.cookies.set("af_token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
