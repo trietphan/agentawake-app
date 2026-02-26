@@ -2,6 +2,7 @@
 import React from "react";
 import { AmnesiaQuiz, CostCalculator, SpotTheAgent } from "../components/BlogGames";
 import TweetableQuote from "../components/TweetableQuote";
+import CodeBlock from "@/components/CodeBlock";
 
 export interface BlogPost {
   slug: string;
@@ -55,10 +56,7 @@ export const blogPosts: BlogPost[] = [
           Think of memory like an operating system: long-term docs, daily state, and behavioral defaults.
           Each layer has one job, which keeps retrieval fast and updates clean.
         </p>
-
-        <div className="relative my-6">
-          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">text</span>
-          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`Memory System (Claude)
+        <CodeBlock lang="text" code={`Memory System (Claude)
 
 ┌───────────────────────────────────────┐
 │ Layer 1: Knowledge Base (PARA)       │
@@ -73,17 +71,13 @@ export const blogPosts: BlogPost[] = [
 ┌───────────────────▼───────────────────┐
 │ Layer 3: Tacit Knowledge              │
 │ preferences, style, guardrails        │
-└───────────────────────────────────────┘`}</code></pre>
-        </div>
+└───────────────────────────────────────┘`} />
 
         <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-amber-400/20 text-amber-300 mr-2">Method 1</span>PARA Knowledge Base</h3>
         <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           PARA keeps context discoverable and scoped. Claude should read one relevant file, not your whole history.
         </p>
-
-        <div className="relative my-6">
-          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">tree</span>
-          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`knowledge/
+        <CodeBlock lang="tree" code={`knowledge/
 ├── projects/
 │   ├── agentawake-site.md
 │   └── sales-automation.md
@@ -93,8 +87,7 @@ export const blogPosts: BlogPost[] = [
 ├── resources/
 │   └── api-references.md
 └── archives/
-    └── old-launches.md`}</code></pre>
-        </div>
+    └── old-launches.md`} />
 
         <div className="rounded-xl border-l-4 border-emerald-400 bg-emerald-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-emerald-300 mb-2">✅ Quick Win</p>
@@ -105,10 +98,7 @@ export const blogPosts: BlogPost[] = [
         <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           Daily notes provide session continuity: what changed, what broke, and what happens next.
         </p>
-
-        <div className="relative my-6">
-          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">markdown</span>
-          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`# 2026-02-25
+        <CodeBlock lang="markdown" code={`# 2026-02-25
 ## Wins
 - Finished pricing page refactor
 
@@ -121,8 +111,7 @@ export const blogPosts: BlogPost[] = [
 
 ## Next actions
 - Add idempotency key
-- Re-run integration tests`}</code></pre>
-        </div>
+- Re-run integration tests`} />
 
         <div className="rounded-xl border-l-4 border-amber-400 bg-amber-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-amber-300 mb-2">💡 Pro Tip</p>
@@ -133,16 +122,12 @@ export const blogPosts: BlogPost[] = [
         <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           Tacit knowledge stores your style and constraints so outputs stay consistent over time.
         </p>
-
-        <div className="relative my-6">
-          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">markdown</span>
-          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`# tacit.md
+        <CodeBlock lang="markdown" code={`# tacit.md
 - Default to TypeScript and strict mode.
 - Keep answers concise unless asked for detail.
 - Never use markdown tables in Discord.
 - Ask before destructive commands.
-- Prefer practical examples over theory.`}</code></pre>
-        </div>
+- Prefer practical examples over theory.`} />
 
         <div className="rounded-xl border-l-4 border-rose-400 bg-rose-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-rose-300 mb-2">⚠️ Warning</p>
@@ -182,40 +167,31 @@ export const blogPosts: BlogPost[] = [
         </div>
 
         <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]">A) Claude Projects</h3>
-        <div className="relative my-6">
-          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">text</span>
-          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`Project Instructions:
+        <CodeBlock lang="text" code={`Project Instructions:
 1. Read knowledge/projects/<active-project>.md before coding.
 2. Read daily-notes/YYYY-MM-DD.md before planning.
 3. Update both files after major decisions.
-4. Keep answers aligned with tacit.md.`}</code></pre>
-        </div>
+4. Keep answers aligned with tacit.md.`} />
 
         <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]">B) Claude Code CLI</h3>
-        <div className="relative my-6">
-          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">bash</span>
-          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`# 1) bootstrap folders
+        <CodeBlock lang="bash" code={`# 1) bootstrap folders
 mkdir -p knowledge/{projects,areas,resources,archives} daily-notes
 
 # 2) ask Claude to operate with memory files
 claude "Read knowledge/projects/agentawake-site.md and daily-notes/$(date +%F).md, implement next task, then update both files with decisions and next actions."
 
 # 3) append a quick memory note manually when needed
-echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`}</code></pre>
-        </div>
+echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`} />
 
         <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]">C) MCP Memory Server</h3>
-        <div className="relative my-6">
-          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">json</span>
-          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`{
+        <CodeBlock lang="json" code={`{
   "mcpServers": {
     "memory": {
       "command": "npx",
       "args": ["@modelcontextprotocol/server-memory"]
     }
   }
-}`}</code></pre>
-        </div>
+}`} />
 
         <div className="rounded-xl border-l-4 border-cyan-400 bg-cyan-400/8 p-5 my-8">
           <p className="text-sm font-semibold text-cyan-300 mb-2">🔵 Info</p>
@@ -236,12 +212,8 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
         <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           Run one nightly job to summarize daily notes, promote durable insights into PARA files, and prune low-value noise.
         </p>
-
-        <div className="relative my-6">
-          <span className="absolute top-3 right-3 text-[0.65rem] font-mono text-[var(--text-tertiary)] uppercase">cron</span>
-          <pre className="bg-[#0d1117] border border-[var(--border)] rounded-xl p-4 pt-5 overflow-x-auto max-w-full text-[0.8rem] sm:text-[0.85rem] leading-relaxed"><code className="text-emerald-300/90 whitespace-pre-wrap break-words">{`# run at 2:00 AM daily
-0 2 * * * cd /my/project && claude "Review today's daily note, update relevant knowledge/* files, and append 3 durable lessons to tacit.md if applicable."`}</code></pre>
-        </div>
+        <CodeBlock lang="cron" code={`# run at 2:00 AM daily
+0 2 * * * cd /my/project && claude "Review today's daily note, update relevant knowledge/* files, and append 3 durable lessons to tacit.md if applicable."`} />
 
         <AmnesiaQuiz />
         <CostCalculator />
@@ -342,7 +314,7 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
           context.
         </p>
 
-        <pre><code>{`knowledge/
+        <CodeBlock code={`knowledge/
 ├── projects/        # Active work with deadlines
 │   ├── my-saas.md
 │   └── trading-bot.md
@@ -351,7 +323,7 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
 ├── resources/       # Reference material
 │   └── api-docs.md
 └── archives/        # Done and dusted
-    └── old-project.md`}</code></pre>
+    └── old-project.md`} />
 
         <p>
           <strong>File two: Daily Notes.</strong> Every day gets a markdown file
@@ -498,7 +470,7 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
           fast and lean.
         </p>
 
-        <pre><code>{`knowledge/
+        <CodeBlock code={`knowledge/
 ├── projects/           # Active quests
 │   ├── agentawake.md
 │   └── trading-bot.md
@@ -509,7 +481,7 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
 │   └── api-docs.md
 ├── archives/           # Completed / paused
 │   └── old-project.md
-└── tacit.md            # The unGoogleable wisdom`}</code></pre>
+└── tacit.md            # The unGoogleable wisdom`} />
 
         <SpotTheAgent />
 
@@ -519,7 +491,7 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
 
         <p>
           When your agent needs to work on the trading bot, it reads
-          <code> knowledge/projects/trading-bot.md</code>. Not the entire
+          <code className="whitespace-pre-wrap break-words word-break-break-word"> knowledge/projects/trading-bot.md</code>. Not the entire
           knowledge base. Not every shower thought you've ever had. <strong>Just
           the relevant file with exactly the context that matters.</strong>
         </p>
@@ -544,7 +516,7 @@ echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`
           been an email.
         </p>
 
-        <pre><code>{`# Project: Trading Bot
+        <CodeBlock code={`# Project: Trading Bot
 ## Status: Active
 ## Objective
 Automated S&P 500 and Gold trading system.
@@ -555,7 +527,7 @@ Automated S&P 500 and Gold trading system.
 
 ## Next Actions
 - Backtest February strategy
-- Add Gold correlation alerts`}</code></pre>
+- Add Gold correlation alerts`} />
 
         <p>
           <strong>Area files</strong> capture your ongoing approach and
@@ -580,12 +552,12 @@ Automated S&P 500 and Gold trading system.
           through chaos" to "walk directly to the right shelf":
         </p>
 
-        <pre><code>{`## Knowledge Base Navigation
+        <CodeBlock code={`## Knowledge Base Navigation
 - Starting a project task? Read knowledge/projects/<project>.md first
 - Need ongoing context? Check knowledge/areas/<area>.md
 - Looking for reference? Browse knowledge/resources/
 - Never read archives unless specifically asked
-- After completing work, update the relevant file`}</code></pre>
+- After completing work, update the relevant file`} />
 
         <p>
           Five lines. That's the difference between searching and

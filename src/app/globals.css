@@ -46,8 +46,21 @@ pre, code {
   max-width: 100%;
 }
 pre {
-  overflow-x: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Force code blocks to wrap on mobile */
+@media (max-width: 640px) {
+  pre, pre code {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-x: hidden !important;
+  }
 }
 
 /* Custom scrollbar */
