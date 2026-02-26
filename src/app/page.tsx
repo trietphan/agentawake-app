@@ -97,8 +97,11 @@ function Hero() {
           Your AI Agent Forgets Everything.{" "}
           <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent animate-gradient-shift">Fix It in 45 Minutes.</span>
         </h1>
-        <p className="text-lg text-[var(--text-secondary)] max-w-[560px] mx-auto mb-11 leading-relaxed">
+        <p className="text-lg text-[var(--text-secondary)] max-w-[560px] mx-auto mb-5 leading-relaxed">
           The complete system for building AI agents that remember, learn, and work autonomously — so you save 5+ hours every week.
+        </p>
+        <p className="text-sm text-[var(--text-tertiary)] mb-7">
+          👥 Join 50+ builders who&apos;ve given their agents memory
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
           <a href="#pricing" className="bg-[var(--accent-muted)] text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-[var(--accent)] transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--accent)]/10">
@@ -119,14 +122,31 @@ function Hero() {
 }
 
 function PlatformStrip() {
+  const platforms = [
+    { name: "Claude", emoji: "🟣" },
+    { name: "ChatGPT", emoji: "🟢" },
+    { name: "CrewAI", emoji: "🚀" },
+    { name: "LangChain", emoji: "🔗" },
+    { name: "Cursor", emoji: "💻" },
+    { name: "n8n", emoji: "⚙️" },
+    { name: "OpenClaw", emoji: "⚡" },
+    { name: "AutoGPT", emoji: "🤖" },
+  ];
+
   return (
-    <div className="border-b border-[var(--border)]/40 py-4">
+    <div className="border-y border-[var(--border)]/40 py-6 bg-[var(--surface)]/40">
       <div className="max-w-[1080px] mx-auto px-6">
-        <p className="text-center text-[0.65rem] font-bold uppercase tracking-widest text-[var(--text-tertiary)] mb-3 opacity-60">Works with</p>
-        <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap opacity-50">
-          {["Claude", "ChatGPT", "CrewAI", "LangChain", "n8n", "Cursor", "AutoGPT", "OpenClaw"].map((p) => (
-            <span key={p} className="text-xs font-semibold uppercase tracking-widest text-[var(--text-tertiary)]">
-              {p}
+        <p className="text-center text-[0.65rem] font-bold uppercase tracking-widest text-[var(--text-tertiary)] mb-4 opacity-70">
+          As seen building with
+        </p>
+        <div className="flex items-center justify-center gap-3 flex-wrap">
+          {platforms.map((p) => (
+            <span
+              key={p.name}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] text-[0.75rem] font-semibold text-[var(--text-secondary)] hover:border-[var(--accent)]/30 hover:text-[var(--accent-light)] transition-colors"
+            >
+              <span className="text-[0.7rem]">{p.emoji}</span>
+              {p.name}
             </span>
           ))}
         </div>
@@ -154,6 +174,18 @@ function BuildersTestimonials() {
       name: "Dev R.",
       role: "Full-Stack Developer",
       emoji: "⚡",
+    },
+    {
+      quote: "I automated my entire content pipeline — research, drafting, scheduling — using the n8n cron recipes. What used to eat my Sundays now runs itself. I just add the personality layer.",
+      name: "Jamie L.",
+      role: "Solopreneur & Content Creator",
+      emoji: "✍️",
+    },
+    {
+      quote: "We used this to onboard three junior devs to our AI workflow stack in under a week. The AGENTS.md + SOUL.md templates gave them a mental model that would've taken months to absorb otherwise.",
+      name: "Marcus T.",
+      role: "Dev Team Lead",
+      emoji: "🧑‍💻",
     },
   ];
 
@@ -791,6 +823,7 @@ function Pricing() {
       name: "Starter",
       product: "The Foundation",
       price: "$9",
+      wasPrice: "$19",
       priceCompare: "Less than a Chipotle burrito 🌯",
       desc: "Everything you need to give your first agent persistent memory. Set up in one afternoon.",
       bestFor: "Getting started fast",
@@ -810,6 +843,7 @@ function Pricing() {
       name: "Professional",
       product: "The Operator's Toolkit",
       price: "$19",
+      wasPrice: "$39",
       priceCompare: "Less than a pizza night 🍕",
       desc: "Production templates, automation recipes, and 3 real case studies. Build agents that run your business.",
       bestFor: "Solo operators & freelancers",
@@ -829,6 +863,7 @@ function Pricing() {
       name: "Premium",
       product: "The Complete System",
       price: "$29",
+      wasPrice: "$69",
       priceCompare: "One month of Netflix you barely watch 📺 (but this keeps working forever)",
       desc: "Multi-agent orchestration, 8 platform guides, revenue playbook, and advanced security. The full arsenal.",
       bestFor: "Agencies & serious builders",
@@ -878,6 +913,10 @@ function Pricing() {
                   )}
                   <div className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-1">{t.name}</div>
                   <div className="text-xl font-bold mb-3">{t.product}</div>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-sm line-through text-[var(--text-tertiary)] font-medium">{t.wasPrice}</span>
+                    <span className="text-[0.65rem] font-bold uppercase tracking-wide text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded">Launch Price</span>
+                  </div>
                   <div className="text-[2.8rem] font-extrabold tracking-tight mb-1">{t.price} <span className="text-lg font-medium text-[var(--text-tertiary)]">one-time</span></div>
                   <p className="text-xs text-[var(--accent-light)]/80 font-medium mb-3">{t.priceCompare}</p>
                   <p className="text-[0.9rem] text-[var(--text-secondary)] mb-3 leading-relaxed">{t.desc}</p>

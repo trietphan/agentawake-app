@@ -7,8 +7,8 @@ export default function ExitIntent() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    // Don't show if already dismissed or on mobile
-    if (localStorage.getItem("exit_dismissed") || window.innerWidth < 768) return;
+    // Don't show if already dismissed this session, or on mobile
+    if (sessionStorage.getItem("exit_dismissed") || window.innerWidth < 768) return;
 
     const handler = (e: MouseEvent) => {
       if (e.clientY < 10 && !dismissed) {
@@ -22,7 +22,8 @@ export default function ExitIntent() {
   const dismiss = () => {
     setDismissed(true);
     setShown(false);
-    localStorage.setItem("exit_dismissed", "1");
+    // Only block for this session — resets when tab closes
+    sessionStorage.setItem("exit_dismissed", "1");
   };
 
   if (!shown) return null;
