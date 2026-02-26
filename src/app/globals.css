@@ -159,6 +159,13 @@ pre {
   }
 }
 
+/* Pricing cards equal height — cascade through ScrollReveal + GlowCard wrappers */
+#pricing .grid > div,
+#pricing .grid > div > div,
+#pricing .grid > div > div > div {
+  height: 100%;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-blob,
   .animate-blob-delay,
