@@ -9,7 +9,7 @@ export default function GlowCard({ children, className = "" }: { children: React
   return (
     <div
       ref={ref}
-      className={`relative overflow-hidden ${className}`}
+      className={`relative overflow-visible ${className}`}
       onMouseMove={(e) => {
         const rect = ref.current?.getBoundingClientRect();
         if (rect) setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
@@ -19,7 +19,7 @@ export default function GlowCard({ children, className = "" }: { children: React
     >
       {hovering && (
         <div
-          className="pointer-events-none absolute -inset-px z-10 rounded-2xl transition-opacity duration-300"
+          className="pointer-events-none absolute -inset-px z-10 rounded-2xl overflow-hidden transition-opacity duration-300"
           style={{
             background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, rgba(232,119,46,0.08), transparent 60%)`,
           }}

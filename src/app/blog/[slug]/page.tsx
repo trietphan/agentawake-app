@@ -47,7 +47,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
     datePublished: post.date,
@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
       </nav>
 
-      <main className="pt-32 pb-24 max-w-[720px] mx-auto px-6">
+      <main className="pt-32 pb-24 max-w-[680px] mx-auto px-6">
         <Link href="/blog" className="text-sm text-[var(--accent-light)] hover:text-[var(--accent-light)] transition-colors mb-8 inline-block">← Back to Blog</Link>
 
         <article>
@@ -112,14 +112,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           <div className="prose prose-invert prose-zinc max-w-none
             prose-headings:font-bold prose-headings:tracking-tight
-            prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4
-            prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-3
-            prose-p:text-[0.95rem] prose-p:leading-relaxed prose-p:text-[var(--foreground)]/80 prose-p:mb-4
-            prose-li:text-[0.95rem] prose-li:text-[var(--foreground)]/80
+            prose-h2:text-xl prose-h2:mt-12 prose-h2:mb-5
+            prose-h3:text-lg prose-h3:mt-10 prose-h3:mb-4
+            prose-p:text-[0.98rem] prose-p:leading-8 prose-p:text-[var(--foreground)]/80 prose-p:mb-6
+            prose-li:text-[0.95rem] prose-li:text-[var(--foreground)]/80 prose-li:leading-7
             prose-a:text-[var(--accent-light)] prose-a:no-underline hover:prose-a:text-[var(--accent-light)]
             prose-strong:text-[var(--foreground)]
             prose-code:text-emerald-300/90 prose-code:text-xs prose-code:bg-[var(--surface-hover)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-            prose-pre:bg-[#0d1117] prose-pre:border prose-pre:border-[var(--border)] prose-pre:rounded-xl
+            prose-pre:bg-[#0d1117] prose-pre:border prose-pre:border-[var(--border)] prose-pre:rounded-xl prose-pre:px-5 prose-pre:py-4
           ">
             {post.content}
           </div>

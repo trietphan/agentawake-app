@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { chapters } from "@/lib/chapters";
+import { blogPosts } from "@/content/blog-posts";
 
 const siteUrl = "https://agentawake.com";
 
@@ -9,6 +10,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: ch.requiredTier === "free" ? 0.9 : 0.7,
+  }));
+
+  const blogPages = blogPosts.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
   }));
 
   return [
@@ -24,6 +32,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.95,
     },
+    {
+      url: `${siteUrl}/chapters`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${siteUrl}/blog/how-to-give-claude-persistent-memory`,
+      lastModified: new Date("2026-02-25"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...blogPages,
     ...guidePages,
   ];
 }

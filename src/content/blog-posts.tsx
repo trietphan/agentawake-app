@@ -23,99 +23,185 @@ export const blogPosts: BlogPost[] = [
     tags: ["Claude persistent memory", "Claude memory system", "give Claude long-term memory", "Claude Code", "MCP"],
     content: (
       <>
-        <p>
-          Claude 3.7 is widely regarded as one of the smartest models on the planet. Its coding abilities, reasoning, and context processing are genuinely mind-bending. But every time you open a new chat, you hit the same wall: <strong>Claude has amnesia.</strong>
+        <div className="rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 p-5">
+          <h3 className="mt-0 mb-2">TL;DR</h3>
+          <ol className="m-0 list-decimal pl-5 space-y-1">
+            <li>Claude forgets between sessions because chat context is temporary, not persistent memory.</li>
+            <li>Use a 3-layer architecture: Knowledge Base (PARA), Daily Notes, and Tacit Knowledge.</li>
+            <li>Implement with Claude Projects, Claude Code CLI, or MCP servers.</li>
+            <li>Add nightly automation so memory gets better while you sleep.</li>
+          </ol>
+        </div>
+
+        <p className="mt-16">
+          Claude 3.7 is insanely good at reasoning, coding, and synthesis. But once the session ends, so does its working memory.
+          That means every new chat starts with expensive re-explaining.
+          You are not fighting model quality—you are fighting architecture.
         </p>
 
         <p>
-          It forgets your preferred tech stack. It forgets the architecture decisions you made yesterday. It forgets that you absolutely despise Tailwind CSS. Every new session forces you into a tedious ritual of re-explaining who you are, what you're doing, and how you want things done.
+          The fix is not "paste more files into context." Big prompts feel smart, but they are noisy and fragile.
+          Persistent memory means Claude can reliably find, update, and reuse structured context across days.
         </p>
+
+        <TweetableQuote quote="Persistent memory is not a bigger prompt. It's a stable architecture Claude can read and update every day." />
+
+        <hr className="border-[var(--border)] my-12" />
+
+        <h2 className="mt-16">The 3-Layer Memory Architecture</h2>
+        <p>
+          Think of this like a kitchen system, not a junk drawer.
+          One layer stores stable ingredients, one tracks what happened today, and one encodes your style and non-negotiables.
+        </p>
+
+        <pre><code>{`Memory System (Claude)
+
+┌───────────────────────────────────────┐
+│ Layer 1: Knowledge Base (PARA)       │
+│ projects / areas / resources / archive│
+└───────────────────┬───────────────────┘
+                    │ read/write
+┌───────────────────▼───────────────────┐
+│ Layer 2: Daily Notes                  │
+│ decisions, blockers, next actions     │
+└───────────────────┬───────────────────┘
+                    │ distilled nightly
+┌───────────────────▼───────────────────┐
+│ Layer 3: Tacit Knowledge              │
+│ preferences, style, guardrails        │
+└───────────────────────────────────────┘`}</code></pre>
+
+        <h3 className="mt-12">Layer 1 — Knowledge Base (PARA)</h3>
+        <p>
+          PARA keeps files discoverable.
+          Claude should read the minimum relevant file, not your entire history.
+        </p>
+
+        <pre><code>{`knowledge/
+├── projects/
+│   ├── agentawake-site.md
+│   └── sales-automation.md
+├── areas/
+│   ├── marketing.md
+│   └── support.md
+├── resources/
+│   └── api-references.md
+└── archives/
+    └── old-launches.md`}</code></pre>
+
+        <h3 className="mt-12">Layer 2 — Daily Notes</h3>
+        <p>
+          Daily notes are Claude's short-term continuity.
+          At startup, Claude reads yesterday's note and resumes instantly.
+        </p>
+
+        <pre><code>{`# 2026-02-25
+## Wins
+- Finished pricing page refactor
+
+## Decisions
+- Keep starter tier at $9
+- Move FAQ above footer
+
+## Blockers
+- Stripe webhook retries flaky in staging
+
+## Next actions
+- Add idempotency key
+- Re-run integration tests`}</code></pre>
+
+        <div className="mt-12 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5">
+          <p className="m-0"><strong>Quick Win:</strong> Add one startup rule to your Claude Project: “Before answering, read the relevant PARA file + yesterday’s daily note.” This single line eliminates most reset pain immediately.</p>
+        </div>
+
+        <h3 className="mt-12">Layer 3 — Tacit Knowledge</h3>
+        <p>
+          This is your private operating style.
+          Capture things like writing tone, code conventions, and “never do this” constraints.
+        </p>
+
+        <pre><code>{`# tacit.md
+- Default to TypeScript and strict mode.
+- Keep answers concise unless asked for detail.
+- Never use markdown tables in Discord.
+- Ask before destructive commands.
+- Prefer practical examples over theory.`}</code></pre>
+
+        <hr className="border-[var(--border)] my-12" />
+
+        <h2 className="mt-16">Implementation Paths (Pick One)</h2>
+        <ol>
+          <li><strong>Claude Projects:</strong> fastest setup in web UI, manual updates.</li>
+          <li><strong>Claude Code CLI:</strong> direct file read/write, ideal for developers.</li>
+          <li><strong>MCP memory server:</strong> best long-term flexibility and automation.</li>
+        </ol>
+
+        <h3 className="mt-12">A) Claude Projects</h3>
+        <pre><code>{`Project Instructions:
+1. Read knowledge/projects/<active-project>.md before coding.
+2. Read daily-notes/YYYY-MM-DD.md before planning.
+3. Update both files after major decisions.
+4. Keep answers aligned with tacit.md.`}</code></pre>
+
+        <h3 className="mt-12">B) Claude Code CLI</h3>
+        <pre><code>{`# 1) bootstrap folders
+mkdir -p knowledge/{projects,areas,resources,archives} daily-notes
+
+# 2) ask Claude to operate with memory files
+claude "Read knowledge/projects/agentawake-site.md and daily-notes/$(date +%F).md, implement next task, then update both files with decisions and next actions."
+
+# 3) append a quick memory note manually when needed
+echo "- Decided to use edge runtime for feed.xml" >> daily-notes/$(date +%F).md`}</code></pre>
+
+        <h3 className="mt-12">C) MCP Memory Server</h3>
+        <pre><code>{`{
+  "mcpServers": {
+    "memory": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-memory"]
+    }
+  }
+}`}</code></pre>
 
         <p>
-          You might think the massive 200K context window solves this. Just dump everything in! But dumping raw files isn't memory—it's noise. It burns tokens, slows down responses, and leads to hallucinations. <strong>True persistent memory isn't about cramming more data into the prompt; it's about giving Claude an organized brain.</strong>
+          MCP lets Claude query and persist memory through a stable interface.
+          It is excellent once you need cross-project recall and less manual file handling.
         </p>
 
-        <TweetableQuote quote="Dumping raw files into a 200K context window isn't memory—it's noise. True persistent memory is about giving Claude an organized brain." />
+        <hr className="border-[var(--border)] my-12" />
+
+        <h2 className="mt-16">Automate Nightly Consolidation</h2>
+        <p>
+          Your memory system compounds when it is maintained automatically.
+          Run one nightly job: summarize the day, promote durable insights to knowledge files, and trim noise.
+        </p>
+
+        <pre><code>{`# run at 2:00 AM daily
+0 2 * * * cd /my/project && claude "Review today's daily note, update relevant knowledge/* files, and append 3 durable lessons to tacit.md if applicable."`}</code></pre>
 
         <AmnesiaQuiz />
-
-        <h2>The Three-Layer Memory Solution</h2>
-
-        <p>
-          To fix this permanently, we don't need expensive third-party tools or complex vector databases. We need a simple, folder-based architecture that Claude can read and update. We break this down into three layers:
-        </p>
-
-        <h3>Layer 1: The Knowledge Base (PARA Method)</h3>
-        <p>
-          If you dump all your notes into a single file, Claude will struggle to find what matters. Instead, we use the PARA method (Projects, Areas, Resources, Archives) specifically tailored for AI agents.
-        </p>
-        <pre><code>{`memory/
-├── projects/        # Active work (e.g., website-redesign.md)
-├── areas/           # Ongoing responsibilities (e.g., marketing.md)
-├── resources/       # Reference material (e.g., api-keys-mock.md)
-└── archives/        # Completed stuff`}</code></pre>
-        <p>
-          By structuring files this way, Claude doesn't have to read your entire life story. It just reads <code>projects/website-redesign.md</code> when you ask about the redesign.
-        </p>
-
-        <h3>Layer 2: Daily Notes (Working Memory)</h3>
-        <p>
-          Your Knowledge Base is long-term memory. Your <strong>Daily Notes</strong> are working memory. Create a <code>MEMORY.md</code> or a daily log file where Claude writes down decisions made, blockers encountered, and tasks for tomorrow. When Claude wakes up the next day, it reads this file and instantly knows the status of everything.
-        </p>
-
-        <h3>Layer 3: Tacit Knowledge (Custom Instructions)</h3>
-        <p>
-          This is the un-Googleable stuff. In your Claude Project instructions or global config, include a section for <em>Tacit Knowledge</em>. Things like: "Always use TypeScript," "Keep explanations under 3 paragraphs," or "Never suggest MongoDB." This acts as Claude's personality and ruleset.
-        </p>
-
         <CostCalculator />
 
-        <h2>3 Ways to Implement Persistent Memory in 2026</h2>
+        <hr className="border-[var(--border)] my-12" />
 
-        <p>Depending on how you use Claude, here is exactly how to set this up.</p>
-
-        <h3>Method A: Claude Projects (For the Web UI)</h3>
-        <p>
-          If you use Claude.ai in the browser, <strong>Claude Projects</strong> is your best friend. 
-          Create a new Project and upload your PARA folders as Project Knowledge. Then, set custom instructions telling Claude to explicitly read from these files before answering. The catch? You have to manually update the files when things change. It's not fully automated, but it completely eliminates the "blank slate" problem for active projects.
-        </p>
-
-        <h3>Method B: Claude Code CLI (For Developers)</h3>
-        <p>
-          Anthropic's new <strong>Claude Code</strong> CLI is a game-changer. It runs in your terminal, accesses your file system, and can <em>write</em> to your memory files natively.
-        </p>
-        <pre><code>{`# In your terminal
-claude "Read memory/projects/app.md. Implement the next feature, then update the memory file with your progress."`}</code></pre>
-        <p>
-          Claude Code will read the file, do the work, and update the markdown file. Persistent memory, fully automated right in your codebase.
-        </p>
-
-        <h3>Method C: MCP Memory Servers (For Power Users)</h3>
-        <p>
-          The <strong>Model Context Protocol (MCP)</strong> allows Claude to interface dynamically with external memory servers. By running an MCP memory server, Claude can seamlessly store, index, and retrieve memories across sessions without you having to manage files manually. This is the closest thing to native human-like memory, allowing Claude to build a persistent graph of knowledge about you.
-        </p>
-
-        <h2>Automating the Heartbeat</h2>
+        <h2 className="mt-16">Final Checklist</h2>
+        <ol>
+          <li>Create PARA folders and seed one active project file.</li>
+          <li>Start daily notes with wins, decisions, blockers, and next actions.</li>
+          <li>Write tacit rules so Claude matches your preferences.</li>
+          <li>Add startup and shutdown routines.</li>
+          <li>Automate nightly consolidation.</li>
+        </ol>
 
         <p>
-          For local setups (like Claude Code), you can automate memory consolidation using simple shell scripts and cron jobs. A nightly script can trigger Claude to review the day's logs and update the Knowledge Base.
-        </p>
-
-        <pre><code>{`# Example Cron Job (Runs every night at 2 AM)
-0 2 * * * cd /my/project && claude "Review today's logs and update the knowledge base"`}</code></pre>
-
-        <p>
-          With this automated heartbeat, Claude cleans up its own memory while you sleep.
-        </p>
-
-        <h2>Stop Starting Over Every Day</h2>
-
-        <p>
-          Giving Claude persistent memory changes how you work forever. You move from treating AI like a temporary intern to treating it like a dedicated partner who remembers your business, your codebase, and your preferences.
+          Once this is in place, Claude stops feeling like a brilliant stranger you re-brief every morning.
+          It starts behaving like an operator with continuity.
+          That shift is where real leverage appears.
         </p>
 
         <p>
-          If you want the complete, copy-paste system—including the exact folder templates, Claude system prompts, MCP configurations, and cron automation scripts—the <a href="/#pricing">AgentAwake Playbook</a> gives you the full 36-chapter blueprint. You can set it up in 15 minutes and never re-explain yourself again.
+          If you want full templates, prompts, and production-ready configs, grab the <a href="/#pricing">AgentAwake Playbook</a>.
+          Setup is quick, and the payoff compounds daily.
         </p>
 
         <p>

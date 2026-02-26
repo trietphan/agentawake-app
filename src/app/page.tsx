@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
-import { StructuredData } from "./structured-data";
 import dynamic from "next/dynamic";
 import Reveal from "@/components/Reveal";
+import ScrollReveal from "@/components/ScrollReveal";
 import RotatingText from "@/components/RotatingText";
 import GlowCard from "@/components/GlowCard";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -10,6 +10,33 @@ import MobileNav from "@/components/MobileNav";
 
 const EmailCaptureComponent = dynamic(() => import("@/components/EmailCapture"), { loading: () => <div className="h-12" /> });
 const MobileStickyCTA = dynamic(() => import("@/components/MobileStickyCTA"), { loading: () => <div /> });
+
+const faqItems = [
+  {
+    q: "Does this work with any AI agent platform?",
+    a: "Yes! The core architecture (memory layers, automation patterns, security model) is universal. OpenClaw gets full copy-paste configs. Claude, ChatGPT, CrewAI, LangChain, and even no-code tools like n8n/Zapier can all use the patterns.",
+  },
+  {
+    q: "How technical do I need to be?",
+    a: "If you can copy-paste commands into a terminal, you can follow this guide. We explain everything with real-life analogies — kitchens, dating, Netflix. The Pro tier has configs you literally copy and paste.",
+  },
+  {
+    q: "What makes this different from free tutorials?",
+    a: "Free tutorials show you how to chat with an AI. This shows you how to build one that works autonomously. It's the difference between a chatbot and a business operator. Plus, the system documented here built this product.",
+  },
+  {
+    q: "Wait — this was really built by an AI agent?",
+    a: "Yes. The agent (ToDaMoon 🐾) that built this landing page, the interactive guide, wired Stripe, and deployed to Vercel is the same system documented in the playbook. We're selling the map we used to navigate the territory.",
+  },
+  {
+    q: "Do I get updates?",
+    a: "All tiers include lifetime updates. As we improve our system, the playbook gets updated. Accelerator members get quarterly deep-dives with new case studies and techniques.",
+  },
+  {
+    q: "Can I get a refund?",
+    a: "Yes — 30-day money-back guarantee. If you follow the guide and don't see meaningful improvement, we refund in full. No questions asked.",
+  },
+] as const;
 
 function NavBar() {
   return (
@@ -94,11 +121,13 @@ function SocialProof() {
           </span>
         </div>
         <div className="flex justify-center flex-wrap gap-16">
-        {stats.map((s) => (
-          <div key={s.lbl} className="text-center">
-            <div className="text-[2.2rem] font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent">{s.num}</div>
-            <div className="text-sm text-[var(--text-tertiary)] font-medium mt-0.5">{s.lbl}</div>
-          </div>
+        {stats.map((s, index) => (
+          <ScrollReveal key={s.lbl} delay={(index % 3) * 100}>
+            <div className="text-center">
+              <div className="text-[2.2rem] font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent">{s.num}</div>
+              <div className="text-sm text-[var(--text-tertiary)] font-medium mt-0.5">{s.lbl}</div>
+            </div>
+          </ScrollReveal>
         ))}
         </div>
       </div>
@@ -168,12 +197,14 @@ function Problem() {
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4">Your AI Agent Has Amnesia</h2>
         <p className="text-[1.05rem] text-[var(--text-secondary)] max-w-[620px] mb-12">You installed ChatGPT, Claude, or an agent framework. It felt magical for an hour. Then reality hit — every session starts from scratch.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {cards.map((c) => (
-            <div key={c.title} className="bg-[var(--surface)]/95 border border-[var(--border)]/80 rounded-2xl p-7 hover:border-[var(--accent-light)]/30 hover:-translate-y-1 transition-all duration-300">
-              <div className={`w-11 h-11 rounded-[10px] flex items-center justify-center text-xl mb-4 ${c.color}`}>{c.icon}</div>
-              <h3 className="text-[1.05rem] font-semibold mb-2">{c.title}</h3>
-              <p className="text-[var(--text-secondary)] text-[0.92rem] leading-relaxed">{c.desc}</p>
-            </div>
+          {cards.map((c, index) => (
+            <ScrollReveal key={c.title} delay={index * 100}>
+              <div className="bg-[var(--surface)]/95 border border-[var(--border)]/80 rounded-2xl p-7 hover:border-[var(--accent-light)]/30 hover:-translate-y-1 transition-all duration-300">
+                <div className={`w-11 h-11 rounded-[10px] flex items-center justify-center text-xl mb-4 ${c.color}`}>{c.icon}</div>
+                <h3 className="text-[1.05rem] font-semibold mb-2">{c.title}</h3>
+                <p className="text-[var(--text-secondary)] text-[0.92rem] leading-relaxed">{c.desc}</p>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -277,20 +308,22 @@ function UseCases() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {cases.map((c) => (
-            <div key={c.title} className="bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-7 hover:border-[var(--border)] transition-all group">
-              <div className="flex items-center gap-3 mb-4">
-                <span className={`text-[0.72rem] font-bold uppercase tracking-wide px-2.5 py-1 rounded-md ${c.tagColor}`}>{c.tag}</span>
+          {cases.map((c, index) => (
+            <ScrollReveal key={c.title} delay={(index % 3) * 100}>
+              <div className="bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-7 hover:border-[var(--border)] transition-all group">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className={`text-[0.72rem] font-bold uppercase tracking-wide px-2.5 py-1 rounded-md ${c.tagColor}`}>{c.tag}</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-1">{c.emoji} {c.title}</h3>
+                <p className="text-sm text-[var(--accent-light)]/70 mb-3 italic">{c.subtitle}</p>
+                <p className="text-[0.92rem] text-[var(--text-secondary)] leading-relaxed mb-4">{c.description}</p>
+                <div className="rounded-xl bg-[var(--accent-light)]/4 border-l-[3px] border-[var(--accent-light)]/30 p-3.5 mb-4">
+                  <div className="text-[0.7rem] font-bold uppercase tracking-wider text-[var(--accent-light)]/80 mb-1">Real-life translation</div>
+                  <p className="text-sm text-[var(--foreground)]/80/80 italic">{c.analogy}</p>
+                </div>
+                <div className="text-sm font-semibold text-emerald-400 pt-3 border-t border-[var(--border)]">{c.result}</div>
               </div>
-              <h3 className="text-lg font-semibold mb-1">{c.emoji} {c.title}</h3>
-              <p className="text-sm text-[var(--accent-light)]/70 mb-3 italic">{c.subtitle}</p>
-              <p className="text-[0.92rem] text-[var(--text-secondary)] leading-relaxed mb-4">{c.description}</p>
-              <div className="rounded-xl bg-[var(--accent-light)]/4 border-l-[3px] border-[var(--accent-light)]/30 p-3.5 mb-4">
-                <div className="text-[0.7rem] font-bold uppercase tracking-wider text-[var(--accent-light)]/80 mb-1">Real-life translation</div>
-                <p className="text-sm text-[var(--foreground)]/80/80 italic">{c.analogy}</p>
-              </div>
-              <div className="text-sm font-semibold text-emerald-400 pt-3 border-t border-[var(--border)]">{c.result}</div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -420,17 +453,19 @@ function Solution() {
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold leading-tight tracking-tight mb-4">A Three-Layer System That Compounds</h2>
         <p className="text-[1.05rem] text-[var(--text-secondary)] max-w-[620px] mb-14">The same architecture behind agents generating thousands per week. Not theory — the exact system we run in production.</p>
         <div className="space-y-4">
-          {layers.map((l) => (
-            <div key={l.num} className="flex flex-col sm:flex-row gap-5 items-start bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-8 hover:border-[var(--accent)]/15 hover:shadow-[0_0_40px_rgba(232,119,46,0.04)] transition-all">
-              <div className="flex-shrink-0 w-[52px] h-[52px] rounded-[14px] flex items-center justify-center text-lg font-extrabold bg-gradient-to-br from-[var(--accent)]/15 to-[var(--accent)]/5 border border-[var(--accent)]/15 text-[var(--accent-light)]">
-                {l.num}
+          {layers.map((l, index) => (
+            <ScrollReveal key={l.num} delay={index * 100}>
+              <div className="flex flex-col sm:flex-row gap-5 items-start bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-8 hover:border-[var(--accent)]/15 hover:shadow-[0_0_40px_rgba(232,119,46,0.04)] transition-all">
+                <div className="flex-shrink-0 w-[52px] h-[52px] rounded-[14px] flex items-center justify-center text-lg font-extrabold bg-gradient-to-br from-[var(--accent)]/15 to-[var(--accent)]/5 border border-[var(--accent)]/15 text-[var(--accent-light)]">
+                  {l.num}
+                </div>
+                <div>
+                  <h3 className="text-[1.1rem] font-semibold mb-1.5">{l.title}</h3>
+                  <p className="text-[0.92rem] text-[var(--text-secondary)]">{l.desc}</p>
+                  <div className="mt-2.5 text-[0.85rem] text-[var(--text-tertiary)] pl-3.5 border-l-2 border-[var(--border)] italic">{l.detail}</div>
+                </div>
               </div>
-              <div>
-                <h3 className="text-[1.1rem] font-semibold mb-1.5">{l.title}</h3>
-                <p className="text-[0.92rem] text-[var(--text-secondary)]">{l.desc}</p>
-                <div className="mt-2.5 text-[0.85rem] text-[var(--text-tertiary)] pl-3.5 border-l-2 border-[var(--border)] italic">{l.detail}</div>
-              </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -497,15 +532,16 @@ function WhatMakesThisDifferent() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {differentiators.map((d) => (
-            <div
-              key={d.title}
-              className={`bg-[var(--surface)] border border-[var(--border)]/80 border-t-2 ${d.accent} rounded-2xl p-7 hover:border-[var(--border)] transition-all`}
-            >
-              <div className="text-2xl mb-3">{d.icon}</div>
-              <h3 className="text-[1.05rem] font-semibold mb-2">{d.title}</h3>
-              <p className="text-[0.88rem] text-[var(--text-secondary)] leading-relaxed">{d.desc}</p>
-            </div>
+          {differentiators.map((d, index) => (
+            <ScrollReveal key={d.title} delay={(index % 3) * 100}>
+              <div
+                className={`bg-[var(--surface)] border border-[var(--border)]/80 border-t-2 ${d.accent} rounded-2xl p-7 hover:border-[var(--border)] transition-all`}
+              >
+                <div className="text-2xl mb-3">{d.icon}</div>
+                <h3 className="text-[1.05rem] font-semibold mb-2">{d.title}</h3>
+                <p className="text-[0.88rem] text-[var(--text-secondary)] leading-relaxed">{d.desc}</p>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -573,18 +609,20 @@ function Testimonials() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {quotes.map((q) => (
-            <a key={q.source} href={q.link} target="_blank" rel="noopener noreferrer" className="bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-6 hover:border-[var(--accent)]/20 transition-all block group">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-[var(--surface-hover)] flex items-center justify-center text-lg">{q.icon}</div>
-                <div>
-                  <div className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent-light)] transition-colors">{q.source}</div>
-                  <div className="text-xs text-[var(--text-tertiary)]">{q.role}</div>
+          {quotes.map((q, index) => (
+            <ScrollReveal key={q.source} delay={(index % 3) * 100}>
+              <a href={q.link} target="_blank" rel="noopener noreferrer" className="bg-[var(--surface)] border border-[var(--border)]/80 rounded-2xl p-6 hover:border-[var(--accent)]/20 transition-all block group">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-[var(--surface-hover)] flex items-center justify-center text-lg">{q.icon}</div>
+                  <div>
+                    <div className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent-light)] transition-colors">{q.source}</div>
+                    <div className="text-xs text-[var(--text-tertiary)]">{q.role}</div>
+                  </div>
                 </div>
-              </div>
-              <p className="text-[0.88rem] text-[var(--text-secondary)] leading-relaxed">&ldquo;{q.text}&rdquo;</p>
-              <div className="mt-3 text-xs text-[var(--accent-light)]/60 group-hover:text-[var(--accent-light)] transition-colors">Read source →</div>
-            </a>
+                <p className="text-[0.88rem] text-[var(--text-secondary)] leading-relaxed">&ldquo;{q.text}&rdquo;</p>
+                <div className="mt-3 text-xs text-[var(--accent-light)]/60 group-hover:text-[var(--accent-light)] transition-colors">Read source →</div>
+              </a>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -610,15 +648,17 @@ function HowItWorks() {
         <div className="max-w-[680px] mx-auto relative">
           <div className="absolute left-[27px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent)] to-[var(--surface-hover)]" />
           <div className="space-y-10">
-            {steps.map((s) => (
-              <div key={s.num} className="flex gap-6 relative">
-                <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[var(--surface)] border-2 border-[var(--accent)] flex items-center justify-center font-extrabold text-[var(--accent-light)] z-10">{s.num}</div>
-                <div className="pt-2">
-                  <h3 className="text-[1.05rem] font-semibold mb-1">{s.title}</h3>
-                  <p className="text-[0.92rem] text-[var(--text-secondary)]">{s.desc}</p>
-                  <div className="text-sm text-[var(--accent-light)] font-semibold mt-1.5">⏱ {s.time}</div>
+            {steps.map((s, index) => (
+              <ScrollReveal key={s.num} delay={(index % 3) * 100}>
+                <div className="flex gap-6 relative">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[var(--surface)] border-2 border-[var(--accent)] flex items-center justify-center font-extrabold text-[var(--accent-light)] z-10">{s.num}</div>
+                  <div className="pt-2">
+                    <h3 className="text-[1.05rem] font-semibold mb-1">{s.title}</h3>
+                    <p className="text-[0.92rem] text-[var(--text-secondary)]">{s.desc}</p>
+                    <div className="text-sm text-[var(--accent-light)] font-semibold mt-1.5">⏱ {s.time}</div>
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -706,43 +746,45 @@ function Pricing() {
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold tracking-tight mb-2 text-center">Choose Your Path</h2>
         <p className="text-[1.05rem] text-[var(--text-secondary)] text-center mb-14">One-time purchase. Interactive chapters. Lifetime updates included.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {tiers.map((t) => (
-            <GlowCard key={t.tier} className="rounded-2xl">
-            <div className={`rounded-2xl p-9 relative transition-all flex flex-col h-full ${
-              t.featured
-                ? "border border-[var(--accent-light)]/35 bg-gradient-to-b from-[var(--accent)]/[0.06] via-[var(--accent-light)]/[0.04] to-[var(--surface)] shadow-[0_0_70px_rgba(232,119,46,0.1)]"
-                : "bg-[var(--surface)]/95 border border-[var(--border)]/80 hover:border-cyan-400/35 hover:-translate-y-1"
-            }`}>
-              {t.featured && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--accent-muted)] text-white text-[0.72rem] font-bold uppercase tracking-wide px-4 py-1 rounded-full">
-                  Most Popular
-                </div>
-              )}
-              <div className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-1">{t.name}</div>
-              <div className="text-xl font-bold mb-3">{t.product}</div>
-              <div className="text-[2.8rem] font-extrabold tracking-tight mb-1">{t.price} <span className="text-lg font-medium text-[var(--text-tertiary)]">one-time</span></div>
-              <p className="text-xs text-[var(--accent-light)]/80 font-medium mb-3">{t.priceCompare}</p>
-              <p className="text-[0.9rem] text-[var(--text-secondary)] mb-6 leading-relaxed">{t.desc}</p>
-              <ul className="space-y-2 mb-7 flex-1">
-                {t.features.map((f) => (
-                  <li key={f} className="flex gap-2.5 items-start text-[0.9rem] text-[var(--text-secondary)]">
-                    <span className="text-emerald-400 font-bold flex-shrink-0">✓</span> {f}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={checkoutUrls[t.tier]}
-                className={`block text-center w-full py-3.5 rounded-[10px] font-semibold text-[0.92rem] transition-all ${
+          {tiers.map((t, index) => (
+            <ScrollReveal key={t.tier} delay={index * 100}>
+              <GlowCard className="rounded-2xl">
+                <div className={`rounded-2xl p-9 relative transition-all flex flex-col h-full ${
                   t.featured
-                    ? "bg-[var(--accent-muted)] text-white hover:bg-[var(--accent)] hover:-translate-y-0.5"
-                    : "border border-[var(--border)] text-[var(--foreground)]/80 hover:border-[var(--accent)]/30 hover:text-[var(--accent-light)]"
-                }`}
-              >
-                {t.cta}
-              </a>
-              <p className="text-center text-xs text-[var(--text-tertiary)] mt-2.5">30-day money-back guarantee</p>
-            </div>
-            </GlowCard>
+                    ? "border border-[var(--accent-light)]/35 bg-gradient-to-b from-[var(--accent)]/[0.06] via-[var(--accent-light)]/[0.04] to-[var(--surface)] shadow-[0_0_70px_rgba(232,119,46,0.1)]"
+                    : "bg-[var(--surface)]/95 border border-[var(--border)]/80 hover:border-cyan-400/35 hover:-translate-y-1"
+                }`}>
+                  {t.featured && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--accent-muted)] text-white text-[0.72rem] font-bold uppercase tracking-wide px-4 py-1 rounded-full">
+                      Most Popular
+                    </div>
+                  )}
+                  <div className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-1">{t.name}</div>
+                  <div className="text-xl font-bold mb-3">{t.product}</div>
+                  <div className="text-[2.8rem] font-extrabold tracking-tight mb-1">{t.price} <span className="text-lg font-medium text-[var(--text-tertiary)]">one-time</span></div>
+                  <p className="text-xs text-[var(--accent-light)]/80 font-medium mb-3">{t.priceCompare}</p>
+                  <p className="text-[0.9rem] text-[var(--text-secondary)] mb-6 leading-relaxed">{t.desc}</p>
+                  <ul className="space-y-2 mb-7 flex-1">
+                    {t.features.map((f) => (
+                      <li key={f} className="flex gap-2.5 items-start text-[0.9rem] text-[var(--text-secondary)]">
+                        <span className="text-emerald-400 font-bold flex-shrink-0">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={checkoutUrls[t.tier]}
+                    className={`block text-center w-full py-3.5 rounded-[10px] font-semibold text-[0.92rem] transition-all ${
+                      t.featured
+                        ? "bg-[var(--accent-muted)] text-white hover:bg-[var(--accent)] hover:-translate-y-0.5"
+                        : "border border-[var(--border)] text-[var(--foreground)]/80 hover:border-[var(--accent)]/30 hover:text-[var(--accent-light)]"
+                    }`}
+                  >
+                    {t.cta}
+                  </a>
+                  <p className="text-center text-xs text-[var(--text-tertiary)] mt-2.5">30-day money-back guarantee</p>
+                </div>
+              </GlowCard>
+            </ScrollReveal>
           ))}
         </div>
 
@@ -761,39 +803,12 @@ function Pricing() {
 }
 
 function FAQ() {
-  const items = [
-    {
-      q: "Does this work with any AI agent platform?",
-      a: "Yes! The core architecture (memory layers, automation patterns, security model) is universal. OpenClaw gets full copy-paste configs. Claude, ChatGPT, CrewAI, LangChain, and even no-code tools like n8n/Zapier can all use the patterns.",
-    },
-    {
-      q: "How technical do I need to be?",
-      a: "If you can copy-paste commands into a terminal, you can follow this guide. We explain everything with real-life analogies — kitchens, dating, Netflix. The Pro tier has configs you literally copy and paste.",
-    },
-    {
-      q: "What makes this different from free tutorials?",
-      a: "Free tutorials show you how to chat with an AI. This shows you how to build one that works autonomously. It's the difference between a chatbot and a business operator. Plus, the system documented here built this product.",
-    },
-    {
-      q: "Wait — this was really built by an AI agent?",
-      a: "Yes. The agent (ToDaMoon 🐾) that built this landing page, the interactive guide, wired Stripe, and deployed to Vercel is the same system documented in the playbook. We're selling the map we used to navigate the territory.",
-    },
-    {
-      q: "Do I get updates?",
-      a: "All tiers include lifetime updates. As we improve our system, the playbook gets updated. Accelerator members get quarterly deep-dives with new case studies and techniques.",
-    },
-    {
-      q: "Can I get a refund?",
-      a: "Yes — 30-day money-back guarantee. If you follow the guide and don't see meaningful improvement, we refund in full. No questions asked.",
-    },
-  ];
-
   return (
     <section id="faq" className="py-24">
       <div className="max-w-[700px] mx-auto px-6">
         <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold tracking-tight mb-12 text-center">Questions & Answers</h2>
         <div className="divide-y divide-[var(--border)]">
-          {items.map((item) => (
+          {faqItems.map((item) => (
             <details key={item.q} className="group">
               <summary className="flex justify-between items-center py-5 cursor-pointer text-[0.98rem] font-semibold hover:text-[var(--accent-light)] transition-colors list-none [&::-webkit-details-marker]:hidden">
                 {item.q}
@@ -824,11 +839,38 @@ function BottomCTA() {
 }
 
 export default function Home() {
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "AgentAwake — The AI Agent Playbook",
+    description: "The exact playbook for building autonomous AI agents with persistent memory, automation, security, and revenue workflows.",
+    brand: { "@type": "Brand", name: "AgentAwake" },
+    offers: [
+      { "@type": "Offer", name: "The Blueprint", price: "9.00", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+      { "@type": "Offer", name: "AgentAwake Pro", price: "29.00", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+      { "@type": "Offer", name: "Accelerator", price: "69.00", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+    ],
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-[var(--background)] relative overflow-x-hidden">
       <div className="pointer-events-none absolute -top-24 -left-20 w-80 h-80 rounded-full bg-[var(--accent)]/10 blur-3xl animate-blob" />
       <div className="pointer-events-none absolute top-[32rem] -right-16 w-72 h-72 rounded-full bg-cyan-500/10 blur-3xl animate-blob-delay" />
-      <StructuredData />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <NavBar />
       <Hero />
       <Reveal><SocialProof /></Reveal>

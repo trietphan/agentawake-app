@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { chapters } from "@/lib/chapters";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "All Chapters — AgentAwake",
@@ -19,8 +20,21 @@ const tierMeta = {
 const grouped = tierOrder.map((tier) => ({ tier, chapters: chapters.filter((ch) => ch.requiredTier === tier) }));
 
 export default function ChaptersPage() {
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "AgentAwake Chapters",
+    itemListElement: chapters.map((chapter, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: chapter.title,
+      url: `https://agentawake.com/guide/${chapter.slug}`,
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <div className="max-w-[1100px] mx-auto px-6 py-16">
         <div className="mb-12">
           <Link href="/" className="text-sm text-[var(--text-tertiary)] hover:text-[var(--foreground)] transition-colors">← Back to home</Link>
@@ -32,7 +46,8 @@ export default function ChaptersPage() {
           {grouped.map(({ tier, chapters: tierChapters }) => {
             const meta = tierMeta[tier];
             return (
-              <section key={tier}>
+              <ScrollReveal key={tier} direction="fade">
+                <section>
                 <div className="flex items-center justify-between mb-5">
                   <h2 className="text-xl font-bold">
                     {meta.label} Tier <span className="text-[var(--text-tertiary)] text-base font-medium">({meta.price})</span>
@@ -43,7 +58,7 @@ export default function ChaptersPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {tierChapters.map((ch) => {
+                  {tierChapters.map((ch, index) => {
                     const isFree = ch.requiredTier === "free";
                     const isNewPlatform = ch.number >= 28 && ch.number <= 35;
                     const card = (
@@ -72,18 +87,23 @@ export default function ChaptersPage() {
                       </article>
                     );
 
-                    return isFree ? (
-                      <Link key={ch.slug} href={`/guide/${ch.slug}`}>
-                        {card}
-                      </Link>
-                    ) : (
-                      <Link key={ch.slug} href="/#pricing">
-                        {card}
-                      </Link>
+                    return (
+                      <ScrollReveal key={ch.slug} delay={(index % 3) * 100}>
+                        {isFree ? (
+                          <Link href={`/guide/${ch.slug}`}>
+                            {card}
+                          </Link>
+                        ) : (
+                          <Link href="/#pricing">
+                            {card}
+                          </Link>
+                        )}
+                      </ScrollReveal>
                     );
                   })}
                 </div>
-              </section>
+                </section>
+              </ScrollReveal>
             );
           })}
         </div>
