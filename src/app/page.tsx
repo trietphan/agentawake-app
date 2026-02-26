@@ -851,9 +851,9 @@ function Pricing() {
   ];
 
   const checkoutUrls: Record<string, string> = {
-    blueprint: "https://buy.stripe.com/dRm5kD4USaSr5cx2sebMQ00",
-    pro: "https://buy.stripe.com/cNi8wP7309OngVf3wibMQ01",
-    accelerator: "https://buy.stripe.com/4gMcN52MK1hR34pff0bMQ02",
+    blueprint: "https://buy.stripe.com/4gM4gz0EC7GfdJ3gj4bMQ05",
+    pro: "https://buy.stripe.com/4gMdR94US0dN6gB7MybMQ03",
+    accelerator: "https://buy.stripe.com/5kQ14ngDAbWv5cx0k6bMQ04",
   };
 
   return (

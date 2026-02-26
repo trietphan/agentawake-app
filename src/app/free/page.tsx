@@ -47,7 +47,7 @@ function UpgradeFunnel() {
       price: "$9",
       desc: "Everything you need to give your first agent persistent memory. Set up in one afternoon.",
       bestFor: "Getting started fast",
-      href: "https://buy.stripe.com/dRm5kD4USaSr5cx2sebMQ00",
+      href: "https://buy.stripe.com/4gM4gz0EC7GfdJ3gj4bMQ05",
     },
     {
       emoji: "🛠️",
@@ -55,7 +55,7 @@ function UpgradeFunnel() {
       price: "$19",
       desc: "Production templates, automation recipes, and 3 real case studies. Build agents that run your business.",
       bestFor: "Solo operators & freelancers",
-      href: "https://buy.stripe.com/cNi8wP7309OngVf3wibMQ01",
+      href: "https://buy.stripe.com/4gMdR94US0dN6gB7MybMQ03",
       featured: true,
     },
     {
@@ -64,7 +64,7 @@ function UpgradeFunnel() {
       price: "$29",
       desc: "Multi-agent orchestration, 8 platform guides, revenue playbook, and advanced security. The full arsenal.",
       bestFor: "Agencies & serious builders",
-      href: "https://buy.stripe.com/4gMcN52MK1hR34pff0bMQ02",
+      href: "https://buy.stripe.com/5kQ14ngDAbWv5cx0k6bMQ04",
     },
   ];
 
