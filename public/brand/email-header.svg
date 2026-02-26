@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200" fill="none">
+  <defs>
+    <linearGradient id="logoCore" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f0a868"/>
+      <stop offset="1" stop-color="#e8772e"/>
+    </linearGradient>
+    <radialGradient id="logoGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(90 100) rotate(90) scale(90)">
+      <stop stop-color="#e8772e" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#e8772e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bottomAccent" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+      <stop stop-color="#e8772e"/>
+      <stop offset="0.6" stop-color="#f0a868"/>
+      <stop stop-color="#c9621e" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background — dark, works on both dark/light email clients -->
+  <rect width="600" height="200" rx="8" fill="#0d0b08"/>
+
+  <!-- Subtle glow behind logo -->
+  <circle cx="90" cy="100" r="90" fill="url(#logoGlow)"/>
+
+  <!-- Logo: ~120px tall, scale=0.234, offset=(90-256*0.234, 100-256*0.234) = (30, 40) -->
+  <g transform="translate(30 40) scale(0.234)">
+    <path d="M163 222C163 171.7 203.7 131 254 131C304.3 131 345 171.7 345 222C370.9 234.5 388 261.1 388 292.5C388 341.4 348.4 381 299.5 381H212.5C163.6 381 124 341.4 124 292.5C124 261.1 141.1 234.5 167 222"
+          stroke="url(#logoCore)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M259 168L215 265H274L250 362L310 259H252L259 168Z" fill="#e8772e"/>
+    <circle cx="190" cy="283" r="11" fill="#f0a868"/>
+    <circle cx="323" cy="283" r="11" fill="#f0a868"/>
+    <path d="M199 313H314" stroke="#f0a868" stroke-width="14" stroke-linecap="round"/>
+  </g>
+
+  <!-- Divider -->
+  <line x1="188" y1="48" x2="188" y2="152" stroke="#e8772e" stroke-width="1" stroke-opacity="0.25"/>
+
+  <!-- Brand name -->
+  <text x="212" y="88"
+        font-family="-apple-system, system-ui, 'Segoe UI', sans-serif"
+        font-weight="800"
+        font-size="46"
+        fill="#ffffff"
+        letter-spacing="-1">AgentAwake</text>
+
+  <!-- Tagline -->
+  <text x="214" y="120"
+        font-family="-apple-system, system-ui, 'Segoe UI', sans-serif"
+        font-weight="400"
+        font-size="16"
+        fill="#a0a0b0"
+        letter-spacing="0.3">The AI Agent Playbook · agentawake.com</text>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="193" width="600" height="3" rx="1.5" fill="url(#bottomAccent)"/>
+
+  <!-- Subtle border -->
+  <rect x="1" y="1" width="598" height="198" rx="8" stroke="#e8772e" stroke-width="1" stroke-opacity="0.15" fill="none"/>
+</svg>

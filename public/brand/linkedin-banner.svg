@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1584" height="396" viewBox="0 0 1584 396" fill="none">
+  <defs>
+    <linearGradient id="logoCore" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f0a868"/>
+      <stop offset="1" stop-color="#e8772e"/>
+    </linearGradient>
+    <radialGradient id="logoGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(180 198) rotate(90) scale(200)">
+      <stop stop-color="#e8772e" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#e8772e" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Subtle right-side vignette -->
+    <linearGradient id="rightFade" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+      <stop offset="0.6" stop-color="#0a0a0f" stop-opacity="0"/>
+      <stop stop-color="#0d0d14" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1584" height="396" fill="#0a0a0f"/>
+  <rect width="1584" height="396" fill="url(#rightFade)"/>
+
+  <!-- Logo glow -->
+  <circle cx="180" cy="198" r="200" fill="url(#logoGlow)"/>
+
+  <!-- Logo: original 512→~220px wide, scale=0.43, offset=(180-256*0.43, 198-256*0.43) = (70, 88) -->
+  <g transform="translate(70 88) scale(0.43)">
+    <path d="M163 222C163 171.7 203.7 131 254 131C304.3 131 345 171.7 345 222C370.9 234.5 388 261.1 388 292.5C388 341.4 348.4 381 299.5 381H212.5C163.6 381 124 341.4 124 292.5C124 261.1 141.1 234.5 167 222"
+          stroke="url(#logoCore)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M259 168L215 265H274L250 362L310 259H252L259 168Z" fill="#e8772e"/>
+    <circle cx="190" cy="283" r="9" fill="#f0a868"/>
+    <circle cx="323" cy="283" r="9" fill="#f0a868"/>
+    <path d="M199 313H314" stroke="#f0a868" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- Vertical divider after logo -->
+  <line x1="320" y1="100" x2="320" y2="296" stroke="#e8772e" stroke-width="1.5" stroke-opacity="0.2"/>
+
+  <!-- Center: main title -->
+  <text x="792" y="168"
+        font-family="-apple-system, system-ui, 'Segoe UI', sans-serif"
+        font-weight="700"
+        font-size="64"
+        fill="#ffffff"
+        text-anchor="middle"
+        letter-spacing="-1">The AI Agent Playbook</text>
+
+  <!-- Subtitle -->
+  <text x="792" y="228"
+        font-family="-apple-system, system-ui, 'Segoe UI', sans-serif"
+        font-weight="400"
+        font-size="26"
+        fill="#c9c9d4"
+        text-anchor="middle"
+        letter-spacing="0.5">Build agents with persistent memory. Stop starting from zero.</text>
+
+  <!-- Platform badges row -->
+  <g transform="translate(792 0)" text-anchor="middle">
+    <!-- Badge pill background group, centered -->
+    <!-- Claude -->
+    <rect x="-380" y="264" width="130" height="36" rx="18" fill="#1e1e2a" stroke="#e8772e" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="-315" y="287" font-family="-apple-system, system-ui, sans-serif" font-size="15" fill="#f0a868" font-weight="500" text-anchor="middle">Claude</text>
+    <!-- ChatGPT -->
+    <rect x="-230" y="264" width="130" height="36" rx="18" fill="#1e1e2a" stroke="#e8772e" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="-165" y="287" font-family="-apple-system, system-ui, sans-serif" font-size="15" fill="#f0a868" font-weight="500" text-anchor="middle">ChatGPT</text>
+    <!-- CrewAI -->
+    <rect x="-80" y="264" width="130" height="36" rx="18" fill="#1e1e2a" stroke="#e8772e" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="-15" y="287" font-family="-apple-system, system-ui, sans-serif" font-size="15" fill="#f0a868" font-weight="500" text-anchor="middle">CrewAI</text>
+    <!-- n8n -->
+    <rect x="70" y="264" width="100" height="36" rx="18" fill="#1e1e2a" stroke="#e8772e" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="120" y="287" font-family="-apple-system, system-ui, sans-serif" font-size="15" fill="#f0a868" font-weight="500" text-anchor="middle">n8n</text>
+    <!-- Cursor -->
+    <rect x="190" y="264" width="110" height="36" rx="18" fill="#1e1e2a" stroke="#e8772e" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="245" y="287" font-family="-apple-system, system-ui, sans-serif" font-size="15" fill="#f0a868" font-weight="500" text-anchor="middle">Cursor</text>
+  </g>
+
+  <!-- Bottom-right: domain -->
+  <text x="1544" y="370"
+        font-family="-apple-system, system-ui, 'Segoe UI', sans-serif"
+        font-weight="400"
+        font-size="18"
+        fill="#6b6b80"
+        text-anchor="end">agentawake.com</text>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="390" width="1584" height="3" rx="1.5" fill="#e8772e" opacity="0.35"/>
+</svg>
