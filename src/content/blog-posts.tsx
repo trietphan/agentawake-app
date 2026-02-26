@@ -94,6 +94,12 @@ export const blogPosts: BlogPost[] = [
           <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Start with one active project file only. Over-structuring on day one slows adoption.</p>
         </div>
 
+        <div className="rounded-2xl border border-[var(--accent)]/20 bg-gradient-to-r from-[var(--accent)]/[0.06] to-[var(--surface)] p-6 my-10 text-center">
+          <p className="font-bold text-lg mb-2">⚡ Want the complete system?</p>
+          <p className="text-sm text-[var(--text-secondary)] mb-4">The AgentAwake Playbook includes copy-paste configs for all 8 platforms, automation recipes, and the revenue playbook.</p>
+          <a href="/#pricing" className="inline-block bg-[var(--accent-muted)] text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-[var(--accent)] transition-all">See Pricing →</a>
+        </div>
+
         <h3 className="text-xl sm:text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]"><span className="inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-blue-400/20 text-blue-300 mr-2">Method 2</span>Daily Notes</h3>
         <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
           Daily notes provide session continuity: what changed, what broke, and what happens next.

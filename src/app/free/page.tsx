@@ -16,10 +16,11 @@ function EmailCapture() {
   return (
     <div className="rounded-2xl border border-[var(--accent)]/20 bg-gradient-to-b from-[var(--accent)]/[0.04] to-[var(--surface)] p-8 text-center">
       <div className="text-2xl mb-2">📬</div>
-      <h3 className="text-lg font-bold mb-2">Get the Full Architecture Guide Free</h3>
-      <p className="text-sm text-[var(--text-secondary)] mb-5 max-w-sm mx-auto">
-        Join 0→1 builders getting the memory architecture cheat sheet + weekly agent techniques. No spam, unsubscribe anytime.
+      <h3 className="text-lg font-bold mb-2">Get Notified When We Add New Chapters</h3>
+      <p className="text-sm text-[var(--text-secondary)] mb-2 max-w-sm mx-auto">
+        Join 100+ builders already using the system — get new chapters and techniques delivered to your inbox. No spam, unsubscribe anytime.
       </p>
+      <p className="text-xs text-[var(--accent-light)] font-semibold mb-5">Join 100+ builders already using the system</p>
       <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
         <input
           type="email"
@@ -30,10 +31,84 @@ function EmailCapture() {
           type="submit"
           className="rounded-xl bg-[var(--accent-muted)] px-6 py-3 text-sm font-bold text-white hover:bg-[var(--accent)] transition-all hover:-translate-y-0.5 shrink-0"
         >
-          Send It →
+          Notify Me →
         </button>
       </form>
       <p className="text-[10px] text-[var(--text-tertiary)] mt-3">No credit card required · Works with any AI platform</p>
+    </div>
+  );
+}
+
+function UpgradeFunnel() {
+  const tiers = [
+    {
+      emoji: "🏗️",
+      name: "The Foundation",
+      price: "$9",
+      desc: "Everything you need to give your first agent persistent memory. Set up in one afternoon.",
+      bestFor: "Getting started fast",
+      href: "https://buy.stripe.com/dRm5kD4USaSr5cx2sebMQ00",
+    },
+    {
+      emoji: "🛠️",
+      name: "The Operator's Toolkit",
+      price: "$29",
+      desc: "Production templates, automation recipes, and 3 real case studies. Build agents that run your business.",
+      bestFor: "Solo operators & freelancers",
+      href: "https://buy.stripe.com/cNi8wP7309OngVf3wibMQ01",
+      featured: true,
+    },
+    {
+      emoji: "🚀",
+      name: "The Complete System",
+      price: "$69",
+      desc: "Multi-agent orchestration, 8 platform guides, revenue playbook, and advanced security. The full arsenal.",
+      bestFor: "Agencies & serious builders",
+      href: "https://buy.stripe.com/4gMcN52MK1hR34pff0bMQ02",
+    },
+  ];
+
+  return (
+    <div className="mt-16 mb-8">
+      <div className="text-center mb-8">
+        <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-2">What&apos;s Next</p>
+        <h2 className="text-2xl font-extrabold tracking-tight mb-2">Loved Chapter 0? Here&apos;s what&apos;s next...</h2>
+        <p className="text-sm text-[var(--text-secondary)] max-w-md mx-auto">The full playbook goes 22 chapters deep — templates, configs, case studies, and the revenue playbook.</p>
+        <p className="text-xs text-[var(--accent-light)] font-semibold mt-2">Join 100+ builders already using the system</p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {tiers.map((t) => (
+          <div
+            key={t.name}
+            className={`rounded-2xl border p-6 flex flex-col ${
+              t.featured
+                ? "border-[var(--accent-light)]/35 bg-gradient-to-b from-[var(--accent)]/[0.06] to-[var(--surface)] shadow-[0_0_40px_rgba(232,119,46,0.08)]"
+                : "border-[var(--border)] bg-[var(--surface)]"
+            }`}
+          >
+            {t.featured && (
+              <span className="text-xs font-bold uppercase tracking-wide text-[var(--accent-light)] bg-[var(--accent)]/10 px-2 py-1 rounded-md self-start mb-3">Most Popular</span>
+            )}
+            <div className="text-2xl mb-2">{t.emoji}</div>
+            <h3 className="text-base font-bold mb-1">{t.name}</h3>
+            <div className="text-2xl font-extrabold tracking-tight mb-1">{t.price} <span className="text-sm font-normal text-[var(--text-tertiary)]">one-time</span></div>
+            <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-2 flex-1">{t.desc}</p>
+            <p className="text-xs text-[var(--accent-light)] font-semibold mb-4">Best for: {t.bestFor}</p>
+            <a
+              href={t.href}
+              className={`block text-center py-3 rounded-xl text-sm font-bold transition-all ${
+                t.featured
+                  ? "bg-[var(--accent-muted)] text-white hover:bg-[var(--accent)]"
+                  : "border border-[var(--border)] text-[var(--foreground)]/80 hover:border-[var(--accent)]/30 hover:text-[var(--accent-light)]"
+              }`}
+            >
+              Get Instant Access →
+            </a>
+            <p className="text-[0.65rem] text-[var(--text-tertiary)] text-center mt-2">One-time payment · 30-day refund</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -175,6 +250,9 @@ export default function FreePage() {
         <div className="mt-12 mb-8">
           <EmailCapture />
         </div>
+
+        {/* Upgrade Funnel */}
+        <UpgradeFunnel />
 
         {/* CTA */}
         <div className="text-center mt-12 pb-8">

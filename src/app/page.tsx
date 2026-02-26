@@ -10,6 +10,7 @@ import MobileNav from "@/components/MobileNav";
 
 const EmailCaptureComponent = dynamic(() => import("@/components/EmailCapture"), { loading: () => <div className="h-12" /> });
 const MobileStickyCTA = dynamic(() => import("@/components/MobileStickyCTA"), { loading: () => <div /> });
+const StickyBottomCTA = dynamic(() => import("@/components/StickyBottomCTA"), { loading: () => <div /> });
 
 const faqItems = [
   {
@@ -83,12 +84,11 @@ function Hero() {
           Built by an autonomous AI agent — the system documented inside
         </div>
         <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] mb-6 max-w-[780px] mx-auto">
-          Your AI Agent Should Be{" "}
-          <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent animate-gradient-shift">Running Your Business</span>{" "}
-          While You Sleep
+          Your AI Agent Forgets Everything.{" "}
+          <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent animate-gradient-shift">Fix It in 45 Minutes.</span>
         </h1>
         <p className="text-lg text-[var(--text-secondary)] max-w-[560px] mx-auto mb-11 leading-relaxed">
-          The exact playbook to make your AI agent <RotatingText /> — shipping code, generating analysis, creating content, and processing payments autonomously.
+          The complete system for building AI agents that remember, learn, and work autonomously — so you save 5+ hours every week.
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
           <a href="#pricing" className="bg-[var(--accent-muted)] text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-[var(--accent)] transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--accent)]/10">
@@ -98,7 +98,11 @@ function Hero() {
             Read Free Chapter
           </Link>
         </div>
-        <p className="mt-5 text-sm text-[var(--text-tertiary)]">One-time purchase · Interactive chapters · Works with any AI platform · Lifetime updates</p>
+        <div className="flex items-center justify-center gap-6 mt-6 text-xs text-[var(--text-tertiary)]">
+          <span>✓ Instant access</span>
+          <span>✓ One-time payment</span>
+          <span>✓ 30-day refund</span>
+        </div>
       </div>
     </section>
   );
@@ -671,14 +675,51 @@ function EmailCapture() {
   return <EmailCaptureComponent />;
 }
 
+function WhoThisIsFor() {
+  return (
+    <section className="py-20 relative">
+      <div className="max-w-[980px] mx-auto px-6">
+        <h2 className="text-center text-[clamp(1.8rem,3.5vw,2.4rem)] font-extrabold tracking-tight mb-4">Built For Builders Who Ship</h2>
+        <p className="text-center text-[var(--text-secondary)] mb-12 max-w-lg mx-auto">Not another AI theory course. This is a system for people who need their agents to work.</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Card 1 */}
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 hover:border-[var(--accent)]/20 transition-all">
+            <div className="text-3xl mb-4">🚀</div>
+            <h3 className="text-lg font-bold mb-2">Solo SaaS Operators</h3>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">Running a product solo? Your agent handles support, content, monitoring, and ops — while you build.</p>
+            <p className="text-xs text-[var(--accent-light)] font-semibold">Saves 5-10 hrs/week on repetitive tasks</p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 hover:border-[var(--accent)]/20 transition-all">
+            <div className="text-3xl mb-4">💼</div>
+            <h3 className="text-lg font-bold mb-2">AI Freelancers &amp; Agencies</h3>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">Productize your client delivery. Reusable memory architecture templates you deploy across every project.</p>
+            <p className="text-xs text-[var(--accent-light)] font-semibold">Ship client projects 3x faster</p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 hover:border-[var(--accent)]/20 transition-all">
+            <div className="text-3xl mb-4">⚡</div>
+            <h3 className="text-lg font-bold mb-2">Technical Builders</h3>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">Building on Claude, Cursor, CrewAI, or n8n? Copy-paste configs for persistent memory on your stack.</p>
+            <p className="text-xs text-[var(--accent-light)] font-semibold">8 platform implementation guides included</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Pricing() {
   const tiers = [
     {
       name: "Starter",
-      product: "The Blueprint",
+      product: "The Foundation",
       price: "$9",
       priceCompare: "Less than a Chipotle burrito 🌯",
-      desc: "Everything you need to build a memory-powered agent from scratch. Cheaper than the coffee you'll drink while reading it.",
+      desc: "Everything you need to give your first agent persistent memory. Set up in one afternoon.",
+      bestFor: "Getting started fast",
       features: [
         "Three-layer memory architecture (40+ pages)",
         "PARA knowledge base setup guide",
@@ -687,36 +728,38 @@ function Pricing() {
         "Real examples from a working system",
         "Day-one setup checklist",
       ],
-      cta: "Get the Blueprint →",
+      cta: "Get Instant Access →",
       tier: "blueprint",
       featured: false,
     },
     {
       name: "Professional",
-      product: "AgentAwake Pro",
+      product: "The Operator's Toolkit",
       price: "$29",
       priceCompare: "One month of Netflix you barely watch 📺",
-      desc: "Copy-paste configs, real case studies with code, and templates. Skip the learning curve entirely.",
+      desc: "Production templates, automation recipes, and 3 real case studies. Build agents that run your business.",
+      bestFor: "Solo operators & freelancers",
       features: [
-        "Everything in The Blueprint",
+        "Everything in The Foundation",
         "Production-ready config templates",
         "4 cron job configs (copy-paste ready)",
         "3 detailed case studies with code",
         "AGENTS.md & SOUL.md templates",
         "Private Discord community access",
       ],
-      cta: "Get AgentAwake Pro →",
+      cta: "Get Instant Access →",
       tier: "pro",
       featured: true,
     },
     {
       name: "Premium",
-      product: "Accelerator",
+      product: "The Complete System",
       price: "$69",
       priceCompare: "One nice dinner out 🍝 (but this keeps working forever)",
-      desc: "The complete system — 9 advanced chapters, revenue playbook, cost optimization, and all future updates.",
+      desc: "Multi-agent orchestration, 8 platform guides, revenue playbook, and advanced security. The full arsenal.",
+      bestFor: "Agencies & serious builders",
       features: [
-        "Everything in Pro",
+        "Everything in The Operator's Toolkit",
         "Multi-agent orchestration guide",
         "Bottleneck elimination framework",
         "Prompt injection defense playbook",
@@ -727,7 +770,7 @@ function Pricing() {
         "The Revenue Playbook — 7 proven income models",
         "All future chapters & updates forever",
       ],
-      cta: "Get the Accelerator →",
+      cta: "Get Instant Access →",
       tier: "accelerator",
       featured: false,
     },
@@ -763,7 +806,8 @@ function Pricing() {
                   <div className="text-xl font-bold mb-3">{t.product}</div>
                   <div className="text-[2.8rem] font-extrabold tracking-tight mb-1">{t.price} <span className="text-lg font-medium text-[var(--text-tertiary)]">one-time</span></div>
                   <p className="text-xs text-[var(--accent-light)]/80 font-medium mb-3">{t.priceCompare}</p>
-                  <p className="text-[0.9rem] text-[var(--text-secondary)] mb-6 leading-relaxed">{t.desc}</p>
+                  <p className="text-[0.9rem] text-[var(--text-secondary)] mb-3 leading-relaxed">{t.desc}</p>
+                  <p className="text-xs text-[var(--accent-light)] font-semibold mb-6">Best for: {t.bestFor}</p>
                   <ul className="space-y-2 mb-7 flex-1">
                     {t.features.map((f) => (
                       <li key={f} className="flex gap-2.5 items-start text-[0.9rem] text-[var(--text-secondary)]">
@@ -781,7 +825,7 @@ function Pricing() {
                   >
                     {t.cta}
                   </a>
-                  <p className="text-center text-xs text-[var(--text-tertiary)] mt-2.5">30-day money-back guarantee</p>
+                  <p className="text-[0.7rem] text-[var(--text-tertiary)] text-center mt-3">One-time payment · Instant access · 30-day refund</p>
                 </div>
               </GlowCard>
             </ScrollReveal>
@@ -883,6 +927,7 @@ export default function Home() {
       <Reveal><Platforms /></Reveal>
       <Reveal><HowItWorks /></Reveal>
       <Reveal><EmailCapture /></Reveal>
+      <Reveal><WhoThisIsFor /></Reveal>
       <Reveal><Pricing /></Reveal>
       <Reveal><FAQ /></Reveal>
       <Reveal><BottomCTA /></Reveal>
@@ -891,6 +936,7 @@ export default function Home() {
         <a href="mailto:hello@agentawake.com" className="hover:text-[var(--text-secondary)] transition-colors">hello@agentawake.com</a>
       </footer>
       <MobileStickyCTA />
+      <StickyBottomCTA />
     </div>
   );
 }
