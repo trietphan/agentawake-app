@@ -25,12 +25,14 @@ function NavBar() {
         <div className="flex items-center gap-2 sm:gap-7">
           <a href="#use-cases" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Use Cases</a>
           <a href="#platforms" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Platforms</a>
+          <Link href="/chapters" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Chapters</Link>
           <a href="#pricing" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Pricing</a>
           <Link href="/blog" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Blog</Link>
           <a href="#faq" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">FAQ</a>
 
           <MobileNav items={[
             { href: "/blog", label: "Blog" },
+            { href: "/chapters", label: "Chapters" },
             { href: "/free", label: "Free Chapter" },
             { href: "#pricing", label: "Playbook" },
           ]} />

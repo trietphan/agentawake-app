@@ -227,6 +227,172 @@ echo "Memory skeleton ready: $today"
 - Delegate repeat workflows to subagents
 - Create weekly memory quality review
 `}</Code>
+      <h2>Your First 30 Minutes (Fresh Start)</h2>
+      <p>
+        If you're starting from zero on OpenClaw, follow this exact timer-based sequence. Don't optimize yet — just establish a working baseline you can trust.
+      </p>
+      <ol className="my-5 space-y-2 text-sm text-[var(--foreground)]/80 list-decimal pl-5">
+        <li><strong>Minute 0-5:</strong> Create folders for knowledge, daily memory, and tacit rules. Keep names boring and predictable.</li>
+        <li><strong>Minute 5-10:</strong> Add one "project snapshot" file with outcomes, constraints, and open questions.</li>
+        <li><strong>Minute 10-15:</strong> Configure a daily note write path (file or database table) and test one write/read cycle.</li>
+        <li><strong>Minute 15-20:</strong> Add your tacit preferences: communication style, safety boundaries, and formatting defaults.</li>
+        <li><strong>Minute 20-25:</strong> Run one end-to-end prompt: retrieve context → perform task → append summary to daily notes.</li>
+        <li><strong>Minute 25-30:</strong> Schedule one nightly consolidation job and capture a rollback plan.</li>
+      </ol>
+
+      <Callout emoji="⏱️" title="30-Minute Rule">
+        A small, reliable memory loop beats a giant architecture that only works in your imagination. In week one, optimize for consistency.
+      </Callout>
+
+      <h2>Architecture Diagram (OpenClaw)</h2>
+      <Code title="memory-architecture.txt">{`User/Trigger
+   |
+   v
+[Agent Runtime: OpenClaw]
+   |
+   +--> [Layer 1: Knowledge Base] ----> PARA docs / vector index
+   |
+   +--> [Layer 2: Daily Notes] -------> date-based logs / SQL rows
+   |
+   +--> [Layer 3: Tacit Rules] -------> behavior + safety defaults
+   |
+   v
+[Consolidation Job @ 02:00]
+   |
+   +--> Promote durable insights to Layer 1
+   +--> Prune stale items + update change log`}</Code>
+
+      <h2>Step-by-Step Walkthrough (Production Baseline)</h2>
+      <ol className="my-5 space-y-3 text-sm text-[var(--foreground)]/80 list-decimal pl-5">
+        <li>
+          <strong>Create the platform config.</strong> Keep keys in environment variables and commit only templates.
+          <Code title="AGENTS.md (core protocol excerpt)">{`## Every Session
+1. Read SOUL.md
+2. Read USER.md
+3. Read memory/YYYY-MM-DD.md (today + yesterday)
+4. If main session: read MEMORY.md
+
+## Safety
+- Don't exfiltrate private data
+- Ask before external actions
+- trash > rm`}</Code>
+        </li>
+        <li>
+          <strong>Create one daily runner script.</strong> This is the backbone for your heartbeat/nightly memory behavior.
+          <Code title="scripts/nightly-memory-maintenance.sh">{`#!/usr/bin/env bash
+set -euo pipefail
+
+cd "\${HOME}/.openclaw/workspace"
+openclaw run "Review last 2 daily files and update MEMORY.md with durable insights"   >> memory/nightly-maintenance.log 2>&1`}</Code>
+        </li>
+        <li><strong>Dry run locally.</strong> Execute the script once and verify it writes a deterministic artifact (file row, markdown update, or DB insert).</li>
+        <li><strong>Add observability.</strong> Log runtime, token use, and failures. If a run fails silently, it's already broken.</li>
+        <li><strong>Add backup + rollback.</strong> Take snapshots before consolidation; keep last 7 days restorable.</li>
+      </ol>
+
+      <h2>Troubleshooting: Common Failures and Fixes</h2>
+      <div className="my-6 space-y-3">
+        <div className="rounded-lg border border-red-500/25 bg-red-500/5 p-4">
+          <div className="text-xs font-bold text-red-400">Issue: Agent ignores recent context</div>
+          <p className="text-sm text-[var(--text-secondary)] mt-1">Fix: force retrieval order (today → yesterday → project snapshot) and cap each file to concise summaries.</p>
+        </div>
+        <div className="rounded-lg border border-amber-500/25 bg-amber-500/5 p-4">
+          <div className="text-xs font-bold text-amber-300">Issue: Memory quality degrades after a week</div>
+          <p className="text-sm text-[var(--text-secondary)] mt-1">Fix: nightly dedupe + weekly archive pass. Delete contradictory stale notes instead of endlessly appending.</p>
+        </div>
+        <div className="rounded-lg border border-blue-500/25 bg-blue-500/5 p-4">
+          <div className="text-xs font-bold text-blue-300">Issue: Costs spike unexpectedly</div>
+          <p className="text-sm text-[var(--text-secondary)] mt-1">Fix: route simple tasks to cheaper models, shrink retrieval chunks, and cache static project context.</p>
+        </div>
+      </div>
+
+      <h2>Migration Guide</h2>
+      <p>
+        Coming from <strong>Any CLI-first agent stack</strong>? The biggest shift in OpenClaw is operational discipline: explicit memory IO, explicit scheduling, explicit safety rules. Assume nothing is implicit.
+      </p>
+      <ul className="my-4 space-y-2 text-sm text-[var(--foreground)]/80">
+        <li className="flex gap-3"><span className="font-bold text-[var(--accent-light)]">•</span><span><strong>Context model:</strong> define where long-term facts live before you write prompts.</span></li>
+        <li className="flex gap-3"><span className="font-bold text-[var(--accent-light)]">•</span><span><strong>Automation model:</strong> decide who triggers runs (cron, scheduler, workflow trigger) and who logs outcomes.</span></li>
+        <li className="flex gap-3"><span className="font-bold text-[var(--accent-light)]">•</span><span><strong>Failure model:</strong> implement retries and dead-letter behavior for failed memory writes.</span></li>
+      </ul>
+
+      <h2>Cost Analysis (Monthly Estimate)</h2>
+      <Code title="cost-estimate.md">{`Assumptions
+- 3 scheduled runs/day + 20 interactive requests/day
+- Moderate retrieval (2-6 docs/request)
+- One nightly consolidation job
+
+Estimated monthly spend
+- Model/API usage:      $25 - $180
+- Storage (files/DB):   $0 - $25
+- Scheduler/hosting:    $0 - $40
+- Observability:        $0 - $30
+---------------------------------
+Total:                  $25 - $275 / month
+
+Optimization levers
+1) Use smaller models for extraction/summarization
+2) Keep memory files concise and chunked
+3) Run consolidation once nightly, not continuously`}</Code>
+
+      <h2>Pro Tips for Power Users</h2>
+      <ul className="my-4 space-y-2 text-sm text-[var(--foreground)]/80">
+        <li className="flex gap-3"><span className="font-bold text-[var(--accent-light)]">•</span><span>Tag durable facts with <code className="text-xs bg-[var(--surface-hover)] px-1 py-0.5 rounded">decision:</code>, <code className="text-xs bg-[var(--surface-hover)] px-1 py-0.5 rounded">constraint:</code>, and <code className="text-xs bg-[var(--surface-hover)] px-1 py-0.5 rounded">owner:</code> metadata for faster retrieval.</span></li>
+        <li className="flex gap-3"><span className="font-bold text-[var(--accent-light)]">•</span><span>Promote only proven patterns from daily notes into Layer 1 — avoid polluting your durable memory with temporary noise.</span></li>
+        <li className="flex gap-3"><span className="font-bold text-[var(--accent-light)]">•</span><span>Keep a "known-failures" file and inject it before risky operations to reduce repeated mistakes.</span></li>
+      </ul>
+
+      <Analogy>
+        Mature agent operations are like running a kitchen during dinner rush: mise en place (knowledge), prep station notes (daily memory), and house standards (tacit rules). If any one is missing, service slows and quality drops.
+      </Analogy>
+
+      <h2>Operational Readiness Checklist</h2>
+      <p>
+        Before trusting this in production, run one rehearsal day where you deliberately inject small failures and verify your system self-recovers.
+      </p>
+      <Code title="ops-checklist.md">{`# Daily reliability checklist
+- [ ] Morning run completed before 09:00
+- [ ] Retrieval quality check passed (top 3 references relevant)
+- [ ] Daily notes appended with decisions + blockers
+- [ ] Consolidation wrote a diff summary
+- [ ] Cost budget still under monthly threshold
+- [ ] Alert channel received success heartbeat
+
+# Weekly checks
+- [ ] Archive stale memory documents
+- [ ] Remove contradictory tacit rules
+- [ ] Update one SOP based on real failures
+- [ ] Restore test from latest backup`}</Code>
+
+      <h2>Failure Drill (Run This Once Per Week)</h2>
+      <ol className="my-5 space-y-2 text-sm text-[var(--foreground)]/80 list-decimal pl-5">
+        <li>Temporarily disable retrieval and confirm the agent reports degraded context instead of pretending confidence.</li>
+        <li>Block memory writes and verify failed writes trigger alerts with retry metadata.</li>
+        <li>Simulate token budget pressure and validate fallback to smaller models.</li>
+        <li>Restore from backup snapshot and compare output quality with yesterday's baseline.</li>
+      </ol>
+
+      <Code title="kpi-dashboard.json">{`{
+  "metrics": [
+    "context_loss_incidents",
+    "avg_retrieval_relevance",
+    "daily_note_write_success_rate",
+    "monthly_model_spend",
+    "time_to_recover_minutes"
+  ],
+  "targets": {
+    "context_loss_incidents": "< 3 per month",
+    "avg_retrieval_relevance": "> 0.75",
+    "daily_note_write_success_rate": "> 99%",
+    "monthly_model_spend": "< budget",
+    "time_to_recover_minutes": "< 15"
+  }
+}`}</Code>
+
+      <Callout emoji="🧪" title="Treat Memory Like Infrastructure">
+        If you test your database and deployment pipeline but never test memory integrity, your agent will eventually fail in subtle ways. Run drills, track metrics, and keep rollback paths warm.
+      </Callout>
+
 
       <p>
         That's the full pattern for OpenClaw. Same brain architecture, different plumbing. Once this is stable, your agent stops being a clever intern and starts acting like an operator.

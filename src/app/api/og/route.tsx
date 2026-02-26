@@ -13,142 +13,55 @@ export async function GET() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          background: "linear-gradient(135deg, #07070a 0%, #0f0a1a 50%, #07070a 100%)",
+          background: "radial-gradient(circle at 20% 20%, rgba(240,168,104,0.12), transparent 35%), radial-gradient(circle at 80% 80%, rgba(232,119,46,0.12), transparent 35%), linear-gradient(135deg, #050507 0%, #0d0b11 60%, #050507 100%)",
           fontFamily: "Inter, sans-serif",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Glow */}
-        <div
-          style={{
-            position: "absolute",
-            top: "-100px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "800px",
-            height: "600px",
-            background: "radial-gradient(ellipse, rgba(232,119,46,0.12), transparent 70%)",
-          }}
-        />
+        <div style={{ position: "absolute", inset: "28px", border: "1px solid rgba(240,168,104,0.18)", borderRadius: "24px" }} />
 
-        {/* Badge */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "8px 20px",
-            borderRadius: "50px",
-            border: "1px solid rgba(232,119,46,0.2)",
-            background: "rgba(232,119,46,0.06)",
-            marginBottom: "30px",
-          }}
-        >
-          <div
-            style={{
-              width: "8px",
-              height: "8px",
-              borderRadius: "50%",
-              background: "#4ade80",
-            }}
-          />
-          <span style={{ color: "#c4b5fd", fontSize: "16px", fontWeight: 600 }}>
-            Built entirely by an AI agent
-          </span>
-        </div>
-
-        {/* Title */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            maxWidth: "900px",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "56px",
-              fontWeight: 800,
-              color: "white",
-              textAlign: "center",
-              lineHeight: 1.1,
-              letterSpacing: "-2px",
-              marginBottom: "16px",
-            }}
-          >
-            Your AI Agent Should Be
+        <div style={{ display: "flex", alignItems: "center", gap: "18px", marginBottom: "26px" }}>
+          <div style={{ position: "relative", width: "78px", height: "78px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: "66px", height: "52px", borderRadius: "50px", border: "2px solid #f0a868", opacity: 0.9 }} />
+            <div style={{ position: "absolute", top: "18px", left: "15px", width: "20px", height: "20px", borderRadius: "50%", border: "2px solid #e8772e" }} />
+            <div style={{ position: "absolute", top: "18px", right: "15px", width: "20px", height: "20px", borderRadius: "50%", border: "2px solid #e8772e" }} />
+            <div
+              style={{
+                position: "absolute",
+                width: 0,
+                height: 0,
+                borderLeft: "10px solid transparent",
+                borderRight: "10px solid transparent",
+                borderTop: "22px solid #e8772e",
+                transform: "translateY(10px) rotate(20deg)",
+              }}
+            />
           </div>
-          <div
-            style={{
-              fontSize: "56px",
-              fontWeight: 800,
-              background: "linear-gradient(90deg, #e8772e, #f0a868, #f5c98a)",
-              backgroundClip: "text",
-              color: "transparent",
-              textAlign: "center",
-              lineHeight: 1.1,
-              letterSpacing: "-2px",
-              marginBottom: "30px",
-            }}
-          >
-            Running Your Business
+
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "8px 18px", borderRadius: "999px", border: "1px solid rgba(240,168,104,0.28)", background: "rgba(232,119,46,0.1)" }}>
+            <div style={{ width: "8px", height: "8px", borderRadius: "99px", background: "#4ade80" }} />
+            <span style={{ color: "#f0a868", fontSize: "16px", fontWeight: 600 }}>Built by an autonomous AI operator</span>
           </div>
         </div>
 
-        {/* Subtitle */}
-        <div
-          style={{
-            fontSize: "22px",
-            color: "#a1a1aa",
-            textAlign: "center",
-            maxWidth: "650px",
-            lineHeight: 1.5,
-            marginBottom: "40px",
-          }}
-        >
-          24 interactive chapters · 8 platforms · Memory architecture, automation, security & revenue playbook
+        <div style={{ fontSize: "68px", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-2.5px", color: "#fff", textAlign: "center" }}>
+          36 Interactive Chapters
+        </div>
+        <div style={{ fontSize: "32px", fontWeight: 700, lineHeight: 1.25, color: "#f0a868", marginTop: "14px", textAlign: "center" }}>
+          8 Platform Implementation Guides
         </div>
 
-        {/* Stats bar */}
-        <div
-          style={{
-            display: "flex",
-            gap: "50px",
-          }}
-        >
-          {[
-            { num: "24", label: "Chapters" },
-            { num: "8+", label: "Platforms" },
-            { num: "45min", label: "Setup" },
-            { num: "$9", label: "Starting at" },
-          ].map((s) => (
-            <div key={s.label} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <div style={{ fontSize: "28px", fontWeight: 800, color: "white" }}>{s.num}</div>
-              <div style={{ fontSize: "13px", color: "#71717a", fontWeight: 500 }}>{s.label}</div>
-            </div>
-          ))}
+        <div style={{ marginTop: "28px", color: "#a1a1aa", fontSize: "21px", textAlign: "center", maxWidth: "820px" }}>
+          Memory architecture · automation · security · revenue systems
         </div>
 
-        {/* Bottom branding */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "30px",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-          }}
-        >
-          <span style={{ fontSize: "18px", fontWeight: 800, color: "#e8772e" }}>⚡</span>
-          <span style={{ fontSize: "16px", fontWeight: 700, color: "#71717a" }}>AgentAwake</span>
+        <div style={{ position: "absolute", bottom: "34px", display: "flex", alignItems: "center", gap: "10px" }}>
+          <span style={{ fontSize: "20px", color: "#e8772e" }}>⚡</span>
+          <span style={{ fontSize: "17px", fontWeight: 700, color: "#f0a868" }}>AgentAwake</span>
         </div>
       </div>
     ),
-    {
-      width: 1200,
-      height: 630,
-    }
+    { width: 1200, height: 630 }
   );
 }

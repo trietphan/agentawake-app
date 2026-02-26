@@ -17,9 +17,11 @@ export default function BlogPage() {
           <Link href="/" className="text-[1.15rem] font-extrabold bg-gradient-to-br from-[#e8772e] to-[#f0a868] bg-clip-text text-transparent">⚡ AgentAwake</Link>
           <div className="flex items-center gap-2 sm:gap-7">
             <Link href="/" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Home</Link>
+            <Link href="/chapters" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Chapters</Link>
             <Link href="/blog" className="hidden sm:inline text-[var(--foreground)] text-sm font-medium">Blog</Link>
             <MobileNav items={[
               { href: "/", label: "Home" },
+              { href: "/chapters", label: "Chapters" },
               { href: "/blog", label: "Blog" },
               { href: "/free", label: "Free Chapter" },
             ]} />

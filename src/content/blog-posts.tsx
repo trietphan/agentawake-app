@@ -15,6 +15,117 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "how-to-give-claude-persistent-memory",
+    title: "How to Give Claude Persistent Memory (Complete 2026 Guide)",
+    description: "Claude is brilliant, but its amnesia is costing you time. Learn how to give Claude long-term persistent memory using Projects, Claude Code CLI, and MCP servers in this complete 2026 guide.",
+    date: "2026-02-25",
+    readTime: "10 min",
+    tags: ["Claude persistent memory", "Claude memory system", "give Claude long-term memory", "Claude Code", "MCP"],
+    content: (
+      <>
+        <p>
+          Claude 3.7 is widely regarded as one of the smartest models on the planet. Its coding abilities, reasoning, and context processing are genuinely mind-bending. But every time you open a new chat, you hit the same wall: <strong>Claude has amnesia.</strong>
+        </p>
+
+        <p>
+          It forgets your preferred tech stack. It forgets the architecture decisions you made yesterday. It forgets that you absolutely despise Tailwind CSS. Every new session forces you into a tedious ritual of re-explaining who you are, what you're doing, and how you want things done.
+        </p>
+
+        <p>
+          You might think the massive 200K context window solves this. Just dump everything in! But dumping raw files isn't memory—it's noise. It burns tokens, slows down responses, and leads to hallucinations. <strong>True persistent memory isn't about cramming more data into the prompt; it's about giving Claude an organized brain.</strong>
+        </p>
+
+        <TweetableQuote quote="Dumping raw files into a 200K context window isn't memory—it's noise. True persistent memory is about giving Claude an organized brain." />
+
+        <AmnesiaQuiz />
+
+        <h2>The Three-Layer Memory Solution</h2>
+
+        <p>
+          To fix this permanently, we don't need expensive third-party tools or complex vector databases. We need a simple, folder-based architecture that Claude can read and update. We break this down into three layers:
+        </p>
+
+        <h3>Layer 1: The Knowledge Base (PARA Method)</h3>
+        <p>
+          If you dump all your notes into a single file, Claude will struggle to find what matters. Instead, we use the PARA method (Projects, Areas, Resources, Archives) specifically tailored for AI agents.
+        </p>
+        <pre><code>{`memory/
+├── projects/        # Active work (e.g., website-redesign.md)
+├── areas/           # Ongoing responsibilities (e.g., marketing.md)
+├── resources/       # Reference material (e.g., api-keys-mock.md)
+└── archives/        # Completed stuff`}</code></pre>
+        <p>
+          By structuring files this way, Claude doesn't have to read your entire life story. It just reads <code>projects/website-redesign.md</code> when you ask about the redesign.
+        </p>
+
+        <h3>Layer 2: Daily Notes (Working Memory)</h3>
+        <p>
+          Your Knowledge Base is long-term memory. Your <strong>Daily Notes</strong> are working memory. Create a <code>MEMORY.md</code> or a daily log file where Claude writes down decisions made, blockers encountered, and tasks for tomorrow. When Claude wakes up the next day, it reads this file and instantly knows the status of everything.
+        </p>
+
+        <h3>Layer 3: Tacit Knowledge (Custom Instructions)</h3>
+        <p>
+          This is the un-Googleable stuff. In your Claude Project instructions or global config, include a section for <em>Tacit Knowledge</em>. Things like: "Always use TypeScript," "Keep explanations under 3 paragraphs," or "Never suggest MongoDB." This acts as Claude's personality and ruleset.
+        </p>
+
+        <CostCalculator />
+
+        <h2>3 Ways to Implement Persistent Memory in 2026</h2>
+
+        <p>Depending on how you use Claude, here is exactly how to set this up.</p>
+
+        <h3>Method A: Claude Projects (For the Web UI)</h3>
+        <p>
+          If you use Claude.ai in the browser, <strong>Claude Projects</strong> is your best friend. 
+          Create a new Project and upload your PARA folders as Project Knowledge. Then, set custom instructions telling Claude to explicitly read from these files before answering. The catch? You have to manually update the files when things change. It's not fully automated, but it completely eliminates the "blank slate" problem for active projects.
+        </p>
+
+        <h3>Method B: Claude Code CLI (For Developers)</h3>
+        <p>
+          Anthropic's new <strong>Claude Code</strong> CLI is a game-changer. It runs in your terminal, accesses your file system, and can <em>write</em> to your memory files natively.
+        </p>
+        <pre><code>{`# In your terminal
+claude "Read memory/projects/app.md. Implement the next feature, then update the memory file with your progress."`}</code></pre>
+        <p>
+          Claude Code will read the file, do the work, and update the markdown file. Persistent memory, fully automated right in your codebase.
+        </p>
+
+        <h3>Method C: MCP Memory Servers (For Power Users)</h3>
+        <p>
+          The <strong>Model Context Protocol (MCP)</strong> allows Claude to interface dynamically with external memory servers. By running an MCP memory server, Claude can seamlessly store, index, and retrieve memories across sessions without you having to manage files manually. This is the closest thing to native human-like memory, allowing Claude to build a persistent graph of knowledge about you.
+        </p>
+
+        <h2>Automating the Heartbeat</h2>
+
+        <p>
+          For local setups (like Claude Code), you can automate memory consolidation using simple shell scripts and cron jobs. A nightly script can trigger Claude to review the day's logs and update the Knowledge Base.
+        </p>
+
+        <pre><code>{`# Example Cron Job (Runs every night at 2 AM)
+0 2 * * * cd /my/project && claude "Review today's logs and update the knowledge base"`}</code></pre>
+
+        <p>
+          With this automated heartbeat, Claude cleans up its own memory while you sleep.
+        </p>
+
+        <h2>Stop Starting Over Every Day</h2>
+
+        <p>
+          Giving Claude persistent memory changes how you work forever. You move from treating AI like a temporary intern to treating it like a dedicated partner who remembers your business, your codebase, and your preferences.
+        </p>
+
+        <p>
+          If you want the complete, copy-paste system—including the exact folder templates, Claude system prompts, MCP configurations, and cron automation scripts—the <a href="/#pricing">AgentAwake Playbook</a> gives you the full 36-chapter blueprint. You can set it up in 15 minutes and never re-explain yourself again.
+        </p>
+
+        <p>
+          <strong><a href="/#pricing">Get the complete playbook →</a></strong>
+        </p>
+      </>
+    ),
+  },
+
+  {
     slug: "how-to-give-your-ai-agent-persistent-memory",
     title: "How to Give Your AI Agent Persistent Memory",
     description:
