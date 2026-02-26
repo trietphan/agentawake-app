@@ -17,15 +17,15 @@
 .light {
   --background: #faf9f7;
   --foreground: #1a1816;
-  --accent: #c9621e;
-  --accent-light: #e8772e;
-  --accent-muted: #a84f14;
+  --accent: #9a4710;
+  --accent-light: #b85a18;
+  --accent-muted: #8b3f0d;
   --surface: #ffffff;
-  --surface-hover: #f5f3f0;
-  --border: #e2dfda;
-  --border-hover: #ccc8c1;
-  --text-secondary: #6b6560;
-  --text-tertiary: #948d86;
+  --surface-hover: #f0edea;
+  --border: #dbd7d1;
+  --border-hover: #c5c0b8;
+  --text-secondary: #544f49;
+  --text-tertiary: #706962;
 }
 
 body {

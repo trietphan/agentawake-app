@@ -10,7 +10,7 @@ import MobileNav from "@/components/MobileNav";
 
 const EmailCaptureComponent = dynamic(() => import("@/components/EmailCapture"), { loading: () => <div className="h-12" /> });
 const MobileStickyCTA = dynamic(() => import("@/components/MobileStickyCTA"), { loading: () => <div /> });
-const StickyBottomCTA = dynamic(() => import("@/components/StickyBottomCTA"), { loading: () => <div /> });
+// StickyBottomCTA removed — MobileStickyCTA handles both buttons
 const ExitIntentPopup = dynamic(() => import("@/components/ExitIntent"), { loading: () => <></> });
 const FAQAccordion = dynamic(() => import("@/components/FAQAccordion"), { loading: () => <div /> });
 
@@ -1002,7 +1002,6 @@ export default function Home() {
         <a href="mailto:hello@agentawake.com" className="hover:text-[var(--text-secondary)] transition-colors">hello@agentawake.com</a>
       </footer>
       <MobileStickyCTA />
-      <StickyBottomCTA />
       <ExitIntentPopup />
     </div>
   );
