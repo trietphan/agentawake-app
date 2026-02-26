@@ -26,7 +26,7 @@ export default function MobileNav({ items }: { items: { href: string; label: str
             onClick={() => setOpen(false)}
             className="fixed inset-0 bg-black/40 backdrop-blur-[1px] z-[69]"
           />
-          <div className="absolute top-full left-0 right-0 mt-2 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-2 animate-fadeIn shadow-xl z-[71]">
+          <div className="fixed top-[64px] left-3 right-3 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-3 flex flex-col gap-2 animate-fadeIn shadow-2xl z-[71]">
             {items.map((item) => (
               <Link
                 key={item.href}
