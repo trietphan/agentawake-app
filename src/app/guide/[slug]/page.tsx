@@ -3,6 +3,8 @@ import Link from "next/link";
 import { getCurrentUser, hasAccess, UserTier } from "@/lib/auth";
 import { getChapter, chapters } from "@/lib/chapters";
 import { chapterContent } from "@/content/chapters";
+import ShareButton from "@/components/ShareButton";
+import ChapterProgress from "@/components/ChapterProgress";
 
 function LockedOverlay({ requiredTier }: { requiredTier: UserTier }) {
   const tierPrices: Record<string, string> = {
@@ -68,13 +70,16 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
     <article className="max-w-2xl mx-auto xl:ml-72 xl:mr-auto px-6 py-12 lg:py-16 xl:max-w-3xl">
       {/* Chapter header */}
       <div className="mb-10">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-3xl">{chapter.emoji}</span>
-          <div>
-            <div className="text-[0.65rem] font-bold uppercase tracking-widest text-[var(--accent-light)]">
-              Chapter {chapter.number} · {chapter.readTime} read
+        <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
+          <div className="flex items-center gap-3">
+            <span className="text-3xl">{chapter.emoji}</span>
+            <div>
+              <div className="text-[0.65rem] font-bold uppercase tracking-widest text-[var(--accent-light)]">
+                Chapter {chapter.number} · {chapter.readTime} read
+              </div>
             </div>
           </div>
+          <ShareButton />
         </div>
         <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight mb-3">
           {chapter.title}
@@ -83,6 +88,9 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
           {chapter.subtitle}
         </p>
       </div>
+
+      {/* Reading progress indicator */}
+      <ChapterProgress />
 
       {/* Content or locked overlay */}
       {canRead && content ? (
@@ -94,19 +102,40 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* Navigation */}
-      <div className="mt-16 flex items-center justify-between border-t border-[var(--border)] pt-8">
-        {prev ? (
-          <Link href={`/guide/${prev.slug}`} className="group flex items-center gap-2 text-sm text-[var(--text-tertiary)] hover:text-[var(--foreground)]/80 transition-colors">
-            <span>←</span>
-            <span className="group-hover:underline">{prev.title}</span>
-          </Link>
-        ) : <div />}
-        {next ? (
-          <Link href={`/guide/${next.slug}`} className="group flex items-center gap-2 text-sm text-[var(--text-tertiary)] hover:text-[var(--foreground)]/80 transition-colors">
-            <span className="group-hover:underline">{next.title}</span>
-            <span>→</span>
-          </Link>
-        ) : <div />}
+      <div className="mt-16 pt-8 border-t border-[var(--border)]">
+        <div className="flex items-center justify-between mb-8">
+          {prev ? (
+            <Link href={`/guide/${prev.slug}`} className="group flex items-center gap-2 text-sm text-[var(--text-tertiary)] hover:text-[var(--foreground)]/80 transition-colors">
+              <span>←</span>
+              <span className="group-hover:underline">{prev.title}</span>
+            </Link>
+          ) : <div />}
+          {/* placeholder to push next to right if no prev */}
+          {next && !prev && <div />}
+        </div>
+
+        {/* Next Chapter Preview Card */}
+        {next && (
+          <div className="mt-4">
+            <p className="text-[0.65rem] font-bold uppercase tracking-widest text-[var(--text-tertiary)] mb-3">Up next</p>
+            <Link
+              href={`/guide/${next.slug}`}
+              className="group flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 hover:border-[var(--accent)]/30 hover:shadow-[0_0_30px_rgba(232,119,46,0.06)] transition-all"
+            >
+              <span className="text-3xl flex-shrink-0 mt-0.5">{next.emoji}</span>
+              <div className="min-w-0">
+                <div className="text-[0.65rem] font-bold uppercase tracking-widest text-[var(--accent-light)] mb-1">
+                  Chapter {next.number} · {next.readTime} read
+                </div>
+                <h3 className="text-base font-bold leading-snug mb-1 group-hover:text-[var(--accent-light)] transition-colors">
+                  {next.title}
+                </h3>
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{next.subtitle}</p>
+              </div>
+              <span className="ml-auto flex-shrink-0 text-[var(--text-tertiary)] group-hover:text-[var(--accent-light)] text-lg transition-colors">→</span>
+            </Link>
+          </div>
+        )}
       </div>
     </article>
   );

@@ -39,10 +39,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${siteUrl}/blog/how-to-give-claude-persistent-memory`,
-      lastModified: new Date("2026-02-25"),
+      url: `${siteUrl}/blog`,
+      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/feed.xml`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
     },
     ...blogPages,
     ...guidePages,

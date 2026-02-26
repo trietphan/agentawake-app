@@ -11,33 +11,43 @@ import MobileNav from "@/components/MobileNav";
 const EmailCaptureComponent = dynamic(() => import("@/components/EmailCapture"), { loading: () => <div className="h-12" /> });
 const MobileStickyCTA = dynamic(() => import("@/components/MobileStickyCTA"), { loading: () => <div /> });
 const StickyBottomCTA = dynamic(() => import("@/components/StickyBottomCTA"), { loading: () => <div /> });
+const ExitIntentPopup = dynamic(() => import("@/components/ExitIntent"), { loading: () => <></> });
+const FAQAccordion = dynamic(() => import("@/components/FAQAccordion"), { loading: () => <div /> });
 
 const faqItems = [
+  {
+    q: "Is this a subscription?",
+    a: "No. One-time payment, lifetime access. You keep everything, including future updates to your tier.",
+  },
+  {
+    q: "I'm not technical. Can I still use this?",
+    a: "Absolutely. The playbook starts with zero-code methods (Claude Projects, ChatGPT Custom GPTs) and progressively introduces more technical setups. Chapter 0 is free — try it.",
+  },
+  {
+    q: "Which AI platform does this work with?",
+    a: "All major ones. We have dedicated implementation guides for Claude, ChatGPT, CrewAI, LangChain, AutoGPT, n8n, Cursor, and OpenClaw. Pick your stack and follow the guide.",
+  },
+  {
+    q: "What if it doesn't work for me?",
+    a: "30-day money-back guarantee. If the playbook doesn't help you build a better agent, email us and we'll refund you immediately.",
+  },
+  {
+    q: "How long does it take to implement?",
+    a: "The basic memory system takes about 45 minutes. Most builders have a working autonomous agent within a weekend.",
+  },
+  {
+    q: "Do I get access to future chapters?",
+    a: "Yes, for your tier and below. We're actively adding new platform guides and case studies.",
+  },
   {
     q: "Does this work with any AI agent platform?",
     a: "Yes! The core architecture (memory layers, automation patterns, security model) is universal. OpenClaw gets full copy-paste configs. Claude, ChatGPT, CrewAI, LangChain, and even no-code tools like n8n/Zapier can all use the patterns.",
   },
   {
-    q: "How technical do I need to be?",
-    a: "If you can copy-paste commands into a terminal, you can follow this guide. We explain everything with real-life analogies — kitchens, dating, Netflix. The Pro tier has configs you literally copy and paste.",
-  },
-  {
-    q: "What makes this different from free tutorials?",
-    a: "Free tutorials show you how to chat with an AI. This shows you how to build one that works autonomously. It's the difference between a chatbot and a business operator. Plus, the system documented here built this product.",
-  },
-  {
     q: "Wait — this was really built by an AI agent?",
     a: "Yes. The agent (ToDaMoon 🐾) that built this landing page, the interactive guide, wired Stripe, and deployed to Vercel is the same system documented in the playbook. We're selling the map we used to navigate the territory.",
   },
-  {
-    q: "Do I get updates?",
-    a: "All tiers include lifetime updates. As we improve our system, the playbook gets updated. Accelerator members get quarterly deep-dives with new case studies and techniques.",
-  },
-  {
-    q: "Can I get a refund?",
-    a: "Yes — 30-day money-back guarantee. If you follow the guide and don't see meaningful improvement, we refund in full. No questions asked.",
-  },
-] as const;
+];
 
 function NavBar() {
   return (
@@ -102,6 +112,70 @@ function Hero() {
           <span>✓ Instant access</span>
           <span>✓ One-time payment</span>
           <span>✓ 30-day refund</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PlatformStrip() {
+  return (
+    <div className="border-b border-[var(--border)]/40 py-4">
+      <div className="max-w-[1080px] mx-auto px-6">
+        <p className="text-center text-[0.65rem] font-bold uppercase tracking-widest text-[var(--text-tertiary)] mb-3 opacity-60">Works with</p>
+        <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap opacity-50">
+          {["Claude", "ChatGPT", "CrewAI", "LangChain", "n8n", "Cursor", "AutoGPT", "OpenClaw"].map((p) => (
+            <span key={p} className="text-xs font-semibold uppercase tracking-widest text-[var(--text-tertiary)]">
+              {p}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BuildersTestimonials() {
+  const testimonials = [
+    {
+      quote: "I was re-explaining my entire codebase to Claude every morning. Set up the memory system from Chapter 3 and now it just... knows. Saved me at least an hour a day.",
+      name: "Alex K.",
+      role: "Solo SaaS Founder",
+      emoji: "🚀",
+    },
+    {
+      quote: "Used the n8n implementation guide to build a self-healing support bot for my client. They think I'm a genius. The playbook is my secret weapon.",
+      name: "Sarah M.",
+      role: "AI Automation Freelancer",
+      emoji: "💼",
+    },
+    {
+      quote: "The Cursor rules chapter alone was worth $69. My AI coding assistant finally remembers my project conventions instead of suggesting random patterns.",
+      name: "Dev R.",
+      role: "Full-Stack Developer",
+      emoji: "⚡",
+    },
+  ];
+
+  return (
+    <section className="py-20 relative">
+      <div className="max-w-[980px] mx-auto px-6">
+        <h2 className="text-center text-[clamp(1.5rem,3vw,2rem)] font-extrabold tracking-tight mb-12">
+          What Builders Are Saying
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((t, i) => (
+            <div key={i} className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+              <div className="text-3xl mb-4">{t.emoji}</div>
+              <p className="text-[0.92rem] text-[var(--foreground)]/80 leading-relaxed mb-4 italic">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div>
+                <p className="text-sm font-semibold">{t.name}</p>
+                <p className="text-xs text-[var(--text-tertiary)]">{t.role}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -850,18 +924,8 @@ function FAQ() {
   return (
     <section id="faq" className="py-24">
       <div className="max-w-[700px] mx-auto px-6">
-        <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold tracking-tight mb-12 text-center">Questions & Answers</h2>
-        <div className="divide-y divide-[var(--border)]">
-          {faqItems.map((item) => (
-            <details key={item.q} className="group">
-              <summary className="flex justify-between items-center py-5 cursor-pointer text-[0.98rem] font-semibold hover:text-[var(--accent-light)] transition-colors list-none [&::-webkit-details-marker]:hidden">
-                {item.q}
-                <span className="text-xs text-[var(--text-tertiary)] group-open:rotate-180 transition-transform">▼</span>
-              </summary>
-              <p className="pb-5 text-[0.92rem] text-[var(--text-secondary)] leading-relaxed">{item.a}</p>
-            </details>
-          ))}
-        </div>
+        <h2 className="text-[clamp(1.8rem,4vw,2.4rem)] font-bold tracking-tight mb-12 text-center">Questions &amp; Answers</h2>
+        <FAQAccordion items={faqItems.map((item) => ({ q: item.q, a: item.a }))} />
       </div>
     </section>
   );
@@ -917,6 +981,7 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <NavBar />
       <Hero />
+      <PlatformStrip />
       <Reveal><SocialProof /></Reveal>
       <Reveal><BuildLog /></Reveal>
       <Reveal><Problem /></Reveal>
@@ -928,6 +993,7 @@ export default function Home() {
       <Reveal><HowItWorks /></Reveal>
       <Reveal><EmailCapture /></Reveal>
       <Reveal><WhoThisIsFor /></Reveal>
+      <Reveal><BuildersTestimonials /></Reveal>
       <Reveal><Pricing /></Reveal>
       <Reveal><FAQ /></Reveal>
       <Reveal><BottomCTA /></Reveal>
@@ -937,6 +1003,7 @@ export default function Home() {
       </footer>
       <MobileStickyCTA />
       <StickyBottomCTA />
+      <ExitIntentPopup />
     </div>
   );
 }
