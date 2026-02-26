@@ -89,21 +89,21 @@ function Hero() {
       <div className="absolute top-[15%] left-[8%] w-40 h-40 rounded-full bg-[var(--accent)]/10 blur-3xl pointer-events-none animate-blob" />
       <div className="absolute top-[30%] right-[8%] w-44 h-44 rounded-full bg-[var(--accent)]/15 blur-3xl pointer-events-none animate-blob-delay" />
       <div className="max-w-[1080px] mx-auto px-6 relative">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm font-semibold text-[var(--accent-light)] bg-gradient-to-r from-[var(--accent)]/10 via-[var(--accent-light)]/8 to-[var(--accent-light)]/5 border border-[var(--accent-light)]/20 mb-7 animate-gradient-shift">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm font-semibold text-[var(--accent-light)] bg-gradient-to-r from-[var(--accent)]/10 via-[var(--accent-light)]/8 to-[var(--accent-light)]/5 border border-[var(--accent-light)]/20 mb-7 animate-gradient-shift animate-hero-reveal">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           Built by an autonomous AI agent — the system documented inside
         </div>
-        <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] mb-6 max-w-[780px] mx-auto">
+        <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] mb-6 max-w-[780px] mx-auto animate-hero-reveal-delay">
           Your AI Agent Forgets Everything.{" "}
           <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent animate-gradient-shift">Fix It in 45 Minutes.</span>
         </h1>
-        <p className="text-lg text-[var(--text-secondary)] max-w-[560px] mx-auto mb-5 leading-relaxed">
+        <p className="text-lg max-w-[560px] mx-auto mb-5 leading-relaxed animate-hero-subtitle glow-sweep">
           The complete system for building AI agents that remember, learn, and work autonomously — so you save 5+ hours every week.
         </p>
-        <p className="text-sm text-[var(--text-tertiary)] mb-7">
+        <p className="text-sm text-[var(--text-tertiary)] mb-7 animate-hero-subtitle" style={{ animationDelay: '0.8s' }}>
           👥 Join 50+ builders who&apos;ve given their agents memory
         </p>
-        <div className="flex gap-3.5 justify-center flex-wrap">
+        <div className="flex gap-3.5 justify-center flex-wrap animate-hero-cta">
           <a href="#pricing" className="bg-[var(--accent-muted)] text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-[var(--accent)] transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--accent)]/10">
             Get the Playbook →
           </a>
@@ -111,7 +111,7 @@ function Hero() {
             Read Free Chapter
           </Link>
         </div>
-        <div className="flex items-center justify-center gap-6 mt-6 text-xs text-[var(--text-tertiary)]">
+        <div className="flex items-center justify-center gap-6 mt-6 text-xs text-[var(--text-tertiary)] animate-hero-cta" style={{ animationDelay: '1.1s' }}>
           <span>✓ Instant access</span>
           <span>✓ One-time payment</span>
           <span>✓ 30-day refund</span>

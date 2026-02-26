@@ -24,8 +24,8 @@
   --surface-hover: #f0edea;
   --border: #dbd7d1;
   --border-hover: #c5c0b8;
-  --text-secondary: #544f49;
-  --text-tertiary: #706962;
+  --text-secondary: #443e39;
+  --text-tertiary: #605950;
 }
 
 body {
@@ -157,6 +157,67 @@ pre {
     from { opacity: 0; transform: translateY(20px) scale(0.99); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
+}
+
+/* Hero subtitle anime-style reveal with glow sweep */
+@keyframes heroReveal {
+  0% { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+  60% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes glowSweep {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.animate-hero-reveal {
+  animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.animate-hero-reveal-delay {
+  animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-hero-subtitle {
+  animation: heroReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  opacity: 0;
+}
+
+.animate-hero-cta {
+  animation: heroReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  opacity: 0;
+}
+
+/* Glowing text sweep — anime energy burst feel */
+.glow-sweep {
+  background: linear-gradient(
+    90deg,
+    var(--text-secondary) 0%,
+    var(--text-secondary) 40%,
+    var(--accent-light) 50%,
+    var(--text-secondary) 60%,
+    var(--text-secondary) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowSweep 4s ease-in-out 1.5s 1 forwards;
+  background-position: -200% center;
+}
+
+/* After sweep, settle to normal color */
+.glow-sweep-settle {
+  animation: glowSweep 4s ease-in-out 1.5s 1 forwards, shimmer 3s ease-in-out 5.5s infinite;
 }
 
 /* Pricing cards equal height — cascade through ScrollReveal + GlowCard wrappers */
