@@ -13,8 +13,8 @@ const tierOrder = ["free", "blueprint", "pro", "accelerator"] as const;
 const tierMeta = {
   free: { label: "Free", price: "Free", cta: "Read now", accent: "text-emerald-300", border: "border-emerald-500/30", bg: "bg-emerald-500/8" },
   blueprint: { label: "Blueprint", price: "$9", cta: "Unlock Blueprint", accent: "text-blue-300", border: "border-blue-500/30", bg: "bg-blue-500/8" },
-  pro: { label: "Pro", price: "$29", cta: "Unlock Pro", accent: "text-violet-300", border: "border-violet-500/30", bg: "bg-violet-500/8" },
-  accelerator: { label: "Accelerator", price: "$69", cta: "Unlock Accelerator", accent: "text-[var(--accent-light)]", border: "border-[var(--accent)]/30", bg: "bg-[var(--accent)]/10" },
+  pro: { label: "Pro", price: "$19", cta: "Unlock Pro", accent: "text-violet-300", border: "border-violet-500/30", bg: "bg-violet-500/8" },
+  accelerator: { label: "Accelerator", price: "$29", cta: "Unlock Accelerator", accent: "text-[var(--accent-light)]", border: "border-[var(--accent)]/30", bg: "bg-[var(--accent)]/10" },
 } as const;
 
 const grouped = tierOrder.map((tier) => ({ tier, chapters: chapters.filter((ch) => ch.requiredTier === tier) }));

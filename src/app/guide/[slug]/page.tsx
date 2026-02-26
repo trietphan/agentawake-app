@@ -9,8 +9,8 @@ import ChapterProgress from "@/components/ChapterProgress";
 function LockedOverlay({ requiredTier }: { requiredTier: UserTier }) {
   const tierPrices: Record<string, string> = {
     blueprint: "$9",
-    pro: "$29",
-    accelerator: "$69",
+    pro: "$19",
+    accelerator: "$29",
   };
   return (
     <div className="relative">

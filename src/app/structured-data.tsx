@@ -17,14 +17,14 @@ export function StructuredData() {
       {
         "@type": "Offer",
         name: "AgentAwake Pro",
-        price: "29.00",
+        price: "19.00",
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
       },
       {
         "@type": "Offer",
         name: "Accelerator",
-        price: "69.00",
+        price: "29.00",
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
       },

@@ -52,7 +52,7 @@ function UpgradeFunnel() {
     {
       emoji: "🛠️",
       name: "The Operator's Toolkit",
-      price: "$29",
+      price: "$19",
       desc: "Production templates, automation recipes, and 3 real case studies. Build agents that run your business.",
       bestFor: "Solo operators & freelancers",
       href: "https://buy.stripe.com/cNi8wP7309OngVf3wibMQ01",
@@ -61,7 +61,7 @@ function UpgradeFunnel() {
     {
       emoji: "🚀",
       name: "The Complete System",
-      price: "$69",
+      price: "$29",
       desc: "Multi-agent orchestration, 8 platform guides, revenue playbook, and advanced security. The full arsenal.",
       bestFor: "Agencies & serious builders",
       href: "https://buy.stripe.com/4gMcN52MK1hR34pff0bMQ02",

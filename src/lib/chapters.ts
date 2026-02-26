@@ -87,7 +87,7 @@ export const chapters: Chapter[] = [
     readTime: "6 min",
   },
 
-  // PRO TIER ($29)
+  // PRO TIER ($19)
   {
     slug: "copy-paste-configs",
     number: 8,
@@ -134,7 +134,7 @@ export const chapters: Chapter[] = [
     readTime: "8 min",
   },
 
-  // ACCELERATOR TIER ($69)
+  // ACCELERATOR TIER ($29)
   {
     slug: "bottleneck-elimination",
     number: 13,

@@ -12,7 +12,7 @@ function getStripe() {
 
 // Map Stripe price IDs to tiers
 const priceTierMap: Record<string, UserTier> = {
-  // New prices ($9, $29, $69)
+  // New prices ($9, $19, $29)
   price_1T3nLnGqBVW20cKOLOGZjtG7: "blueprint",
   price_1T3nLnGqBVW20cKOsD2PapWD: "pro",
   price_1T3nLnGqBVW20cKOVXO7lrhU: "accelerator",

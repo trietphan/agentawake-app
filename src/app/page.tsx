@@ -150,7 +150,7 @@ function BuildersTestimonials() {
       emoji: "💼",
     },
     {
-      quote: "The Cursor rules chapter alone was worth $69. My AI coding assistant finally remembers my project conventions instead of suggesting random patterns.",
+      quote: "The Cursor rules chapter alone was worth $29. My AI coding assistant finally remembers my project conventions instead of suggesting random patterns.",
       name: "Dev R.",
       role: "Full-Stack Developer",
       emoji: "⚡",
@@ -809,8 +809,8 @@ function Pricing() {
     {
       name: "Professional",
       product: "The Operator's Toolkit",
-      price: "$29",
-      priceCompare: "One month of Netflix you barely watch 📺",
+      price: "$19",
+      priceCompare: "Less than a pizza night 🍕",
       desc: "Production templates, automation recipes, and 3 real case studies. Build agents that run your business.",
       bestFor: "Solo operators & freelancers",
       features: [
@@ -828,8 +828,8 @@ function Pricing() {
     {
       name: "Premium",
       product: "The Complete System",
-      price: "$69",
-      priceCompare: "One nice dinner out 🍝 (but this keeps working forever)",
+      price: "$29",
+      priceCompare: "One month of Netflix you barely watch 📺 (but this keeps working forever)",
       desc: "Multi-agent orchestration, 8 platform guides, revenue playbook, and advanced security. The full arsenal.",
       bestFor: "Agencies & serious builders",
       features: [
@@ -955,8 +955,8 @@ export default function Home() {
     brand: { "@type": "Brand", name: "AgentAwake" },
     offers: [
       { "@type": "Offer", name: "The Blueprint", price: "9.00", priceCurrency: "USD", availability: "https://schema.org/InStock" },
-      { "@type": "Offer", name: "AgentAwake Pro", price: "29.00", priceCurrency: "USD", availability: "https://schema.org/InStock" },
-      { "@type": "Offer", name: "Accelerator", price: "69.00", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+      { "@type": "Offer", name: "AgentAwake Pro", price: "19.00", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+      { "@type": "Offer", name: "Accelerator", price: "29.00", priceCurrency: "USD", availability: "https://schema.org/InStock" },
     ],
   };
 
