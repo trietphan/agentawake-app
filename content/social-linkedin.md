@@ -16,6 +16,8 @@ The practical takeaway: you don't need a sophisticated vector database to get st
 
 What's the one piece of context you find yourself re-explaining to AI tools every single time?
 
+Learn more at agentawake.com.
+
 ---
 
 ## Post 2 — Building in Public: What 90 Days of Agent Development Actually Looks Like
@@ -48,6 +50,8 @@ Start small: create a simple document called "agent context" and put your three 
 
 What would you put in your agent's context document if you started one today?
 
+Start building yours at agentawake.com.
+
 ---
 
 ## Post 4 — The ROI of AI Memory: Why "Faster" Is the Wrong Metric
@@ -63,6 +67,8 @@ I've seen teams reduce the "AI oversight tax" — the time spent reviewing, corr
 The practical move: audit your current AI interactions for repetition. What are you explaining over and over? That list is your memory roadmap. Build the storage first, the retrieval second, and then let the speed improvements take care of themselves.
 
 What repetitive context are you tired of supplying to your AI tools every day?
+
+The fix is at agentawake.com.
 
 ---
 
@@ -80,6 +86,8 @@ This is the whole reason I built AgentAwake. Not another collection of prompts �
 
 Where would you place your current AI implementation on that maturity curve?
 
+Explore the framework at agentawake.com.
+
 ---
 
 ## Post 6 — Team Automation: The One Architecture Mistake That Kills Adoption
@@ -95,6 +103,8 @@ The implementation is more straightforward than most teams expect. You don't nee
 The teams I've seen do this well report that new hires get productive faster too — because the agent context serves as an organizational knowledge base that onboarding hadn't previously captured.
 
 Has your team struggled with AI tool adoption? I'd love to hear what you tried.
+
+If you're ready to fix it: agentawake.com.
 
 ---
 
@@ -128,6 +138,8 @@ Build fewer agents. Invest more in their memory. Let compound knowledge do what 
 
 What's your current ratio of agents to use cases? I'm curious whether others have hit the same fragmentation problem.
 
+Deeper context, fewer agents — the full playbook at agentawake.com.
+
 ---
 
 ## Post 9 — Lessons Learned: 6 Months of Building Agents That Actually Work
@@ -144,6 +156,8 @@ Happy to share more specifics about any of these if they're useful.
 
 What's the most valuable lesson your AI development experience has taught you?
 
+I documented mine at agentawake.com.
+
 ---
 
 ## Post 10 — The Future of Work Isn't AI Replacing Humans. It's AI That Remembers.
@@ -159,5 +173,7 @@ This isn't an argument that AI will replace everyone. It's an observation that t
 The playbook for building that kind of system is what I built AgentAwake to teach. The window for getting ahead of this is open, but it won't be forever.
 
 What would change in your work if your AI tools remembered everything from the past six months?
+
+Start building memory-first agents at agentawake.com.
 
 ---

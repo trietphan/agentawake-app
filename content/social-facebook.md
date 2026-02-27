@@ -13,6 +13,8 @@ That's exactly what most AI tools do right now. Every time you start a new chat,
 
 The fix is giving your AI agent persistent memory — so it carries what it learned forward into the next conversation, the next day, the next month. Once you build that, using AI goes from "useful but exhausting" to "genuinely feels like having a team member who's always up to speed." The difference is night and day.
 
+Check it out: agentawake.com
+
 ---
 
 ## Post 2 — Stop Repeating Yourself
@@ -32,6 +34,8 @@ This happened to me last week and I'm still thinking about it. I was working on 
 I had forgotten about that. The agent hadn't. It pulled that context from memory and used it to give me a better answer than I would have gotten if I'd just typed a fresh prompt. That's when it clicked for me — this isn't about AI being smart. It's about AI being informed. The memory is what makes it genuinely useful.
 
 Building that kind of agent is more approachable than it sounds. You don't need to be a developer to understand the framework. You just need to know what you want your agent to remember, and set up a system to make that happen.
+
+Check it out: agentawake.com
 
 ---
 
@@ -53,6 +57,8 @@ The issue wasn't the AI. The issue was that I was building agents with no memory
 
 Once I figured out how to add persistent memory to my agents, everything changed. Suddenly the corrections stuck. Suddenly the agent got better over time instead of staying mediocre forever. I went from being ready to abandon the whole project to being genuinely excited about where it was going. Memory is the thing that makes AI agents worth using long-term.
 
+Check it out: agentawake.com
+
 ---
 
 ## Post 6 — The Difference Between a Tool and a Team Member
@@ -73,6 +79,8 @@ The gains compound quietly. A few minutes here. An hour there. A decision that t
 
 That's what persistent memory actually delivers. Not magic, but compounding value. And once you experience it, basic stateless AI tools feel like a serious downgrade.
 
+Check it out: agentawake.com
+
 ---
 
 ## Post 8 — Anyone Can Build This (Yes, Really)
@@ -92,6 +100,8 @@ Let me put some rough numbers on something. If you use AI tools for an hour a da
 What would you do with 80 extra hours? Probably not re-explain your target audience to an AI for the 300th time.
 
 Persistent agent memory isn't just a quality-of-life improvement. It's a meaningful time recovery — the kind that adds up to weeks over the course of a year. And the setup isn't nearly as painful as those 80 hours. Most people can get a basic memory layer working in a weekend. The payback period is measured in days.
+
+Check it out: agentawake.com
 
 ---
 
