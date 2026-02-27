@@ -14,6 +14,17 @@ const MobileStickyCTA = dynamic(() => import("@/components/MobileStickyCTA"), { 
 const ExitIntentPopup = dynamic(() => import("@/components/ExitIntent"), { loading: () => <></> });
 const FAQAccordion = dynamic(() => import("@/components/FAQAccordion"), { loading: () => <div /> });
 
+function GuaranteeBadge() {
+  return (
+    <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full">
+      <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+      </svg>
+      30-Day Money-Back Guarantee
+    </div>
+  );
+}
+
 const faqItems = [
   {
     q: "Is this a subscription?",
@@ -111,10 +122,13 @@ function Hero() {
             Read Free Chapter
           </Link>
         </div>
-        <div className="flex items-center justify-center gap-6 mt-6 text-xs text-[var(--text-tertiary)] animate-hero-cta" style={{ animationDelay: '1.1s' }}>
-          <span>✓ Instant access</span>
-          <span>✓ One-time payment</span>
-          <span>✓ 30-day refund</span>
+        <div className="flex flex-col items-center gap-3 mt-6 animate-hero-cta" style={{ animationDelay: '1.1s' }}>
+          <div className="flex items-center justify-center gap-6 text-xs text-[var(--text-tertiary)]">
+            <span>✓ Instant access</span>
+            <span>✓ One-time payment</span>
+            <span>✓ No subscription</span>
+          </div>
+          <GuaranteeBadge />
         </div>
       </div>
     </section>
@@ -945,14 +959,15 @@ function Pricing() {
           ))}
         </div>
 
-        <div className="flex justify-center items-center gap-4 sm:gap-6 mt-10 text-xs text-[var(--text-tertiary)] flex-wrap">
-          <span>🔒 Secure checkout</span>
-          <span className="hidden sm:inline text-[var(--text-tertiary)]">|</span>
-          <span>↩️ 30-day money back</span>
-          <span className="hidden sm:inline text-[var(--text-tertiary)]">|</span>
-          <span>⚡ Instant access</span>
-          <span className="hidden sm:inline text-[var(--text-tertiary)]">|</span>
-          <span>🚫 No subscription</span>
+        <div className="flex flex-col items-center gap-4 mt-10">
+          <GuaranteeBadge />
+          <div className="flex justify-center items-center gap-4 sm:gap-6 text-xs text-[var(--text-tertiary)] flex-wrap">
+            <span>🔒 Secure checkout</span>
+            <span className="hidden sm:inline text-[var(--text-tertiary)]">|</span>
+            <span>⚡ Instant access</span>
+            <span className="hidden sm:inline text-[var(--text-tertiary)]">|</span>
+            <span>🚫 No subscription</span>
+          </div>
         </div>
       </div>
     </section>
@@ -975,11 +990,15 @@ function BottomCTA() {
     <section className="py-24 text-center relative overflow-hidden">
       <div className="absolute bottom-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(232,119,46,0.08),transparent_70%)] pointer-events-none" />
       <div className="max-w-[1080px] mx-auto px-6 relative">
+        <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-3">Stop re-explaining, start building.</p>
         <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-tight mb-4">Stop Chatting. Start Operating.</h2>
         <p className="text-lg text-[var(--text-secondary)] max-w-[500px] mx-auto mb-9">Your agent should be working while you sleep. The playbook shows you exactly how.</p>
         <a href="#pricing" className="inline-block bg-[var(--accent-muted)] text-white px-9 py-4 rounded-[10px] text-[1.05rem] font-semibold hover:bg-[var(--accent)] transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--accent)]/10">
           Get the Playbook →
         </a>
+        <div className="flex justify-center mt-5">
+          <GuaranteeBadge />
+        </div>
       </div>
     </section>
   );

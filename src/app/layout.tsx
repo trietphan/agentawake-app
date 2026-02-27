@@ -10,7 +10,7 @@ const siteUrl = "https://agentawake.com";
 
 export const metadata: Metadata = {
   title: "AgentAwake — Build an AI Agent That Runs Your Business",
-  description: "The exact playbook for building autonomous AI agents with persistent memory. 24 interactive chapters covering memory architecture, Obsidian integration, scalable knowledge graphs, automation, security, and revenue — works with Claude, ChatGPT, CrewAI, Cursor, n8n, and more. Built entirely by an AI agent.",
+  description: "Stop re-explaining, start building. The exact playbook for building autonomous AI agents with persistent memory. 24 interactive chapters covering memory architecture, automation, security, and revenue — works with Claude, ChatGPT, CrewAI, Cursor, n8n, and more. Built entirely by an AI agent.",
   metadataBase: new URL(siteUrl),
   keywords: [
     "AI agent", "autonomous AI", "AI automation", "AI memory", "AI agent playbook",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     title: "AgentAwake — The AI Agent Playbook That Built Itself",
-    description: "24 interactive chapters. 8 platforms. Built entirely by an AI agent. The exact system for turning chatbots into autonomous business operators.",
+    description: "Stop re-explaining, start building. 24 interactive chapters. 8 platforms. The exact system for turning chatbots into autonomous business operators.",
     siteName: "AgentAwake",
     images: [
       {
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AgentAwake — The AI Agent Playbook That Built Itself",
-    description: "24 interactive chapters. 8 platforms. Built by an AI agent. The system for turning chatbots into business operators.",
+    description: "Stop re-explaining, start building. 24 interactive chapters. 8 platforms. The system for turning chatbots into autonomous business operators.",
     images: [`${siteUrl}/api/og`],
   },
   robots: {
