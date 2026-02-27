@@ -1263,6 +1263,1044 @@ Automated S&P 500 and Gold trading system.
       </>
     ),
   },
+  {
+    slug: "claude-persistent-memory",
+    title: "How to Give Claude Persistent Memory (2026 Guide)",
+    description: "Claude forgets everything between chats. Here's how to build real persistent memory with MEMORY.md files, Python automation, and battle-tested prompts.",
+    date: "2026-02-26",
+    readTime: "8 min",
+    tags: ["claude", "persistent memory", "claude long term memory", "AI memory", "claude tips"],
+    content: (
+      <>
+        <div className="rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 p-5 sm:p-6 my-2">
+          <h3 className="text-xl sm:text-2xl font-bold mt-0 mb-3 text-[var(--foreground)]">TL;DR</h3>
+          <ol className="list-decimal pl-5 space-y-3 mb-0 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
+            <li>Claude has no built-in memory across sessions — each chat starts from zero by design.</li>
+            <li>The fix: maintain a MEMORY.md file and inject it into every conversation.</li>
+            <li>Use Claude Projects (web) or a system prompt (API) to automate injection.</li>
+            <li>End sessions with a summary prompt to keep your memory file current.</li>
+            <li>A simple Python script can automate load, chat, and save in one workflow.</li>
+          </ol>
+        </div>
+
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6 mt-16">
+          You've just spent 40 minutes explaining your business context to Claude. Your brand voice, your customer segments, the competitor you're trying to beat. Claude is finally giving you exactly the output you need.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          You close the tab.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          The next day, you come back and start a new chat. "Hi! I'm Claude. How can I help you today?"
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Gone. All of it.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          If you've used Claude for more than a week, you've felt this frustration. It's not a bug — it's how large language models fundamentally work. Each conversation starts with a blank slate. There's no persistent store, no "remember last time." Just tokens in, tokens out, context window closed.
+        </p>
+
+        <TweetableQuote quote="Claude doesn't forget because it's broken. It forgets because memory was never part of the design. The fix is simple: you carry the memory yourself." />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">01</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Why Claude Has No Memory (And Why That's Actually Fine)</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Claude doesn't "remember" between chats because each API call is stateless. The model doesn't store your conversation — your browser does (or the app you're using does). When you start a new chat, there's no session, no cookie, no previous-turn lookup. It's just raw inference.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          This is actually a feature from an architecture standpoint — it makes Claude infinitely scalable and keeps your data from accumulating in ways you can't control.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          But for power users? It's maddening.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          The workaround is simple: <strong>if the model won't remember, you carry the memory yourself.</strong> You write it down, and you inject it at the start of every session.
+        </p>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">02</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">The MEMORY.md Approach: How It Works</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          The core idea is a plain text file — usually called <code>MEMORY.md</code> — that you maintain and inject into every Claude conversation. It's your external brain. Claude reads it, gets context, and picks up right where you left off.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Here's what a real MEMORY.md looks like:
+        </p>
+
+        <CodeBlock lang="markdown" code={`# Context: My Business
+
+## Who I Am
+- Founder of a B2B SaaS company (HR analytics space)
+- 3-person team, bootstrapped, ~$40K MRR
+- Primary market: US mid-market companies (200-1000 employees)
+
+## Current Focus (Feb 2026)
+- Launching new "Retention Insights" module in Q1
+- Trying to reduce churn from 8% → 5% by June
+- Running a content marketing push targeting HR Directors
+
+## Brand Voice
+- Professional but not stuffy
+- Data-driven, no fluff
+- We use "talent teams" not "HR departments"
+- Avoid: synergy, leverage (as a verb), disruptive
+
+## Key Competitors
+- Visier: enterprise, expensive, slow to implement
+- Workday Prism: bundled, not standalone
+- Our angle: "Visier for the mid-market, at 1/3 the price"
+
+## Ongoing Projects
+- Blog series: "Retention Playbooks for Mid-Market HR"
+- LinkedIn thought leadership (posting 3x/week)
+- SEO push: targeting "employee retention analytics" cluster`} />
+
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          This is not a complex document. It's just organized notes — the kind you'd give to a new contractor on day one.
+        </p>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">03</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Step-by-Step: Setting Up Your MEMORY.md System</h2>
+        </div>
+
+        <h3 className="text-xl sm:text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">Step 1: Create Your Memory File</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Start with these five sections:
+        </p>
+        <ol className="list-decimal pl-5 space-y-2 mb-6 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
+          <li><strong>Who you are / what you're building</strong> — 3-5 bullet points</li>
+          <li><strong>Current focus</strong> — What are you working on right now?</li>
+          <li><strong>Voice and style</strong> — Words to use, words to avoid, tone</li>
+          <li><strong>Key context</strong> — Competitors, customers, constraints</li>
+          <li><strong>Active projects</strong> — What should Claude always know about?</li>
+        </ol>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Don't overthink it. A messy MEMORY.md is better than no MEMORY.md. You'll refine it as you go.
+        </p>
+
+        <h3 className="text-xl sm:text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">Step 2: Create a System Prompt Template</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          If you're using Claude.ai (the web interface), you can use <strong>Projects</strong> — which lets you set a persistent system prompt. Paste your MEMORY.md content there.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          If you're using the API directly, prefix every conversation with your memory file:
+        </p>
+
+        <CodeBlock lang="python" code={`SYSTEM_PROMPT = open("MEMORY.md").read()
+
+response = anthropic.messages.create(
+    model="claude-opus-4-5",
+    max_tokens=4096,
+    system=SYSTEM_PROMPT,
+    messages=[
+        {"role": "user", "content": user_message}
+    ]
+)`} />
+
+        <h3 className="text-xl sm:text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">Step 3: Automate Memory Updates</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          This is the part most people skip — and why their memory files get stale. At the end of any important Claude session, ask it to summarize what you should add to your memory file:
+        </p>
+
+        <CodeBlock lang="text" code={`Before we wrap up, can you give me a bullet-point summary of:
+1. Any new decisions we made today
+2. Any context you learned about my project that I should save
+3. Any preferences or patterns you noticed in my feedback
+
+Format it so I can paste it directly into my MEMORY.md`} />
+
+        <div className="rounded-xl border-l-4 border-amber-400 bg-amber-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-amber-300 mb-2">💡 Pro Tip</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Date-stamp your "Current Focus" section. Review it every Monday morning before your first Claude session. Stale memory is almost worse than no memory — it makes Claude confidently wrong about your situation.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">04</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">A Simple Python Script to Manage Claude Memory</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          If you want to go a step further, here's a minimal Python script that loads your MEMORY.md automatically, runs a Claude conversation, and appends a session summary to your memory file:
+        </p>
+
+        <CodeBlock lang="python" code={`import anthropic
+import datetime
+from pathlib import Path
+
+MEMORY_FILE = Path("MEMORY.md")
+client = anthropic.Anthropic()
+
+def load_memory():
+    if MEMORY_FILE.exists():
+        return MEMORY_FILE.read_text()
+    return "No memory file found. Starting fresh."
+
+def save_memory_update(update: str):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d")
+    with open(MEMORY_FILE, "a") as f:
+        f.write(f"\\n\\n## Session Notes ({timestamp})\\n{update}")
+
+def chat_with_memory(user_message: str) -> str:
+    memory = load_memory()
+    system = f"""You are a helpful assistant with access to the user's memory context.
+
+{memory}
+
+Always reference this context when relevant. At the end of the conversation,
+be ready to summarize any new information worth saving."""
+
+    response = client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=4096,
+        system=system,
+        messages=[{"role": "user", "content": user_message}]
+    )
+    return response.content[0].text
+
+def extract_memory_update(conversation_history: list) -> str:
+    messages = conversation_history + [{
+        "role": "user",
+        "content": "Please summarize any new context from this session worth adding to my memory file. Be concise, bullet points only."
+    }]
+    response = client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=1024,
+        system="You are a helpful assistant that creates concise memory summaries.",
+        messages=messages
+    )
+    return response.content[0].text
+
+if __name__ == "__main__":
+    history = []
+    print("Claude (with memory) — type 'quit' to exit and save memory\\n")
+
+    while True:
+        user_input = input("You: ").strip()
+        if user_input.lower() == "quit":
+            break
+        response = chat_with_memory(user_input)
+        print(f"\\nClaude: {response}\\n")
+        history.append({"role": "user", "content": user_input})
+        history.append({"role": "assistant", "content": response})
+
+    if history:
+        print("\\nGenerating memory update...")
+        update = extract_memory_update(history)
+        save_memory_update(update)
+        print(f"Saved to {MEMORY_FILE}")`} />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">05</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Common Pitfalls (And How to Fix Them)</h2>
+        </div>
+
+        <h3 className="text-xl sm:text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">Pitfall 1: Your Memory File Gets Too Long</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>Symptom:</strong> You keep appending to MEMORY.md without ever pruning. After 3 months, it's 4,000 words and Claude spends half its context window just reading it.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>Fix:</strong> Do a monthly memory audit. Ask Claude to compress your memory file:
+        </p>
+        <CodeBlock lang="text" code={`Here is my current MEMORY.md. Please compress it to under 500 words while
+preserving all critical context. Remove outdated projects and redundant information.`} />
+
+        <h3 className="text-xl sm:text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">Pitfall 2: Memory Goes Stale</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>Symptom:</strong> Your memory file says you're focused on Q1 launch, but it's now Q3 and you're in maintenance mode. Claude confidently gives you Q1 advice for a Q3 problem.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>Fix:</strong> Date-stamp your "Current Focus" section. Make reviewing it a weekly habit — five minutes before your first Claude session on Monday.
+        </p>
+
+        <h3 className="text-xl sm:text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">Pitfall 3: Memory Is Too Generic</h3>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>Symptom:</strong> Your MEMORY.md says "I run a startup" but gives no specifics. Claude's responses feel slightly better but not dramatically so.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>Fix:</strong> Be ruthlessly specific. Instead of "I run a startup," write "I'm the solo founder of [Name], a bootstrapped B2B SaaS in [vertical] with [X] customers and [Y] MRR." Numbers and specifics are what make memory powerful.
+        </p>
+
+        <div className="rounded-xl border-l-4 border-emerald-400 bg-emerald-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-emerald-300 mb-2">✅ Quick Win</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Start with a MEMORY.md that's 200 words or less. Five focused bullets beat five rambling paragraphs. You can always expand; it's hard to shrink something you've already over-engineered.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">06</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">What to Put In Your Memory File (And What to Skip)</h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+          <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-5">
+            <p className="text-sm font-bold text-emerald-300 mb-3">✅ Include</p>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs text-[var(--foreground)]/70 mb-0">
+              <li>Business context (industry, size, stage)</li>
+              <li>Current goals and OKRs</li>
+              <li>Style and voice preferences</li>
+              <li>Key decisions already made</li>
+              <li>Recurring characters (team, customers, competitors)</li>
+              <li>Constraints Claude should always know</li>
+            </ul>
+          </div>
+          <div className="rounded-xl border border-rose-400/20 bg-rose-400/5 p-5">
+            <p className="text-sm font-bold text-rose-300 mb-3">❌ Skip</p>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs text-[var(--foreground)]/70 mb-0">
+              <li>Raw conversation history (too noisy)</li>
+              <li>Sensitive credentials or passwords (never)</li>
+              <li>Anything that changes daily</li>
+              <li>Information you can just paste in-context</li>
+              <li>Generic filler that Claude already knows</li>
+            </ul>
+          </div>
+        </div>
+
+        <TweetableQuote quote="Once you have persistent memory working, your relationship with Claude changes. You stop treating it like a search engine and start treating it like a knowledgeable collaborator." />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] mt-16 mb-6">Want the Battle-Tested Templates?</h2>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Building MEMORY.md from scratch takes trial and error. After testing dozens of formats, we've developed structured templates that work across different use cases — whether you're a solo founder, a consultant, a developer, or a content creator.
+        </p>
+
+        <div className="rounded-2xl border border-[var(--accent)]/40 bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent)]/5 p-6 my-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-2">Free Starter Kit</p>
+          <h3 className="text-xl font-extrabold text-[var(--foreground)] mt-0 mb-3">Get the Claude Memory Starter Kit — structured templates for 6 different use cases, plus the Python script above, ready to run.</h3>
+          <p className="text-[0.95rem] text-[var(--foreground)]/70 mb-4">For the full system — automated memory management, multi-agent workflows, and production-ready scripts — see the AgentAwake playbooks starting at $9.</p>
+          <a href="/#pricing" className="inline-flex items-center gap-2 bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors">Get the Playbook →</a>
+        </div>
+      </>
+    ),
+  },
+  {
+    slug: "chatgpt-custom-gpt-memory",
+    title: "Why Your Custom GPT Keeps Forgetting Everything (And How to Fix It)",
+    description: "Custom GPTs forget clients, context, and preferences every session. Here are 3 real fixes — from prompt tricks to API state — that actually work.",
+    date: "2026-02-26",
+    readTime: "9 min",
+    tags: ["custom gpt", "chatgpt memory", "custom gpt memory", "chatgpt custom gpt forgetting", "AI agents"],
+    content: (
+      <>
+        <div className="rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 p-5 sm:p-6 my-2">
+          <h3 className="text-xl sm:text-2xl font-bold mt-0 mb-3 text-[var(--foreground)]">TL;DR</h3>
+          <ol className="list-decimal pl-5 space-y-3 mb-0 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
+            <li>Custom GPTs are stateless — every session is a blank slate, by design.</li>
+            <li>The Instructions box is static context, not dynamic memory. It hits limits fast.</li>
+            <li>Fix 1: Structured context blocks you paste at session start (works today, 15 min setup).</li>
+            <li>Fix 2: Notion/Airtable webhook via GPT Actions (real persistence, medium effort).</li>
+            <li>Fix 3: OpenAI API with your own backend (full control, production-grade).</li>
+          </ol>
+        </div>
+
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6 mt-16">
+          You built a Custom GPT. You spent hours on the Instructions. You gave it a name, a persona, maybe even some uploaded knowledge files. You tested it, it worked great, you shared the link with your team.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Then someone came back the next day and said: "Why doesn't it know who our clients are?"
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          And you realized — it doesn't. It never will. Not unless you tell it again. Every. Single. Time.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          This is the Custom GPT memory problem, and it's the #1 reason most Custom GPTs fail to deliver on their promise. They're not dumb — they're amnesiac. And there's a difference.
+        </p>
+
+        <TweetableQuote quote="Custom GPTs aren't broken. They're stateless by design. The memory has to live somewhere — and it's your job to decide where." />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">01</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Why the Instructions Box Isn't Enough</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          The first instinct is to dump everything into the Instructions field. If I just tell it about my clients upfront, it'll know, right?
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Sort of. But here's the problem: the Instructions field is <strong>static context</strong>, not <strong>dynamic memory</strong>.
+        </p>
+
+        <h3 className="text-xl sm:text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">Static vs Dynamic: The Critical Distinction</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+          <div className="rounded-xl border border-blue-400/20 bg-blue-400/5 p-5">
+            <p className="text-sm font-bold text-blue-300 mb-3">📝 Static Context (Instructions box)</p>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs text-[var(--foreground)]/70 mb-0">
+              <li>Who you are, brand voice, general approach</li>
+              <li>Same every session — appropriate here</li>
+              <li>~8,000 character limit</li>
+              <li>GPT can read but never write to it</li>
+            </ul>
+          </div>
+          <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-5">
+            <p className="text-sm font-bold text-amber-300 mb-3">⚡ Dynamic Memory (needs external storage)</p>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs text-[var(--foreground)]/70 mb-0">
+              <li>Active clients, recent decisions, evolving projects</li>
+              <li>Changes over time — must live elsewhere</li>
+              <li>Unlimited via external DB</li>
+              <li>Bidirectional read/write</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="rounded-xl border-l-4 border-rose-400 bg-rose-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-rose-300 mb-2">⚠️ Warning</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">OpenAI's built-in "Memory" feature — the one that saves facts across chats — does <strong>not</strong> work inside Custom GPTs. It's only available in the standard ChatGPT interface. Don't count on it for your GPT users.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">02</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Solution 1: Structured Context Prompts (Easy, Works Today)</h2>
+        </div>
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Difficulty</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">⭐☆☆☆☆</p>
+          </div>
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Setup</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">15 minutes</p>
+          </div>
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Persistence</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">Semi (manual)</p>
+          </div>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          You create a "context block" — a short, formatted snippet — that you paste at the start of every session. The GPT reads it and has everything it needs.
+        </p>
+
+        <CodeBlock lang="text" code={`## Current Context (paste at session start)
+Date: [today's date]
+
+### Active Leads
+- Sarah Chen (Meridian Consulting) — demo call Feb 28, Enterprise tier
+- Marcus Webb (Volta Foods) — sent proposal Jan 15, following up this week
+- TechNorth team — ghosted after trial, try re-engage in March
+
+### My Business
+- B2B SaaS, project management for agencies
+- Pricing: $49/mo Starter, $149/mo Pro, $399/mo Enterprise
+
+### This Session
+- Goal: [fill in what you want to accomplish today]`} />
+
+        <div className="rounded-xl border-l-4 border-amber-400 bg-amber-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-amber-300 mb-2">💡 Pro Tip</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Keep this context block in a Notion page or Apple Note. Update it after each session. It becomes your lightweight CRM — and it works with any AI, not just your Custom GPT.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">03</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Solution 2: Notion Webhook (Medium, Powerful)</h2>
+        </div>
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Difficulty</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">⭐⭐⭐☆☆</p>
+          </div>
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Setup</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">2–4 hours</p>
+          </div>
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Persistence</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">Automatic</p>
+          </div>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Using the Custom GPT's <strong>Actions</strong> feature, you connect it to an external database — like Notion — and have it read and write data in real time. Here's a simplified example of what the Action schema looks like:
+        </p>
+
+        <CodeBlock lang="json" code={`{
+  "openapi": "3.1.0",
+  "info": { "title": "Lead Memory API", "version": "1.0.0" },
+  "paths": {
+    "/leads": {
+      "get": {
+        "summary": "Get all active leads",
+        "operationId": "getLeads",
+        "responses": { "200": { "description": "List of leads with status and notes" } }
+      }
+    },
+    "/leads/{id}/note": {
+      "post": {
+        "summary": "Add a note to a lead",
+        "operationId": "addLeadNote",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "note": { "type": "string" },
+                  "date": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`} />
+
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          This requires a bit of technical lifting — you need somewhere to host the API, or use a service like Zapier or Make to proxy the Notion connection. But once it's running, your GPT genuinely has memory. It can look up "what do I know about Sarah Chen?" and get real, current data.
+        </p>
+
+        <div className="rounded-xl border-l-4 border-cyan-400 bg-cyan-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-cyan-300 mb-2">🔵 Mental Model Shift</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">The GPT doesn't need to remember. Your database does. Once you internalize that, the architecture becomes obvious.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">04</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Solution 3: Full API State Management (Hard, Production-Grade)</h2>
+        </div>
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Difficulty</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">⭐⭐⭐⭐⭐</p>
+          </div>
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Setup</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">Days–weeks</p>
+          </div>
+          <div className="rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 p-3 text-center">
+            <p className="text-xs font-bold text-[var(--accent-light)] mb-1">Persistence</p>
+            <p className="text-sm text-[var(--foreground)]/70 mb-0">Full / bidirectional</p>
+          </div>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          If you're building a serious product, move to the OpenAI API directly and manage state in your own backend. The architecture:
+        </p>
+
+        <CodeBlock lang="text" code={`User Message
+     ↓
+Your Backend (Node.js / Python / etc.)
+     ↓
+Load User State from DB (Postgres / Redis / Supabase)
+     ↓
+Inject State into System Prompt
+     ↓
+Call OpenAI API
+     ↓
+Parse Response → Extract State Updates
+     ↓
+Save Updates → Return Response to User`} />
+
+        <CodeBlock lang="python" code={`def build_system_prompt(user_id: str) -> str:
+    state = db.get_user_state(user_id)
+
+    return f"""You are a lead management assistant for {state['company_name']}.
+
+## Current Leads ({len(state['leads'])} active)
+{format_leads(state['leads'])}
+
+## User Preferences
+- Communication style: {state['comm_style']}
+- Follow-up cadence: {state['followup_cadence']}
+
+After each interaction, provide a JSON block with any state updates:
+{{"updates": [{{"type": "lead_update", "id": "...", "field": "...", "value": "..."}}]}}"""
+
+def process_response(response: str, user_id: str):
+    updates = extract_json_updates(response)
+    if updates:
+        db.apply_state_updates(user_id, updates)`} />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">05</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Which Solution Should You Use?</h2>
+        </div>
+
+        <div className="overflow-x-auto my-6">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-[var(--accent)]/20">
+                <th className="text-left py-3 px-4 text-[var(--foreground)]/60 font-semibold">Your situation</th>
+                <th className="text-left py-3 px-4 text-[var(--foreground)]/60 font-semibold">Best solution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-[var(--accent)]/10">
+                <td className="py-3 px-4 text-[var(--foreground)]/80">Just need this to work today</td>
+                <td className="py-3 px-4 text-[var(--foreground)]/80">Solution 1 (context block)</td>
+              </tr>
+              <tr className="border-b border-[var(--accent)]/10">
+                <td className="py-3 px-4 text-[var(--foreground)]/80">Power user with some tech skills</td>
+                <td className="py-3 px-4 text-[var(--foreground)]/80">Solution 2 (Notion webhook)</td>
+              </tr>
+              <tr className="border-b border-[var(--accent)]/10">
+                <td className="py-3 px-4 text-[var(--foreground)]/80">Building a real product or team tool</td>
+                <td className="py-3 px-4 text-[var(--foreground)]/80">Solution 3 (API + backend)</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 text-[var(--foreground)]/80">Non-technical, want it automatic</td>
+                <td className="py-3 px-4 text-[var(--foreground)]/80">Solution 2 via Zapier/Make</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Start with Solution 1. It's underrated — structured context blocks, done well, solve 80% of the problem with 5% of the effort.
+        </p>
+
+        <div className="rounded-2xl border border-[var(--accent)]/40 bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent)]/5 p-6 my-12">
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-2">Get the Complete Playbook</p>
+          <h3 className="text-xl font-extrabold text-[var(--foreground)] mt-0 mb-3">Ready-to-use context block templates, Notion schema + API setup, and Python starter code with state extraction built in.</h3>
+          <p className="text-[0.95rem] text-[var(--foreground)]/70 mb-4">Stop re-explaining yourself to your GPT. Build it once, get memory that works. Tiers from $9.</p>
+          <a href="/#pricing" className="inline-flex items-center gap-2 bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors">Get the Playbook →</a>
+        </div>
+      </>
+    ),
+  },
+  {
+    slug: "ai-agent-memory-architecture",
+    title: "The 3-Layer Memory Architecture Every AI Agent Needs",
+    description: "90% of AI agents fail because they have amnesia. Here's the 3-layer memory system (with real code) that makes agents actually reliable and useful.",
+    date: "2026-02-26",
+    readTime: "11 min",
+    tags: ["AI agent memory", "AI agent architecture", "persistent AI memory", "LLM memory", "AI agents"],
+    content: (
+      <>
+        <div className="rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 p-5 sm:p-6 my-2">
+          <h3 className="text-xl sm:text-2xl font-bold mt-0 mb-3 text-[var(--foreground)]">TL;DR</h3>
+          <ol className="list-decimal pl-5 space-y-3 mb-0 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
+            <li>Most AI agents fail not because the AI is bad, but because they lack a memory architecture.</li>
+            <li><strong>Layer 1 — Semantic memory:</strong> Long-term facts, preferences, context (the "pantry").</li>
+            <li><strong>Layer 2 — Working memory:</strong> In-session state and conversation history (the "countertop").</li>
+            <li><strong>Layer 3 — Episodic memory:</strong> Searchable log of past sessions and outcomes (the "recipe book").</li>
+            <li>Minimum viable version takes 45 minutes. Full vector DB implementation is a weekend project.</li>
+          </ol>
+        </div>
+
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6 mt-16">
+          Most AI agents ship broken.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Not broken in the way software usually breaks — no stack traces, no error messages. They just quietly fail to be useful. They give generic answers. They repeat themselves. They lose the thread. They can't build on prior work.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          The root cause, almost every time? <strong>Amnesia.</strong>
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          The agent was built without a real memory architecture. It has a system prompt, maybe some tools, and a loop — but no persistent understanding of what happened before. Each invocation is a blank slate. Each session starts from zero.
+        </p>
+
+        <TweetableQuote quote="This is the difference between an AI agent and a useful AI agent. One has memory; the other doesn't." />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">01</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Why 90% of AI Agents Fail</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          When developers build their first AI agent, they typically do this:
+        </p>
+
+        <CodeBlock lang="python" code={`def run_agent(user_message: str) -> str:
+    response = llm.complete(
+        system="You are a helpful assistant that manages tasks.",
+        user=user_message
+    )
+    return response`} />
+
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          This works in demos. The agent sounds smart, responds coherently, does impressive things in isolation.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Then users try it in the real world:
+        </p>
+        <ul className="list-disc pl-5 space-y-2 mb-6 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
+          <li>"Hey, do you remember what we decided last week?" → No.</li>
+          <li>"Can you pick up where we left off on the project plan?" → What project plan?</li>
+          <li>"Use the same tone as my last email." → Which email?</li>
+        </ul>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          The agent is smart but useless as a continuing collaborator. Without memory, every interaction is a cold start. The user has to re-explain everything, every time. Eventually they stop using it.
+        </p>
+
+        <div className="rounded-xl border-l-4 border-cyan-400 bg-cyan-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-cyan-300 mb-2">🔵 Key Insight</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Memory isn't hard to implement. It's just poorly understood. Most tutorials skip it, or treat it as an afterthought. It's not — it's the difference between something people use once and something they rely on daily.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">02</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">The Kitchen Analogy</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Before code, a mental model. Imagine a professional chef. They have three memory systems working simultaneously:
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
+          <div className="rounded-xl border border-blue-400/20 bg-blue-400/5 p-5">
+            <p className="text-sm font-bold text-blue-300 mb-2">🗄️ The Pantry</p>
+            <p className="text-xs font-semibold text-[var(--foreground)]/60 mb-2 uppercase tracking-wide">Semantic Memory</p>
+            <p className="text-xs text-[var(--foreground)]/70 mb-0">Long-term knowledge from years of training. Flavor profiles, techniques, mastered recipes. Stable, deep, doesn't change daily.</p>
+          </div>
+          <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-5">
+            <p className="text-sm font-bold text-amber-300 mb-2">🔪 The Countertop</p>
+            <p className="text-xs font-semibold text-[var(--foreground)]/60 mb-2 uppercase tracking-wide">Working Memory</p>
+            <p className="text-xs text-[var(--foreground)]/70 mb-0">What's currently prepped and ready. The mise en place for today's service. Active, current, temporary.</p>
+          </div>
+          <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-5">
+            <p className="text-sm font-bold text-emerald-300 mb-2">📖 The Recipe Book</p>
+            <p className="text-xs font-semibold text-[var(--foreground)]/60 mb-2 uppercase tracking-wide">Episodic Memory</p>
+            <p className="text-xs text-[var(--foreground)]/70 mb-0">Records of specific meals, notes from past services. "Table 7 has a shellfish allergy." Persistent, specific, searchable.</p>
+          </div>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          An AI agent needs the same three layers. Just like a chef can't do their best work with only one of these, neither can your agent.
+        </p>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">03</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Layer 1: Semantic Memory (The Pantry)</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>What it stores:</strong> Business context, domain knowledge, user preferences, static configuration, background facts that rarely change.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>Where it lives:</strong> A structured file (like MEMORY.md), a database row, or a vector store.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Most developers do implement this layer — usually as a system prompt. But most do it wrong: they make it static and never update it. Here's the right approach:
+        </p>
+
+        <CodeBlock lang="python" code={`class SemanticMemory:
+    def __init__(self, storage_path: str):
+        self.path = Path(storage_path)
+
+    def load(self) -> dict:
+        if not self.path.exists():
+            return {}
+        with open(self.path) as f:
+            return json.load(f)
+
+    def update(self, key: str, value: any):
+        data = self.load()
+        data[key] = {
+            "value": value,
+            "updated_at": datetime.utcnow().isoformat()
+        }
+        with open(self.path, "w") as f:
+            json.dump(data, f, indent=2)
+
+    def to_prompt_block(self) -> str:
+        data = self.load()
+        if not data:
+            return ""
+        lines = ["## Background Context"]
+        for key, entry in data.items():
+            lines.append(f"- {key}: {entry['value']}")
+        return "\\n".join(lines)
+
+# Usage
+memory = SemanticMemory("agent_memory.json")
+memory.update("user_company", "Acme Corp, B2B SaaS, 50-person team")
+memory.update("user_goal", "Reduce customer churn from 12% to 8% by Q3")
+memory.update("preferred_output", "Bullet points with action items at the bottom")`} />
+
+        <div className="rounded-xl border-l-4 border-amber-400 bg-amber-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-amber-300 mb-2">💡 Key Insight</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Semantic memory is <em>bidirectional</em>. After each session, your agent should be able to suggest updates to semantic memory based on what it learned. Build that feedback loop from day one.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">04</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Layer 2: Working Memory (The Countertop)</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>What it stores:</strong> The conversation history, intermediate results, current task state, decisions made mid-session.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          This is the easiest layer to understand but hardest to manage well. Context windows are finite. As conversations grow, you have to decide what to keep and what to drop. The key: don't just truncate — <em>summarize</em>.
+        </p>
+
+        <CodeBlock lang="python" code={`class WorkingMemory:
+    def __init__(self, max_tokens: int = 4000):
+        self.messages = []
+        self.max_tokens = max_tokens
+
+    def add(self, role: str, content: str):
+        self.messages.append({"role": role, "content": content})
+        self._trim_if_needed()
+
+    def _trim_if_needed(self):
+        total_chars = sum(len(m["content"]) for m in self.messages)
+        estimated_tokens = total_chars / 4
+
+        while estimated_tokens > self.max_tokens and len(self.messages) > 2:
+            removed = self.messages.pop(1)  # Keep first message
+            total_chars -= len(removed["content"])
+            estimated_tokens = total_chars / 4
+
+    def summarize_and_compress(self, llm) -> str:
+        """Ask the LLM to compress old messages into a summary."""
+        if len(self.messages) < 6:
+            return ""
+
+        to_compress = self.messages[1:len(self.messages)//2]
+        compress_prompt = f"""Summarize these conversation turns into a concise paragraph
+        capturing all key decisions, facts learned, and context established:
+        {json.dumps(to_compress, indent=2)}"""
+
+        summary = llm.complete(compress_prompt)
+
+        # Replace compressed messages with summary
+        self.messages = (
+            [self.messages[0]] +
+            [{"role": "system", "content": f"[Earlier in this session]: {summary}"}] +
+            self.messages[len(self.messages)//2:]
+        )
+        return summary`} />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">05</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Layer 3: Episodic Memory (The Recipe Book)</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>What it stores:</strong> What happened in previous sessions, feedback the user gave, decisions made over time, patterns observed.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          <strong>Where it lives:</strong> A vector database (Pinecone, Chroma, Weaviate) for semantic search, or a structured DB for exact lookup.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          This is the layer most developers skip entirely — and it's the layer that makes agents feel genuinely intelligent over time. Without episodic memory, your agent can't say: "Last month you said you were thinking about raising prices — did that happen?" With it, it can.
+        </p>
+
+        <CodeBlock lang="python" code={`import chromadb
+
+class EpisodicMemory:
+    def __init__(self, collection_name: str = "agent_episodes"):
+        self.client = chromadb.Client()
+        self.collection = self.client.get_or_create_collection(collection_name)
+
+    def store_episode(self, episode_id: str, content: str, metadata: dict = None):
+        """Store a memory of what happened in a session."""
+        self.collection.add(
+            documents=[content],
+            ids=[episode_id],
+            metadatas=[metadata or {}]
+        )
+
+    def recall(self, query: str, n_results: int = 3) -> list[str]:
+        """Retrieve relevant past episodes based on semantic similarity."""
+        results = self.collection.query(
+            query_texts=[query],
+            n_results=n_results
+        )
+        return results["documents"][0] if results["documents"] else []
+
+    def to_prompt_block(self, current_context: str) -> str:
+        memories = self.recall(current_context)
+        if not memories:
+            return ""
+        lines = ["## Relevant Past Context"]
+        for memory in memories:
+            lines.append(f"- {memory}")
+        return "\\n".join(lines)
+
+# After each session, store what happened
+episodic = EpisodicMemory()
+episodic.store_episode(
+    episode_id="session_2026_02_26_001",
+    content="User discussed Q2 pricing strategy. Decided to hold prices but add a premium tier at $499/mo.",
+    metadata={"date": "2026-02-26", "topic": "pricing", "outcome": "decision_made"}
+)`} />
+
+        <div className="rounded-xl border-l-4 border-emerald-400 bg-emerald-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-emerald-300 mb-2">✅ Key Insight</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Episodic memory gets better over time. The more sessions your agent has, the richer its recall becomes. This is how you get AI that feels like a trusted advisor instead of a smart stranger.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">06</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">Putting It All Together: The Full Architecture</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Here's how all three layers combine in a single agent invocation:
+        </p>
+
+        <CodeBlock lang="python" code={`class MemoryAwareAgent:
+    def __init__(self):
+        self.semantic = SemanticMemory("semantic.json")
+        self.working = WorkingMemory(max_tokens=3000)
+        self.episodic = EpisodicMemory()
+        self.llm = YourLLMClient()
+
+    def build_system_prompt(self, user_message: str) -> str:
+        semantic_block = self.semantic.to_prompt_block()
+        episodic_block = self.episodic.to_prompt_block(user_message)
+
+        return f"""You are a strategic assistant with memory across sessions.
+
+{semantic_block}
+
+{episodic_block}
+
+Use this context naturally. Don't mention the memory system — just be helpful."""
+
+    def respond(self, user_message: str) -> str:
+        system = self.build_system_prompt(user_message)
+        self.working.add("user", user_message)
+
+        response = self.llm.complete(
+            system=system,
+            messages=self.working.get_messages()
+        )
+
+        self.working.add("assistant", response)
+        return response
+
+    def end_session(self, session_summary: str):
+        """Call this when a session ends to persist what happened."""
+        self.episodic.store_episode(
+            episode_id=f"session_{datetime.utcnow().isoformat()}",
+            content=session_summary,
+            metadata={"date": datetime.utcnow().date().isoformat()}
+        )
+        # Extract semantic memory updates...`} />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">07</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">How This Maps to Real Platforms</h2>
+        </div>
+
+        <div className="overflow-x-auto my-6">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-[var(--accent)]/20">
+                <th className="text-left py-3 px-3 text-[var(--foreground)]/60 font-semibold">Platform</th>
+                <th className="text-left py-3 px-3 text-[var(--foreground)]/60 font-semibold">Semantic</th>
+                <th className="text-left py-3 px-3 text-[var(--foreground)]/60 font-semibold">Working</th>
+                <th className="text-left py-3 px-3 text-[var(--foreground)]/60 font-semibold">Episodic</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-[var(--accent)]/10">
+                <td className="py-2.5 px-3 text-[var(--foreground)]/80 font-medium">Claude (API)</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">System prompt</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">messages[] array</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Custom vector store</td>
+              </tr>
+              <tr className="border-b border-[var(--accent)]/10">
+                <td className="py-2.5 px-3 text-[var(--foreground)]/80 font-medium">Claude Projects</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Project instructions</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Conversation history</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Knowledge files (limited)</td>
+              </tr>
+              <tr className="border-b border-[var(--accent)]/10">
+                <td className="py-2.5 px-3 text-[var(--foreground)]/80 font-medium">Custom GPTs</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Instructions field</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Chat history</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Actions → external DB</td>
+              </tr>
+              <tr className="border-b border-[var(--accent)]/10">
+                <td className="py-2.5 px-3 text-[var(--foreground)]/80 font-medium">CrewAI</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Agent backstory</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Task context</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">Memory module (built-in)</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/80 font-medium">LangChain</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">System prompt</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">ConversationBufferMemory</td>
+                <td className="py-2.5 px-3 text-[var(--foreground)]/70">VectorStoreRetrieverMemory</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="rounded-xl border-l-4 border-cyan-400 bg-cyan-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-cyan-300 mb-2">🔵 The Honest Truth</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Most platforms give you good working memory out of the box. Semantic memory requires discipline to set up. Episodic memory is almost always DIY — and almost always worth the effort.</p>
+        </div>
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <div className="flex items-center gap-3 mt-16 mb-6">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent)]/15 text-[var(--accent-light)] text-sm font-bold shrink-0">08</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] m-0">The Minimum Viable Memory System</h2>
+        </div>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Don't try to implement all three layers at once. Here's the minimum viable version that takes 45 minutes and makes a dramatic difference immediately:
+        </p>
+        <ol className="list-decimal pl-5 space-y-3 mb-6 text-[0.95rem] sm:text-base leading-relaxed text-[var(--foreground)]/80">
+          <li><strong>Start with a MEMORY.md file</strong> (semantic layer, manual)</li>
+          <li><strong>Inject it into every system prompt</strong> (working layer, automatic)</li>
+          <li><strong>After every meaningful session, write a one-paragraph summary</strong> to a log file (episodic layer, manual)</li>
+        </ol>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          You can graduate to vector databases and automated state management once you've validated the value.
+        </p>
+
+        <div className="rounded-xl border-l-4 border-emerald-400 bg-emerald-400/8 p-5 my-8">
+          <p className="text-sm font-semibold text-emerald-300 mb-2">✅ Quick Win</p>
+          <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-0">Set a recurring reminder for every Friday: open your MEMORY.md, read through it, update what's changed, delete what's stale. Five minutes a week keeps your agent accurate all year.</p>
+        </div>
+
+        <TweetableQuote quote="Memory is what allows an agent relationship to compound over time. The longer you use a memory-enabled agent, the more useful it becomes. That's the flywheel that makes AI agents actually sticky." />
+
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent" />
+
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)] mt-16 mb-6">Memory Is What Makes Agents Trustworthy</h2>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Memory isn't just about convenience — it's about <em>trust</em>. Users trust people who remember them. The therapist who remembers what you talked about last time. The doctor who recalls your history. The business partner who knows what was decided without you having to re-explain.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          AI agents that lack memory feel like talking to someone with a short attention span. It's not that they're not smart — it's that the relationship can't grow.
+        </p>
+        <p className="text-[0.95rem] sm:text-base leading-[1.85] text-[var(--foreground)]/80 mb-6">
+          Build memory into your agents from day one. Not as an afterthought.
+        </p>
+
+        <div className="rounded-2xl border border-[var(--accent)]/40 bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent)]/5 p-6 my-12">
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-2">Get the Full Implementation Guide</p>
+          <h3 className="text-xl font-extrabold text-[var(--foreground)] mt-0 mb-3">Working code for all 3 memory layers, MEMORY.md template library, and a setup checklist — plus production-ready patterns for Claude, ChatGPT, and CrewAI.</h3>
+          <p className="text-[0.95rem] text-[var(--foreground)]/70 mb-4">Build agents that remember. Build agents that improve. Build agents people actually use. Tiers from $9.</p>
+          <a href="/#pricing" className="inline-flex items-center gap-2 bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors">Get the Playbook →</a>
+        </div>
+      </>
+    ),
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
