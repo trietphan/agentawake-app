@@ -97,8 +97,18 @@ function Hero() {
           Your AI Agent Forgets Everything.{" "}
           <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent animate-gradient-shift">Fix It in 45 Minutes.</span>
         </h1>
-        <p className="text-lg max-w-[560px] mx-auto mb-5 leading-relaxed animate-hero-subtitle glow-sweep">
-          The complete system for building AI agents that remember, learn, and work autonomously — so you save 5+ hours every week.
+        <p className="text-lg max-w-[560px] mx-auto mb-5 leading-relaxed animate-hero-subtitle text-[var(--text-secondary)]">
+          {"The complete system for building AI agents that ".split(" ").map((word, i) => (
+            <span key={i} className="hero-subtitle-word" style={{ animationDelay: `${0.8 + i * 0.06}s` }}>{word}{" "}</span>
+          ))}
+          {["remember,", "learn,"].map((word, i) => (
+            <span key={`a${i}`} className="hero-accent-word" style={{ animationDelay: `${0.8 + (9 + i) * 0.06}s` }}>{word}{" "}</span>
+          ))}
+          {"and work autonomously".split(" ").map((word, i) => (
+            <span key={`b${i}`} className="hero-subtitle-word" style={{ animationDelay: `${0.8 + (11 + i) * 0.06}s` }}>{word}{" "}</span>
+          ))}
+          <span className="hero-subtitle-word" style={{ animationDelay: '1.7s' }}>—{" "}</span>
+          <span className="hero-accent-word" style={{ animationDelay: '1.76s' }}>so you save 5+ hours every week.</span>
         </p>
         <p className="text-sm text-[var(--text-tertiary)] mb-7 animate-hero-subtitle" style={{ animationDelay: '0.8s' }}>
           👥 Join 50+ builders who&apos;ve given their agents memory
@@ -1027,12 +1037,12 @@ export default function Home() {
       <Reveal><Solution /></Reveal>
       <Reveal><WhatMakesThisDifferent /></Reveal>
       <UseCases />
-      <Reveal><Testimonials /></Reveal>
+      {/* Testimonials temporarily removed — page too long */}
       <Reveal><Platforms /></Reveal>
       <Reveal><HowItWorks /></Reveal>
       <Reveal><EmailCapture /></Reveal>
       <Reveal><WhoThisIsFor /></Reveal>
-      <Reveal><BuildersTestimonials /></Reveal>
+      {/* BuildersTestimonials temporarily removed — page too long */}
       <Reveal><Pricing /></Reveal>
       <Reveal><FAQ /></Reveal>
       <Reveal><BottomCTA /></Reveal>

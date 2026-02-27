@@ -197,27 +197,29 @@ pre {
   opacity: 0;
 }
 
-/* Glowing text sweep — anime energy burst feel */
-.glow-sweep {
-  background: linear-gradient(
-    90deg,
-    var(--text-secondary) 0%,
-    var(--text-secondary) 40%,
-    var(--accent-light) 50%,
-    var(--text-secondary) 60%,
-    var(--text-secondary) 100%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: glowSweep 4s ease-in-out 1.5s 1 forwards;
-  background-position: -200% center;
+/* Typewriter word-by-word reveal + glow accent */
+@keyframes wordReveal {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-/* After sweep, settle to normal color */
-.glow-sweep-settle {
-  animation: glowSweep 4s ease-in-out 1.5s 1 forwards, shimmer 3s ease-in-out 5.5s infinite;
+@keyframes accentPulse {
+  0%, 100% { color: var(--accent-light); text-shadow: 0 0 20px rgba(232,119,46,0.3); }
+  50% { color: var(--accent); text-shadow: 0 0 30px rgba(232,119,46,0.5); }
+}
+
+.hero-subtitle-word {
+  display: inline-block;
+  opacity: 0;
+  animation: wordReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-accent-word {
+  display: inline-block;
+  color: var(--accent-light);
+  font-weight: 600;
+  animation: wordReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+             accentPulse 3s ease-in-out 2.5s infinite;
 }
 
 /* Pricing cards equal height — cascade through ScrollReveal + GlowCard wrappers */

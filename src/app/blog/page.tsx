@@ -19,11 +19,17 @@ const cardColors = [
 
 function tagColor(tag: string) {
   const t = tag.toLowerCase();
-  if (t.includes("claude")) return "bg-violet-400/10 text-violet-300 border-violet-400/20";
-  if (t.includes("chatgpt") || t.includes("openai")) return "bg-emerald-400/10 text-emerald-300 border-emerald-400/20";
-  if (t.includes("memory")) return "bg-amber-400/10 text-amber-300 border-amber-400/20";
-  if (t.includes("agent")) return "bg-cyan-400/10 text-cyan-300 border-cyan-400/20";
-  if (t.includes("mcp") || t.includes("code")) return "bg-blue-400/10 text-blue-300 border-blue-400/20";
+  if (t.includes("claude") || t.includes("anthropic")) return "bg-violet-400/10 text-violet-300 border-violet-400/20";
+  if (t.includes("chatgpt") || t.includes("openai") || t.includes("gpt")) return "bg-emerald-400/10 text-emerald-300 border-emerald-400/20";
+  if (t.includes("memory") || t.includes("persistent")) return "bg-amber-400/10 text-amber-300 border-amber-400/20";
+  if (t.includes("agent") || t.includes("autonom")) return "bg-cyan-400/10 text-cyan-300 border-cyan-400/20";
+  if (t.includes("mcp") || t.includes("code") || t.includes("cursor")) return "bg-blue-400/10 text-blue-300 border-blue-400/20";
+  if (t.includes("crew") || t.includes("langchain") || t.includes("framework")) return "bg-rose-400/10 text-rose-300 border-rose-400/20";
+  if (t.includes("n8n") || t.includes("automat") || t.includes("workflow")) return "bg-orange-400/10 text-orange-300 border-orange-400/20";
+  if (t.includes("security") || t.includes("trust")) return "bg-red-400/10 text-red-300 border-red-400/20";
+  if (t.includes("obsidian") || t.includes("knowledge")) return "bg-purple-400/10 text-purple-300 border-purple-400/20";
+  if (t.includes("python") || t.includes("script")) return "bg-yellow-400/10 text-yellow-300 border-yellow-400/20";
+  if (t.includes("architect") || t.includes("system")) return "bg-teal-400/10 text-teal-300 border-teal-400/20";
   return "bg-[var(--surface-hover)] text-[var(--text-secondary)] border-[var(--border)]";
 }
 

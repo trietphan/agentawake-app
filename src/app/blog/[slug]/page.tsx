@@ -7,6 +7,22 @@ import MobileNav from "@/components/MobileNav";
 import ReadingProgress from "@/components/ReadingProgress";
 import BlogToc from "@/components/BlogToc";
 
+function tagColor(tag: string) {
+  const t = tag.toLowerCase();
+  if (t.includes("claude") || t.includes("anthropic")) return "bg-violet-400/10 text-violet-300 border-violet-400/20";
+  if (t.includes("chatgpt") || t.includes("openai") || t.includes("gpt")) return "bg-emerald-400/10 text-emerald-300 border-emerald-400/20";
+  if (t.includes("memory") || t.includes("persistent")) return "bg-amber-400/10 text-amber-300 border-amber-400/20";
+  if (t.includes("agent") || t.includes("autonom")) return "bg-cyan-400/10 text-cyan-300 border-cyan-400/20";
+  if (t.includes("mcp") || t.includes("code") || t.includes("cursor")) return "bg-blue-400/10 text-blue-300 border-blue-400/20";
+  if (t.includes("crew") || t.includes("langchain") || t.includes("framework")) return "bg-rose-400/10 text-rose-300 border-rose-400/20";
+  if (t.includes("n8n") || t.includes("automat") || t.includes("workflow")) return "bg-orange-400/10 text-orange-300 border-orange-400/20";
+  if (t.includes("security") || t.includes("trust")) return "bg-red-400/10 text-red-300 border-red-400/20";
+  if (t.includes("obsidian") || t.includes("knowledge")) return "bg-purple-400/10 text-purple-300 border-purple-400/20";
+  if (t.includes("python") || t.includes("script")) return "bg-yellow-400/10 text-yellow-300 border-yellow-400/20";
+  if (t.includes("architect") || t.includes("system")) return "bg-teal-400/10 text-teal-300 border-teal-400/20";
+  return "bg-[var(--surface-hover)] text-[var(--text-secondary)] border-[var(--border)]";
+}
+
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
@@ -116,6 +132,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   Open article URL ↗
                 </a>
               </div>
+
+              {post.tags && post.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className={`text-xs px-2.5 py-1 rounded-full border font-medium ${tagColor(tag)}`}>{tag}</span>
+                  ))}
+                </div>
+              )}
 
               <div id="blog-content" className="max-w-full overflow-x-hidden space-y-0 [&_pre]:whitespace-pre-wrap [&_pre_code]:whitespace-pre-wrap [&_pre]:overflow-x-hidden [&_pre]:break-words [&_pre]:word-break-break-word [&_pre_code]:break-words [&_pre_code]:word-break-break-word [&_code]:whitespace-pre-wrap [&_code]:break-words [&_code]:word-break-break-word">
                 {post.content}
