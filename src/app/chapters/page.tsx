@@ -79,9 +79,9 @@ export default function ChaptersPage() {
                         <div className="mt-4 flex items-center justify-between">
                           <span className="text-xs text-[var(--text-tertiary)]">📖 {ch.readTime} read</span>
                           {isFree ? (
-                            <span className="text-sm text-emerald-300 font-medium">Open chapter →</span>
+                            <span className="text-sm text-emerald-300 font-medium">Read chapter →</span>
                           ) : (
-                            <span className="text-sm text-[var(--accent-light)] font-medium">🔒 {meta.cta} →</span>
+                            <span className="text-sm text-[var(--accent-light)] font-medium">Preview chapter →</span>
                           )}
                         </div>
                       </article>
@@ -89,15 +89,9 @@ export default function ChaptersPage() {
 
                     return (
                       <ScrollReveal key={ch.slug} delay={(index % 3) * 100}>
-                        {isFree ? (
-                          <Link href={`/guide/${ch.slug}`}>
-                            {card}
-                          </Link>
-                        ) : (
-                          <Link href="/#pricing">
-                            {card}
-                          </Link>
-                        )}
+                        <Link href={`/guide/${ch.slug}`}>
+                          {card}
+                        </Link>
                       </ScrollReveal>
                     );
                   })}
