@@ -21,9 +21,9 @@ interface GuideNavProps {
 
 const tierLevel: Record<string, number> = { free: 0, blueprint: 1, pro: 2, accelerator: 3 };
 const tierColors: Record<string, string> = {
-  free: "text-[var(--text-secondary)]",
-  blueprint: "text-[var(--accent-light)]",
-  pro: "text-blue-400",
+  free: "text-emerald-400",
+  blueprint: "text-blue-400",
+  pro: "text-violet-400",
   accelerator: "text-[var(--accent-light)]",
 };
 
@@ -40,17 +40,17 @@ export default function GuideNav({ chapters, currentSlug, userTier }: GuideNavPr
         return (
           <Link
             key={ch.slug}
-            href={locked ? "/#pricing" : `/guide/${ch.slug}`}
+            href={`/guide/${ch.slug}`}
             onClick={() => setOpen(false)}
             className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${
               active
                 ? "bg-[var(--accent)]/15 text-[var(--accent-light)] font-medium"
                 : locked
-                  ? "text-[var(--text-tertiary)] hover:text-[var(--text-tertiary)]"
+                  ? "text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
                   : "text-[var(--text-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)]/50"
             }`}
           >
-            <span className="text-lg shrink-0">{locked ? "🔒" : ch.emoji}</span>
+            <span className="text-lg shrink-0">{ch.emoji}</span>
             <div className="min-w-0">
               <div className={`truncate ${active ? "" : ""}`}>
                 {ch.number}. {ch.title}
