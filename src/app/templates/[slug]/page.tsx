@@ -5,12 +5,7 @@ import { notFound } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
 import MobileNav from "@/components/MobileNav";
 import { templates, getTemplateBySlug } from "@/content/templates";
-import dynamic from "next/dynamic";
-
-const TemplateEmailGate = dynamic(
-  () => import("@/components/TemplateEmailGate"),
-  { ssr: false }
-);
+import TemplateEmailGate from "@/components/TemplateEmailGate";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
