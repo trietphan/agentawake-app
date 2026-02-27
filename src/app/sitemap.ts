@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { chapters } from "@/lib/chapters";
 import { blogPosts } from "@/content/blog-posts";
+import { templates } from "@/content/templates";
 
 const siteUrl = "https://agentawake.com";
 
@@ -17,6 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(post.date),
     changeFrequency: "weekly" as const,
     priority: 0.7,
+  }));
+
+  const templatePages = templates.map((t) => ({
+    url: `${siteUrl}/templates/${t.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: t.price === 0 ? 0.85 : 0.75,
   }));
 
   return [
@@ -39,6 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${siteUrl}/templates`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${siteUrl}/chapters`,
       lastModified: new Date(),
       changeFrequency: "weekly",
@@ -56,6 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.5,
     },
+    ...templatePages,
     ...blogPages,
     ...guidePages,
   ];

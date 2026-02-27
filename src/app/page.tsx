@@ -72,6 +72,7 @@ function NavBar() {
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-7">
+          <Link href="/templates" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Templates</Link>
           <a href="#use-cases" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Use Cases</a>
           <a href="#platforms" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Platforms</a>
           <Link href="/chapters" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Chapters</Link>
@@ -80,6 +81,7 @@ function NavBar() {
           <a href="#faq" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">FAQ</a>
 
           <MobileNav items={[
+            { href: "/templates", label: "Templates" },
             { href: "/blog", label: "Blog" },
             { href: "/chapters", label: "Chapters" },
             { href: "/free", label: "Free Chapter" },
