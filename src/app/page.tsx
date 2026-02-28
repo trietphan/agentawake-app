@@ -78,12 +78,14 @@ function NavBar() {
           <Link href="/chapters" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Chapters</Link>
           <a href="#pricing" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Pricing</a>
           <Link href="/blog" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">Blog</Link>
+          <Link href="/health-check" className="hidden sm:inline text-[var(--accent-light)] text-sm font-semibold hover:text-[var(--accent)] transition-colors">🩺 Health Check</Link>
           <a href="#faq" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">FAQ</a>
 
           <MobileNav items={[
             { href: "/templates", label: "Templates" },
             { href: "/blog", label: "Blog" },
             { href: "/chapters", label: "Chapters" },
+            { href: "/health-check", label: "🩺 Health Check" },
             { href: "/free", label: "Free Chapter" },
             { href: "#pricing", label: "Playbook" },
           ]} />
