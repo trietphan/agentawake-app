@@ -36,6 +36,9 @@ function NavBar() {
           <Link href="/templates" className="hidden sm:inline text-[var(--accent-light)] text-sm font-semibold">
             Templates
           </Link>
+          <Link href="/templates/submit" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">
+            Submit
+          </Link>
           <Link href="/chapters" className="hidden sm:inline text-[var(--text-tertiary)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">
             Chapters
           </Link>
@@ -45,6 +48,7 @@ function NavBar() {
           <MobileNav
             items={[
               { href: "/templates", label: "Templates" },
+              { href: "/templates/submit", label: "Submit a Template" },
               { href: "/blog", label: "Blog" },
               { href: "/chapters", label: "Chapters" },
               { href: "/free", label: "Free Chapter" },
@@ -150,6 +154,27 @@ export default function TemplatesPage() {
       <section className="pb-24">
         <div className="max-w-[1080px] mx-auto px-6">
           <TemplateFilters templates={templates} />
+        </div>
+      </section>
+
+      {/* Submit CTA */}
+      <section className="py-14 border-t border-[var(--border)]/40">
+        <div className="max-w-[1080px] mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[var(--accent-light)] bg-[var(--accent)]/10 border border-[var(--accent-light)]/20 mb-5">
+            <span>🛒</span>
+            Community Marketplace
+          </div>
+          <h2 className="text-2xl font-bold mb-3">Have a Great Agent Template?</h2>
+          <p className="text-[var(--text-secondary)] max-w-md mx-auto mb-7 text-sm leading-relaxed">
+            Submit your memory configuration to the AgentAwake marketplace.
+            Earn <strong className="text-[var(--accent-light)]">70% of revenue</strong> from every sale — we handle the store, you keep the credit.
+          </p>
+          <Link
+            href="/templates/submit"
+            className="inline-block border border-[var(--accent)]/50 text-[var(--accent-light)] px-8 py-3.5 rounded-[10px] text-sm font-semibold hover:bg-[var(--accent)]/10 transition-all hover:-translate-y-0.5"
+          >
+            Submit Your Template →
+          </Link>
         </div>
       </section>
 
