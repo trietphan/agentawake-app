@@ -1,3 +1,4 @@
+import React from "react";
 import { NextRequest, NextResponse } from "next/server";
 import { resend, EMAIL_FROM } from "@/lib/resend";
 import Drip1WelcomeEmail from "@/emails/drip-1-welcome";
@@ -13,7 +14,7 @@ import Drip5SoftPitchEmail from "@/emails/drip-5-soft-pitch";
 // Day 8  → drip-4-memory-patterns
 // Day 12 → drip-5-soft-pitch
 
-const DRIP_CONFIG: Record<number, { subject: string; component: () => JSX.Element }> = {
+const DRIP_CONFIG: Record<number, { subject: string; component: () => React.ReactElement }> = {
   0: {
     subject: "Welcome to AgentAwake — your free templates are ready ⚡",
     component: Drip1WelcomeEmail,
