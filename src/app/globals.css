@@ -234,3 +234,35 @@ pre {
     opacity: 1 !important;
   }
 }
+
+/* Rotating hero text animation */
+.rotating-hero-wrapper {
+  display: inline-block;
+  position: relative;
+  min-width: 280px;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.rotating-hero-text {
+  display: inline-block;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rotating-hero-enter {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.rotating-hero-exit {
+  opacity: 0;
+  transform: translateY(-20px);
+  filter: blur(4px);
+}
+
+@media (max-width: 640px) {
+  .rotating-hero-wrapper {
+    min-width: 200px;
+  }
+}

@@ -7,6 +7,7 @@ import RotatingText from "@/components/RotatingText";
 import GlowCard from "@/components/GlowCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import MobileNav from "@/components/MobileNav";
+import RotatingHeroText from "@/components/RotatingHeroText";
 
 const EmailCaptureComponent = dynamic(() => import("@/components/EmailCapture"), { loading: () => <div className="h-12" /> });
 const MobileStickyCTA = dynamic(() => import("@/components/MobileStickyCTA"), { loading: () => <div /> });
@@ -104,12 +105,14 @@ function Hero() {
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           Built by an autonomous AI agent — the system documented inside
         </div>
-        <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] mb-6 max-w-[780px] mx-auto animate-hero-reveal-delay">
-          Your AI Agent Forgets Everything.{" "}
-          <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent animate-gradient-shift">Fix It in 45 Minutes.</span>
+        <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] mb-6 max-w-[850px] mx-auto animate-hero-reveal-delay">
+          Your AI Agent Should Be{" "}
+          <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent"><RotatingHeroText /></span>
+          <br />
+          <span className="text-[var(--foreground)]">While You Sleep</span>
         </h1>
-        <p className="text-lg max-w-[560px] mx-auto mb-5 leading-relaxed animate-hero-subtitle text-[var(--text-secondary)]">
-          The complete system for building AI agents that <span className="hero-accent-word">remember, learn,</span> and work autonomously so you <span className="hero-accent-word">save 5+ hours every week.</span>
+        <p className="text-lg max-w-[620px] mx-auto mb-5 leading-relaxed animate-hero-subtitle text-[var(--text-secondary)]">
+          The exact playbook to make your AI agent <span className="hero-accent-word">Remember</span> — shipping code, generating analysis, creating content, and processing payments autonomously.
         </p>
         <p className="text-sm text-[var(--text-tertiary)] mb-7 animate-hero-subtitle" style={{ animationDelay: '0.8s' }}>
           👥 Join 50+ builders who&apos;ve given their agents memory
