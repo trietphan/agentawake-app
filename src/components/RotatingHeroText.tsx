@@ -1,46 +1,54 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const PHRASES = [
-  { text: "Running Your Business", emoji: "🚀" },
-  { text: "Shipping Code", emoji: "⚡" },
-  { text: "Closing Deals", emoji: "💰" },
-  { text: "Creating Content", emoji: "✍️" },
-  { text: "Analyzing Data", emoji: "📊" },
-  { text: "Managing Projects", emoji: "📋" },
-  { text: "Processing Payments", emoji: "💳" },
-  { text: "Monitoring Systems", emoji: "🔍" },
+  "Running Your Business",
+  "Shipping Code",
+  "Closing Deals",
+  "Creating Content",
+  "Analyzing Data",
+  "Managing Projects",
+  "Processing Payments",
+  "Monitoring Systems",
 ];
 
 export default function RotatingHeroText() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [phase, setPhase] = useState<"visible" | "exiting" | "entering">("visible");
-
-  const rotate = useCallback(() => {
-    setPhase("exiting");
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % PHRASES.length);
-      setPhase("entering");
-    }, 500);
-    setTimeout(() => {
-      setPhase("visible");
-    }, 1000);
-  }, []);
+  const [nextIndex, setNextIndex] = useState<number | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const mounted = useRef(false);
 
   useEffect(() => {
-    const interval = setInterval(rotate, 5000);
-    return () => clearInterval(interval);
-  }, [rotate]);
+    // Skip animation on first render
+    mounted.current = true;
 
-  const phrase = PHRASES[currentIndex];
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      const next = (prev: number) => (prev + 1) % PHRASES.length;
+      
+      // After exit animation, swap text
+      setTimeout(() => {
+        setCurrentIndex((prev) => {
+          const n = next(prev);
+          setNextIndex(null);
+          return n;
+        });
+        // After swap, enter
+        requestAnimationFrame(() => {
+          setIsTransitioning(false);
+        });
+      }, 400);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <span className="rotating-hero-container">
-      <span className={`rotating-hero-phrase rotating-hero-${phase}`}>
-        <span className="rotating-hero-emoji">{phrase.emoji}</span>
-        {phrase.text}
-      </span>
+    <span
+      className={`hero-rotating-word ${isTransitioning ? "hero-rotating-out" : "hero-rotating-in"}`}
+    >
+      {PHRASES[currentIndex]}
     </span>
   );
 }

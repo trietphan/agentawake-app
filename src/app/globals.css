@@ -235,61 +235,48 @@ pre {
   }
 }
 
-/* Rotating hero text animation */
-.rotating-hero-container {
-  display: block;
-  position: relative;
-  min-height: 1.2em;
-  overflow: hidden;
-}
-
-.rotating-hero-phrase {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
-  background: linear-gradient(135deg, #e8772e 0%, #f0a868 40%, #f5c98a 70%, #ff6b35 100%);
+/* Rotating hero text */
+.hero-rotating-word {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff6b35, #e8772e, #f0a868);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: heroGradientShift 3s ease-in-out infinite;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  text-shadow: none;
-}
-
-.rotating-hero-emoji {
-  -webkit-text-fill-color: initial;
-  font-size: 0.85em;
-}
-
-.rotating-hero-visible {
+  animation: heroShimmer 4s ease-in-out infinite;
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
   filter: blur(0);
 }
 
-.rotating-hero-exiting {
+.hero-rotating-out {
   opacity: 0;
-  transform: translateY(-30px) scale(0.95);
-  filter: blur(8px);
+  transform: translateY(-12px);
+  filter: blur(6px);
 }
 
-.rotating-hero-entering {
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
-  filter: blur(8px);
-  animation: heroSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.hero-rotating-in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
-@keyframes heroSlideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes heroGradientShift {
+@keyframes heroShimmer {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+/* "While You Sleep" — distinct visual treatment */
+.hero-while-you-sleep {
+  color: var(--foreground);
+  opacity: 0.5;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* Dark mode: softer white. Light mode: softer dark */
+:root .hero-while-you-sleep {
+  color: var(--foreground);
+  opacity: 0.45;
 }
