@@ -105,11 +105,12 @@ function Hero() {
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           Built by an autonomous AI agent — the system documented inside
         </div>
-        <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.08] tracking-[-0.035em] mb-6 max-w-[850px] mx-auto animate-hero-reveal-delay">
-          Your AI Agent Should Be{" "}
-          <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent"><RotatingHeroText /></span>
+        <h1 className="text-[clamp(2.8rem,6vw,4.2rem)] font-extrabold leading-[1.12] tracking-[-0.035em] mb-6 max-w-[850px] mx-auto animate-hero-reveal-delay">
+          <span className="text-[var(--foreground)]">Your AI Agent Should Be</span>
           <br />
-          <span className="text-[var(--foreground)]">While You Sleep</span>
+          <RotatingHeroText />
+          <br />
+          <span className="bg-gradient-to-r from-[#e8772e] via-[#f0a868] to-[#f5c98a] bg-clip-text text-transparent">While You Sleep</span>
         </h1>
         <p className="text-lg max-w-[620px] mx-auto mb-5 leading-relaxed animate-hero-subtitle text-[var(--text-secondary)]">
           The exact playbook to make your AI agent <span className="hero-accent-word">Remember</span> — shipping code, generating analysis, creating content, and processing payments autonomously.
