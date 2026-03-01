@@ -250,6 +250,11 @@ pre {
   filter: blur(0);
 }
 
+.hero-rotating-emoji {
+  -webkit-text-fill-color: initial;
+  font-size: 0.8em;
+}
+
 .hero-rotating-out {
   opacity: 0;
   transform: translateY(-12px);
@@ -267,16 +272,19 @@ pre {
   50% { background-position: 100% 50%; }
 }
 
-/* "While You Sleep" — distinct visual treatment */
+/* "While You Sleep" — indigo/night-sky vibe, stands apart from the orange */
 .hero-while-you-sleep {
-  color: var(--foreground);
-  opacity: 0.5;
-  font-style: italic;
-  letter-spacing: 0.02em;
+  display: inline-block;
+  background: linear-gradient(135deg, #818cf8, #6366f1, #a5b4fc);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: sleepShimmer 5s ease-in-out infinite;
+  letter-spacing: 0.01em;
 }
 
-/* Dark mode: softer white. Light mode: softer dark */
-:root .hero-while-you-sleep {
-  color: var(--foreground);
-  opacity: 0.45;
+@keyframes sleepShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }

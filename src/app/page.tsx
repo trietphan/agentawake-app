@@ -110,7 +110,7 @@ function Hero() {
           <br />
           <RotatingHeroText />
           <br />
-          <span className="hero-while-you-sleep">While You Sleep</span>
+          <span className="hero-while-you-sleep">🌙 While You Sleep</span>
         </h1>
         <p className="text-lg max-w-[620px] mx-auto mb-5 leading-relaxed animate-hero-subtitle text-[var(--text-secondary)]">
           The exact playbook to make your AI agent <span className="hero-accent-word">Remember</span> — shipping code, generating analysis, creating content, and processing payments autonomously.
